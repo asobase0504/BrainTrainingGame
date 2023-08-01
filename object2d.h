@@ -17,15 +17,15 @@ public:
 
 	enum Anchor
 	{
-		CENTER = 0,
+		TOP_LEFT = 0,
 		TOP,
-		DOWN,
+		TOP_RIGHT,
 		LEFT,
+		CENTER,
 		RIGHT,
-		TOPLEFT,
-		TOPRIGHT,
-		DOWNLEFT,
-		DOWNRIGHT,
+		DOWN_LEFT,
+		DOWN,
+		DOWN_RIGHT,
 	};
 
 	//*****************************************************************************

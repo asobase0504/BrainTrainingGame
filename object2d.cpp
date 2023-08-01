@@ -153,102 +153,87 @@ void CObject2D::SetPos(const D3DXVECTOR3 & inPos)
 
 	switch (m_anchor)
 	{
-	case CObject2D::CENTER:
-		pVtx[0].pos.x = m_pos.x - m_size.x * 0.5f;
-		pVtx[0].pos.y = m_pos.y - m_size.y * 0.5f;
-		pVtx[0].pos.z = 0.0f;
+	case CObject2D::TOP_LEFT:
+		pVtx[0].pos.x = m_pos.x - m_size.x;
+		pVtx[0].pos.y = m_pos.y;
 
-		pVtx[1].pos.x = m_pos.x + m_size.x * 0.5f;
-		pVtx[1].pos.y = m_pos.y - m_size.y * 0.5f;
-		pVtx[1].pos.z = 0.0f;
+		pVtx[1].pos.x = m_pos.x;
+		pVtx[1].pos.y = m_pos.y;
 
-		pVtx[2].pos.x = m_pos.x - m_size.x * 0.5f;
-		pVtx[2].pos.y = m_pos.y + m_size.y * 0.5f;
-		pVtx[2].pos.z = 0.0f;
+		pVtx[2].pos.x = m_pos.x - m_size.x;
+		pVtx[2].pos.y = m_pos.y + m_size.y;
 
-		pVtx[3].pos.x = m_pos.x + m_size.x * 0.5f;
-		pVtx[3].pos.y = m_pos.y + m_size.y * 0.5f;
-		pVtx[3].pos.z = 0.0f;
+		pVtx[3].pos.x = m_pos.x;
+		pVtx[3].pos.y = m_pos.y + m_size.y;
 		break;
 	case CObject2D::TOP:
 		break;
-	case CObject2D::DOWN:
+	case CObject2D::TOP_RIGHT:
+		pVtx[0].pos.x = m_pos.x;
+		pVtx[0].pos.y = m_pos.y;
+
+		pVtx[1].pos.x = m_pos.x + m_size.x;
+		pVtx[1].pos.y = m_pos.y;
+
+		pVtx[2].pos.x = m_pos.x;
+		pVtx[2].pos.y = m_pos.y + m_size.y;
+
+		pVtx[3].pos.x = m_pos.x + m_size.x;
+		pVtx[3].pos.y = m_pos.y + m_size.y;
 		break;
 	case CObject2D::LEFT:
 		break;
+	case CObject2D::CENTER:
+		pVtx[0].pos.x = m_pos.x - m_size.x * 0.5f;
+		pVtx[0].pos.y = m_pos.y - m_size.y * 0.5f;
+
+		pVtx[1].pos.x = m_pos.x + m_size.x * 0.5f;
+		pVtx[1].pos.y = m_pos.y - m_size.y * 0.5f;
+
+		pVtx[2].pos.x = m_pos.x - m_size.x * 0.5f;
+		pVtx[2].pos.y = m_pos.y + m_size.y * 0.5f;
+
+		pVtx[3].pos.x = m_pos.x + m_size.x * 0.5f;
+		pVtx[3].pos.y = m_pos.y + m_size.y * 0.5f;
+		break;
 	case CObject2D::RIGHT:
 		break;
-	case CObject2D::TOPLEFT:
-		pVtx[0].pos.x = m_pos.x - m_size.x;
-		pVtx[0].pos.y = m_pos.y;
-		pVtx[0].pos.z = 0.0f;
-
-		pVtx[1].pos.x = m_pos.x;
-		pVtx[1].pos.y = m_pos.y;
-		pVtx[1].pos.z = 0.0f;
-
-		pVtx[2].pos.x = m_pos.x - m_size.x;
-		pVtx[2].pos.y = m_pos.y + m_size.y;
-		pVtx[2].pos.z = 0.0f;
-
-		pVtx[3].pos.x = m_pos.x;
-		pVtx[3].pos.y = m_pos.y + m_size.y;
-		pVtx[3].pos.z = 0.0f;
-		break;
-	case CObject2D::TOPRIGHT:
-		pVtx[0].pos.x = m_pos.x;
-		pVtx[0].pos.y = m_pos.y;
-		pVtx[0].pos.z = 0.0f;
-
-		pVtx[1].pos.x = m_pos.x + m_size.x;
-		pVtx[1].pos.y = m_pos.y;
-		pVtx[1].pos.z = 0.0f;
-
-		pVtx[2].pos.x = m_pos.x;
-		pVtx[2].pos.y = m_pos.y + m_size.y;
-		pVtx[2].pos.z = 0.0f;
-
-		pVtx[3].pos.x = m_pos.x + m_size.x;
-		pVtx[3].pos.y = m_pos.y + m_size.y;
-		pVtx[3].pos.z = 0.0f;
-		break;
-	case CObject2D::DOWNLEFT:
+	case CObject2D::DOWN_LEFT:
 		pVtx[0].pos.x = m_pos.x - m_size.x;
 		pVtx[0].pos.y = m_pos.y - m_size.y;
-		pVtx[0].pos.z = 0.0f;
 
 		pVtx[1].pos.x = m_pos.x;
 		pVtx[1].pos.y = m_pos.y - m_size.y;
-		pVtx[1].pos.z = 0.0f;
 
 		pVtx[2].pos.x = m_pos.x - m_size.x;
 		pVtx[2].pos.y = m_pos.y;
-		pVtx[2].pos.z = 0.0f;
 
 		pVtx[3].pos.x = m_pos.x;
 		pVtx[3].pos.y = m_pos.y;
-		pVtx[3].pos.z = 0.0f;
 		break;
-	case CObject2D::DOWNRIGHT:
+	case CObject2D::DOWN:
+		break;
+	case CObject2D::DOWN_RIGHT:
 		pVtx[0].pos.x = m_pos.x;
 		pVtx[0].pos.y = m_pos.y - m_size.y;
-		pVtx[0].pos.z = 0.0f;
 
 		pVtx[1].pos.x = m_pos.x + m_size.x;
 		pVtx[1].pos.y = m_pos.y - m_size.y;
-		pVtx[1].pos.z = 0.0f;
 
 		pVtx[2].pos.x = m_pos.x;
 		pVtx[2].pos.y = m_pos.y;
-		pVtx[2].pos.z = 0.0f;
 
 		pVtx[3].pos.x = m_pos.x + m_size.x;
 		pVtx[3].pos.y = m_pos.y;
-		pVtx[3].pos.z = 0.0f;
 		break;
 	default:
 		break;
 	}
+
+	pVtx[0].pos.z = 0.0f;
+	pVtx[1].pos.z = 0.0f;
+	pVtx[2].pos.z = 0.0f;
+	pVtx[3].pos.z = 0.0f;
 
 	// 頂点バッファをアンロックする
 	m_pVtxBuff->Unlock();
