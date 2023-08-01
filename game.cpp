@@ -13,6 +13,7 @@
 #include <assert.h>
 #include "sound.h"
 #include "application.h"
+#include "file.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ

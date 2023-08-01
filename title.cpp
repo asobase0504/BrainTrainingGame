@@ -16,7 +16,6 @@
 #include "input.h"
 #include "menu_item.h"
 #include "sound.h"
-#include "tutorial.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -163,14 +162,6 @@ void CTitle::Update()
 		break;
 	case CTitle::Status::GAME_STAET:
 		CApplication::GetInstance()->SetMode(CApplication::MODE_TYPE::GAME);
-		break;
-	case CTitle::Status::TUTORIAL:
-	{
-		int decisionDvice = m_decisionDvice;
-		CApplication::GetInstance()->SetMode(CApplication::MODE_TYPE::TUTORIAL);
-		CTutorial* tutorialMode = (CTutorial*)CApplication::GetInstance()->GetMode();
-		tutorialMode->SetControllerIndex(decisionDvice);
-	}
 		break;
 	case CTitle::Status::CUSTOMIZE:
 		CApplication::GetInstance()->SetMode(CApplication::MODE_TYPE::CUSTUM);
