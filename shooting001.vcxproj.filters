@@ -230,6 +230,9 @@
     <ClCompile Include="menu_number_Select.cpp">
       <Filter>ソース ファイル\07_UI\00_Menu\03_PeopleNumberSelect</Filter>
     </ClCompile>
+    <ClCompile Include="precompile.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input.h">
@@ -375,6 +378,9 @@
     </ClInclude>
     <ClInclude Include="menu_number_Select.h">
       <Filter>ソース ファイル\07_UI\00_Menu\03_PeopleNumberSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="precompile.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
