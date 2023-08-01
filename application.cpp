@@ -12,12 +12,10 @@
 #include "input.h"
 #include "renderer.h"
 #include "theme_color.h"
-#include "tutorial.h"
 #include "texture.h"
 #include "object2d.h"
 #include "title.h"
 #include "game.h"
-#include "customize.h"
 #include "sound.h"
 
 //-----------------------------------------------------------------------------
@@ -225,12 +223,6 @@ void CApplication::SetMode(MODE_TYPE inType)
 	{
 	case CApplication::MODE_TYPE::TITLE:
 		mode = new CTitle;
-		break;
-	case CApplication::MODE_TYPE::TUTORIAL:
-		mode = new CTutorial;
-		break;
-	case CApplication::MODE_TYPE::CUSTUM:
-		mode = new CCustomize;
 		break;
 	case CApplication::MODE_TYPE::GAME:
 		mode = new CGame;
