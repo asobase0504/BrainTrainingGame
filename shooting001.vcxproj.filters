@@ -146,6 +146,9 @@
     <ClCompile Include="precompile.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="objectList.cpp">
+      <Filter>ソース ファイル\02_Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input.h">
@@ -234,6 +237,9 @@
     </ClInclude>
     <ClInclude Include="precompile.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="objectList.h">
+      <Filter>ソース ファイル\02_Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

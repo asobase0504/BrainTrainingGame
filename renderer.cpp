@@ -9,6 +9,7 @@
 #include "application.h"
 #include "mode.h"
 #include <tchar.h>
+#include "objectList.h"
 
 //=============================================================================
 // コンストラクタ
@@ -138,7 +139,7 @@ void CRenderer::Uninit()
 //=============================================================================
 void CRenderer::Update()
 {
-	CObject::UpdateAll();	// オブジェクト
+	CObjectList::GetInstance()->Update();
 }
 
 //=============================================================================
@@ -157,8 +158,8 @@ void CRenderer::Draw()
 		DrawFPS();
 #endif // _DEBUG
 
-		CObject::DrawAll();	// オブジェクト
 		CApplication::GetInstance()->GetMode()->Draw();
+		CObjectList::GetInstance()->Draw();
 
 		// Direct3Dによる描画の終了
 		pD3DDevice->EndScene();

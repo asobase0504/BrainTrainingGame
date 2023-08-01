@@ -5,6 +5,7 @@
 #include "application.h"
 #include "input.h"
 #include <assert.h>
+#include "objectList.h"
 
 //-----------------------------------------
 // コンストラクタ
@@ -29,7 +30,7 @@ CPause::~CPause()
 //-----------------------------------------
 HRESULT CPause::Init()
 {
-	CObject::SetStopUpdate(true);
+	CObjectList::GetInstance()->Pause(true);
 
 	// 背景の設定
 	{
@@ -99,7 +100,7 @@ HRESULT CPause::Init()
 void CPause::Uninit()
 {
 	SetIsDeleted();
-	CObject::SetStopUpdate(false);
+	CObjectList::GetInstance()->Pause(false);
 	if (m_menu != nullptr)
 	{
 		m_menu->Uninit();

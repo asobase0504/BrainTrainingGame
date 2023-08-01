@@ -24,17 +24,9 @@ public:	// 列挙型
 	};
 
 public:	// 定数
-	static const int NUM_MAX = 1500;
 
 public:	// 静的関数
-	static void ReleaseAll();
-	static void UpdateAll();
-	static void DrawAll();
 
-	static void SetStopUpdate(bool inStopStatus) { isStopUpdate = inStopStatus; }
-
-	static const std::list<CObject*>* GetMyObject(int inIndex) { return &object.at(inIndex); }
-	static int GetPrioritySize() { return (int)object.size(); }
 public:
 	CObject(TYPE type,int priority = 3);
 	virtual ~CObject();
@@ -46,7 +38,7 @@ public:
 
 	// Setter
 	void SetIsDeleted(bool inDeleted) { m_isDeleted = inDeleted; }		// 死亡状態を設定
-	void SetShouldStopAlsoUpdate() { shouldStopAlsoUpdate = true; }
+	void SetShouldStopAlsoUpdate() { m_shouldStopAlsoUpdate = true; }
 	virtual void SetPos(const D3DXVECTOR3& inPos) { m_pos = inPos; }	// 位置の設定
 
 	// Getter
@@ -54,16 +46,29 @@ public:
 	const TYPE GetType() { return m_type; }
 	const bool GetIsDeleted() { return m_isDeleted; }
 
+	/* リスト構造 */
+	void SetPrev(CObject* inTask) { m_prev = inTask; }
+	CObject* GetPrev() { return m_prev; }
+	void SetNext(CObject* inTask) { m_next = inTask; }
+	CObject* GetNext() { return m_next; }
+
+	/* 削除フラグ */
+	void Release() { m_isDeleted = true; }
+	bool IsRelease() { return m_isDeleted; }
+
+	bool IsActivityAtPouse() { return m_isActivityAtPouse; }
+	int GetPriority() { return m_assignmentPriority; }
 private:
-	auto Release();
 
 private:
-	static std::vector<std::list<CObject*>> object;	// オブジェクト
-	static int numAll;	// 最大数
-	int createIdx;		// 生成番号
-	static bool isStopUpdate;	// 更新が停止中か
-	bool shouldStopAlsoUpdate;	// 停止中も更新すべきか
-	bool shouldInvisible;		// 描画を停止中すべきか
+	bool m_shouldStopAlsoUpdate;	// 停止中も更新すべきか
+	bool m_shouldInvisible;		// 停止中に描画も止めるべきか
+
+	CObject* m_prev;	// 前のオブジェクト
+	CObject* m_next;	// 次のオブジェクト
+
+	int m_assignmentPriority;
+	bool m_isActivityAtPouse;
 protected:
 	D3DXVECTOR3 m_pos;	// 位置
 	bool m_isDeleted;	// 削除フラグ

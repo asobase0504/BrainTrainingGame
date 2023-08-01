@@ -17,6 +17,7 @@
 #include "title.h"
 #include "game.h"
 #include "sound.h"
+#include "objectList.h"
 
 //-----------------------------------------------------------------------------
 // 静的メンバー変数の初期化
@@ -116,7 +117,7 @@ HRESULT CApplication::Init(HWND hWnd, HINSTANCE hInstance)
 void CApplication::Uninit()
 {
 	// オブジェクト全体の解放
-	CObject::ReleaseAll();
+	CObjectList::GetInstance()->Uninit();
 
 	// ゲームのクリア
 	if (mode != nullptr)
@@ -213,7 +214,7 @@ void CApplication::SetMode(MODE_TYPE inType)
 {
 	if (mode != nullptr)
 	{
-		CObject::ReleaseAll();
+		CObjectList::GetInstance()->AllRelease();
 		mode->Uninit();
 		delete mode;
 		mode = nullptr;
