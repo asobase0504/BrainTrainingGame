@@ -14,7 +14,9 @@
 #include "application.h"
 #include "file.h"
 #include "bus.h"
-#include "camera.h"
+#include "camera_game.h"
+#include "station.h"
+#include "station_goal.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -37,15 +39,12 @@ CGame::~CGame()
 //-----------------------------------------------------------------------------
 HRESULT CGame::Init()
 {
-	m_camera = new CCamera;
-	m_camera->Init();
-
 	m_count = 0;
 
 	// 背景の設定
 	{
-		CObject2D* bg = CObject2D::Create(0);
-		bg->SetSize(CApplication::GetInstance()->GetScreenSize());
+		CObject3D* bg = CObject3D::Create(0);
+		bg->SetSize(CApplication::GetInstance()->GetScreenSize() * 2.0f);
 		D3DXVECTOR3 pos(CApplication::GetInstance()->CENTER_X, CApplication::GetInstance()->CENTER_Y, 0.0f);	// 位置の取得
 		bg->SetTexture("BG");
 		bg->SetPos(pos);
@@ -54,7 +53,33 @@ HRESULT CGame::Init()
 
 	CBus* bus = new CBus;
 	bus->Init();
-	bus->SetPos(D3DXVECTOR3(0.0f,0.0f,0.0f));
+	bus->SetPos(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
+	CStation* prevStation;
+
+	{
+		CStation* station = new CStation;
+		station->Init();
+		station->SetPos(D3DXVECTOR3(-200.0f, -20.0f, 0.0f));
+		bus->Departure(station);
+		prevStation = station;
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		CStation* station = new CStation;
+		station->Init();
+		station->SetPos(D3DXVECTOR3(-200.0f + -100.0f * (i + 1), -20.0f, 0.0f));
+		prevStation->AttachNextStation(station);
+		prevStation = station;
+	}
+
+	CStation* goal = new CStationGoal;
+	goal->Init();
+	goal->SetPos(D3DXVECTOR3(-200.0f + -100.0f * 11, -20.0f, 0.0f));
+	prevStation->AttachNextStation(goal);
+
+	m_camera = CCameraGame::Create(bus);
 
 	return S_OK;
 }
@@ -84,6 +109,8 @@ void CGame::Uninit()
 //-----------------------------------------------------------------------------
 void CGame::Update()
 {
+	m_camera->Update();
+
 	if (CInput::GetKey()->Trigger(DIK_LEFT))
 	{
 		m_count++;
@@ -99,5 +126,5 @@ void CGame::Update()
 //-----------------------------------------------------------------------------
 void CGame::Draw()
 {
-	m_camera->Draw();
+	m_camera->Set();
 }

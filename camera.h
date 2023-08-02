@@ -22,12 +22,11 @@ private:
 	static const float VIEWING_ANGLE;	// Ž‹–ìŠp
 public:
 	CCamera();
-	~CCamera();
+	virtual ~CCamera();
 
-	HRESULT Init();
-	void Uninit();
-	void Update();
-	void Draw();
+	virtual HRESULT Init();
+	virtual void Uninit();
+	virtual void Update();
 	void Set();
 
 	// Getter

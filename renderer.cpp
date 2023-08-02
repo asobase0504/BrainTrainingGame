@@ -9,6 +9,7 @@
 #include "application.h"
 #include "mode.h"
 #include <tchar.h>
+#include "application.h"
 #include "objectList.h"
 
 //=============================================================================
@@ -18,10 +19,6 @@ CRenderer::CRenderer() :
 	pD3D(nullptr),
 	pD3DDevice(nullptr)
 {
-#ifdef _DEBUG
-	// フォント
-	pFont = nullptr;
-#endif // _DEBUG
 }
 
 //=============================================================================
@@ -96,11 +93,7 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 	pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);	// １つ目の色はテクスチャの色
 	pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_CURRENT);	// ２つ目の色は現在の色
 
-#ifdef _DEBUG
-	// デバッグ情報表示用フォントの生成
-	D3DXCreateFont(pD3DDevice, 18, 0, 0, 0, FALSE, SHIFTJIS_CHARSET,
-		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, _T("Terminal"), &pFont);
-#endif
+	CDebugProc::Init();
 
 	return S_OK;
 }
@@ -110,15 +103,6 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 //=============================================================================
 void CRenderer::Uninit()
 {
-#ifdef _DEBUG
-	// デバッグ情報表示用フォントの破棄
-	if (pFont != nullptr)
-	{
-		pFont->Release();
-		pFont = nullptr;
-	}
-#endif // _DEBUG
-
 	// デバイスの破棄
 	if (pD3DDevice != nullptr)
 	{
@@ -132,6 +116,8 @@ void CRenderer::Uninit()
 		pD3D->Release();
 		pD3D = nullptr;
 	}
+
+	CDebugProc::Uninit();
 }
 
 //=============================================================================
@@ -153,14 +139,14 @@ void CRenderer::Draw()
 	// Direct3Dによる描画の開始
 	if (SUCCEEDED(pD3DDevice->BeginScene()))
 	{
-#ifdef _DEBUG
-		// FPS表示
-		DrawFPS();
-#endif // _DEBUG
 
 		CApplication::GetInstance()->GetMode()->Draw();
 		CObjectList::GetInstance()->Draw();
 
+#ifdef _DEBUG
+		// FPS表示
+		CDebugProc::Draw();
+#endif // _DEBUG
 		// Direct3Dによる描画の終了
 		pD3DDevice->EndScene();
 	}
@@ -168,19 +154,3 @@ void CRenderer::Draw()
 	// バックバッファとフロントバッファの入れ替え
 	pD3DDevice->Present(NULL, NULL, NULL, NULL);
 }
-
-#ifdef _DEBUG
-//=============================================================================
-// FPS表示
-//=============================================================================
-void CRenderer::DrawFPS()
-{
-	//RECT rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-	//TCHAR str[256];
-
-	//wsprintf(str, _T("FPS : %d\n"), g_nCountFPS);
-
-	//// テキスト描画
-	//pFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xff, 0xff, 0xff));
-}
-#endif // _DEBUG

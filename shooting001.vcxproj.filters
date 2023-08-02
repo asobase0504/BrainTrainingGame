@@ -164,6 +164,21 @@
     <ClCompile Include="camera.cpp">
       <Filter>ソース ファイル\04_Camera</Filter>
     </ClCompile>
+    <ClCompile Include="passenger.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="station.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="camera_game.cpp">
+      <Filter>ソース ファイル\04_Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="station_goal.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="debug_proc.cpp">
+      <Filter>ソース ファイル\00_Main\00_InSide</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input.h">
@@ -264,6 +279,21 @@
     </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>ソース ファイル\04_Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="passenger.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="station.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="camera_game.h">
+      <Filter>ソース ファイル\04_Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="station_goal.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="debug_proc.h">
+      <Filter>ソース ファイル\00_Main\00_InSide</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

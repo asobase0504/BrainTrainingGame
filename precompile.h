@@ -68,6 +68,6 @@
 #include "nlohmann/json.hpp"
 
 // Debug
-//#include "debug_proc.h"
+#include "debug_proc.h"
 
 #endif

@@ -1,35 +1,29 @@
 //=========================================
 // 
-// バス全般クラス
+// 駅全般クラス
 // Author YudaKaito
 // 
 //=========================================
-#ifndef _BUS_H_
-#define _BUS_H_
+#ifndef _STATION_H_
+#define _STATION_H_
 
 #include "object3d.h"
 
 //-----------------------------------------
 // 前方宣言
 //-----------------------------------------
-class CStation;
+class CBus;
 
 //-----------------------------------------
 // アプリケーションクラス
 //-----------------------------------------
-class CBus : public CObject3D
+class CStation : public CObject3D
 {
 private: // 列挙型
 
-	enum class State
-	{
-		MOVE,
-		STOP
-	};
-
 public:	// メンバー関数
-	CBus();
-	virtual ~CBus() override;
+	CStation();
+	virtual ~CStation() override;
 
 	virtual HRESULT Init() override;
 	virtual void Uninit() override;
@@ -37,22 +31,26 @@ public:	// メンバー関数
 	// 更新処理
 	virtual void Update() override;
 
-	bool IsArrival() { return m_isArrival; }
-
 	void Departure(CStation* inStation);	// 出発
 	void Arrival();							// 到着
 	void GetOff();							// 降車
 	void GetOn(int inNumber);				// 乗車
+
+	void SetBus(CBus* inBus) { m_bus = inBus; }
+
+	void AttachNextStation(CStation* inStation) { m_nextStation = inStation; }
 
 private: // 動的プライベート関数
 
 private: // 動的メンバー変数
 
 	CStation* m_nextStation;
-	State m_state;		// 状態
+	CBus* m_bus;
+
 	int m_passenger;	// 乗客
-	int m_nextGetOff;	// 次降りる人
-	bool m_isArrival;	// 到着したか
+	int m_waitTime;
+
+	bool m_IsPassed;
 };
 
 #endif // !_GAME_H_

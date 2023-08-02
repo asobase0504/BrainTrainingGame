@@ -49,12 +49,15 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	// Setter
+	// 位置
 	void SetPos(const D3DXVECTOR3& inPos) override;
+	void AddPos(const D3DXVECTOR3& inPos) { SetPos(m_pos + inPos); }
+
 	void SetRot(const D3DXVECTOR3& inRot);
 	const D3DXVECTOR3& GetRot() const { return m_rot; }
 	void SetSize(const D3DXVECTOR2& inSize);
 	void SetColor(const D3DXCOLOR& inColor);
+	void SetTexture(std::string inTex) { m_texture = inTex; }	// テクスチャの設定
 
 	LPDIRECT3DVERTEXBUFFER9 GetVtx() { return m_pVtxBuff; }	// 頂点バッファの取得
 	const D3DXVECTOR3& GetNormal() const { return m_Normal; }
