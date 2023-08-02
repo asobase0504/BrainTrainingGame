@@ -1,5 +1,6 @@
 {
   "TEXTURE": [
+    [ "BUS", "data\/TEXTURE\/bus.png" ],
     [ "PLAYER", "data\/TEXTURE\/player.png" ],
     [ "BLOCK", "data\/TEXTURE\/Block.png" ],
     [ "BULLET", "data\/TEXTURE\/Bullet.png" ],

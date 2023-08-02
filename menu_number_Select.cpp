@@ -19,8 +19,7 @@
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CNumberSelectMenuItem::CNumberSelectMenuItem(CObject::TYPE type) :
-	CMenuItem(type),
+CNumberSelectMenuItem::CNumberSelectMenuItem() :
 	m_SinTime(0),
 	m_abovePaste(nullptr)
 {
@@ -46,7 +45,7 @@ HRESULT CNumberSelectMenuItem::Init()
 	}
 	CMenuItem::Init();
 	{
-		m_abovePaste = new CObject2D(CObject::TYPE::NONE,5);
+		m_abovePaste = new CObject2D(5);
 		m_abovePaste->Init();
 		m_abovePaste->SetSize(D3DXVECTOR2(0.0f, 0.0f));
 		m_abovePaste->SetColor(CApplication::GetInstance()->GetColor(0));	// 色の設定

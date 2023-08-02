@@ -90,8 +90,7 @@ CColorSelectMenu* CColorSelectMenu::Create(int inColorCount)
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CColorSelectMenuFream::CColorSelectMenuFream(CObject::TYPE type) :
-	CMenuFream(type)
+CColorSelectMenuFream::CColorSelectMenuFream()
 {
 }
 
@@ -125,8 +124,7 @@ void CColorSelectMenuFream::Update()
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CColorSelectMenuItem::CColorSelectMenuItem(CObject::TYPE type) :
-	CMenuItem(type),
+CColorSelectMenuItem::CColorSelectMenuItem() :
 	m_SinTime(0)
 {
 }

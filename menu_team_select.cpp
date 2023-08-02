@@ -46,8 +46,7 @@ void CTeamSelectMenu::UpdateAfterDecision()
 //-----------------------------------------
 // コンストラクタ
 //-----------------------------------------
-CTeamSelectMenuFream::CTeamSelectMenuFream(CObject::TYPE type):
-	CMenuFream(type)
+CTeamSelectMenuFream::CTeamSelectMenuFream()
 {
 }
 
@@ -89,8 +88,7 @@ void CTeamSelectMenuFream::Update()
 //-----------------------------------------
 // コンストラクタ
 //-----------------------------------------
-CTeamSelectMenuItem::CTeamSelectMenuItem(CObject::TYPE type) :
-	CMenuItem(type)
+CTeamSelectMenuItem::CTeamSelectMenuItem()
 {
 }
 

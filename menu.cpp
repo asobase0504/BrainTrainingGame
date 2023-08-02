@@ -345,8 +345,7 @@ void CMenu::SetItemPos()
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CMenuFream::CMenuFream(CObject::TYPE type) :
-	CObject2D(type)
+CMenuFream::CMenuFream()
 {
 }
 
@@ -398,8 +397,8 @@ void CMenuFream::Draw()
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CMenuItem::CMenuItem(CObject::TYPE type) :
-	CObject2D(type,4),
+CMenuItem::CMenuItem() :
+	CObject2D(4),
 	m_isPopNow(false),
 	m_isPopDuringUpdateAccept(false)
 {

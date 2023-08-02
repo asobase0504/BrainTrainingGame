@@ -30,7 +30,7 @@ public:	// パブリック関数
 class CTeamSelectMenuFream : public CMenuFream
 {
 public:	// パブリック関数
-	CTeamSelectMenuFream(CObject::TYPE type = CObject::TYPE::NONE);
+	CTeamSelectMenuFream();
 	~CTeamSelectMenuFream() override;
 
 	HRESULT Init() override;
@@ -49,7 +49,7 @@ private: // メンバー変数
 class CTeamSelectMenuItem : public CMenuItem
 {
 public:	// パブリック関数
-	CTeamSelectMenuItem(CObject::TYPE type = CObject::TYPE::NONE);
+	CTeamSelectMenuItem();
 	~CTeamSelectMenuItem() override;
 
 	HRESULT Init() override;

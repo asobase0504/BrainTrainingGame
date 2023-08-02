@@ -85,7 +85,7 @@ protected: // メンバー変数
 class CMenuFream : public CObject2D
 {
 public:	// パブリック関数
-	CMenuFream(CObject::TYPE type = CObject::TYPE::NONE);
+	CMenuFream();
 	virtual ~CMenuFream() override;
 
 	virtual HRESULT Init() override;
@@ -105,7 +105,7 @@ private: // メンバー変数
 class CMenuItem : public CObject2D
 {
 public:	// パブリック関数
-	CMenuItem(CObject::TYPE type = CObject::TYPE::NONE);
+	CMenuItem();
 	virtual ~CMenuItem() override;
 
 	virtual HRESULT Init() override;

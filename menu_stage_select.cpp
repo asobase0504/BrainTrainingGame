@@ -88,8 +88,7 @@ CStageSelectMenu* CStageSelectMenu::Create(int inStageCount)
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CStageSelectMenuFream::CStageSelectMenuFream(CObject::TYPE type) :
-	CMenuFream(type)
+CStageSelectMenuFream::CStageSelectMenuFream()
 {
 }
 
@@ -123,8 +122,7 @@ void CStageSelectMenuFream::Update()
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CStageSelectMenuItem::CStageSelectMenuItem(CObject::TYPE type) :
-	CMenuItem(type),
+CStageSelectMenuItem::CStageSelectMenuItem() :
 	m_SinTime(0)
 {
 }

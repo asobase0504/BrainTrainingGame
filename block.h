@@ -50,7 +50,7 @@ public:
 	};
 
 public:
-	CBlock(CObject::TYPE type = CObject::TYPE::BLOCK);
+	CBlock();
 	~CBlock() override;
 
 	HRESULT Init() override;
