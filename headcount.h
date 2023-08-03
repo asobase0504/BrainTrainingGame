@@ -21,6 +21,7 @@ public:
 	void Uninit(void); //終了処理
 	int Add(void); //人数加算処理
 	int Sab(void); //人数減算処理
+	int GetNum(void) { return m_nHeadCount; } //人数取得処理
 
 	//静的メンバ関数
 	static CHeadCount *Create(void); //生成処理

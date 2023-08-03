@@ -8,13 +8,14 @@
 #include <stdio.h>
 #include <d3dx9.h>
 #include "error_warning.h"
+#include "utility.h"
 
 //==========================================
 //  静的メンバ変数宣言
 //==========================================
 CHeadCount::FileData CHeadCount::ms_FileData = { 0, 0, 0, 0, 0, 0 };
-const char CHeadCount::msc_sDebugPass[128] = "data\\LevelData.txt"; //デバッグ用のテキストファイル
-const char CHeadCount::msc_sReleaseFile[128] = "data\\LevelData.bin"; //リリース用のバイナリーファイル
+const char CHeadCount::msc_sDebugPass[128] = "data\\FILE\\LevelData.txt"; //デバッグ用のテキストファイル
+const char CHeadCount::msc_sReleaseFile[128] = "data\\FILE\\LevelData.bin"; //リリース用のバイナリーファイル
 
 //==========================================
 //  コンストラクタ
@@ -38,7 +39,7 @@ CHeadCount::~CHeadCount()
 void CHeadCount::Init(void)
 {
 	//初期値を設定する
-	m_nHeadCount = (rand() % ms_FileData.nDefMax) + ms_FileData.nDefMin;
+	m_nHeadCount = IntRandom(ms_FileData.nDefMax, ms_FileData.nDefMax);
 }
 
 //==========================================
@@ -56,7 +57,7 @@ void CHeadCount::Uninit(void)
 int CHeadCount::Add(void)
 {
 	//加算する人数を決める
-	int nAddNum = (rand() % ms_FileData.nAddMax) + ms_FileData.nAddMin;
+	int nAddNum = IntRandom(ms_FileData.nAddMax, ms_FileData.nAddMax);
 
 	//加算前の人数を保存する
 	m_nOldHeadCount = m_nHeadCount;
@@ -81,7 +82,7 @@ int CHeadCount::Sab(void)
 		while (1)//無限ループ
 		{
 			//減算する人数を決める
-			nSabNum = (rand() % ms_FileData.nSabMax) + ms_FileData.nSabMin;
+			nSabNum = IntRandom(ms_FileData.nSabMax, ms_FileData.nSabMax);
 
 			//既に存在している人数より少ない場合抜け出す
 			if (m_nOldHeadCount >= nSabNum)
