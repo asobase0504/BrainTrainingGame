@@ -55,6 +55,7 @@ HRESULT CMiniGameNumber25::Init()
 			m_pObject2D[nCntNumber] = CObject2D::Create();
 			m_pObject2D[nCntNumber]->SetPos(D3DXVECTOR3(400.0f + 120.0f * nCntX, 120.0f + 120.0f * nCntY, 0.0f));
 			m_pObject2D[nCntNumber]->SetSize(D3DXVECTOR2(50.0f, 50.0f));
+			m_pObject2D[nCntNumber]->SetTexture("NUMBER25");
 			m_pObject2D[nCntNumber]->AnimTexture(nCntNumber, 25);
 		}
 	}
