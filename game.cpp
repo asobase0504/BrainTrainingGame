@@ -66,11 +66,11 @@ HRESULT CGame::Init()
 		prevStation = station;
 	}
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		CStation* station = new CStation;
 		station->Init();
-		station->SetPos(D3DXVECTOR3(-200.0f + -600.0f * (i + 1), -20.0f, 0.0f));
+		station->SetPos(D3DXVECTOR3(-200.0f + -900.0f * (i + 1), -20.0f, 0.0f));
 		station->CreatePassenger();
 		prevStation->AttachNextStation(station);
 		prevStation = station;
@@ -78,7 +78,7 @@ HRESULT CGame::Init()
 
 	CStation* goal = new CStationGoal;
 	goal->Init();
-	goal->SetPos(D3DXVECTOR3(-200.0f + -600.0f * 11, -20.0f, 0.0f));
+	goal->SetPos(D3DXVECTOR3(-200.0f + -900.0f * 6, -20.0f, 0.0f));
 	prevStation->AttachNextStation(goal);
 
 	m_camera = CCameraGame::Create(bus);
