@@ -57,13 +57,16 @@
     <Filter Include="ソース ファイル\07_UI\00_Menu\03_PeopleNumberSelect">
       <UniqueIdentifier>{80881531-679e-4beb-9d25-213e325b0f82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Object">
-      <UniqueIdentifier>{50bf1145-4f85-41b4-8c03-8f87c15c742d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\04_Camera">
       <UniqueIdentifier>{b998b0be-5f84-423e-9bfd-25ace88ab016}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Object\01_Station">
+    <Filter Include="ソース ファイル\03_Mode\00_Game\00_BusGame">
+      <UniqueIdentifier>{cc8e58d1-b105-469f-a849-2580611cad0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object">
+      <UniqueIdentifier>{50bf1145-4f85-41b4-8c03-8f87c15c742d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object\01_Station">
       <UniqueIdentifier>{bd314462-97fc-42e2-9fdd-5d153c9a7b30}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -159,7 +162,7 @@
       <Filter>ソース ファイル\02_Object</Filter>
     </ClCompile>
     <ClCompile Include="bus.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="object3d.cpp">
       <Filter>ソース ファイル\02_Object</Filter>
@@ -168,7 +171,7 @@
       <Filter>ソース ファイル\04_Camera</Filter>
     </ClCompile>
     <ClCompile Include="passenger.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="camera_game.cpp">
       <Filter>ソース ファイル\04_Camera</Filter>
@@ -177,13 +180,16 @@
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
     </ClCompile>
     <ClCompile Include="station_goal.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object\01_Station</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object\01_Station</Filter>
     </ClCompile>
     <ClCompile Include="station.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object\01_Station</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object\01_Station</Filter>
     </ClCompile>
     <ClCompile Include="headcount.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game</Filter>
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="minigame_bus.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,7 +284,7 @@
       <Filter>ソース ファイル\02_Object</Filter>
     </ClInclude>
     <ClInclude Include="bus.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="object3d.h">
       <Filter>ソース ファイル\02_Object</Filter>
@@ -287,7 +293,7 @@
       <Filter>ソース ファイル\04_Camera</Filter>
     </ClInclude>
     <ClInclude Include="passenger.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="camera_game.h">
       <Filter>ソース ファイル\04_Camera</Filter>
@@ -295,14 +301,15 @@
     <ClInclude Include="debug_proc.h">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
     </ClInclude>
-    <ClInclude Include="headcount.h">
-      <Filter>ソース ファイル\03_Mode\00_Game</Filter>
-    </ClInclude>
     <ClInclude Include="station.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object\01_Station</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object\01_Station</Filter>
     </ClInclude>
     <ClInclude Include="station_goal.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object\01_Station</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object\01_Station</Filter>
+    </ClInclude>
+    <ClInclude Include="headcount.h" />
+    <ClInclude Include="minigame_bus.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

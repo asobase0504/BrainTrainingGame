@@ -7,17 +7,22 @@
 //-----------------------------------------------------------------------------
 // include
 //-----------------------------------------------------------------------------
-#include "game.h"
-#include "application.h"
+#include "minigame_bus.h"
 #include "pause.h"
 #include "input.h"
+#include <assert.h>
+#include "application.h"
 #include "file.h"
-#include "camera.h"
+#include "headcount.h"
+#include "bus.h"
+#include "camera_game.h"
+#include "station.h"
+#include "station_goal.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CGame::CGame() :
+CMiniGameBus::CMiniGameBus() :
 	m_pause(nullptr)
 {
 }
@@ -25,7 +30,7 @@ CGame::CGame() :
 //-----------------------------------------------------------------------------
 // デストラクタ
 //-----------------------------------------------------------------------------
-CGame::~CGame()
+CMiniGameBus::~CMiniGameBus()
 {
 	assert(m_pause == nullptr);
 }
@@ -33,10 +38,54 @@ CGame::~CGame()
 //-----------------------------------------------------------------------------
 // 初期化
 //-----------------------------------------------------------------------------
-HRESULT CGame::Init()
+HRESULT CMiniGameBus::Init()
 {
-	m_camera = new CCamera;
-	m_camera->Init();
+	m_count = 0;
+
+	// 背景の設定
+	{
+		CObject3D* bg = CObject3D::Create(0);
+		bg->SetSize(CApplication::GetInstance()->GetScreenSize() * 10.0f);
+		D3DXVECTOR3 pos(CApplication::GetInstance()->CENTER_X, CApplication::GetInstance()->CENTER_Y, 0.0f);	// 位置の取得
+		bg->SetTexture("BG");
+		bg->SetPos(pos);
+		bg->SetColor(CApplication::GetInstance()->GetColor(2));
+	}
+
+	CBus* bus = new CBus;
+	//ファイル読み込み
+	CHeadCount::Load();
+
+	bus->Init();
+	bus->SetPos(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
+	CStation* prevStation;
+
+	{
+		CStation* station = new CStation;
+		station->Init();
+		station->SetPos(D3DXVECTOR3(-200.0f, -20.0f, 0.0f));
+		station->CreatePassenger();
+		bus->Departure(station);
+		prevStation = station;
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		CStation* station = new CStation;
+		station->Init();
+		station->SetPos(D3DXVECTOR3(-200.0f + -900.0f * (i + 1), -20.0f, 0.0f));
+		station->CreatePassenger();
+		prevStation->AttachNextStation(station);
+		prevStation = station;
+	}
+
+	CStation* goal = new CStationGoal;
+	goal->Init();
+	goal->SetPos(D3DXVECTOR3(-200.0f + -900.0f * 6, -20.0f, 0.0f));
+	prevStation->AttachNextStation(goal);
+
+	m_camera = CCameraGame::Create(bus);
 
 	return S_OK;
 }
@@ -44,7 +93,7 @@ HRESULT CGame::Init()
 //-----------------------------------------------------------------------------
 // 終了
 //-----------------------------------------------------------------------------
-void CGame::Uninit()
+void CMiniGameBus::Uninit()
 {
 	if (m_pause != nullptr)
 	{
@@ -64,7 +113,7 @@ void CGame::Uninit()
 //-----------------------------------------------------------------------------
 // 更新
 //-----------------------------------------------------------------------------
-void CGame::Update()
+void CMiniGameBus::Update()
 {
 	m_camera->Update();
 }
@@ -72,7 +121,7 @@ void CGame::Update()
 //-----------------------------------------------------------------------------
 // 描画
 //-----------------------------------------------------------------------------
-void CGame::Draw()
+void CMiniGameBus::Draw()
 {
 	m_camera->Set();
 }

@@ -28,9 +28,9 @@ public:
 	enum class MODE_TYPE
 	{
 		TITLE = 0,
-		TUTORIAL,
-		CUSTUM,
 		GAME,
+		MINIGAME_BUS,
+		CUSTUM,
 		RESULT,
 		MAX
 	};

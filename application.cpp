@@ -224,6 +224,9 @@ void CApplication::SetMode(MODE_TYPE inType)
 	case CApplication::MODE_TYPE::TITLE:
 		mode = new CTitle;
 		break;
+	case CApplication::MODE_TYPE::MINIGAME_BUS:
+		mode = new CTitle;
+		break;
 	case CApplication::MODE_TYPE::GAME:
 		mode = new CGame;
 		break;
