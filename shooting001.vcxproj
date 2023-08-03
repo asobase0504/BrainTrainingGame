@@ -126,7 +126,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -157,6 +157,7 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="DirectInput.cpp" />
+    <ClCompile Include="headcount.cpp" />
     <ClCompile Include="inputjoypad.cpp" />
     <ClCompile Include="inputkeyboard.cpp" />
     <ClCompile Include="menu.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="application.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="DirectInput.h" />
+    <ClInclude Include="headcount.h" />
     <ClInclude Include="inputjoypad.h" />
     <ClInclude Include="inputkeyboard.h" />
     <ClInclude Include="inputkeydata.h" />

@@ -14,6 +14,7 @@
 #include "sound.h"
 #include "application.h"
 #include "file.h"
+#include "headcount.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -45,6 +46,9 @@ HRESULT CGame::Init()
 		bg->SetPos(pos);
 		bg->SetColor(CApplication::GetInstance()->GetColor(2));
 	}
+
+	//ファイル読み込み
+	CHeadCount::Load();
 
 	return S_OK;
 }

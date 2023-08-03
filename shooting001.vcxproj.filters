@@ -149,6 +149,9 @@
     <ClCompile Include="objectList.cpp">
       <Filter>ソース ファイル\02_Object</Filter>
     </ClCompile>
+    <ClCompile Include="headcount.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input.h">
@@ -240,6 +243,9 @@
     </ClInclude>
     <ClInclude Include="objectList.h">
       <Filter>ソース ファイル\02_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="headcount.h">
+      <Filter>ソース ファイル\03_Mode\00_Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
