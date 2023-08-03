@@ -161,6 +161,7 @@
     <ClCompile Include="camera_game.cpp" />
     <ClCompile Include="debug_proc.cpp" />
     <ClCompile Include="minigame_bus.cpp" />
+    <ClCompile Include="minigame_number25.cpp" />
     <ClCompile Include="station.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="collision.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="camera_game.h" />
     <ClInclude Include="debug_proc.h" />
     <ClInclude Include="minigame_bus.h" />
+    <ClInclude Include="minigame_number25.h" />
     <ClInclude Include="station.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="collision.h" />

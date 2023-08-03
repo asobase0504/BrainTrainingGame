@@ -69,6 +69,9 @@
     <Filter Include="ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object\01_Station">
       <UniqueIdentifier>{bd314462-97fc-42e2-9fdd-5d153c9a7b30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\02_Number25">
+      <UniqueIdentifier>{9ff648bb-063f-4274-ba3a-35c6dab2f3fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="input.cpp">
@@ -191,6 +194,9 @@
     <ClCompile Include="minigame_bus.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame</Filter>
     </ClCompile>
+    <ClCompile Include="minigame_number25.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input.h">
@@ -310,6 +316,9 @@
     <ClInclude Include="headcount.h" />
     <ClInclude Include="minigame_bus.h">
       <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame</Filter>
+    </ClInclude>
+    <ClInclude Include="minigame_number25.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -308,6 +308,27 @@ void CObject2D::SetColorAlpha(const float inAlpha)
 }
 
 //=============================================================================
+// テクスチャのアニメーション
+//=============================================================================
+void CObject2D::AnimTexture(int num, int texMax)
+{
+	VERTEX_2D *pVtx;			// 頂点情報へのポインタ
+
+	float nDivisionRate = 1.0f / texMax;
+
+	// 頂点バッファをロックし、頂点情報へのポインタを取得
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	pVtx[0].tex = D3DXVECTOR2(num * nDivisionRate, 0.0f);
+	pVtx[1].tex = D3DXVECTOR2((num + 1) * nDivisionRate, 0.0f);
+	pVtx[2].tex = D3DXVECTOR2(num * nDivisionRate, 1.0f);
+	pVtx[3].tex = D3DXVECTOR2((num + 1) * nDivisionRate, 1.0f);
+
+	// 頂点バッファをアンロック
+	m_pVtxBuff->Unlock();
+}
+
+//=============================================================================
 // ポリゴンクラスの作成
 //=============================================================================
 CObject2D* CObject2D::Create(int inPriority)

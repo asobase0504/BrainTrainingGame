@@ -62,6 +62,7 @@ public:
 	void SetColor(const D3DXCOLOR& inColor);
 	void SetColorAlpha(const float inAlpha);
 	void SetTexture(std::string inTex) { m_texture = inTex; }	// テクスチャの設定
+	void AnimTexture(int num, int texMax);
 
 	// Getter
 	const D3DXVECTOR2 GetSize() { return m_size; }

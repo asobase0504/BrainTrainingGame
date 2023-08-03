@@ -30,6 +30,7 @@ public:
 		TITLE = 0,
 		GAME,
 		MINIGAME_BUS,
+		MINIGAME_NUMBER25,
 		CUSTUM,
 		RESULT,
 		MAX
