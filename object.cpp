@@ -15,14 +15,18 @@
 //----------------------------------------
 // コンストラクタ
 //----------------------------------------
-CObject::CObject(TYPE type, int priority) :
+CObject::CObject(int priority) :
+	m_assignmentPriority(priority),
 	m_pos(D3DXVECTOR3(0.0f,0.0f,0.0f)),
 	m_prev(nullptr),
 	m_next(nullptr),
 	m_isDeleted(false),
-	m_shouldStopAlsoUpdate(false)
+	m_isActivityAtPouse(false),
+	m_shouldInvisible(false),
+	m_parent(nullptr)
 {
-	m_type = type;
+	m_children.clear();
+
 
 	CObjectList* taskGroup = CObjectList::GetInstance();
 
@@ -34,4 +38,20 @@ CObject::CObject(TYPE type, int priority) :
 //----------------------------------------
 CObject::~CObject()
 {
+}
+
+
+//----------------------------------------
+// デストラクタ
+//----------------------------------------
+void CObject::SetPos(const D3DXVECTOR3& inPos)
+{
+	m_pos = inPos;
+
+	int childrenCount = m_children.size();
+
+	for (int i = 0; i < childrenCount; i++)
+	{
+		m_children[i]->SetPos(m_children[i]->GetPos());
+	}
 }

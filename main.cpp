@@ -6,16 +6,8 @@
 //=============================================================================
 
 //*****************************************************************************
-// ライブラリーリンク
-//*****************************************************************************
-#pragma comment(lib,"d3d9.lib")
-#pragma comment(lib,"d3dx9.lib")
-#pragma comment(lib,"winmm.lib")
-
-//*****************************************************************************
 // include
 //*****************************************************************************
-#include <Windows.h>
 #include <tchar.h> // _T
 #include "application.h"
 
@@ -151,6 +143,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpC
 				application->Update();
 
 				// 描画処理
+				CDebugProc::Print("FPS : %d\n",g_nCountFPS);
 				application->Draw();
 
 #ifdef _DEBUG

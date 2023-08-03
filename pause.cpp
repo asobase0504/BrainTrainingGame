@@ -34,7 +34,7 @@ HRESULT CPause::Init()
 
 	// ”wŒi‚ÌÝ’è
 	{
-		m_bg = CObject2D::Create(CObject::TYPE::NONE, 2);
+		m_bg = CObject2D::Create(2);
 		m_bg->SetSize(CApplication::GetInstance()->GetScreenSize());
 		D3DXVECTOR3 pos(CApplication::GetInstance()->CENTER_X, CApplication::GetInstance()->CENTER_Y, 0.0f);	// ˆÊ’u‚ÌŽæ“¾
 		m_bg->SetTexture("BG");
@@ -61,7 +61,7 @@ HRESULT CPause::Init()
 
 			CMenuItem* item = new CPauseMenuItem;
 			item->Init();
-			item->SetShouldStopAlsoUpdate();
+			item->AttachActivityAtPouse();
 			item->SetSize(D3DXVECTOR2(465.0f, 80.0f));			// ‘å‚«‚³‚ÌÝ’è
 			item->SetColor(CApplication::GetInstance()->GetColor(0));			// F‚ÌÝ’è
 
@@ -86,7 +86,7 @@ HRESULT CPause::Init()
 		}
 
 		D3DXVECTOR2 pos(CApplication::GetInstance()->CENTER_X, CApplication::GetInstance()->CENTER_Y);
-		D3DXVECTOR2 area((float)CApplication::GetInstance()->SCREEN_WIDTH, (float)CApplication::GetInstance()->CENTER_Y * 0.8f);
+		D3DXVECTOR2 area((float)CApplication::SCREEN_WIDTH, (float)CApplication::CENTER_Y * 0.8f);
 		m_menu = CMenu::Create(pos, area, fream);
 		m_menu->SetItems(items);
 	}

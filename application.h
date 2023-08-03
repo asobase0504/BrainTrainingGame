@@ -7,9 +7,6 @@
 #ifndef _APPLICATION_H_
 #define _APPLICATION_H_
 
-#include <d3dx9.h>
-#include <vector>
-
 //-----------------------------------------
 // 前方宣言
 //-----------------------------------------
@@ -39,10 +36,10 @@ public:
 	};
 
 public: // 定数
-	const int SCREEN_WIDTH;		// スクリーンの幅
-	const int SCREEN_HEIGHT;	// スクリーンの高さ
-	const float CENTER_X;		// スクリーン中心座標のX座標
-	const float CENTER_Y;		// スクリーン中心座標のY座標
+	static const int SCREEN_WIDTH;		// スクリーンの幅
+	static const int SCREEN_HEIGHT;		// スクリーンの高さ
+	static const float CENTER_X;		// スクリーン中心座標のX座標
+	static const float CENTER_Y;		// スクリーン中心座標のY座標
 
 public: // 静的メンバー変数
 	static CApplication* application;

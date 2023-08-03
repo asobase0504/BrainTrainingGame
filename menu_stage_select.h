@@ -32,7 +32,7 @@ public:	// パブリック関数
 class CStageSelectMenuFream : public CMenuFream
 {
 public:	// パブリック関数
-	CStageSelectMenuFream(CObject::TYPE type = CObject::TYPE::NONE);
+	CStageSelectMenuFream();
 	virtual ~CStageSelectMenuFream() override;
 
 	virtual void Uninit() override;
@@ -50,7 +50,7 @@ private: // メンバー変数
 class CStageSelectMenuItem : public CMenuItem
 {
 public:	// パブリック関数
-	CStageSelectMenuItem(CObject::TYPE type = CObject::TYPE::NONE);
+	CStageSelectMenuItem();
 	~CStageSelectMenuItem() override;
 
 	HRESULT Init() override;

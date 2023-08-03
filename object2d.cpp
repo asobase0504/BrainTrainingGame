@@ -13,8 +13,8 @@
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-CObject2D::CObject2D(TYPE type,int inPriority) :
-	CObject(type, inPriority),
+CObject2D::CObject2D(int inPriority) :
+	CObject(inPriority),
 	m_pVtxBuff(nullptr),
 	m_texture("\0"),
 	m_rotY(0.0f),
@@ -97,14 +97,14 @@ HRESULT CObject2D::Init()
 //=============================================================================
 void CObject2D::Uninit()
 {
+	CObject::Release();
+
 	// 頂点バッファの破壊
 	if (m_pVtxBuff != nullptr)
 	{
 		m_pVtxBuff->Release();
 		m_pVtxBuff = nullptr;
 	}
-
-	m_isDeleted = true;
 }
 
 //=============================================================================
@@ -112,6 +112,10 @@ void CObject2D::Uninit()
 //=============================================================================
 void CObject2D::Update()
 {
+	if (m_parent != nullptr)
+	{
+		SetPos(m_pos);
+	}
 }
 
 //=============================================================================
@@ -146,6 +150,13 @@ void CObject2D::SetPos(const D3DXVECTOR3 & inPos)
 {
 	CObject::SetPos(inPos);
 
+	D3DXVECTOR3 pos = m_pos;
+
+	if (m_parent != nullptr)
+	{
+		pos += m_parent->GetPos();
+	}
+
 	VERTEX_2D *pVtx = NULL;		// 頂点情報へのポインタ
 
 	// 頂点情報をロックし、頂点情報へのポインタを取得
@@ -154,77 +165,77 @@ void CObject2D::SetPos(const D3DXVECTOR3 & inPos)
 	switch (m_anchor)
 	{
 	case CObject2D::TOP_LEFT:
-		pVtx[0].pos.x = m_pos.x - m_size.x;
-		pVtx[0].pos.y = m_pos.y;
+		pVtx[0].pos.x = pos.x - m_size.x;
+		pVtx[0].pos.y = pos.y;
 
-		pVtx[1].pos.x = m_pos.x;
-		pVtx[1].pos.y = m_pos.y;
+		pVtx[1].pos.x = pos.x;
+		pVtx[1].pos.y = pos.y;
 
-		pVtx[2].pos.x = m_pos.x - m_size.x;
-		pVtx[2].pos.y = m_pos.y + m_size.y;
+		pVtx[2].pos.x = pos.x - m_size.x;
+		pVtx[2].pos.y = pos.y + m_size.y;
 
-		pVtx[3].pos.x = m_pos.x;
-		pVtx[3].pos.y = m_pos.y + m_size.y;
+		pVtx[3].pos.x = pos.x;
+		pVtx[3].pos.y = pos.y + m_size.y;
 		break;
 	case CObject2D::TOP:
 		break;
 	case CObject2D::TOP_RIGHT:
-		pVtx[0].pos.x = m_pos.x;
-		pVtx[0].pos.y = m_pos.y;
+		pVtx[0].pos.x = pos.x;
+		pVtx[0].pos.y = pos.y;
 
-		pVtx[1].pos.x = m_pos.x + m_size.x;
-		pVtx[1].pos.y = m_pos.y;
+		pVtx[1].pos.x = pos.x + m_size.x;
+		pVtx[1].pos.y = pos.y;
 
-		pVtx[2].pos.x = m_pos.x;
-		pVtx[2].pos.y = m_pos.y + m_size.y;
+		pVtx[2].pos.x = pos.x;
+		pVtx[2].pos.y = pos.y + m_size.y;
 
-		pVtx[3].pos.x = m_pos.x + m_size.x;
-		pVtx[3].pos.y = m_pos.y + m_size.y;
+		pVtx[3].pos.x = pos.x + m_size.x;
+		pVtx[3].pos.y = pos.y + m_size.y;
 		break;
 	case CObject2D::LEFT:
 		break;
 	case CObject2D::CENTER:
-		pVtx[0].pos.x = m_pos.x - m_size.x * 0.5f;
-		pVtx[0].pos.y = m_pos.y - m_size.y * 0.5f;
+		pVtx[0].pos.x = pos.x - m_size.x * 0.5f;
+		pVtx[0].pos.y = pos.y - m_size.y * 0.5f;
 
-		pVtx[1].pos.x = m_pos.x + m_size.x * 0.5f;
-		pVtx[1].pos.y = m_pos.y - m_size.y * 0.5f;
+		pVtx[1].pos.x = pos.x + m_size.x * 0.5f;
+		pVtx[1].pos.y = pos.y - m_size.y * 0.5f;
 
-		pVtx[2].pos.x = m_pos.x - m_size.x * 0.5f;
-		pVtx[2].pos.y = m_pos.y + m_size.y * 0.5f;
+		pVtx[2].pos.x = pos.x - m_size.x * 0.5f;
+		pVtx[2].pos.y = pos.y + m_size.y * 0.5f;
 
-		pVtx[3].pos.x = m_pos.x + m_size.x * 0.5f;
-		pVtx[3].pos.y = m_pos.y + m_size.y * 0.5f;
+		pVtx[3].pos.x = pos.x + m_size.x * 0.5f;
+		pVtx[3].pos.y = pos.y + m_size.y * 0.5f;
 		break;
 	case CObject2D::RIGHT:
 		break;
 	case CObject2D::DOWN_LEFT:
-		pVtx[0].pos.x = m_pos.x - m_size.x;
-		pVtx[0].pos.y = m_pos.y - m_size.y;
+		pVtx[0].pos.x = pos.x - m_size.x;
+		pVtx[0].pos.y = pos.y - m_size.y;
 
-		pVtx[1].pos.x = m_pos.x;
-		pVtx[1].pos.y = m_pos.y - m_size.y;
+		pVtx[1].pos.x = pos.x;
+		pVtx[1].pos.y = pos.y - m_size.y;
 
-		pVtx[2].pos.x = m_pos.x - m_size.x;
-		pVtx[2].pos.y = m_pos.y;
+		pVtx[2].pos.x = pos.x - m_size.x;
+		pVtx[2].pos.y = pos.y;
 
-		pVtx[3].pos.x = m_pos.x;
-		pVtx[3].pos.y = m_pos.y;
+		pVtx[3].pos.x = pos.x;
+		pVtx[3].pos.y = pos.y;
 		break;
 	case CObject2D::DOWN:
 		break;
 	case CObject2D::DOWN_RIGHT:
-		pVtx[0].pos.x = m_pos.x;
-		pVtx[0].pos.y = m_pos.y - m_size.y;
+		pVtx[0].pos.x = pos.x;
+		pVtx[0].pos.y = pos.y - m_size.y;
 
-		pVtx[1].pos.x = m_pos.x + m_size.x;
-		pVtx[1].pos.y = m_pos.y - m_size.y;
+		pVtx[1].pos.x = pos.x + m_size.x;
+		pVtx[1].pos.y = pos.y - m_size.y;
 
-		pVtx[2].pos.x = m_pos.x;
-		pVtx[2].pos.y = m_pos.y;
+		pVtx[2].pos.x = pos.x;
+		pVtx[2].pos.y = pos.y;
 
-		pVtx[3].pos.x = m_pos.x + m_size.x;
-		pVtx[3].pos.y = m_pos.y;
+		pVtx[3].pos.x = pos.x + m_size.x;
+		pVtx[3].pos.y = pos.y;
 		break;
 	default:
 		break;
@@ -299,9 +310,9 @@ void CObject2D::SetColorAlpha(const float inAlpha)
 //=============================================================================
 // ポリゴンクラスの作成
 //=============================================================================
-CObject2D* CObject2D::Create(TYPE type, int inPriority)
+CObject2D* CObject2D::Create(int inPriority)
 {
-	CObject2D* objectCreate = new CObject2D(type, inPriority);
+	CObject2D* objectCreate = new CObject2D(inPriority);
 
 	if ((objectCreate == nullptr) || FAILED(objectCreate->Init()))
 	{

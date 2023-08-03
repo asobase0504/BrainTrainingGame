@@ -16,8 +16,7 @@
 //-----------------------------------------
 // コンストラクタ
 //-----------------------------------------
-CPauseMenuItem::CPauseMenuItem(CObject::TYPE type) :
-	CMenuItem(type),
+CPauseMenuItem::CPauseMenuItem() :
 	m_text(nullptr)
 {
 }

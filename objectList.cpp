@@ -10,7 +10,7 @@
 #include "ObjectList.h"
 #include "Object.h"
 #include "renderer.h"
-#include <assert.h>
+#include "application.h"
 
 //-----------------------------------------------------------------------------
 // 静的メンバー変数の宣言
@@ -129,13 +129,25 @@ void CObjectList::Update()
 //=============================================================================
 void CObjectList::Draw()
 {
-	AllProcess([](CObject* object)
+	for (int i = 0; i <= m_priorityNumber; i++)
 	{
-		if (!object->IsRelease())
+		if (m_list.count(i) == 0)
 		{
-			object->Draw();
+			continue;
 		}
-	});
+
+		// 画面クリア(Zバッファのクリア)
+		LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstance()->GetRenderer()->GetDevice();
+		pDevice->Clear(0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_RGBA(0, 0, 0, 0), 1.0f, 0);
+
+		PriorityProcess(i, [](CObject* object)
+		{
+			if (!object->IsRelease())
+			{
+				object->Draw();
+			}
+		});
+	}
 }
 
 //=============================================================================

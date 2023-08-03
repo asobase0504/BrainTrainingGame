@@ -36,9 +36,9 @@ public:
 	enum EPriority
 	{
 		LEVEL_SYSTEM = 0,
-		LEVEL_3D_1,
 		LEVEL_2D_1,
 		LEVEL_2D_2,
+		LEVEL_3D_1,
 		LEVEL_2D_UI,
 		LEVEL_FADE,
 		LEVEL_DEBUG,

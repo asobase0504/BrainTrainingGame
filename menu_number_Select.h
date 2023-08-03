@@ -17,7 +17,7 @@
 class CNumberSelectMenuItem : public CMenuItem
 {
 public:	// パブリック関数
-	CNumberSelectMenuItem(CObject::TYPE type = CObject::TYPE::NONE);
+	CNumberSelectMenuItem();
 	~CNumberSelectMenuItem() override;
 
 	HRESULT Init() override;

@@ -25,7 +25,7 @@ CCountDownUI * CCountDownUI::Create(const D3DXVECTOR2 & inPos)
 
 	// フレームの初期化
 	{
-		countDown->m_fream = new CObject2D(CObject::TYPE::NONE, PRIORITY_BELONG);
+		countDown->m_fream = new CObject2D(PRIORITY_BELONG);
 		if (FAILED(countDown->m_fream->Init()))
 		{
 			return nullptr;
@@ -35,12 +35,12 @@ CCountDownUI * CCountDownUI::Create(const D3DXVECTOR2 & inPos)
 		color.a = 0.95f;
 		countDown->m_fream->SetColor(color);
 		countDown->m_fream->SetSize({ (float)CApplication::GetInstance()->SCREEN_WIDTH,100.0f });
-		countDown->m_fream->SetShouldStopAlsoUpdate();
+		countDown->m_fream->AttachActivityAtPouse();
 	}
 
 	// テキストの初期化
 	{
-		countDown->m_text = new CObject2D(CObject::TYPE::NONE, 5);
+		countDown->m_text = new CObject2D(PRIORITY_BELONG);
 		if (FAILED(countDown->m_text->Init()))
 		{
 			return nullptr;
@@ -51,7 +51,7 @@ CCountDownUI * CCountDownUI::Create(const D3DXVECTOR2 & inPos)
 		countDown->m_text->SetColor(color);
 		countDown->m_text->SetSize({ 300.0f,80.0f });
 		countDown->m_text->SetTexture("TEXT_READY");
-		countDown->m_text->SetShouldStopAlsoUpdate();
+		countDown->m_text->AttachActivityAtPouse();
 	}
 
 	return countDown;

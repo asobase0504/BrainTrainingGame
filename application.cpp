@@ -23,6 +23,10 @@
 // 静的メンバー変数の初期化
 //-----------------------------------------------------------------------------
 CApplication* CApplication::application = nullptr;
+const int CApplication::SCREEN_WIDTH(1280);
+const int CApplication::SCREEN_HEIGHT(720);
+const float CApplication::CENTER_X(SCREEN_WIDTH * 0.5f);
+const float CApplication::CENTER_Y(SCREEN_HEIGHT * 0.5f);
 
 //-----------------------------------------------------------------------------
 // シングルトンでのインスタンスの取得
@@ -41,10 +45,6 @@ CApplication* CApplication::GetInstance()
 // コンストラクタ
 //-----------------------------------------------------------------------------
 CApplication::CApplication() :
-	SCREEN_WIDTH(1280),
-	SCREEN_HEIGHT(720),
-	CENTER_X(SCREEN_WIDTH * 0.5f),
-	CENTER_Y(SCREEN_HEIGHT * 0.5f),
 	mode(nullptr),
 	renderer(nullptr),
 	input(nullptr),
@@ -103,7 +103,6 @@ HRESULT CApplication::Init(HWND hWnd, HINSTANCE hInstance)
 	{
 		return E_FAIL;
 	}
-	sound->Play(CSound::LABEL_BGM_TITLE);
 
 	// ゲームモード
 	SetMode(MODE_TYPE::TITLE);
@@ -227,8 +226,6 @@ void CApplication::SetMode(MODE_TYPE inType)
 		break;
 	case CApplication::MODE_TYPE::GAME:
 		mode = new CGame;
-		break;
-	case CApplication::MODE_TYPE::RESULT:
 		break;
 	default:
 		break;

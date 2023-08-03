@@ -10,41 +10,31 @@
 #include <d3dx9.h>
 #include <list>
 #include <vector>
+#include "objectList.h"
 
 class CObject
 {
-public:	// 列挙型
-	// CObjectクラスの派生先
-	enum class TYPE
-	{
-		CHARACTER = 0,
-		BULLET,
-		BLOCK,
-		NONE
-	};
-
 public:	// 定数
 
 public:	// 静的関数
 
 public:
-	CObject(TYPE type,int priority = 3);
+	CObject(int priority = CObjectList::LEVEL_SYSTEM);
 	virtual ~CObject();
 
 	virtual HRESULT Init() = 0;
 	virtual void Uninit() = 0;
 	virtual void Update() = 0;
-	virtual void Draw() = 0;
+	virtual void Draw() {};
 
 	// Setter
 	void SetIsDeleted(bool inDeleted) { m_isDeleted = inDeleted; }		// 死亡状態を設定
-	void SetShouldStopAlsoUpdate() { m_shouldStopAlsoUpdate = true; }
-	virtual void SetPos(const D3DXVECTOR3& inPos) { m_pos = inPos; }	// 位置の設定
+	virtual void SetPos(const D3DXVECTOR3& inPos);	// 位置の設定
 
 	// Getter
 	const D3DXVECTOR3& GetPos() { return m_pos; }	// 位置の取得
-	const TYPE GetType() { return m_type; }
 	const bool GetIsDeleted() { return m_isDeleted; }
+	int GetPriority() { return m_assignmentPriority; }
 
 	/* リスト構造 */
 	void SetPrev(CObject* inTask) { m_prev = inTask; }
@@ -56,23 +46,29 @@ public:
 	void Release() { m_isDeleted = true; }
 	bool IsRelease() { return m_isDeleted; }
 
+	/* ポーズ中の状態 */
+	void AttachActivityAtPouse() { m_isActivityAtPouse = true; }
 	bool IsActivityAtPouse() { return m_isActivityAtPouse; }
-	int GetPriority() { return m_assignmentPriority; }
-private:
+
+	/* 親子関係 */
+	CObject* AttachParent(CObject* inParent) { inParent->AttachChildren(this); return inParent; }
+	void AttachChildren(CObject* inChild) { m_children.push_back(inChild); inChild->m_parent = this; }
 
 private:
-	bool m_shouldStopAlsoUpdate;	// 停止中も更新すべきか
-	bool m_shouldInvisible;		// 停止中に描画も止めるべきか
+	int m_assignmentPriority;	// 所属しているプライオリティ
 
 	CObject* m_prev;	// 前のオブジェクト
 	CObject* m_next;	// 次のオブジェクト
 
-	int m_assignmentPriority;
-	bool m_isActivityAtPouse;
-protected:
-	D3DXVECTOR3 m_pos;	// 位置
+	bool m_isActivityAtPouse;	// ポーズ中も更新できるか
+	bool m_shouldInvisible;		// 停止中に描画も止めるべきか
+
 	bool m_isDeleted;	// 削除フラグ
-	TYPE m_type;		// 種類
+
+protected:
+	CObject* m_parent;
+	std::vector<CObject*> m_children;
+	D3DXVECTOR3 m_pos;	// 位置
 };
 
 #endif // !_RENDERER_H_

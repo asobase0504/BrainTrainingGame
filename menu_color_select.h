@@ -32,7 +32,7 @@ public:	// パブリック関数
 class CColorSelectMenuFream : public CMenuFream
 {
 public:	// パブリック関数
-	CColorSelectMenuFream(CObject::TYPE type = CObject::TYPE::NONE);
+	CColorSelectMenuFream();
 	virtual ~CColorSelectMenuFream() override;
 
 	virtual void Uninit() override;
@@ -50,7 +50,7 @@ private: // メンバー変数
 class CColorSelectMenuItem : public CMenuItem
 {
 public:	// パブリック関数
-	CColorSelectMenuItem(CObject::TYPE type = CObject::TYPE::NONE);
+	CColorSelectMenuItem();
 	~CColorSelectMenuItem() override;
 
 	HRESULT Init() override;

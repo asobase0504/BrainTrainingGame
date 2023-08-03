@@ -17,7 +17,7 @@
 class CPauseMenuItem : public CMenuItem
 {
 public:	// パブリック関数
-	CPauseMenuItem(CObject::TYPE type = CObject::TYPE::NONE);
+	CPauseMenuItem();
 	~CPauseMenuItem() override;
 
 	void PopUpdate() override;
