@@ -19,6 +19,7 @@
 #include "sound.h"
 #include "objectList.h"
 #include "minigame_number25.h"
+#include "minigame_bus.h"
 
 //-----------------------------------------------------------------------------
 // Ã“Iƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
@@ -226,7 +227,7 @@ void CApplication::SetMode(MODE_TYPE inType)
 		mode = new CTitle;
 		break;
 	case CApplication::MODE_TYPE::MINIGAME_BUS:
-		mode = new CTitle;
+		mode = new CMiniGameBus;
 		break;
 	case CApplication::MODE_TYPE::MINIGAME_NUMBER25:
 		mode = new CMiniGameNumber25;
