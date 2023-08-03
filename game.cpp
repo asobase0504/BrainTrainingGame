@@ -13,6 +13,7 @@
 #include <assert.h>
 #include "application.h"
 #include "file.h"
+#include "headcount.h"
 #include "bus.h"
 #include "camera_game.h"
 #include "station.h"
@@ -52,6 +53,9 @@ HRESULT CGame::Init()
 	}
 
 	CBus* bus = new CBus;
+	//ƒtƒ@ƒCƒ‹“Ç‚Ýž‚Ý
+	CHeadCount::Load();
+
 	bus->Init();
 	bus->SetPos(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 

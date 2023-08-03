@@ -182,6 +182,9 @@
     <ClCompile Include="station.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\00_Object\01_Station</Filter>
     </ClCompile>
+    <ClCompile Include="headcount.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input.h">
@@ -291,6 +294,9 @@
     </ClInclude>
     <ClInclude Include="debug_proc.h">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
+    </ClInclude>
+    <ClInclude Include="headcount.h">
+      <Filter>ソース ファイル\03_Mode\00_Game</Filter>
     </ClInclude>
     <ClInclude Include="station.h">
       <Filter>ソース ファイル\03_Mode\00_Game\00_Object\01_Station</Filter>
