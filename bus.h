@@ -42,7 +42,7 @@ public:	// メンバー関数
 	void Departure(CStation* inStation);	// 出発
 	void Arrival();							// 到着
 	void GetOff();							// 降車
-	void GetOn(int inNumber);				// 乗車
+	void GetOn(int inNumber) { m_passenger += inNumber; }				// 乗車
 
 private: // 動的プライベート関数
 

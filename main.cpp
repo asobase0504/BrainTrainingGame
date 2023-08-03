@@ -83,6 +83,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpC
 		hInstance,
 		NULL);
 
+	//—”‚Ì‰Šú‰»
+	srand((unsigned int)time(0));
+
 	if (FAILED(application->Init(hWnd, hInstance)))
 	{
 		return E_FAIL;

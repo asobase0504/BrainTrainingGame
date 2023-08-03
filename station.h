@@ -13,6 +13,7 @@
 // 前方宣言
 //-----------------------------------------
 class CBus;
+class CPassenger;
 
 //-----------------------------------------
 // アプリケーションクラス
@@ -27,6 +28,8 @@ public:	// メンバー関数
 
 	virtual HRESULT Init() override;
 	virtual void Uninit() override;
+
+	void CreatePassenger();
 
 	// 更新処理
 	virtual void Update() override;
@@ -45,6 +48,7 @@ private: // 動的プライベート関数
 private: // 動的メンバー変数
 
 	CStation* m_nextStation;
+	std::vector<CPassenger*> m_passengerList;
 	CBus* m_bus;
 
 	int m_passenger;	// 乗客

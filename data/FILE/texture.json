@@ -2,6 +2,7 @@
   "TEXTURE": [
     [ "BUS", "data\/TEXTURE\/bus.png" ],
     [ "STATION", "data\/TEXTURE\/station.png" ],
+    [ "HUMAN", "data\/TEXTURE\/human.png" ],
     [ "PLAYER", "data\/TEXTURE\/player.png" ],
     [ "BLOCK", "data\/TEXTURE\/Block.png" ],
     [ "BULLET", "data\/TEXTURE\/Bullet.png" ],

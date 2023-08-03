@@ -56,6 +56,9 @@ public:
 	void SetRot(const D3DXVECTOR3& inRot);
 	const D3DXVECTOR3& GetRot() const { return m_rot; }
 	void SetSize(const D3DXVECTOR2& inSize);
+	void AddSize(const D3DXVECTOR2& inSize) { SetSize((D3DXVECTOR2)m_size + inSize); }
+	const D3DXVECTOR2& GetSize() const { return (D3DXVECTOR2)m_size; }
+
 	void SetColor(const D3DXCOLOR& inColor);
 	void SetTexture(std::string inTex) { m_texture = inTex; }	// テクスチャの設定
 

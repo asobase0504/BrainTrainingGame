@@ -63,6 +63,9 @@
     <Filter Include="ソース ファイル\04_Camera">
       <UniqueIdentifier>{b998b0be-5f84-423e-9bfd-25ace88ab016}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Object\01_Station">
+      <UniqueIdentifier>{bd314462-97fc-42e2-9fdd-5d153c9a7b30}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="input.cpp">
@@ -167,17 +170,17 @@
     <ClCompile Include="passenger.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
     </ClCompile>
-    <ClCompile Include="station.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
-    </ClCompile>
     <ClCompile Include="camera_game.cpp">
       <Filter>ソース ファイル\04_Camera</Filter>
     </ClCompile>
-    <ClCompile Include="station_goal.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
-    </ClCompile>
     <ClCompile Include="debug_proc.cpp">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
+    </ClCompile>
+    <ClCompile Include="station_goal.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Object\01_Station</Filter>
+    </ClCompile>
+    <ClCompile Include="station.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Object\01_Station</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,17 +286,17 @@
     <ClInclude Include="passenger.h">
       <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
     </ClInclude>
-    <ClInclude Include="station.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
-    </ClInclude>
     <ClInclude Include="camera_game.h">
       <Filter>ソース ファイル\04_Camera</Filter>
     </ClInclude>
-    <ClInclude Include="station_goal.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Object</Filter>
-    </ClInclude>
     <ClInclude Include="debug_proc.h">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
+    </ClInclude>
+    <ClInclude Include="station.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Object\01_Station</Filter>
+    </ClInclude>
+    <ClInclude Include="station_goal.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Object\01_Station</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

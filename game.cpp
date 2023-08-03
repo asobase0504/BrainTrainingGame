@@ -44,7 +44,7 @@ HRESULT CGame::Init()
 	// ”wŒi‚ÌÝ’è
 	{
 		CObject3D* bg = CObject3D::Create(0);
-		bg->SetSize(CApplication::GetInstance()->GetScreenSize() * 2.0f);
+		bg->SetSize(CApplication::GetInstance()->GetScreenSize() * 10.0f);
 		D3DXVECTOR3 pos(CApplication::GetInstance()->CENTER_X, CApplication::GetInstance()->CENTER_Y, 0.0f);	// ˆÊ’u‚ÌŽæ“¾
 		bg->SetTexture("BG");
 		bg->SetPos(pos);
@@ -61,6 +61,7 @@ HRESULT CGame::Init()
 		CStation* station = new CStation;
 		station->Init();
 		station->SetPos(D3DXVECTOR3(-200.0f, -20.0f, 0.0f));
+		station->CreatePassenger();
 		bus->Departure(station);
 		prevStation = station;
 	}
@@ -69,14 +70,15 @@ HRESULT CGame::Init()
 	{
 		CStation* station = new CStation;
 		station->Init();
-		station->SetPos(D3DXVECTOR3(-200.0f + -100.0f * (i + 1), -20.0f, 0.0f));
+		station->SetPos(D3DXVECTOR3(-200.0f + -600.0f * (i + 1), -20.0f, 0.0f));
+		station->CreatePassenger();
 		prevStation->AttachNextStation(station);
 		prevStation = station;
 	}
 
 	CStation* goal = new CStationGoal;
 	goal->Init();
-	goal->SetPos(D3DXVECTOR3(-200.0f + -100.0f * 11, -20.0f, 0.0f));
+	goal->SetPos(D3DXVECTOR3(-200.0f + -600.0f * 11, -20.0f, 0.0f));
 	prevStation->AttachNextStation(goal);
 
 	m_camera = CCameraGame::Create(bus);
