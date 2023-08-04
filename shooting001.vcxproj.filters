@@ -72,6 +72,9 @@
     <Filter Include="ソース ファイル\03_Mode\00_Game\02_Number25">
       <UniqueIdentifier>{9ff648bb-063f-4274-ba3a-35c6dab2f3fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\02_Number25\00_Object">
+      <UniqueIdentifier>{823de920-107d-4aee-9f43-a2d4ea112f76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="input.cpp">
@@ -197,6 +200,12 @@
     <ClCompile Include="minigame_number25.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\02_Number25</Filter>
     </ClCompile>
+    <ClCompile Include="number.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25\00_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="timer.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25\00_Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input.h">
@@ -319,6 +328,12 @@
     </ClInclude>
     <ClInclude Include="minigame_number25.h">
       <Filter>ソース ファイル\03_Mode\00_Game\02_Number25</Filter>
+    </ClInclude>
+    <ClInclude Include="number.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25\00_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25\00_Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

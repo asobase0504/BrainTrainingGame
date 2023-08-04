@@ -12,7 +12,9 @@
 #include "application.h"
 #include "renderer.h"
 #include "debug_proc.h"
+
 #include "object2d.h"
+#include "timer.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -48,8 +50,6 @@ CMiniGameNumber25::~CMiniGameNumber25()
 //-----------------------------------------------------------------------------
 HRESULT CMiniGameNumber25::Init()
 {
-	m_dwGameStartTime = timeGetTime();
-
 	for (int nCntY = 0; nCntY < 5; nCntY++)
 	{
 		for (int nCntX = 0; nCntX < 5; nCntX++)
@@ -63,6 +63,9 @@ HRESULT CMiniGameNumber25::Init()
 		}
 	}
 
+	m_pTimer = CTimer::Create(D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.5f, 50.0f, 0.0f), D3DXVECTOR2(25.0f, 50.0f));
+	m_pTimer->SetTimer(0);
+
 	Shuffle();
 
 	return S_OK;
@@ -73,6 +76,12 @@ HRESULT CMiniGameNumber25::Init()
 //-----------------------------------------------------------------------------
 void CMiniGameNumber25::Uninit()
 {
+	m_pTimer = nullptr;
+
+	for (int i = 0; i < 25; i++)
+	{
+		m_pObject2D[i] = nullptr;
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -121,15 +130,12 @@ void CMiniGameNumber25::Shuffle()
 //-----------------------------------------------------------------------------
 void CMiniGameNumber25::DrawTime()
 {
-	RECT rect = { 420, -20, CApplication::SCREEN_WIDTH, CApplication::SCREEN_HEIGHT };
-
 	if (!m_isEndGame)
 	{
-		CDebugProc::Print(" \n経過時間 : %.2f\n", (float)m_dwGameTime / 1000.0f);
 	}
 	else
 	{
-		CDebugProc::Print(" \nクリア : %.2f\n", (float)m_dwGameTime / 1000.0f);
+		m_pTimer->StopTimer(true);
 	}
 }
 
