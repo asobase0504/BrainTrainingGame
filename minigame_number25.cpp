@@ -9,6 +9,9 @@
 //-----------------------------------------------------------------------------
 #include "minigame_number25.h"
 
+#include "application.h"
+#include "renderer.h"
+#include "debug_proc.h"
 #include "object2d.h"
 
 //-----------------------------------------------------------------------------
@@ -77,6 +80,8 @@ void CMiniGameNumber25::Uninit()
 //-----------------------------------------------------------------------------
 void CMiniGameNumber25::Update()
 {
+	DrawTime();
+
 	// ゲーム経過時間　＝　現在時刻　ー　ゲーム開始時刻
 	if (!m_isEndGame)
 	{
@@ -111,9 +116,26 @@ void CMiniGameNumber25::Shuffle()
 	}
 }
 
-//==================================================
+//-----------------------------------------------------------------------------
 // マウスのタッチ処理
-//==================================================
+//-----------------------------------------------------------------------------
+void CMiniGameNumber25::DrawTime()
+{
+	RECT rect = { 420, -20, CApplication::SCREEN_WIDTH, CApplication::SCREEN_HEIGHT };
+
+	if (!m_isEndGame)
+	{
+		CDebugProc::Print(" \n経過時間 : %.2f\n", (float)m_dwGameTime / 1000.0f);
+	}
+	else
+	{
+		CDebugProc::Print(" \nクリア : %.2f\n", (float)m_dwGameTime / 1000.0f);
+	}
+}
+
+//-----------------------------------------------------------------------------
+// マウスのタッチ処理
+//-----------------------------------------------------------------------------
 void CMiniGameNumber25::Touch(float nPosX, float nPosY)
 {
 	if (!m_isEndGame)

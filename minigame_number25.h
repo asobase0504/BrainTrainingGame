@@ -34,7 +34,7 @@ public:	// ƒƒ“ƒo[ŠÖ”
 	void Draw() override;
 
 	void Shuffle();
-
+	void DrawTime();
 	void Touch(float nPosX, float nPosY);
 
 private:
