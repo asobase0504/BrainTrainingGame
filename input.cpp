@@ -2,7 +2,6 @@
 //
 // 入力処理 [input.cpp]
 // Author1 : KOZUNA HIROHITO
-// Author2 : YUDA KAITO
 //
 //=============================================================================
 
@@ -10,9 +9,11 @@
 //インクルードファイル
 //-----------------------------------------------------------------------------
 #include "input.h"
-#include "DirectInput.h"
-#include "inputkeyboard.h"
-#include "inputjoypad.h"
+#include "input\DirectInput.h"
+#include "input\inputkeyboard.h"
+#include "input\inputjoypad.h"
+#include "input\inputmouse.h"
+#include <assert.h>
 
 //-----------------------------------------------------------------------------
 //静的メンバ変数宣言
@@ -26,6 +27,8 @@ CInput::CInput()
 {
 	m_pKeyboard = nullptr;		//キーボードの情報
 	m_pJoyPad = nullptr;		//ジョイパッドの情報
+	m_pMouse = nullptr;			//マウスの情報
+	m_nOldInputType = INPUT_TYPE_KEYBOARD;
 }
 
 //*************************************************************************************
@@ -64,6 +67,15 @@ HRESULT CInput::Init(HINSTANCE hInstance, HWND hWnd)
 		return E_FAIL;
 	}
 
+	//マウスの生成
+	m_pMouse = new CInputMouse;
+
+	//マウスの初期化処理
+	if (FAILED(m_pMouse->Init(hInstance, hWnd)))
+	{
+		return E_FAIL;
+	}
+
 	return S_OK;
 }
 
@@ -88,6 +100,14 @@ void CInput::Uninit()
 		m_pJoyPad = nullptr;
 	}
 
+	//マウスの破棄
+	if (m_pMouse != nullptr)
+	{
+		m_pMouse->Uninit();
+		delete m_pMouse;
+		m_pMouse = nullptr;
+	}
+
 	//DirectInputオブジェクトの破棄
 	CDirectInput::Break();
 
@@ -108,6 +128,22 @@ void CInput::Update()
 	m_pKeyboard->Update();
 	//ジョイパッドの更新
 	m_pJoyPad->Update();
+	//マウスの更新
+	m_pMouse->Update();
+
+	//最後に触ったデバイス
+	if (m_pJoyPad->GetPressAll())
+	{
+		m_nOldInputType = INPUT_TYPE_JOYPAD;
+	}
+	else if (m_pKeyboard->GetKeyboardAllPress())
+	{
+		m_nOldInputType = INPUT_TYPE_KEYBOARD;
+	}
+	else if (m_pMouse->GetPressAll())
+	{
+		m_nOldInputType = INPUT_TYPE_MOUSE;
+	}
 }
 
 //*************************************************************************************
@@ -118,659 +154,6 @@ CInput *CInput::Create()
 	//Inputの自己生成
 	m_pInput = new CInput;
 	return m_pInput;
-}
-
-//*************************************************************************************
-//プレス処理(総合)
-//*************************************************************************************
-bool CInput::Press(STAN_DART_INPUT_KEY key)
-{
-	switch (key)
-	{
-	case KEY_UP:
-		if (m_pKeyboard->GetKeyboardPress(DIK_W)
-			|| m_pKeyboard->GetKeyboardPress(DIK_UP)
-			|| m_pJoyPad->GetPressAll(JOYPAD_UP))
-		{
-			return true;
-		}
-		break;
-	case KEY_DOWN:
-		if (m_pKeyboard->GetKeyboardPress(DIK_S)
-			|| m_pKeyboard->GetKeyboardPress(DIK_DOWN)
-			|| m_pJoyPad->GetPressAll(JOYPAD_DOWN))
-		{
-			return true;
-		}
-		break;
-	case KEY_LEFT:
-		if (m_pKeyboard->GetKeyboardPress(DIK_A)
-			|| m_pKeyboard->GetKeyboardPress(DIK_LEFT)
-			|| m_pJoyPad->GetPressAll(JOYPAD_LEFT))
-		{
-			return true;
-		}
-		break;
-	case KEY_RIGHT:
-		if (m_pKeyboard->GetKeyboardPress(DIK_D)
-			|| m_pKeyboard->GetKeyboardPress(DIK_RIGHT)
-			|| m_pJoyPad->GetPressAll(JOYPAD_RIGHT))
-		{
-			return true;
-		}
-		break;
-	case KEY_DECISION:
-		if (m_pKeyboard->GetKeyboardPress(DIK_RETURN)
-			|| m_pJoyPad->GetPressAll(JOYPAD_A))
-		{
-			return true;
-		}
-		break;
-	case KEY_SHOT:
-		if (m_pKeyboard->GetKeyboardPress(DIK_SPACE)
-			|| m_pJoyPad->GetPressAll(JOYPAD_R1))
-		{
-			return true;
-		}
-		break;
-	case KEY_BACK:
-		if (m_pKeyboard->GetKeyboardPress(DIK_BACKSPACE)
-			|| m_pKeyboard->GetKeyboardPress(DIK_B)
-			|| m_pJoyPad->GetPressAll(JOYPAD_BACK)
-			|| m_pJoyPad->GetPressAll(JOYPAD_B))
-		{
-			return true;
-		}
-		break;
-	case KEY_SHIFT:
-		if (m_pKeyboard->GetKeyboardPress(DIK_RSHIFT)
-			|| m_pKeyboard->GetKeyboardPress(DIK_LSHIFT)
-			|| m_pJoyPad->GetPressAll(JOYPAD_L1))
-		{
-			return true;
-		}
-		break;
-	case KEY_MOVE:
-		if (Press(KEY_UP) || Press(KEY_DOWN) || Press(KEY_LEFT) || Press(KEY_RIGHT))
-		{
-			return true;
-		}
-		break;
-	case KEY_PAUSE:
-		if (m_pKeyboard->GetKeyboardPress(DIK_P)
-			|| m_pJoyPad->GetPressAll(JOYPAD_START))
-		{
-			return true;
-		}
-		break;
-	default:
-		break;
-	}
-
-	return false;
-}
-
-//*************************************************************************************
-//トリガー処理(総合)
-//*************************************************************************************
-bool CInput::Trigger(STAN_DART_INPUT_KEY key)
-{
-	switch (key)
-	{
-	case KEY_UP:
-		if (m_pKeyboard->GetKeyboardTrigger(DIK_W)
-			|| m_pKeyboard->GetKeyboardTrigger(DIK_UP)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_UP))
-		{
-			return true;
-		}
-		break;
-	case KEY_DOWN:
-		if (m_pKeyboard->GetKeyboardTrigger(DIK_S)
-			|| m_pKeyboard->GetKeyboardTrigger(DIK_DOWN)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_DOWN))
-		{
-			return true;
-		}
-		break;
-	case KEY_LEFT:
-		if (m_pKeyboard->GetKeyboardTrigger(DIK_A)
-			|| m_pKeyboard->GetKeyboardTrigger(DIK_LEFT)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_LEFT))
-		{
-			return true;
-		}
-		break;
-	case KEY_RIGHT:
-		if (m_pKeyboard->GetKeyboardTrigger(DIK_D)
-			|| m_pKeyboard->GetKeyboardTrigger(DIK_RIGHT)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_RIGHT))
-		{
-			return true;
-		}
-		break;
-	case KEY_DECISION:
-		if (m_pKeyboard->GetKeyboardTrigger(DIK_RETURN)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_A))
-		{
-			return true;
-		}
-		break;
-	case KEY_SHOT:
-		if (m_pKeyboard->GetKeyboardTrigger(DIK_SPACE)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_R1))
-		{
-			return true;
-		}
-		break;
-	case KEY_BACK:
-		if (m_pKeyboard->GetKeyboardTrigger(DIK_BACKSPACE)
-			|| m_pKeyboard->GetKeyboardTrigger(DIK_B)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_BACK)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_B))
-		{
-			return true;
-		}
-		break;
-	case KEY_SHIFT:
-		if (m_pKeyboard->GetKeyboardTrigger(DIK_RSHIFT)
-			|| m_pKeyboard->GetKeyboardTrigger(DIK_LSHIFT)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_A))
-		{
-			return true;
-		}
-		break;
-	case KEY_MOVE:
-		if (Trigger(KEY_UP) || Trigger(KEY_DOWN) || Trigger(KEY_LEFT) || Trigger(KEY_RIGHT))
-		{
-			return true;
-		}
-		break;
-	case KEY_PAUSE:
-		if (m_pKeyboard->GetKeyboardTrigger(DIK_P)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_START)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_HOME))
-		{
-			return true;
-		}
-		break;
-	default:
-		break;
-	}
-
-	return false;
-}
-
-//*************************************************************************************
-//リリース処理(総合)
-//*************************************************************************************
-bool CInput::Release(STAN_DART_INPUT_KEY key)
-{
-	switch (key)
-	{
-	case KEY_UP:
-		if (m_pKeyboard->GetKeyboardRelease(DIK_W)
-			|| m_pKeyboard->GetKeyboardRelease(DIK_UP)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_UP))
-		{
-			return true;
-		}
-		break;
-	case KEY_DOWN:
-		if (m_pKeyboard->GetKeyboardRelease(DIK_S)
-			|| m_pKeyboard->GetKeyboardRelease(DIK_DOWN)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_DOWN))
-		{
-			return true;
-		}
-		break;
-	case KEY_LEFT:
-		if (m_pKeyboard->GetKeyboardRelease(DIK_A)
-			|| m_pKeyboard->GetKeyboardRelease(DIK_LEFT)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_LEFT))
-		{
-			return true;
-		}
-		break;
-	case KEY_RIGHT:
-		if (m_pKeyboard->GetKeyboardRelease(DIK_D)
-			|| m_pKeyboard->GetKeyboardRelease(DIK_RIGHT)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_RIGHT))
-		{
-			return true;
-		}
-		break;
-	case KEY_DECISION:
-		if (m_pKeyboard->GetKeyboardRelease(DIK_RETURN)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_A))
-		{
-			return true;
-		}
-		break;
-	case KEY_SHOT:
-		if (m_pKeyboard->GetKeyboardRelease(DIK_SPACE)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_R1))
-		{
-			return true;
-		}
-		break;
-	case KEY_BACK:
-		if (m_pKeyboard->GetKeyboardRelease(DIK_BACKSPACE)
-			|| m_pKeyboard->GetKeyboardRelease(DIK_B)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_BACK)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_B))
-		{
-			return true;
-		}
-		break;
-	case KEY_SHIFT:
-		if (m_pKeyboard->GetKeyboardRelease(DIK_RSHIFT)
-			|| m_pKeyboard->GetKeyboardRelease(DIK_LSHIFT)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_A))
-		{
-			return true;
-		}
-		break;
-	case KEY_MOVE:
-		if (Release(KEY_UP) || Release(KEY_DOWN) || Release(KEY_LEFT) || Release(KEY_RIGHT))
-		{
-			return true;
-		}
-		break;
-	case KEY_PAUSE:
-		if (m_pKeyboard->GetKeyboardRelease(DIK_P)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_START)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_HOME))
-		{
-			return true;
-		}
-		break;
-	default:
-		break;
-	}
-
-	return false;
-}
-
-bool CInput::Press(STAN_DART_INPUT_KEY key, int nNum)
-{
-	switch (key)
-	{
-	case KEY_UP:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardPress(DIK_W) || m_pKeyboard->GetKeyboardPress(DIK_UP);
-		}
-		else
-		{
-			return m_pJoyPad->GetPress(JOYPAD_UP, nNum);
-		}
-
-		break;
-	case KEY_DOWN:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardPress(DIK_S) || m_pKeyboard->GetKeyboardPress(DIK_DOWN);
-		}
-		else
-		{
-			return m_pJoyPad->GetPress(JOYPAD_DOWN, nNum);
-		}
-		break;
-	case KEY_LEFT:
-		if (nNum == -1)
-		{
-			if ((m_pKeyboard->GetKeyboardPress(DIK_A)
-				|| m_pKeyboard->GetKeyboardPress(DIK_LEFT)))
-			{
-				return true;
-			}
-		}
-		else
-		{
-			return m_pJoyPad->GetPress(JOYPAD_LEFT, nNum);
-		}
-		break;
-	case KEY_RIGHT:
-		if (nNum == -1)
-		{
-			if (m_pKeyboard->GetKeyboardPress(DIK_D)
-				|| m_pKeyboard->GetKeyboardPress(DIK_RIGHT))
-			{
-				return true;
-			}
-		}
-		else
-		{
-			return m_pJoyPad->GetPress(JOYPAD_RIGHT, nNum);
-		}
-		break;
-	case KEY_MOVE_UP:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardPress(DIK_W) : m_pJoyPad->GetPress(JOYPAD_UP, nNum);
-		break;
-	case KEY_MOVE_DOWN:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardPress(DIK_S) : m_pJoyPad->GetPress(JOYPAD_DOWN, nNum);
-		break;
-	case KEY_MOVE_LEFT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardPress(DIK_A) : m_pJoyPad->GetPress(JOYPAD_LEFT, nNum);
-		break;
-	case KEY_MOVE_RIGHT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardPress(DIK_D) : m_pJoyPad->GetPress(JOYPAD_RIGHT, nNum);
-		break;
-	case KEY_SHOT_UP:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardPress(DIK_UP) : m_pJoyPad->GetPress(JOYPAD_Y, nNum);
-		break;
-	case KEY_SHOT_DOWN:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardPress(DIK_DOWN) : m_pJoyPad->GetPress(JOYPAD_A, nNum);
-		break;
-	case KEY_SHOT_LEFT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardPress(DIK_LEFT) : m_pJoyPad->GetPress(JOYPAD_X, nNum);
-		break;
-	case KEY_SHOT_RIGHT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardPress(DIK_RIGHT) : m_pJoyPad->GetPress(JOYPAD_B, nNum);
-		break;
-	case KEY_DECISION:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardPress(DIK_RETURN);
-		}
-		else
-		{
-			return m_pJoyPad->GetPress(JOYPAD_A, nNum);
-		}
-		break;
-	case KEY_SHOT:
-		if (m_pKeyboard->GetKeyboardPress(DIK_SPACE)
-			|| m_pJoyPad->GetPressAll(JOYPAD_R1))
-		{
-			return true;
-		}
-		break;
-	case KEY_BACK:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardPress(DIK_BACKSPACE) || m_pKeyboard->GetKeyboardPress(DIK_B);
-		}
-		else
-		{
-			return m_pJoyPad->GetPress(JOYPAD_BACK, nNum) || m_pJoyPad->GetPress(JOYPAD_B, nNum);
-		}
-		break;
-	case KEY_MOVE:
-		if (Press(KEY_UP, nNum) || Press(KEY_DOWN, nNum) || Press(KEY_LEFT, nNum) || Press(KEY_RIGHT, nNum))
-		{
-			return true;
-		}
-		break;
-	case KEY_PAUSE:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardPress(DIK_P);
-		}
-		else
-		{
-			return m_pJoyPad->GetPress(JOYPAD_START, nNum) || m_pJoyPad->GetPress(JOYPAD_HOME, nNum);
-		}
-		break;
-	default:
-		break;
-	}
-
-	return false;
-}
-
-bool CInput::Trigger(STAN_DART_INPUT_KEY key, int nNum)
-{
-	switch (key)
-	{
-	case KEY_UP:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardTrigger(DIK_W) || m_pKeyboard->GetKeyboardTrigger(DIK_UP);
-		}
-		else
-		{
-			return m_pJoyPad->GetTrigger(JOYPAD_UP, nNum);
-		}
-
-		break;
-	case KEY_DOWN:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardTrigger(DIK_S) || m_pKeyboard->GetKeyboardTrigger(DIK_DOWN);
-		}
-		else
-		{
-			return m_pJoyPad->GetTrigger(JOYPAD_DOWN, nNum);
-		}
-		break;
-	case KEY_LEFT:
-		if (nNum == -1)
-		{
-			if ((m_pKeyboard->GetKeyboardTrigger(DIK_A)
-				|| m_pKeyboard->GetKeyboardTrigger(DIK_LEFT)))
-			{
-				return true;
-			}
-		}
-		else
-		{
-			return m_pJoyPad->GetTrigger(JOYPAD_LEFT, nNum);
-		}
-		break;
-	case KEY_RIGHT:
-		if (nNum == -1)
-		{
-			if (m_pKeyboard->GetKeyboardTrigger(DIK_D)
-				|| m_pKeyboard->GetKeyboardTrigger(DIK_RIGHT))
-			{
-				return true;
-			}
-		}
-		else
-		{
-			return m_pJoyPad->GetTrigger(JOYPAD_RIGHT, nNum);
-		}
-		break;
-	case KEY_MOVE_UP:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardTrigger(DIK_W) : m_pJoyPad->GetTrigger(JOYPAD_UP, nNum);
-		break;
-	case KEY_MOVE_DOWN:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardTrigger(DIK_S) : m_pJoyPad->GetTrigger(JOYPAD_DOWN, nNum);
-		break;
-	case KEY_MOVE_LEFT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardTrigger(DIK_A) : m_pJoyPad->GetTrigger(JOYPAD_LEFT, nNum);
-		break;
-	case KEY_MOVE_RIGHT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardTrigger(DIK_D) : m_pJoyPad->GetTrigger(JOYPAD_RIGHT, nNum);
-		break;
-	case KEY_SHOT_UP:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardTrigger(DIK_UP) : m_pJoyPad->GetTrigger(JOYPAD_Y, nNum);
-		break;
-	case KEY_SHOT_DOWN:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardTrigger(DIK_DOWN) : m_pJoyPad->GetTrigger(JOYPAD_A, nNum);
-		break;
-	case KEY_SHOT_LEFT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardTrigger(DIK_LEFT) : m_pJoyPad->GetTrigger(JOYPAD_X, nNum);
-		break;
-	case KEY_SHOT_RIGHT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardTrigger(DIK_RIGHT) : m_pJoyPad->GetTrigger(JOYPAD_B, nNum);
-		break;
-	case KEY_DECISION:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardTrigger(DIK_RETURN);
-		}
-		else
-		{
-			return m_pJoyPad->GetTrigger(JOYPAD_A, nNum);
-		}
-		break;
-	case KEY_SHOT:
-		if (m_pKeyboard->GetKeyboardTrigger(DIK_SPACE)
-			|| m_pJoyPad->GetTriggerAll(JOYPAD_R1))
-		{
-			return true;
-		}
-		break;
-	case KEY_BACK:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardTrigger(DIK_BACKSPACE) || m_pKeyboard->GetKeyboardTrigger(DIK_B);
-		}
-		else
-		{
-			return m_pJoyPad->GetTrigger(JOYPAD_BACK, nNum) || m_pJoyPad->GetTrigger(JOYPAD_B, nNum);
-		}
-		break;
-	case KEY_MOVE:
-		if (Trigger(KEY_UP, nNum) || Trigger(KEY_DOWN, nNum) || Trigger(KEY_LEFT, nNum) || Trigger(KEY_RIGHT, nNum))
-		{
-			return true;
-		}
-		break;
-	case KEY_PAUSE:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardTrigger(DIK_P);
-		}
-		else
-		{
-			return m_pJoyPad->GetTrigger(JOYPAD_START, nNum) || m_pJoyPad->GetTrigger(JOYPAD_HOME, nNum);
-		}
-		break;
-	default:
-		break;
-	}
-
-	return false;
-}
-
-bool CInput::Release(STAN_DART_INPUT_KEY key, int nNum)
-{
-	switch (key)
-	{
-	case KEY_UP:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardRelease(DIK_W) || m_pKeyboard->GetKeyboardRelease(DIK_UP);
-		}
-		else
-		{
-			return m_pJoyPad->GetRelease(JOYPAD_UP, nNum);
-		}
-
-		break;
-	case KEY_DOWN:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardRelease(DIK_S) || m_pKeyboard->GetKeyboardRelease(DIK_DOWN);
-		}
-		else
-		{
-			return m_pJoyPad->GetRelease(JOYPAD_DOWN, nNum);
-		}
-		break;
-	case KEY_LEFT:
-		if (nNum == -1)
-		{
-			if ((m_pKeyboard->GetKeyboardRelease(DIK_A)
-				|| m_pKeyboard->GetKeyboardRelease(DIK_LEFT)))
-			{
-				return true;
-			}
-		}
-		else
-		{
-			return m_pJoyPad->GetRelease(JOYPAD_LEFT, nNum);
-		}
-		break;
-	case KEY_RIGHT:
-		if (nNum == -1)
-		{
-			if (m_pKeyboard->GetKeyboardRelease(DIK_D)
-				|| m_pKeyboard->GetKeyboardRelease(DIK_RIGHT))
-			{
-				return true;
-			}
-		}
-		else
-		{
-			return m_pJoyPad->GetRelease(JOYPAD_RIGHT, nNum);
-		}
-		break;
-	case KEY_MOVE_UP:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardRelease(DIK_W) : m_pJoyPad->GetRelease(JOYPAD_UP, nNum);
-		break;
-	case KEY_MOVE_DOWN:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardRelease(DIK_S) : m_pJoyPad->GetRelease(JOYPAD_DOWN, nNum);
-		break;
-	case KEY_MOVE_LEFT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardRelease(DIK_A) : m_pJoyPad->GetRelease(JOYPAD_LEFT, nNum);
-		break;
-	case KEY_MOVE_RIGHT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardRelease(DIK_D) : m_pJoyPad->GetRelease(JOYPAD_RIGHT, nNum);
-		break;
-	case KEY_SHOT_UP:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardRelease(DIK_UP) : m_pJoyPad->GetRelease(JOYPAD_Y, nNum);
-		break;
-	case KEY_SHOT_DOWN:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardRelease(DIK_DOWN) : m_pJoyPad->GetRelease(JOYPAD_A, nNum);
-		break;
-	case KEY_SHOT_LEFT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardRelease(DIK_LEFT) : m_pJoyPad->GetRelease(JOYPAD_X, nNum);
-		break;
-	case KEY_SHOT_RIGHT:
-		return nNum == -1 ? m_pKeyboard->GetKeyboardRelease(DIK_RIGHT) : m_pJoyPad->GetRelease(JOYPAD_B, nNum);
-		break;
-	case KEY_DECISION:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardRelease(DIK_RETURN);
-		}
-		else
-		{
-			return m_pJoyPad->GetRelease(JOYPAD_A, nNum);
-		}
-		break;
-	case KEY_SHOT:
-		if (m_pKeyboard->GetKeyboardRelease(DIK_SPACE)
-			|| m_pJoyPad->GetReleaseAll(JOYPAD_R1))
-		{
-			return true;
-		}
-		break;
-	case KEY_BACK:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardRelease(DIK_BACKSPACE) || m_pKeyboard->GetKeyboardRelease(DIK_B);
-		}
-		else
-		{
-			return m_pJoyPad->GetRelease(JOYPAD_BACK, nNum) || m_pJoyPad->GetRelease(JOYPAD_B, nNum);
-		}
-		break;
-	case KEY_MOVE:
-		if (Release(KEY_UP, nNum) || Release(KEY_DOWN, nNum) || Release(KEY_LEFT, nNum) || Release(KEY_RIGHT, nNum))
-		{
-			return true;
-		}
-		break;
-	case KEY_PAUSE:
-		if (nNum == -1)
-		{
-			return m_pKeyboard->GetKeyboardRelease(DIK_P);
-		}
-		else
-		{
-			return m_pJoyPad->GetRelease(JOYPAD_START, nNum) || m_pJoyPad->GetRelease(JOYPAD_HOME, nNum);
-		}
-		break;
-	default:
-		break;
-	}
-
-	return false;
 }
 
 //*************************************************************************************
@@ -787,14 +170,14 @@ std::vector<int> CInput::PressDevice(STAN_DART_INPUT_KEY key)
 	}
 
 	// JoyPad入力の調査
-	for (int i = 0;i < m_pJoyPad->GetJoyPadNumMax();i++)
+	for (int i = 0; i < m_pJoyPad->GetJoyPadNumMax(); i++)
 	{
 		if (Release(key, i))
 		{
 			inputedDeviceIndex.push_back(i);
 		}
 	}
-	
+
 	return inputedDeviceIndex;
 }
 
@@ -851,7 +234,7 @@ std::vector<int> CInput::ReleaseDevice(STAN_DART_INPUT_KEY key)
 //*************************************************************************************
 //プレス処理(キーボード)
 //*************************************************************************************
-bool CInput::Press(int nKey)
+bool CInput::Press(int nKey,int)
 {
 	return m_pKeyboard->GetKeyboardPress(nKey);
 }
@@ -859,7 +242,7 @@ bool CInput::Press(int nKey)
 //*************************************************************************************
 //トリガー処理(キーボード)
 //*************************************************************************************
-bool CInput::Trigger(int nkey)
+bool CInput::Trigger(int nkey, int)
 {
 	return m_pKeyboard->GetKeyboardTrigger(nkey);
 }
@@ -867,7 +250,7 @@ bool CInput::Trigger(int nkey)
 //*************************************************************************************
 //リリース処理(キーボード)
 //*************************************************************************************
-bool CInput::Release(int nkey)
+bool CInput::Release(int nkey, int)
 {
 	return m_pKeyboard->GetKeyboardRelease(nkey);
 }
@@ -897,16 +280,46 @@ bool CInput::Release(DirectJoypad key, int nNum)
 }
 
 //*************************************************************************************
+//プレス処理(マウス)
+//*************************************************************************************
+bool CInput::Press(MOUSE_KEY Key)
+{
+	return m_pMouse->GetPress(Key);
+}
+
+//*************************************************************************************
+//トリガー処理(マウス)
+//*************************************************************************************
+bool CInput::Trigger(MOUSE_KEY Key)
+{
+	return m_pMouse->GetTrigger(Key);
+}
+
+//*************************************************************************************
+//リリース処理(マウス)
+//*************************************************************************************
+bool CInput::Release(MOUSE_KEY Key)
+{
+	return m_pMouse->GetRelease(Key);
+}
+
+//*************************************************************************************
 //十字キーのベクトル
 //*************************************************************************************
-D3DXVECTOR3 CInput::VectorMoveKey()
+D3DXVECTOR3 CInput::VectorMoveKey(int nNum)
 {
 	D3DXVECTOR3 VectorMove = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	if (m_pJoyPad->GetJoyPadNumMax() == 0)
 	{
 		return VectorMove;
 	}
-	int nCheck = m_pJoyPad->GetCross();
+
+	if (m_pJoyPad->GetJoyPadNumMax() <= nNum)
+	{
+		return VectorMove;
+	}
+
+	int nCheck = m_pJoyPad->GetCross(nNum);
 
 	if (nCheck > 360 || nCheck < 0)
 	{//十字キーの角度が指定外だったら０を返す
@@ -921,6 +334,41 @@ D3DXVECTOR3 CInput::VectorMoveKey()
 	//長さ１のベクトル変換
 	D3DXVec3Normalize(&VectorMove, &VectorMove);
 
+	return VectorMove;
+}
+
+D3DXVECTOR3 CInput::VectorMoveKeyAll()
+{
+	D3DXVECTOR3 VectorMove = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	int nJoyPad = m_pJoyPad->GetJoyPadNumMax();
+	if (m_pJoyPad->GetJoyPadNumMax() == 0)
+	{
+		return VectorMove;
+	}
+
+	for (int nCnt = 0; nCnt < nJoyPad; nCnt++)
+	{
+		int nCheck = m_pJoyPad->GetCross(nCnt);
+
+		if (nCheck > 360 || nCheck < 0)
+		{//十字キーの角度が指定外だったら０を返す
+			return VectorMove;
+		}
+
+		float fRot = D3DXToRadian(nCheck);
+
+		VectorMove.x = sinf(fRot);
+		VectorMove.y = -cosf(fRot);
+
+		//長さ１のベクトル変換
+		D3DXVec3Normalize(&VectorMove, &VectorMove);
+
+		if (VectorMove != D3DXVECTOR3(0.0f, 0.0f, 0.0f))
+		{
+			return VectorMove;
+		}
+
+	}
 	return VectorMove;
 }
 
@@ -941,7 +389,286 @@ D3DXVECTOR3 CInput::VectorMoveJoyStick(int nNum, bool bleftandright)
 	return VectorMove;
 }
 
-int CInput::GetAcceptJoyPadCount()
+//*************************************************************************************
+//ジョイスティックのベクトル
+//*************************************************************************************
+D3DXVECTOR3 CInput::VectorMoveJoyStickAll(bool bleftandright)
+{
+	D3DXVECTOR3 VectorNull = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	for (int nCnt = 0; nCnt < 2; nCnt++)
+	{
+		D3DXVECTOR3 VectorMove = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		VectorMove = m_pJoyPad->GetJoyStickData(nCnt, bleftandright);
+		//長さ１のベクトル変換
+		D3DXVec3Normalize(&VectorMove, &VectorMove);
+		if (VectorNull != VectorMove)
+		{
+			return  VectorMove;
+		}
+	}
+
+	return VectorNull;
+}
+
+//*************************************************************************************
+// マウスカーソルのスクリーン座標の取得
+//*************************************************************************************
+D3DXVECTOR3 CInput::GetMouseCursor(void)
+{
+	return m_pMouse->GetMouseCursor();
+}
+
+//*************************************************************************************
+// マウスのホイールの動き処理
+//*************************************************************************************
+int CInput::GetMouseWheel(void)
+{
+	return m_pMouse->GetMouseWheel();
+}
+
+//*************************************************************************************
+// マウスの移動量を出力処理
+//*************************************************************************************
+D3DXVECTOR3 CInput::GetMouseMove(void)
+{
+	return m_pMouse->GetMouseMove();
+}
+
+//*************************************************************************************
+// 画面内のカーソルを消すかどうか
+//*************************************************************************************
+void CInput::SetCursorErase(bool bUse)
+{
+	// 画面内のカーソルを消すかどうか
+	m_pMouse->SetCursorErase(bUse);
+}
+
+//*************************************************************************************
+//キーの入れ替え
+//*************************************************************************************
+void CInput::SetJoypadKeyConfig(int nPlayerNum, DirectJoypad OldKey, DirectJoypad NewKey)
+{
+	//変更したキーが変更可能番号以上だったらエラー
+	if (OldKey > JOYPAD_HOME || NewKey > JOYPAD_HOME)
+	{
+		return;
+	}
+	//ジョイパッドのキー入れ替え関数を呼ぶ
+	m_pJoyPad->SetKeyConfig(nPlayerNum, OldKey, NewKey);
+}
+
+//*************************************************************************************
+//ジョイパッドが接続されているかどうか
+//*************************************************************************************
+bool CInput::IsConnected(int nNum)
+{
+	//デバイスデータが存在するかどうか
+	if (m_pJoyPad->GetInputDevice(nNum) != nullptr)
+	{
+		return true;
+	}
+	return false;
+}
+
+//*************************************************************************************
+//ジョイパッドの接続数
+//*************************************************************************************
+int CInput::GetIsConnectedNumMax()
 {
 	return m_pJoyPad->GetJoyPadNumMax();
+}
+
+//*************************************************************************************
+//デバイスの途中検知のオンオフ
+//*************************************************************************************
+void CInput::IntermediateReception(bool bIR)
+{
+	m_pJoyPad->IntermediateReception(bIR);
+}
+
+//*************************************************************************************
+//現在デバイスの途中検知を行っているかどうか
+//*************************************************************************************
+bool CInput::GetIntermediateReception()
+{
+	return m_pJoyPad->GetIntermediateReception();
+}
+
+//*************************************************************************************
+// 全デバイスの入力を確認
+//*************************************************************************************
+bool CInput::KeyChackAll(STAN_DART_INPUT_KEY key, int type)
+{
+	auto lambda = [this, type](auto a)
+	{
+		if (a == KEY_ALL)
+		{
+			switch (type)
+			{
+			case 1:
+				return m_pKeyboard->GetKeyboardAllPress() || m_pJoyPad->GetPressAll() || m_pMouse->GetPressAll();
+				break;
+			case 2:
+				return m_pKeyboard->GetKeyboardAllTrigger() || m_pJoyPad->GetTriggerAll() || m_pMouse->GetTriggerAll();
+				break;
+			case 3:
+				return m_pKeyboard->GetKeyboardAllRelease() || m_pJoyPad->GetReleaseAll() || m_pMouse->GetReleaseAll();
+				break;
+			default:
+				break;
+			}
+		}
+
+		switch (type)
+		{
+		case 1:
+			return Press(a);
+			break;
+		case 2:
+			return Trigger(a);
+			break;
+		case 3:
+			return Release(a);
+			break;
+		default:
+			break;
+		}
+		return false;
+	};
+
+	switch (key)
+	{
+	case KEY_UP:
+		return (lambda(DIK_W) || lambda(DIK_UP) || lambda(JOYPAD_UP));
+		break;
+	case KEY_UP_LEFT:
+		return ((lambda(DIK_W) && lambda(DIK_A)) || (lambda(DIK_UP) && lambda(DIK_LEFT)) || lambda(JOYPAD_UP_LEFT));
+		break;
+	case KEY_UP_RIGHT:
+		return ((lambda(DIK_W) && lambda(DIK_D)) || (lambda(DIK_UP) && lambda(DIK_RIGHT)) || lambda(JOYPAD_UP_RIGHT));
+		break;
+	case KEY_DOWN:
+		return (lambda(DIK_S) || lambda(DIK_DOWN) || lambda(JOYPAD_DOWN));
+		break;
+	case KEY_DOWN_LEFT:
+		return ((lambda(DIK_S) && lambda(DIK_A)) || (lambda(DIK_DOWN) && lambda(DIK_LEFT)) || lambda(JOYPAD_DOWN_LEFT));
+		break;
+	case KEY_DOWN_RIGHT:
+		return (lambda(DIK_S) && lambda(DIK_D)) || (lambda(DIK_DOWN) && lambda(DIK_RIGHT)) || lambda(JOYPAD_DOWN_RIGHT);
+		break;
+	case KEY_LEFT:
+		return lambda(DIK_A) || lambda(DIK_LEFT) || lambda(JOYPAD_LEFT);
+		break;
+	case KEY_RIGHT:
+		return lambda(DIK_D) || lambda(DIK_RIGHT) || lambda(JOYPAD_RIGHT);
+		break;
+	case KEY_DECISION:
+		return lambda(DIK_RETURN) || lambda(JOYPAD_A);
+		break;
+	case KEY_SHOT:
+		return lambda(DIK_SPACE) || lambda(JOYPAD_R1);
+		break;
+	case KEY_BACK:
+		return lambda(DIK_BACKSPACE) || lambda(DIK_B) || lambda(JOYPAD_BACK) || lambda(JOYPAD_B);
+		break;
+	case KEY_SHIFT:
+		return lambda(DIK_RSHIFT) || lambda(DIK_LSHIFT) || lambda(JOYPAD_A);
+		break;
+	case KEY_MOVE:
+		return Trigger(KEY_UP) || Trigger(KEY_DOWN) || Trigger(KEY_LEFT) || Trigger(KEY_RIGHT);
+		break;
+	case KEY_PAUSE:
+		return lambda(DIK_P) || lambda(JOYPAD_START) || lambda(JOYPAD_HOME);
+		break;
+	case KEY_ALL:
+		return lambda(key);
+		break;
+	default:
+		break;
+	}
+
+	// 予定されてないキーが呼ばれた
+	assert(false);
+	return false;
+}
+
+//*************************************************************************************
+// 指定したデバイスの入力を確認
+//*************************************************************************************
+bool CInput::KeyChackNum(STAN_DART_INPUT_KEY key, int type, int nNum)
+{
+	auto lambda = [this, nNum, type](auto a)
+	{
+		switch (type)
+		{
+		case 1:
+			return Press(a, nNum);
+			break;
+		case 2:
+			return Trigger(a, nNum);
+			break;
+		case 3:
+			return Release(a, nNum);
+			break;
+		default:
+			break;
+		}
+		return false;
+	};
+
+	switch (key)
+	{
+	case KEY_UP:
+		return (lambda(DIK_W) || lambda(DIK_UP) || lambda(JOYPAD_UP));
+		break;
+	case KEY_UP_LEFT:
+		return ((lambda(DIK_W) && lambda(DIK_A)) || (lambda(DIK_UP) && lambda(DIK_LEFT)) || lambda(JOYPAD_UP_LEFT));
+		break;
+	case KEY_UP_RIGHT:
+		return ((lambda(DIK_W) && lambda(DIK_D)) || (lambda(DIK_UP) && lambda(DIK_RIGHT)) || lambda(JOYPAD_UP_RIGHT));
+		break;
+	case KEY_DOWN:
+		return (lambda(DIK_S) || lambda(DIK_DOWN) || lambda(JOYPAD_DOWN));
+		break;
+	case KEY_DOWN_LEFT:
+		return ((lambda(DIK_S) && lambda(DIK_A)) || (lambda(DIK_DOWN) && lambda(DIK_LEFT)) || lambda(JOYPAD_DOWN_LEFT));
+		break;
+	case KEY_DOWN_RIGHT:
+		return (lambda(DIK_S) && lambda(DIK_D)) || (lambda(DIK_DOWN) && lambda(DIK_RIGHT)) || lambda(JOYPAD_DOWN_RIGHT);
+		break;
+	case KEY_LEFT:
+		return lambda(DIK_A) || lambda(DIK_LEFT) || lambda(JOYPAD_LEFT);
+		break;
+	case KEY_RIGHT:
+		return lambda(DIK_D) || lambda(DIK_RIGHT) || lambda(JOYPAD_RIGHT);
+		break;
+	case KEY_DECISION:
+		return lambda(DIK_RETURN) || lambda(JOYPAD_A);
+		break;
+	case KEY_SHOT:
+		return lambda(DIK_SPACE) || lambda(JOYPAD_R1);
+		break;
+	case KEY_BACK:
+		return lambda(DIK_BACKSPACE) || lambda(DIK_B) || lambda(JOYPAD_BACK) || lambda(JOYPAD_B);
+		break;
+	case KEY_SHIFT:
+		return lambda(DIK_RSHIFT) || lambda(DIK_LSHIFT) || lambda(JOYPAD_A);
+		break;
+	case KEY_MOVE:
+		return Trigger(KEY_UP) || Trigger(KEY_DOWN) || Trigger(KEY_LEFT) || Trigger(KEY_RIGHT);
+		break;
+	case KEY_PAUSE:
+		return lambda(DIK_P) || lambda(JOYPAD_START) || lambda(JOYPAD_HOME);
+		break;
+	case KEY_ALL:
+		return lambda(-2);
+		break;
+	default:
+		break;
+
+	}
+
+	// 予定されてないキーが呼ばれた
+	assert(false);
+	return false;
 }

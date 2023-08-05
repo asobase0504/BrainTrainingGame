@@ -16,9 +16,6 @@
 //*************************************************************************************
 CInputKeyboard::CInputKeyboard()
 {
-	memset(m_aKeyState, 0, sizeof(m_aKeyState));
-	memset(m_aKeyStateTrigger, 0, sizeof(m_aKeyStateTrigger));
-	memset(m_aKeyStateRelease, 0, sizeof(m_aKeyStateRelease));
 	m_pDevKeyboard = nullptr;
 }
 
@@ -86,9 +83,14 @@ void CInputKeyboard::Update(void)
 	{
 		for (nCntKey = 0; nCntKey < NUM_KEY_MAX; nCntKey++)
 		{
-			m_aKeyStateTrigger[nCntKey] = ~m_aKeyState[nCntKey] & aKeyState[nCntKey];	 // キーボードのトリガー情報を保存
-			m_aKeyStateRelease[nCntKey] = m_aKeyState[nCntKey] & ~aKeyState[nCntKey];	 // キーボードのリリース情報を保存
-			m_aKeyState[nCntKey] = aKeyState[nCntKey];		// キーボードのプレス情報を保存
+			// キーボードトリガー情報を保存
+			m_aKeyStateTrigger[nCntKey] = ~m_aKeyState[nCntKey] & aKeyState[nCntKey];
+
+			// キーボードリリース情報を保存
+			m_aKeyStateRelease[nCntKey] = m_aKeyState[nCntKey] & ~aKeyState[nCntKey];
+
+			//キーボードのプレス情報を保存
+			m_aKeyState[nCntKey] = aKeyState[nCntKey];		
 		}
 	}
 	else
@@ -102,7 +104,6 @@ bool CInputKeyboard::GetKeyboardPress(int nKey)
 {
 	return (m_aKeyState[nKey] & 0x80) ? true : false;
 }
-
 //キーボードトリガー処理
 bool CInputKeyboard::GetKeyboardTrigger(int nKey)
 {
@@ -140,7 +141,7 @@ bool CInputKeyboard::GetKeyboardAllTrigger(void)
 }
 
 //キーボード全キーリリース処理
-bool CInputKeyboard::GetKetboardAllRelease(void)
+bool CInputKeyboard::GetKeyboardAllRelease(void)
 {
 	for (int nCntKey = 0; nCntKey < NUM_KEY_MAX; nCntKey++)
 	{

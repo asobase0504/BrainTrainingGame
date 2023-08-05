@@ -74,9 +74,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="input.cpp">
-      <Filter>ソース ファイル\01_Input</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル\00_Main</Filter>
     </ClCompile>
@@ -121,15 +118,6 @@
     </ClCompile>
     <ClCompile Include="renderer.cpp">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectInput.cpp">
-      <Filter>ソース ファイル\01_Input</Filter>
-    </ClCompile>
-    <ClCompile Include="inputjoypad.cpp">
-      <Filter>ソース ファイル\01_Input</Filter>
-    </ClCompile>
-    <ClCompile Include="inputkeyboard.cpp">
-      <Filter>ソース ファイル\01_Input</Filter>
     </ClCompile>
     <ClCompile Include="pause.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game</Filter>
@@ -197,11 +185,23 @@
     <ClCompile Include="minigame_number25.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\02_Number25</Filter>
     </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>ソース ファイル\01_Input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\DirectInput.cpp">
+      <Filter>ソース ファイル\01_Input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\inputjoypad.cpp">
+      <Filter>ソース ファイル\01_Input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\inputkeyboard.cpp">
+      <Filter>ソース ファイル\01_Input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\inputmouse.cpp">
+      <Filter>ソース ファイル\01_Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="input.h">
-      <Filter>ソース ファイル\01_Input</Filter>
-    </ClInclude>
     <ClInclude Include="title.h">
       <Filter>ソース ファイル\03_Mode\01_Title</Filter>
     </ClInclude>
@@ -243,18 +243,6 @@
     </ClInclude>
     <ClInclude Include="renderer.h">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectInput.h">
-      <Filter>ソース ファイル\01_Input</Filter>
-    </ClInclude>
-    <ClInclude Include="inputjoypad.h">
-      <Filter>ソース ファイル\01_Input</Filter>
-    </ClInclude>
-    <ClInclude Include="inputkeyboard.h">
-      <Filter>ソース ファイル\01_Input</Filter>
-    </ClInclude>
-    <ClInclude Include="inputkeydata.h">
-      <Filter>ソース ファイル\01_Input</Filter>
     </ClInclude>
     <ClInclude Include="pause.h">
       <Filter>ソース ファイル\03_Mode\00_Game</Filter>
@@ -319,6 +307,24 @@
     </ClInclude>
     <ClInclude Include="minigame_number25.h">
       <Filter>ソース ファイル\03_Mode\00_Game\02_Number25</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>ソース ファイル\01_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\DirectInput.h">
+      <Filter>ソース ファイル\01_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\inputjoypad.h">
+      <Filter>ソース ファイル\01_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\inputkeyboard.h">
+      <Filter>ソース ファイル\01_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\inputkeydata.h">
+      <Filter>ソース ファイル\01_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\inputmouse.h">
+      <Filter>ソース ファイル\01_Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

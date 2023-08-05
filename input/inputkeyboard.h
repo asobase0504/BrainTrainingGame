@@ -22,22 +22,21 @@ private:
 public:
 	CInputKeyboard();
 	~CInputKeyboard()override;
-	HRESULT Init(HINSTANCE hInstance, HWND hWnd)override;		// 入力処理全部の初期化
-	void Uninit(void)override;									// 入力処理全部の終了処理
-	void Update(void)override;									// 入力処理全部の更新処理
+	HRESULT Init(HINSTANCE hInstance, HWND hWnd)override;		//入力処理全部の初期化
+	void Uninit(void)override;									//入力処理全部の終了処理
+	void Update(void)override;									//入力処理全部の更新処理
 
-	bool GetKeyboardPress(int nKey);		// キーボードプレス処理
-	bool GetKeyboardTrigger(int nKey);		// キーボードトリガー処理
-	bool GetKeyboardRelease(int nKey);		// キーボードリリース処理
-	bool GetKeyboardAllPress(void);			// キーボード全キープレス処理
-	bool GetKeyboardAllTrigger(void);		// キーボード全キートリガー処理
-	bool GetKetboardAllRelease(void);		// キーボード全キーリリース処理
+	bool GetKeyboardPress(int nKey);			//キーボードプレス処理
+	bool GetKeyboardTrigger(int nKey);			//キーボードトリガー処理
+	bool GetKeyboardRelease(int nKey);			//キーボードリリース処理
+	bool GetKeyboardAllPress(void);				//キーボード全キープレス処理
+	bool GetKeyboardAllTrigger(void);			//キーボード全キートリガー処理
+	bool GetKeyboardAllRelease(void);			//キーボード全キーリリース処理
 
 private:
-	LPDIRECTINPUTDEVICE8 m_pDevKeyboard;	// 入力デバイス（キーボード（コントローラー用は別に作る））へのポインタ
-	BYTE m_aKeyState[NUM_KEY_MAX];			// キーボードのプレス情報
-	BYTE m_aKeyStateTrigger[NUM_KEY_MAX];	// キーボードのトリガー情報
-	BYTE m_aKeyStateRelease[NUM_KEY_MAX];	// キーボードのリリース情報
-
+	LPDIRECTINPUTDEVICE8 m_pDevKeyboard;				//入力デバイス（キーボード（コントローラー用は別に作る））へのポインタ
+	BYTE m_aKeyState[NUM_KEY_MAX];						//キーボードのプレス情報
+	BYTE m_aKeyStateTrigger[NUM_KEY_MAX];				//キーボードのトリガー情報
+	BYTE m_aKeyStateRelease[NUM_KEY_MAX];				//キーボードのリリース情報
 };
 #endif
