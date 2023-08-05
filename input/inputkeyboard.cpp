@@ -53,6 +53,11 @@ HRESULT CInputKeyboard::Init(HINSTANCE hInstance, HWND hWnd)
 
 	//キーボードへのアクセス権を獲得
 	m_pDevKeyboard->Acquire();
+	
+	//初期化
+	ZeroMemory(m_aKeyState, sizeof(m_aKeyState));
+	ZeroMemory(m_aKeyStateRelease, sizeof(m_aKeyState));
+	ZeroMemory(m_aKeyStateTrigger, sizeof(m_aKeyState));
 
 	return S_OK;
 }
