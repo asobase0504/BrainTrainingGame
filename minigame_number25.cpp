@@ -9,7 +9,12 @@
 //-----------------------------------------------------------------------------
 #include "minigame_number25.h"
 
+#include "application.h"
+#include "renderer.h"
+#include "debug_proc.h"
+
 #include "object2d.h"
+#include "timer.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -45,8 +50,6 @@ CMiniGameNumber25::~CMiniGameNumber25()
 //-----------------------------------------------------------------------------
 HRESULT CMiniGameNumber25::Init()
 {
-	m_dwGameStartTime = timeGetTime();
-
 	for (int nCntY = 0; nCntY < 5; nCntY++)
 	{
 		for (int nCntX = 0; nCntX < 5; nCntX++)
@@ -60,6 +63,9 @@ HRESULT CMiniGameNumber25::Init()
 		}
 	}
 
+	m_pTimer = CTimer::Create(D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.5f, 50.0f, 0.0f), D3DXVECTOR2(25.0f, 50.0f));
+	m_pTimer->SetTimer(0);
+
 	Shuffle();
 
 	return S_OK;
@@ -70,6 +76,12 @@ HRESULT CMiniGameNumber25::Init()
 //-----------------------------------------------------------------------------
 void CMiniGameNumber25::Uninit()
 {
+	m_pTimer = nullptr;
+
+	for (int i = 0; i < 25; i++)
+	{
+		m_pObject2D[i] = nullptr;
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -77,6 +89,8 @@ void CMiniGameNumber25::Uninit()
 //-----------------------------------------------------------------------------
 void CMiniGameNumber25::Update()
 {
+	DrawTime();
+
 	// ゲーム経過時間　＝　現在時刻　ー　ゲーム開始時刻
 	if (!m_isEndGame)
 	{
@@ -111,9 +125,23 @@ void CMiniGameNumber25::Shuffle()
 	}
 }
 
-//==================================================
+//-----------------------------------------------------------------------------
 // マウスのタッチ処理
-//==================================================
+//-----------------------------------------------------------------------------
+void CMiniGameNumber25::DrawTime()
+{
+	if (!m_isEndGame)
+	{
+	}
+	else
+	{
+		m_pTimer->StopTimer(true);
+	}
+}
+
+//-----------------------------------------------------------------------------
+// マウスのタッチ処理
+//-----------------------------------------------------------------------------
 void CMiniGameNumber25::Touch(float nPosX, float nPosY)
 {
 	if (!m_isEndGame)

@@ -15,6 +15,7 @@
 class CPause;
 class CCamera;
 class CObject2D;
+class CTimer;
 
 //-----------------------------------------
 // アプリケーションクラス
@@ -34,13 +35,14 @@ public:	// メンバー関数
 	void Draw() override;
 
 	void Shuffle();
-
+	void DrawTime();
 	void Touch(float nPosX, float nPosY);
 
 private:
 
 private:
 	CObject2D* m_pObject2D[25];
+	CTimer *m_pTimer;
 	// ゲーム開始時刻
 	DWORD m_dwGameStartTime;
 	// ゲーム経過時間

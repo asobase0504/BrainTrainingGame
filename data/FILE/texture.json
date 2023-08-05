@@ -1,6 +1,7 @@
 {
 	"TEXTURE": [
-		[ "NUMBER25", "data\/TEXTURE\/number003.png" ],
+		[ "TIME_NUMBER", "data\/TEXTURE\/number001.png" ],
+		[ "NUMBER25", "data\/TEXTURE\/number002.png" ],
 		[ "BUS", "data\/TEXTURE\/bus.png" ],
 		[ "STATION", "data\/TEXTURE\/station.png" ],
 		[ "HUMAN", "data\/TEXTURE\/human.png" ],
