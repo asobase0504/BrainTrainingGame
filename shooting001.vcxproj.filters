@@ -69,11 +69,14 @@
     <Filter Include="ソース ファイル\03_Mode\00_Game\00_BusGame\00_Object\01_Station">
       <UniqueIdentifier>{bd314462-97fc-42e2-9fdd-5d153c9a7b30}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\02_Number25">
+    <Filter Include="ソース ファイル\03_Mode\00_Game\03_Number25">
       <UniqueIdentifier>{9ff648bb-063f-4274-ba3a-35c6dab2f3fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\02_Number25\00_Object">
+    <Filter Include="ソース ファイル\03_Mode\00_Game\03_Number25\00_Object">
       <UniqueIdentifier>{823de920-107d-4aee-9f43-a2d4ea112f76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\10_RemenberBefore">
+      <UniqueIdentifier>{8587cdd7-97b7-4aa5-96a7-c96f7f98b3f6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -186,13 +189,13 @@
       <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame</Filter>
     </ClCompile>
     <ClCompile Include="minigame_number25.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25</Filter>
     </ClCompile>
     <ClCompile Include="number.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25\00_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="timer.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25\00_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="input.cpp">
       <Filter>ソース ファイル\01_Input</Filter>
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="input\inputmouse.cpp">
       <Filter>ソース ファイル\01_Input</Filter>
+    </ClCompile>
+    <ClCompile Include="remenber_before.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\10_RemenberBefore</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -315,13 +321,13 @@
       <Filter>ソース ファイル\03_Mode\00_Game\00_BusGame</Filter>
     </ClInclude>
     <ClInclude Include="minigame_number25.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25</Filter>
     </ClInclude>
     <ClInclude Include="number.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25\00_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="timer.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\02_Number25\00_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="input.h">
       <Filter>ソース ファイル\01_Input</Filter>
@@ -340,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="input\inputmouse.h">
       <Filter>ソース ファイル\01_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="remenber_before.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\10_RemenberBefore</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

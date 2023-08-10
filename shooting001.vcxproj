@@ -168,6 +168,7 @@
     <ClCompile Include="minigame_bus.cpp" />
     <ClCompile Include="minigame_number25.cpp" />
     <ClCompile Include="number.cpp" />
+    <ClCompile Include="remenber_before.cpp" />
     <ClCompile Include="station.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="collision.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="minigame_bus.h" />
     <ClInclude Include="minigame_number25.h" />
     <ClInclude Include="number.h" />
+    <ClInclude Include="remenber_before.h" />
     <ClInclude Include="station.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="collision.h" />
