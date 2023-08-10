@@ -23,8 +23,8 @@ class CTimer;
 class CMiniGameNumber25 : public CMode
 {
 public:
-	static const int X_LINE = 3;
-	static const int Y_LINE = 3;
+	static const int X_LINE = 5;
+	static const int Y_LINE = 5;
 	static const int TOTAL_NUM = X_LINE * Y_LINE;
 
 public:	// ƒƒ“ƒo[ŠÖ”
