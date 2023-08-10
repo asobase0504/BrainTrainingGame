@@ -51,7 +51,6 @@ public:
 
 	// ˆÊ’u
 	void SetPos(const D3DXVECTOR3& inPos) override;
-	void AddPos(const D3DXVECTOR3& inPos) { SetPos(m_pos + inPos); }
 
 	void SetRot(const D3DXVECTOR3& inRot);
 	const D3DXVECTOR3& GetRot() const { return m_rot; }

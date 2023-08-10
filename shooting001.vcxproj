@@ -166,7 +166,10 @@
     <ClCompile Include="input\inputkeyboard.cpp" />
     <ClCompile Include="input\inputmouse.cpp" />
     <ClCompile Include="minigame_bus.cpp" />
+    <ClCompile Include="minigame_moveobject.cpp" />
     <ClCompile Include="minigame_number25.cpp" />
+    <ClCompile Include="move_object\countdown.cpp" />
+    <ClCompile Include="move_object\move_object.cpp" />
     <ClCompile Include="number.cpp" />
     <ClCompile Include="station.cpp" />
     <ClCompile Include="camera.cpp" />
@@ -221,6 +224,9 @@
     <ClInclude Include="input\inputmouse.h" />
     <ClInclude Include="minigame_bus.h" />
     <ClInclude Include="minigame_number25.h" />
+    <ClInclude Include="minigame_moveobject.h" />
+    <ClInclude Include="move_object\countdown.h" />
+    <ClInclude Include="move_object\move_object.h" />
     <ClInclude Include="number.h" />
     <ClInclude Include="station.h" />
     <ClInclude Include="camera.h" />

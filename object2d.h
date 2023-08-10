@@ -55,18 +55,24 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	// Setter
+	// 中心座標
 	void SetAnchor(Anchor inAnvhor) { m_anchor = inAnvhor; }
+
+	// 位置
 	void SetPos(const D3DXVECTOR3& inPos) override;
+
+	// 多きさ
 	void SetSize(const D3DXVECTOR2& inSize);
-	void SetColor(const D3DXCOLOR& inColor);
-	void SetColorAlpha(const float inAlpha);
+	const D3DXVECTOR2 GetSize() { return m_size; }
+
+	// アニメーション
 	void SetTexture(std::string inTex) { m_texture = inTex; }	// テクスチャの設定
 	void AnimTexture(int num, int texMax);
 
-	// Getter
-	const D3DXVECTOR2 GetSize() { return m_size; }
+	// 色
+	void SetColor(const D3DXCOLOR& inColor);
 	const D3DXCOLOR GetColor() { return m_col; }
+	void SetColorAlpha(const float inAlpha);
 private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	// VtxBuff
 	Anchor m_anchor;	// アンカーの設定

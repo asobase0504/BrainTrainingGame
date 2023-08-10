@@ -27,14 +27,12 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw() {};
 
-	// Setter
-	void SetIsDeleted(bool inDeleted) { m_isDeleted = inDeleted; }		// 死亡状態を設定
-	virtual void SetPos(const D3DXVECTOR3& inPos);	// 位置の設定
-
-	// Getter
-	const D3DXVECTOR3& GetPos() { return m_pos; }	// 位置の取得
-	const bool GetIsDeleted() { return m_isDeleted; }
 	int GetPriority() { return m_assignmentPriority; }
+
+	/* 位置 */
+	virtual void SetPos(const D3DXVECTOR3& inPos);	// 位置の設定
+	virtual void AddPos(const D3DXVECTOR3& inPos) { SetPos(m_pos + inPos); }	// 位置の設定
+	const D3DXVECTOR3& GetPos() { return m_pos; }	// 位置の取得
 
 	/* リスト構造 */
 	void SetPrev(CObject* inTask) { m_prev = inTask; }
@@ -43,8 +41,10 @@ public:
 	CObject* GetNext() { return m_next; }
 
 	/* 削除フラグ */
+	void SetIsDeleted(bool inDeleted) { m_isDeleted = inDeleted; }		// 死亡状態を設定
 	void Release() { m_isDeleted = true; }
-	bool IsRelease() { return m_isDeleted; }
+	const bool GetIsDeleted() { return m_isDeleted; }
+	const bool IsRelease() { return m_isDeleted; }
 
 	/* ポーズ中の状態 */
 	void AttachActivityAtPouse() { m_isActivityAtPouse = true; }
