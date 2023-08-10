@@ -12,6 +12,7 @@
 #include "application.h"
 #include "renderer.h"
 #include "debug_proc.h"
+#include "input.h"
 
 #include "object2d.h"
 #include "timer.h"
@@ -89,7 +90,14 @@ void CMiniGameNumber25::Uninit()
 //-----------------------------------------------------------------------------
 void CMiniGameNumber25::Update()
 {
+	// インプット
+	CInput *input = CInput::GetKey();
+
 	DrawTime();
+
+	D3DXVECTOR3 mousePos = input->GetMouseCursor();
+
+	Touch(mousePos.x, mousePos.y);
 
 	// ゲーム経過時間　＝　現在時刻　ー　ゲーム開始時刻
 	if (!m_isEndGame)
@@ -144,6 +152,9 @@ void CMiniGameNumber25::DrawTime()
 //-----------------------------------------------------------------------------
 void CMiniGameNumber25::Touch(float nPosX, float nPosY)
 {
+	// インプット
+	CInput *input = CInput::GetKey();
+
 	if (!m_isEndGame)
 	{// すべてのポリゴンのタッチ座標判定
 		for (int nCntNumber = 0; nCntNumber < 25; nCntNumber++)
@@ -151,8 +162,9 @@ void CMiniGameNumber25::Touch(float nPosX, float nPosY)
 			D3DXVECTOR3 pos = m_pObject2D[nCntNumber]->GetPos();
 			D3DXVECTOR3 size = m_pObject2D[nCntNumber]->GetSize();
 			//	タッチ座標がポリゴンの中だったら
-			if (nCntNumber == m_nTouchCount &&
-				pos.x + size.x >= nPosX
+			if (nCntNumber == m_nTouchCount
+				&& input->Trigger(MOUSE_INPUT_LEFT)
+				&& pos.x + size.x >= nPosX
 				&& pos.x - size.x <= nPosX
 				&& pos.y - size.y <= nPosY
 				&& pos.y + size.y >= nPosY)
