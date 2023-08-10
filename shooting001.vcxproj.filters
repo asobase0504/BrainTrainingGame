@@ -75,6 +75,9 @@
     <Filter Include="ソース ファイル\03_Mode\00_Game\03_Number25\00_Object">
       <UniqueIdentifier>{823de920-107d-4aee-9f43-a2d4ea112f76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\09_RemenberBefore">
+      <UniqueIdentifier>{8587cdd7-97b7-4aa5-96a7-c96f7f98b3f6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ソース ファイル\03_Mode\00_Game\08_MoveObject">
       <UniqueIdentifier>{e29217d7-dd13-472e-a153-a01b9e252215}</UniqueIdentifier>
     </Filter>
@@ -214,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="input\inputmouse.cpp">
       <Filter>ソース ファイル\01_Input</Filter>
+    </ClCompile>
+    <ClCompile Include="remenber_before.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\09_RemenberBefore</Filter>
     </ClCompile>
     <ClCompile Include="move_object\countdown.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject\00_Object</Filter>
@@ -355,6 +361,9 @@
     </ClInclude>
     <ClInclude Include="input\inputmouse.h">
       <Filter>ソース ファイル\01_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="remenber_before.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\09_RemenberBefore</Filter>
     </ClInclude>
     <ClInclude Include="minigame_moveobject.h">
       <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject</Filter>

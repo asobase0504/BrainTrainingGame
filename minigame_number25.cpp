@@ -1,6 +1,6 @@
 //=============================================================================
 // 
-// アプリケーションクラス
+// ミニゲーム：ナンバー25
 // Author BuriyaKota
 // 
 //=============================================================================
@@ -12,6 +12,7 @@
 #include "application.h"
 #include "renderer.h"
 #include "debug_proc.h"
+#include "input.h"
 
 #include "object2d.h"
 #include "timer.h"
@@ -21,7 +22,7 @@
 //-----------------------------------------------------------------------------
 CMiniGameNumber25::CMiniGameNumber25()
 {
-	for (int i = 0; i < 25; i++)
+	for (int i = 0; i < TOTAL_NUM; i++)
 	{
 		m_pObject2D[i] = nullptr;
 	}
@@ -50,11 +51,11 @@ CMiniGameNumber25::~CMiniGameNumber25()
 //-----------------------------------------------------------------------------
 HRESULT CMiniGameNumber25::Init()
 {
-	for (int nCntY = 0; nCntY < 5; nCntY++)
+	for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
 	{
-		for (int nCntX = 0; nCntX < 5; nCntX++)
+		for (int nCntX = 0; nCntX < X_LINE; nCntX++)
 		{
-			int nCntNumber = nCntY * 5 + nCntX;
+			int nCntNumber = nCntY * Y_LINE + nCntX;
 			m_pObject2D[nCntNumber] = CObject2D::Create();
 			m_pObject2D[nCntNumber]->SetPos(D3DXVECTOR3(400.0f + 120.0f * nCntX, 120.0f + 120.0f * nCntY, 0.0f));
 			m_pObject2D[nCntNumber]->SetSize(D3DXVECTOR2(50.0f, 50.0f));
@@ -78,7 +79,7 @@ void CMiniGameNumber25::Uninit()
 {
 	m_pTimer = nullptr;
 
-	for (int i = 0; i < 25; i++)
+	for (int i = 0; i < TOTAL_NUM; i++)
 	{
 		m_pObject2D[i] = nullptr;
 	}
@@ -89,7 +90,14 @@ void CMiniGameNumber25::Uninit()
 //-----------------------------------------------------------------------------
 void CMiniGameNumber25::Update()
 {
+	// インプット
+	CInput *input = CInput::GetKey();
+
 	DrawTime();
+
+	D3DXVECTOR3 mousePos = input->GetMouseCursor();
+
+	Touch(mousePos.x, mousePos.y);
 
 	// ゲーム経過時間　＝　現在時刻　ー　ゲーム開始時刻
 	if (!m_isEndGame)
@@ -112,7 +120,7 @@ void CMiniGameNumber25::Draw()
 void CMiniGameNumber25::Shuffle()
 {
 	D3DXVECTOR3 pos;
-	for (int nCnt = 25 - 1; nCnt > 0; nCnt--)
+	for (int nCnt = TOTAL_NUM - 1; nCnt > 0; nCnt--)
 	{
 		int nShuffle = rand() % nCnt;
 
@@ -144,15 +152,19 @@ void CMiniGameNumber25::DrawTime()
 //-----------------------------------------------------------------------------
 void CMiniGameNumber25::Touch(float nPosX, float nPosY)
 {
+	// インプット
+	CInput *input = CInput::GetKey();
+
 	if (!m_isEndGame)
 	{// すべてのポリゴンのタッチ座標判定
-		for (int nCntNumber = 0; nCntNumber < 25; nCntNumber++)
+		for (int nCntNumber = 0; nCntNumber < TOTAL_NUM; nCntNumber++)
 		{
 			D3DXVECTOR3 pos = m_pObject2D[nCntNumber]->GetPos();
 			D3DXVECTOR3 size = m_pObject2D[nCntNumber]->GetSize();
 			//	タッチ座標がポリゴンの中だったら
-			if (nCntNumber == m_nTouchCount &&
-				pos.x + size.x >= nPosX
+			if (nCntNumber == m_nTouchCount
+				&& input->Trigger(MOUSE_INPUT_LEFT)
+				&& pos.x + size.x >= nPosX
 				&& pos.x - size.x <= nPosX
 				&& pos.y - size.y <= nPosY
 				&& pos.y + size.y >= nPosY)
@@ -161,7 +173,7 @@ void CMiniGameNumber25::Touch(float nPosX, float nPosY)
 				m_pObject2D[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 				m_nTouchCount++;
 
-				if (m_nTouchCount >= 25)
+				if (m_nTouchCount >= TOTAL_NUM)
 				{
 					m_isEndGame = true;
 				}
@@ -172,13 +184,15 @@ void CMiniGameNumber25::Touch(float nPosX, float nPosY)
 	{
 		m_isEndGame = false;
 
+		m_pTimer->SetTimer(0);
+		m_pTimer->StopTimer(false);
 		m_dwGameStartTime = timeGetTime();
 		m_dwGameTime = 0;
 		m_nTouchCount = 0;
 
 		Shuffle();
 
-		for (int nCntNumber = 0; nCntNumber < 25; nCntNumber++)
+		for (int nCntNumber = 0; nCntNumber < TOTAL_NUM; nCntNumber++)
 		{
 			m_pObject2D[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 		}
