@@ -14,12 +14,15 @@
 #include "theme_color.h"
 #include "texture.h"
 #include "object2d.h"
-#include "title.h"
-#include "game.h"
 #include "sound.h"
 #include "objectList.h"
+
+// ÉÇÅ[Éh
+#include "title.h"
+#include "game.h"
 #include "minigame_number25.h"
 #include "minigame_bus.h"
+#include "minigame_moveobject.h"
 
 using namespace std;
 
@@ -230,6 +233,9 @@ void CApplication::SetMode(MODE_TYPE inType)
 		break;
 	case CApplication::MODE_TYPE::MINIGAME_BUS:
 		mode = new CMiniGameBus;
+		break;
+	case CApplication::MODE_TYPE::MINIGAME_MOVEOBJECT:
+		mode = new CMiniGameMoveObject;
 		break;
 	case CApplication::MODE_TYPE::MINIGAME_NUMBER25:
 		mode = new CMiniGameNumber25;

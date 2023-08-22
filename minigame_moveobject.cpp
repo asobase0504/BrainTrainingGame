@@ -32,6 +32,8 @@ CMiniGameMoveObject::~CMiniGameMoveObject()
 //-----------------------------------------------------------------------------
 HRESULT CMiniGameMoveObject::Init()
 {
+	m_level = ELevel::LEVEL_1;
+	CMoveObject::Create(&m_level, 1, D3DXVECTOR3(500.0f, 500.0f, 0.0f));
 	return S_OK;
 }
 

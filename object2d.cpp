@@ -149,105 +149,13 @@ void CObject2D::Draw()
 void CObject2D::SetPos(const D3DXVECTOR3 & inPos)
 {
 	CObject::SetPos(inPos);
+	Vtx();
+}
 
-	D3DXVECTOR3 pos = m_pos;
-
-	if (m_parent != nullptr)
-	{
-		pos += m_parent->GetPos();
-	}
-
-	VERTEX_2D *pVtx = NULL;		// 頂点情報へのポインタ
-
-	// 頂点情報をロックし、頂点情報へのポインタを取得
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-
-	switch (m_anchor)
-	{
-	case CObject2D::TOP_LEFT:
-		pVtx[0].pos.x = pos.x - m_size.x;
-		pVtx[0].pos.y = pos.y;
-
-		pVtx[1].pos.x = pos.x;
-		pVtx[1].pos.y = pos.y;
-
-		pVtx[2].pos.x = pos.x - m_size.x;
-		pVtx[2].pos.y = pos.y + m_size.y;
-
-		pVtx[3].pos.x = pos.x;
-		pVtx[3].pos.y = pos.y + m_size.y;
-		break;
-	case CObject2D::TOP:
-		break;
-	case CObject2D::TOP_RIGHT:
-		pVtx[0].pos.x = pos.x;
-		pVtx[0].pos.y = pos.y;
-
-		pVtx[1].pos.x = pos.x + m_size.x;
-		pVtx[1].pos.y = pos.y;
-
-		pVtx[2].pos.x = pos.x;
-		pVtx[2].pos.y = pos.y + m_size.y;
-
-		pVtx[3].pos.x = pos.x + m_size.x;
-		pVtx[3].pos.y = pos.y + m_size.y;
-		break;
-	case CObject2D::LEFT:
-		break;
-	case CObject2D::CENTER:
-		pVtx[0].pos.x = pos.x - m_size.x * 0.5f;
-		pVtx[0].pos.y = pos.y - m_size.y * 0.5f;
-
-		pVtx[1].pos.x = pos.x + m_size.x * 0.5f;
-		pVtx[1].pos.y = pos.y - m_size.y * 0.5f;
-
-		pVtx[2].pos.x = pos.x - m_size.x * 0.5f;
-		pVtx[2].pos.y = pos.y + m_size.y * 0.5f;
-
-		pVtx[3].pos.x = pos.x + m_size.x * 0.5f;
-		pVtx[3].pos.y = pos.y + m_size.y * 0.5f;
-		break;
-	case CObject2D::RIGHT:
-		break;
-	case CObject2D::DOWN_LEFT:
-		pVtx[0].pos.x = pos.x - m_size.x;
-		pVtx[0].pos.y = pos.y - m_size.y;
-
-		pVtx[1].pos.x = pos.x;
-		pVtx[1].pos.y = pos.y - m_size.y;
-
-		pVtx[2].pos.x = pos.x - m_size.x;
-		pVtx[2].pos.y = pos.y;
-
-		pVtx[3].pos.x = pos.x;
-		pVtx[3].pos.y = pos.y;
-		break;
-	case CObject2D::DOWN:
-		break;
-	case CObject2D::DOWN_RIGHT:
-		pVtx[0].pos.x = pos.x;
-		pVtx[0].pos.y = pos.y - m_size.y;
-
-		pVtx[1].pos.x = pos.x + m_size.x;
-		pVtx[1].pos.y = pos.y - m_size.y;
-
-		pVtx[2].pos.x = pos.x;
-		pVtx[2].pos.y = pos.y;
-
-		pVtx[3].pos.x = pos.x + m_size.x;
-		pVtx[3].pos.y = pos.y;
-		break;
-	default:
-		break;
-	}
-
-	pVtx[0].pos.z = 0.0f;
-	pVtx[1].pos.z = 0.0f;
-	pVtx[2].pos.z = 0.0f;
-	pVtx[3].pos.z = 0.0f;
-
-	// 頂点バッファをアンロックする
-	m_pVtxBuff->Unlock();
+void CObject2D::SetRot(const float inRot)
+{
+	m_rotY = inRot;
+	Vtx();
 }
 
 //=============================================================================
@@ -302,6 +210,44 @@ void CObject2D::SetColorAlpha(const float inAlpha)
 	pVtx[1].col = m_col;
 	pVtx[2].col = m_col;
 	pVtx[3].col = m_col;
+
+	// 頂点バッファをアンロックする
+	m_pVtxBuff->Unlock();
+}
+
+void CObject2D::Vtx()
+{
+	D3DXVECTOR3 pos = m_pos;
+	if (m_parent != nullptr)
+	{
+		pos += m_parent->GetPos();
+	}
+
+	D3DXMATRIX mtx;	// 計算用マトリックス
+
+					// マトリックスの生成
+	D3DXMatrixIdentity(&mtx);
+
+	// マトリックスを回転
+	D3DXMatrixRotationZ(&mtx, m_rotY);
+	D3DXVECTOR3 addPos[4];
+
+	D3DXVec3TransformCoord(&addPos[0], &D3DXVECTOR3(-1.0f, -1.0f, 0.0f), &mtx);
+	D3DXVec3TransformCoord(&addPos[1], &D3DXVECTOR3(1.0f, -1.0f, 0.0f), &mtx);
+	D3DXVec3TransformCoord(&addPos[2], &D3DXVECTOR3(-1.0f, 1.0f, 0.0f), &mtx);
+	D3DXVec3TransformCoord(&addPos[3], &D3DXVECTOR3(1.0f, 1.0f, 0.0f), &mtx);
+
+	VERTEX_2D *pVtx = NULL;		// 頂点情報へのポインタ
+
+	// 頂点情報をロックし、頂点情報へのポインタを取得
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	for (int i = 0; i < 4; i++)
+	{
+		pVtx[i].pos.x = pos.x + addPos[i].x * m_size.x * 0.5f;
+		pVtx[i].pos.y = pos.y + addPos[i].y * m_size.y * 0.5f;
+		pVtx[i].pos.z = 0.0f;
+	}
 
 	// 頂点バッファをアンロックする
 	m_pVtxBuff->Unlock();

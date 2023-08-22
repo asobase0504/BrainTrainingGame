@@ -160,7 +160,7 @@ void CTitle::Update()
 	}
 		break;
 	case CTitle::Status::GAME_STAET:
-		CApplication::GetInstance()->SetMode(CApplication::MODE_TYPE::MINIGAME_BUS);
+		CApplication::GetInstance()->SetMode(CApplication::MODE_TYPE::MINIGAME_MOVEOBJECT);
 		break;
 	case CTitle::Status::CUSTOMIZE:
 		CApplication::GetInstance()->SetMode(CApplication::MODE_TYPE::MINIGAME_NUMBER25);

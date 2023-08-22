@@ -26,6 +26,7 @@ public:
 		DOWN_LEFT,
 		DOWN,
 		DOWN_RIGHT,
+		MAX
 	};
 
 	//*****************************************************************************
@@ -61,6 +62,9 @@ public:
 	// 位置
 	void SetPos(const D3DXVECTOR3& inPos) override;
 
+	void SetRot(const float inRot);
+	void AddRot(const float inRot) { SetRot(inRot + m_rotY); }
+
 	// 多きさ
 	void SetSize(const D3DXVECTOR2& inSize);
 	const D3DXVECTOR2 GetSize() { return m_size; }
@@ -73,6 +77,8 @@ public:
 	void SetColor(const D3DXCOLOR& inColor);
 	const D3DXCOLOR GetColor() { return m_col; }
 	void SetColorAlpha(const float inAlpha);
+private:
+	void Vtx();
 private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	// VtxBuff
 	Anchor m_anchor;	// アンカーの設定
