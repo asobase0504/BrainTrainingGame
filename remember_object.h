@@ -27,15 +27,6 @@
 //**************************************************
 class CRememberObject : public CObject2D
 {
-private:
-	enum TEXTURE
-	{// 使用しているテクスチャ
-		TEXTURE_0 = 0,
-		TEXTURE_1,
-		TEXTURE_2,
-		TEXTURE_MAX
-	};
-
 public:
 	explicit CRememberObject(int nPriority = CObjectList::LEVEL_2D_1);
 	~CRememberObject();
@@ -45,7 +36,16 @@ public:
 	void Update() override;
 	void Draw() override {}
 
-	static CRememberObject *Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size, TEXTURE tex);
+	static CRememberObject *Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size);
+
+private:
+	enum TEXTURE
+	{// 使用しているテクスチャ
+		TEXTURE_0 = 0,
+		TEXTURE_1,
+		TEXTURE_2,
+		TEXTURE_MAX
+	};
 
 private:
 	// オブジェクト2Dの箱
