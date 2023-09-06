@@ -22,6 +22,7 @@ class CObject2D;
 class CMiniGameRememberBefore : public CMode
 {
 public:
+	static const int MAX_TEXTURE = 10;
 
 public:	// メンバー関数
 	CMiniGameRememberBefore();
@@ -33,8 +34,8 @@ public:	// メンバー関数
 	void Draw() override;
 
 private:
+	CObject2D* m_pObject2D[MAX_TEXTURE];
 
-private:
 };
 
 #endif // !_MINI_GAME_REMEMBER_BEFORE_H_
