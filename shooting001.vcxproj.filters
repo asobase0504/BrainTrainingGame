@@ -230,14 +230,14 @@
     <ClCompile Include="minigame_moveobject.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject</Filter>
     </ClCompile>
-    <ClCompile Include="remember_before.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before</Filter>
-    </ClCompile>
     <ClCompile Include="remember_system.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="remember_object.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before\00_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="minigame_remember_before.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -380,14 +380,14 @@
     <ClInclude Include="move_object\move_object.h">
       <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject\00_Object</Filter>
     </ClInclude>
-    <ClInclude Include="remember_before.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before</Filter>
-    </ClInclude>
     <ClInclude Include="remember_system.h">
       <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="remember_object.h">
       <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before\00_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="minigame_remember_before.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

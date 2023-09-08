@@ -36,7 +36,7 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	static CRememberObject *Create(int inMyNumber);
+	static CRememberObject *Create(const D3DXVECTOR3& inPos, const D3DXVECTOR2& inSize, int inMyNumber);
 
 	void SetMyNumber(int inMyNumber) { m_myNumber = inMyNumber; }
 	int GetMyNumber() { return m_myNumber; }

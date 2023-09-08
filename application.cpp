@@ -23,6 +23,7 @@
 #include "minigame_number25.h"
 #include "minigame_bus.h"
 #include "minigame_moveobject.h"
+#include "minigame_remember_before.h"
 
 using namespace std;
 
@@ -240,6 +241,9 @@ void CApplication::SetMode(MODE_TYPE inType)
 	case CApplication::MODE_TYPE::MINIGAME_NUMBER25:
 		mode = new CMiniGameNumber25;
 		break;
+	case CApplication::MODE_TYPE::MINIGAME_REMEMBER_BEFORE:
+		mode = new CMiniGameRememberBefore;
+		break;	
 	case CApplication::MODE_TYPE::GAME:
 		mode = new CGame;
 		break;

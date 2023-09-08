@@ -166,7 +166,7 @@ void CTitle::Update()
 		CApplication::GetInstance()->SetMode(CApplication::MODE_TYPE::MINIGAME_NUMBER25);
 		break;
 	case CTitle::Status::OPSITON:
-		CApplication::GetInstance()->SetMode(CApplication::MODE_TYPE::GAME);
+		CApplication::GetInstance()->SetMode(CApplication::MODE_TYPE::MINIGAME_REMEMBER_BEFORE);
 		break;
 	default:
 		break;

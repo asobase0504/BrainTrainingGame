@@ -52,9 +52,10 @@ HRESULT CRememberSystem::Init()
 	for (int nCntTexture = 0; nCntTexture < TEXTURE_MAX; nCntTexture++)
 	{
 		// テクスチャ
-		m_pRememberObject[nCntTexture] = CRememberObject::Create(nCntTexture);
-		m_pRememberObject[nCntTexture]->SetPos(D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * (0.5f + nCntTexture), (float)CApplication::SCREEN_HEIGHT * 0.5f, 0.0f));
-		m_pRememberObject[nCntTexture]->SetSize(D3DXVECTOR2(300.0f, (float)200.0f));
+		m_pRememberObject[nCntTexture] = CRememberObject::Create(
+			D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * (0.5f + nCntTexture), (float)CApplication::SCREEN_HEIGHT * 0.5f, 0.0f),
+			D3DXVECTOR2(300.0f, 200.0f),
+			nCntTexture);
 		m_pRememberObject[nCntTexture]->SetTexture(tex[nCntTexture]);
 		m_pRememberObject[nCntTexture]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
