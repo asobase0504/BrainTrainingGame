@@ -34,7 +34,6 @@ public:	// ƒƒ“ƒo[ŠÖ”
 	void Draw() override;
 
 private:
-	CObject2D* m_pObject2D[MAX_TEXTURE];
 
 };
 

@@ -9,15 +9,13 @@
 //-----------------------------------------------------------------------------
 #include "remember_before.h"
 
+#include "remember_system.h"
+
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
 CMiniGameRememberBefore::CMiniGameRememberBefore()
 {
-	for (int i = 0; i < MAX_TEXTURE; i++)
-	{
-		m_pObject2D[i] = nullptr;
-	}
 }
 
 //-----------------------------------------------------------------------------
@@ -32,6 +30,8 @@ CMiniGameRememberBefore::~CMiniGameRememberBefore()
 //-----------------------------------------------------------------------------
 HRESULT CMiniGameRememberBefore::Init()
 {
+	CRememberSystem::Create();
+
 	return S_OK;
 }
 

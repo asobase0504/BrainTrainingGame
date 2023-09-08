@@ -1,5 +1,5 @@
 //==================================================
-// number.cpp
+// remember_object.cpp
 // Author: Buriya Kota
 //==================================================
 
@@ -14,6 +14,7 @@
 CRememberObject::CRememberObject(int nPriority) : CObject2D(nPriority)
 {
 }
+
 //--------------------------------------------------
 // デストラクタ
 //--------------------------------------------------
@@ -26,8 +27,6 @@ CRememberObject::~CRememberObject()
 //--------------------------------------------------
 HRESULT CRememberObject::Init()
 {
-	CObject2D::Init();
-
 	return S_OK;
 }
 
@@ -36,7 +35,6 @@ HRESULT CRememberObject::Init()
 //--------------------------------------------------
 void CRememberObject::Uninit()
 {
-	CObject2D::Uninit();
 }
 
 //--------------------------------------------------
@@ -44,13 +42,19 @@ void CRememberObject::Uninit()
 //--------------------------------------------------
 void CRememberObject::Update()
 {
-	CObject2D::Update();
+}
+
+//--------------------------------------------------
+// 描画
+//--------------------------------------------------
+void CRememberObject::Draw()
+{
 }
 
 //--------------------------------------------------
 // 生成
 //--------------------------------------------------
-CRememberObject *CRememberObject::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 size)
+CRememberObject *CRememberObject::Create(int inMyNumber)
 {
 	CRememberObject *pRememberObject;
 	pRememberObject = new CRememberObject;
@@ -58,8 +62,7 @@ CRememberObject *CRememberObject::Create(const D3DXVECTOR3 pos, const D3DXVECTOR
 	if (pRememberObject != nullptr)
 	{
 		pRememberObject->Init();
-		pRememberObject->SetPos(pos);
-		pRememberObject->SetSize(size);
+		pRememberObject->SetMyNumber(inMyNumber);
 	}
 	else
 	{
