@@ -60,12 +60,12 @@ void CNumberSelectMenuItem::Uninit()
 {
 	if (m_EmphasisSelect != nullptr)
 	{
-		m_EmphasisSelect->SetIsDeleted(true);
+		m_EmphasisSelect->Uninit();
 		m_EmphasisSelect = nullptr;
 	}
 	if (m_abovePaste != nullptr)
 	{
-		m_abovePaste->SetIsDeleted(true);
+		m_abovePaste->Uninit();
 		m_abovePaste = nullptr;
 	}
 	CMenuItem::Uninit();

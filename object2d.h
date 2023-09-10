@@ -77,6 +77,9 @@ public:
 	void SetColor(const D3DXCOLOR& inColor);
 	const D3DXCOLOR GetColor() { return m_col; }
 	void SetColorAlpha(const float inAlpha);
+	void AddColorAlpha(const float inAlpha) { SetColorAlpha(m_col.a + inAlpha); }
+	float GetColorAlpha() { return m_col.a; }
+
 private:
 	void Vtx();
 private:

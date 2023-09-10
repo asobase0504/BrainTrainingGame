@@ -84,6 +84,9 @@
     <Filter Include="ソース ファイル\03_Mode\00_Game\10_Remenber_before">
       <UniqueIdentifier>{3ea03509-dbff-4058-a46d-bb7c7b9555aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\03_Mode\01_Title\01_Object">
+      <UniqueIdentifier>{afed4d64-bd53-4fc8-9438-016e892a428c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -230,6 +233,18 @@
     <ClCompile Include="remenber_before.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
     </ClCompile>
+    <ClCompile Include="mode_guidance_item.cpp">
+      <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="task.cpp">
+      <Filter>ソース ファイル\02_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="task_group.cpp">
+      <Filter>ソース ファイル\02_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>ソース ファイル\03_Mode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -373,6 +388,18 @@
     </ClInclude>
     <ClInclude Include="remenber_before.h">
       <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+    </ClInclude>
+    <ClInclude Include="mode_guidance_item.h">
+      <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="task.h">
+      <Filter>ソース ファイル\02_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="task_group.h">
+      <Filter>ソース ファイル\02_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>ソース ファイル\03_Mode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

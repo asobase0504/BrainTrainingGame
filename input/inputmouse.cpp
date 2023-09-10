@@ -76,8 +76,8 @@ HRESULT CInputMouse::Init(HINSTANCE hInstance, HWND hWnd)
 	m_pDevMouse->Acquire();
 
 	//ウィンドウの横幅と高さの取得
-	m_fWidthWnd = CApplication::SCREEN_WIDTH;
-	m_fHeightWnd = CApplication::SCREEN_HEIGHT;
+	m_fWidthWnd = (float)CApplication::SCREEN_WIDTH;
+	m_fHeightWnd = (float)CApplication::SCREEN_HEIGHT;
 
 	return S_OK;
 }

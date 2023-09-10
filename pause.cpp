@@ -30,7 +30,7 @@ CPause::~CPause()
 //-----------------------------------------
 HRESULT CPause::Init()
 {
-	CObjectList::GetInstance()->Pause(true);
+	CTaskGroup::GetInstance()->Pause(true);
 
 	// ”wŒi‚ÌÝ’è
 	{
@@ -61,7 +61,7 @@ HRESULT CPause::Init()
 
 			CMenuItem* item = new CPauseMenuItem;
 			item->Init();
-			item->AttachActivityAtPouse();
+			item->PauseOn();
 			item->SetSize(D3DXVECTOR2(465.0f, 80.0f));			// ‘å‚«‚³‚ÌÝ’è
 			item->SetColor(CApplication::GetInstance()->GetColor(0));			// F‚ÌÝ’è
 
@@ -100,7 +100,7 @@ HRESULT CPause::Init()
 void CPause::Uninit()
 {
 	SetIsDeleted();
-	CObjectList::GetInstance()->Pause(false);
+	CTaskGroup::GetInstance()->Pause(false);
 	if (m_menu != nullptr)
 	{
 		m_menu->Uninit();
@@ -147,10 +147,10 @@ void CPause::SetIsDeleted()
 	m_isDeleted = true;
 	if (m_bg != nullptr)
 	{
-		m_bg->SetIsDeleted(true);
+		m_bg->Uninit();
 	}
 	if (m_menu != nullptr)
 	{
-		m_menu->SetIsDeleted();
+		m_menu->Uninit();
 	}
 }

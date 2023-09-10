@@ -5,7 +5,7 @@
 #include "utility.h"
 
 CBus::CBus() :
-	CObject3D(CObjectList::LEVEL_3D_1),
+	CObject3D(CTaskGroup::LEVEL_3D_1),
 	m_passenger(0),
 	m_isArrival(false)
 {
