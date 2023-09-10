@@ -7,7 +7,9 @@
 //-----------------------------------------------------------------------------
 // include
 //-----------------------------------------------------------------------------
-#include "remenber_before.h"
+#include "minigame_remember_before.h"
+
+#include "remember_system.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -28,6 +30,8 @@ CMiniGameRememberBefore::~CMiniGameRememberBefore()
 //-----------------------------------------------------------------------------
 HRESULT CMiniGameRememberBefore::Init()
 {
+	CRememberSystem::Create();
+
 	return S_OK;
 }
 

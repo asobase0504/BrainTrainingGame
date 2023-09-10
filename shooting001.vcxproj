@@ -173,7 +173,9 @@
     <ClCompile Include="move_object\countdown.cpp" />
     <ClCompile Include="move_object\move_object.cpp" />
     <ClCompile Include="number.cpp" />
-    <ClCompile Include="remenber_before.cpp" />
+    <ClCompile Include="remember_object.cpp" />
+    <ClCompile Include="remember_system.cpp" />
+    <ClCompile Include="minigame_remember_before.cpp" />
     <ClCompile Include="station.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="collision.cpp" />
@@ -235,7 +237,9 @@
     <ClInclude Include="move_object\countdown.h" />
     <ClInclude Include="move_object\move_object.h" />
     <ClInclude Include="number.h" />
-    <ClInclude Include="remenber_before.h" />
+    <ClInclude Include="remember_object.h" />
+    <ClInclude Include="remember_system.h" />
+    <ClInclude Include="minigame_remember_before.h" />
     <ClInclude Include="station.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="collision.h" />
