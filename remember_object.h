@@ -28,7 +28,7 @@
 class CRememberObject : public CObject2D
 {
 public:
-	explicit CRememberObject(int nPriority = CObjectList::LEVEL_2D_1);
+	explicit CRememberObject(int nPriority = CTaskGroup::LEVEL_2D_1);
 	~CRememberObject();
 
 	HRESULT Init() override;

@@ -240,10 +240,10 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 	case CMode::MODE_TYPE::MINIGAME_NUMBER25:
 		mode = new CMiniGameNumber25;
 		break;
-	case CApplication::MODE_TYPE::MINIGAME_REMEMBER_BEFORE:
+	case CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE:
 		mode = new CMiniGameRememberBefore;
 		break;	
-	case CApplication::MODE_TYPE::GAME:
+	case CMode::MODE_TYPE::GAME:
 		mode = new CGame;
 		break;
 	default:

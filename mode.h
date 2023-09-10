@@ -26,7 +26,7 @@ public:
 		MINIGAME_CUPSHUFFLE,	// カップシャッフル
 		MINIGAME_MOVEOBJECT,	// 動き回る物体の数
 		MINIGAME_TROLLEY,		// トロッコ
-		MINIGAME_PREV,			// ひとつ前を覚えて
+		MINIGAME_REMEMBER_BEFORE,			// ひとつ前を覚えて
 		MINIGAME_COLORTEXT,		// 色分別
 		MINIGAME_COMEOUT,		// 出た順番に押す
 		MINIGAME_SHADOW,		// かげと同じものはどれ
