@@ -15,7 +15,6 @@ HRESULT CModeGuidanceItem::Init()
 {
 	CObject2D::Init();
 	SetSize(D3DXVECTOR2(100.0f,100.0f));
-
 	return E_NOTIMPL;
 }
 

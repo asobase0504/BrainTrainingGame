@@ -251,6 +251,9 @@
     <ClCompile Include="headcount.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
     </ClCompile>
+    <ClCompile Include="save_guidance_item.cpp">
+      <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -414,6 +417,9 @@
     </ClInclude>
     <ClInclude Include="headcount.h">
       <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
+    </ClInclude>
+    <ClInclude Include="save_guidance_item.h">
+      <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

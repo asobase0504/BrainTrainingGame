@@ -12,6 +12,7 @@
 		[ "CASTLE", "data\/TEXTURE\/REMEMBER_TEXTURE\/castle.jpg" ],
 		[ "TIME_NUMBER", "data\/TEXTURE\/number001.png" ],
 		[ "NUMBER25", "data\/TEXTURE\/number002.png" ],
+		[ "BOOK", "data\/TEXTURE\/Book.png" ],
 		[ "BUS", "data\/TEXTURE\/bus.png" ],
 		[ "STATION", "data\/TEXTURE\/station.png" ],
 		[ "HUMAN", "data\/TEXTURE\/human.png" ],
