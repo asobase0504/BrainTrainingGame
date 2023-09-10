@@ -81,11 +81,8 @@
     <Filter Include="ソース ファイル\03_Mode\00_Game\08_MoveObject\00_Object">
       <UniqueIdentifier>{f8b4e15c-402b-4719-9531-87e70e78ebaf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\10_Remember_before">
+    <Filter Include="ソース ファイル\03_Mode\00_Game\10_Remenber_before">
       <UniqueIdentifier>{3ea03509-dbff-4058-a46d-bb7c7b9555aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\10_Remember_before\00_Object">
-      <UniqueIdentifier>{5d77c320-801e-4466-b9df-014155e441d5}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\03_Mode\01_Title\01_Object">
       <UniqueIdentifier>{afed4d64-bd53-4fc8-9438-016e892a428c}</UniqueIdentifier>
@@ -194,9 +191,6 @@
     <ClCompile Include="station.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object\01_Station</Filter>
     </ClCompile>
-    <ClCompile Include="headcount.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="minigame_bus.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
     </ClCompile>
@@ -233,15 +227,6 @@
     <ClCompile Include="minigame_moveobject.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject</Filter>
     </ClCompile>
-    <ClCompile Include="remember_system.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before\00_Object</Filter>
-    </ClCompile>
-    <ClCompile Include="remember_object.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before\00_Object</Filter>
-    </ClCompile>
-    <ClCompile Include="minigame_remember_before.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before</Filter>
-    </ClCompile>
     <ClCompile Include="mode_guidance_item.cpp">
       <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
     </ClCompile>
@@ -253,6 +238,18 @@
     </ClCompile>
     <ClCompile Include="fade.cpp">
       <Filter>ソース ファイル\03_Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="minigame_remember_before.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+    </ClCompile>
+    <ClCompile Include="remember_system.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+    </ClCompile>
+    <ClCompile Include="remember_object.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+    </ClCompile>
+    <ClCompile Include="headcount.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,7 +352,6 @@
     <ClInclude Include="station_goal.h">
       <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object\01_Station</Filter>
     </ClInclude>
-    <ClInclude Include="headcount.h" />
     <ClInclude Include="minigame_bus.h">
       <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
     </ClInclude>
@@ -395,15 +391,6 @@
     <ClInclude Include="move_object\move_object.h">
       <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject\00_Object</Filter>
     </ClInclude>
-    <ClInclude Include="remember_system.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before\00_Object</Filter>
-    </ClInclude>
-    <ClInclude Include="remember_object.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before\00_Object</Filter>
-    </ClInclude>
-    <ClInclude Include="minigame_remember_before.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remember_before</Filter>
-    </ClInclude>
     <ClInclude Include="mode_guidance_item.h">
       <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
     </ClInclude>
@@ -415,6 +402,18 @@
     </ClInclude>
     <ClInclude Include="fade.h">
       <Filter>ソース ファイル\03_Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="remember_system.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+    </ClInclude>
+    <ClInclude Include="remember_object.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+    </ClInclude>
+    <ClInclude Include="minigame_remember_before.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+    </ClInclude>
+    <ClInclude Include="headcount.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

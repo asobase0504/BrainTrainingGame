@@ -12,7 +12,6 @@
 
 #include "application.h"
 #include "mode_guidance_item.h"
-#include "input.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
