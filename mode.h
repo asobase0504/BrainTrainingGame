@@ -41,7 +41,7 @@ public:	// メンバー関数
 
 	virtual HRESULT Init() = 0;
 	virtual void Uninit() = 0;
-	virtual void Update() = 0;
+	virtual void Update() {};
 	virtual void Draw() {};
 
 private: // 動的メンバー変数

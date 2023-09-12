@@ -231,20 +231,52 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 	case CMode::MODE_TYPE::TITLE:
 		mode = new CTitle;
 		break;
+	case CMode::MODE_TYPE::GAME:
+		mode = new CGame;
+		break;
 	case CMode::MODE_TYPE::MINIGAME_BUS:
 		mode = new CMiniGameBus;
-		break;
-	case CMode::MODE_TYPE::MINIGAME_MOVEOBJECT:
-		mode = new CMiniGameMoveObject;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_NUMBER25:
 		mode = new CMiniGameNumber25;
 		break;
+	case CMode::MODE_TYPE::MINIGAME_BOX:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_CALCULATION:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_CUPSHUFFLE:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_MOVEOBJECT:
+		mode = new CMiniGameMoveObject;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_TROLLEY:
+		mode = new CTitle;
+		break;
 	case CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE:
 		mode = new CMiniGameRememberBefore;
-		break;	
-	case CMode::MODE_TYPE::GAME:
-		mode = new CGame;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_COLORTEXT:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_COMEOUT:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_SHADOW:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_ADD:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::CUSTUM:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::RESULT:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MAX:
 		break;
 	default:
 		break;
