@@ -23,6 +23,8 @@ public:
 	HRESULT Init() override;
 	void Update();
 
+	bool IsSelect() { return m_isSelect; }
+
 	static CSaveGuidanceItem* Create(const D3DXVECTOR3& pos, std::string savePath);
 
 private:

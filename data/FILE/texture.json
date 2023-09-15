@@ -1,5 +1,6 @@
 {
 	"TEXTURE": [
+		[ "TITLE_LOGO", "data\/TEXTURE\/TITLE\/logo00.png" ],
 		[ "WINTER", "data\/TEXTURE\/REMEMBER_TEXTURE\/winter.jpg" ],
 		[ "SUN_FLOWER", "data\/TEXTURE\/REMEMBER_TEXTURE\/sun_flower.jpg" ],
 		[ "MOUNTAIN", "data\/TEXTURE\/REMEMBER_TEXTURE\/mountain.jpg" ],
@@ -12,10 +13,10 @@
 		[ "CASTLE", "data\/TEXTURE\/REMEMBER_TEXTURE\/castle.jpg" ],
 		[ "TIME_NUMBER", "data\/TEXTURE\/number001.png" ],
 		[ "NUMBER25", "data\/TEXTURE\/number002.png" ],
+		[ "BUS", "data\/TEXTURE\/BUS\/bus.png" ],
+		[ "STATION", "data\/TEXTURE\/BUS\/station.png" ],
+		[ "HUMAN", "data\/TEXTURE\/BUS\/human.png" ],
 		[ "BOOK", "data\/TEXTURE\/Book.png" ],
-		[ "BUS", "data\/TEXTURE\/bus.png" ],
-		[ "STATION", "data\/TEXTURE\/station.png" ],
-		[ "HUMAN", "data\/TEXTURE\/human.png" ],
 		[ "PLAYER", "data\/TEXTURE\/player.png" ],
 		[ "BLOCK", "data\/TEXTURE\/Block.png" ],
 		[ "BULLET", "data\/TEXTURE\/Bullet.png" ],
