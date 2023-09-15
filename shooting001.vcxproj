@@ -207,6 +207,7 @@
     </ClCompile>
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="station_goal.cpp" />
+    <ClCompile Include="target.cpp" />
     <ClCompile Include="task.cpp" />
     <ClCompile Include="task_group.cpp" />
     <ClCompile Include="theme_color.cpp" />
@@ -270,6 +271,7 @@
     <ClInclude Include="precompile.h" />
     <ClInclude Include="sound.h" />
     <ClInclude Include="station_goal.h" />
+    <ClInclude Include="target.h" />
     <ClInclude Include="task.h" />
     <ClInclude Include="task_group.h" />
     <ClInclude Include="theme_color.h" />
