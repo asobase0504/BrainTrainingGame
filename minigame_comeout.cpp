@@ -1,22 +1,16 @@
 //==========================================
 //
-//  出た順に押す(minigame_pressorder.cpp)
+//  出た順に押す(minigame_comeout.cpp)
 //  Author : Tomoya Kanazaki
 //
 //==========================================
-#include "precompile.h"
-#include "minigame_pressorder.h"
+#include "minigame_comeout.h"
 #include "debug_proc.h"
-
-//==========================================
-//  静的メンバ変数宣言
-//==========================================
-CTarget *CMiniGamePressOrder::m_pTarget = NULL;
 
 //==========================================
 //  コンストラクタ
 //==========================================
-CMiniGamePressOrder::CMiniGamePressOrder()
+CMiniGameComeOut::CMiniGameComeOut()
 {
 
 }
@@ -24,7 +18,7 @@ CMiniGamePressOrder::CMiniGamePressOrder()
 //==========================================
 //  デストラクタ
 //==========================================
-CMiniGamePressOrder::~CMiniGamePressOrder()
+CMiniGameComeOut::~CMiniGameComeOut()
 {
 
 }
@@ -32,7 +26,7 @@ CMiniGamePressOrder::~CMiniGamePressOrder()
 //==========================================
 //  初期化処理
 //==========================================
-HRESULT CMiniGamePressOrder::Init()
+HRESULT CMiniGameComeOut::Init()
 {
 	return S_OK;
 }
@@ -40,7 +34,7 @@ HRESULT CMiniGamePressOrder::Init()
 //==========================================
 //  終了処理
 //==========================================
-void CMiniGamePressOrder::Uninit()
+void CMiniGameComeOut::Uninit()
 {
 
 }
@@ -48,31 +42,15 @@ void CMiniGamePressOrder::Uninit()
 //==========================================
 //  更新処理
 //==========================================
-void CMiniGamePressOrder::Update()
+void CMiniGameComeOut::Update()
 {
-	CDebugProc::Print("出た順に押す\n");
+	CDebugProc::Print("出た順に押すモードだよーーーん\n");
 }
 
 //==========================================
 //  描画処理
 //==========================================
-void CMiniGamePressOrder::Draw()
-{
-
-}
-
-//==========================================
-//  読み込み処理
-//==========================================
-void CMiniGamePressOrder::Load()
-{
-
-}
-
-//==========================================
-//  破棄
-//==========================================
-void CMiniGamePressOrder::UnLoad()
+void CMiniGameComeOut::Draw()
 {
 
 }
