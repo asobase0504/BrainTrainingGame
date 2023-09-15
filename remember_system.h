@@ -41,6 +41,9 @@ public:
 	static CRememberSystem *Create();
 
 private:
+	void Touch_(float nPosX, float nPosY);
+
+private:
 	enum TEXTURE
 	{// 使用しているテクスチャ
 		TEXTURE_WINTER = 0,

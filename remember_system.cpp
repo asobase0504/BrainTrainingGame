@@ -75,7 +75,11 @@ void CRememberSystem::Uninit()
 //--------------------------------------------------
 void CRememberSystem::Update()
 {
+	// インプット
+	CInput *input = CInput::GetKey();
+	D3DXVECTOR3 mousePos = input->GetMouseCursor();
 
+	Touch_(mousePos.x, mousePos.y);
 }
 
 //--------------------------------------------------
@@ -103,4 +107,29 @@ CRememberSystem *CRememberSystem::Create()
 	}
 
 	return pRememberSystem;
+}
+
+//--------------------------------------------------
+// タッチ
+//--------------------------------------------------
+void CRememberSystem::Touch_(float nPosX, float nPosY)
+{
+	// インプット
+	CInput *input = CInput::GetKey();
+
+	for (int nCntNumber = 0; nCntNumber < TEXTURE_MAX; nCntNumber++)
+	{
+		D3DXVECTOR3 pos = m_pRememberObject[nCntNumber]->GetPos();
+		D3DXVECTOR3 size = m_pRememberObject[nCntNumber]->GetSize();
+		//	タッチ座標がポリゴンの中だったら
+		if (input->Trigger(MOUSE_INPUT_LEFT)
+			&& pos.x + size.x >= nPosX
+			&& pos.x - size.x <= nPosX
+			&& pos.y - size.y <= nPosY
+			&& pos.y + size.y >= nPosY)
+		{
+			// ポリゴンのカラー変更
+			m_pRememberObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+		}
+	}
 }
