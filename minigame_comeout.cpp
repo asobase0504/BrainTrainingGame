@@ -14,7 +14,6 @@
 //==========================================
 CMiniGameComeOut::CMiniGameComeOut()
 {
-	m_pTarget = NULL;
 	m_nNumData = 0;
 }
 
@@ -34,6 +33,12 @@ HRESULT CMiniGameComeOut::Init()
 	//データを読み込み
 	Load();
 
+	//ターゲットを生成をする
+	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
+	{
+		m_pTarget.push_back(new CTarget);
+	}
+
 	return S_OK;
 }
 
@@ -42,12 +47,7 @@ HRESULT CMiniGameComeOut::Init()
 //==========================================
 void CMiniGameComeOut::Uninit()
 {
-	//押すやつを削除
-	//if (m_pTarget != NULL)
-	//{
-	//	delete[] m_pTarget;
-	//	m_pTarget = NULL;
-	//}
+
 }
 
 //==========================================
