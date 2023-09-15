@@ -55,25 +55,3 @@ void CTarget::Draw()
 {
 	CObject2D::Draw();
 }
-
-//==========================================
-//  生成処理
-//==========================================
-CTarget * CTarget::Create(D3DXVECTOR3 pos, int nID)
-{
-	//インスタンス生成
-	CTarget *pTarget = NULL;
-
-	//メモリを確保する
-	pTarget = new CTarget;
-
-	//値を設定する
-	pTarget->m_pos = pos;
-	pTarget->m_nID = nID;
-
-	//初期化処理
-	pTarget->Init();
-
-	//アドレスを返す
-	return pTarget;
-}

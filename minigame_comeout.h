@@ -35,7 +35,7 @@ private:
 	void Load(void);
 
 	//ƒƒ“ƒo•Ï”
-	CTarget *m_pTarget;
+	std::vector<CTarget*> m_pTarget;
 	int m_nNumData; //o‚Ä‚­‚é”
 
 };

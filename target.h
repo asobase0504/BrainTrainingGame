@@ -24,9 +24,6 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	//Ã“Iƒƒ“ƒoŠÖ”
-	static CTarget *Create(D3DXVECTOR3 pos, int nID);
-
 private:
 
 	//ƒƒ“ƒo•Ï”
