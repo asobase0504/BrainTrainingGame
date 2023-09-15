@@ -8,13 +8,13 @@
 //**************************************************
 // インクルード
 //**************************************************
-#include "object2D.h"
+#include "click_item.h"
 #include "mode.h"
 
 //**************************************************
 // クラス
 //**************************************************
-class CModeGuidanceItem : public CObject2D
+class CModeGuidanceItem : public CClickItem
 {
 public:
 	explicit CModeGuidanceItem();
@@ -25,8 +25,8 @@ public:
 
 	static CModeGuidanceItem* Create(const D3DXVECTOR3& pos, CMode::MODE_TYPE type);
 
-private:
-	void Select();
+	void ClickEvent();
+
 private:
 	CMode::MODE_TYPE m_type;
 	int m_delayTime;

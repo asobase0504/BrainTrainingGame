@@ -8,13 +8,13 @@
 //**************************************************
 // インクルード
 //**************************************************
-#include "object2D.h"
+#include "click_item.h"
 #include "mode.h"
 
 //**************************************************
 // クラス
 //**************************************************
-class CSaveGuidanceItem : public CObject2D
+class CSaveGuidanceItem : public CClickItem
 {
 public:
 	explicit CSaveGuidanceItem();
@@ -26,6 +26,8 @@ public:
 	bool IsSelect() { return m_isSelect; }
 
 	static CSaveGuidanceItem* Create(const D3DXVECTOR3& pos, std::string savePath);
+
+	void ClickEvent();
 
 private:
 	void Select();

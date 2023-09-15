@@ -3,7 +3,7 @@
 #include "application.h"
 #include "fade.h"
 
-CModeGuidanceItem::CModeGuidanceItem() : CObject2D(CTaskGroup::LEVEL_2D_UI)
+CModeGuidanceItem::CModeGuidanceItem()
 {
 }
 
@@ -20,8 +20,7 @@ HRESULT CModeGuidanceItem::Init()
 
 void CModeGuidanceItem::Update()
 {
-	CObject2D::Update();
-	Select();
+	CClickItem::Update();
 }
 
 CModeGuidanceItem * CModeGuidanceItem::Create(const D3DXVECTOR3 & pos, CMode::MODE_TYPE type)
@@ -37,19 +36,8 @@ CModeGuidanceItem * CModeGuidanceItem::Create(const D3DXVECTOR3 & pos, CMode::MO
 	return item;
 }
 
-void CModeGuidanceItem::Select()
+void CModeGuidanceItem::ClickEvent()
 {
-	CInput* input = CInput::GetKey();
-
-	if (input->Trigger(MOUSE_KEY::MOUSE_INPUT_LEFT))
-	{
-		D3DXVECTOR3 mousePos = input->GetMouseCursor();
-		if (mousePos.x < m_pos.x + 40.0f && mousePos.x > m_pos.x - 40.0f)
-		{
-			if (mousePos.y < m_pos.y + 40.0f && mousePos.y > m_pos.y - 40.0f)
-			{
-				CFade::GetInstance()->NextMode(m_type);
-			}
-		}
-	}
+	CFade::GetInstance()->NextMode(m_type);
 }
+
