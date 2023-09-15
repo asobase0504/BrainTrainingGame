@@ -9,6 +9,11 @@
 #include "mode.h"
 
 //==========================================
+//  前方宣言
+//==========================================
+class CTarget;
+
+//==========================================
 //  クラス定義
 //==========================================
 class CMiniGameComeOut : public CMode
@@ -25,6 +30,13 @@ public:
 	void Draw() override;
 
 private:
+
+	//メンバ関数
+	void Load(void);
+
+	//メンバ変数
+	CTarget *m_pTarget;
+	int m_nNumData; //出てくる数
 
 };
 

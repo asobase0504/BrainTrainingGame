@@ -281,6 +281,9 @@
     <ClCompile Include="minigame_comeout.cpp">
       <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
     </ClCompile>
+    <ClCompile Include="target.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -455,6 +458,9 @@
       <Filter>ソース ファイル\03_Mode\02_SelectSave\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="minigame_comeout.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
+    </ClInclude>
+    <ClInclude Include="target.h">
       <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
     </ClInclude>
   </ItemGroup>
