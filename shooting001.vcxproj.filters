@@ -108,6 +108,9 @@
     <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty\01_Result">
       <UniqueIdentifier>{71c61a9a-ab25-4792-8335-25d715f72008}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty\02_NumberSelect">
+      <UniqueIdentifier>{e9bba57c-12a1-4f61-bc54-11c8f181fad6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -291,7 +294,13 @@
       <Filter>ソース ファイル\07_UI</Filter>
     </ClCompile>
     <ClCompile Include="target.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="number_select.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\02_NumberSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="sequence.cpp">
+      <Filter>ソース ファイル\07_UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -473,8 +482,12 @@
     <ClInclude Include="click_item.h">
       <Filter>ソース ファイル\07_UI</Filter>
     </ClInclude>
-    <ClInclude Include="target.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
+    <ClInclude Include="target.h" />
+    <ClInclude Include="number_select.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\02_NumberSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="sequence.h">
+      <Filter>ソース ファイル\07_UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

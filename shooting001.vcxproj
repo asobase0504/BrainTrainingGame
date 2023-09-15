@@ -175,11 +175,13 @@
     <ClCompile Include="move_object\countdown.cpp" />
     <ClCompile Include="move_object\move_object.cpp" />
     <ClCompile Include="number.cpp" />
+    <ClCompile Include="number_select.cpp" />
     <ClCompile Include="remember_object.cpp" />
     <ClCompile Include="remember_system.cpp" />
     <ClCompile Include="minigame_remember_before.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="save_guidance_item.cpp" />
+    <ClCompile Include="sequence.cpp" />
     <ClCompile Include="select_mode.cpp" />
     <ClCompile Include="select_save.cpp" />
     <ClCompile Include="station.cpp" />
@@ -246,11 +248,13 @@
     <ClInclude Include="move_object\countdown.h" />
     <ClInclude Include="move_object\move_object.h" />
     <ClInclude Include="number.h" />
+    <ClInclude Include="number_select.h" />
     <ClInclude Include="remember_object.h" />
     <ClInclude Include="remember_system.h" />
     <ClInclude Include="minigame_remember_before.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="save_guidance_item.h" />
+    <ClInclude Include="sequence.h" />
     <ClInclude Include="select_mode.h" />
     <ClInclude Include="select_save.h" />
     <ClInclude Include="station.h" />

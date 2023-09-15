@@ -11,7 +11,7 @@
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CNumber::CNumber(int nPriority /* =4 */) : CObject2D(nPriority)
+CNumber::CNumber(int nPriority /* =4 */) : CObject2D(CTaskGroup::LEVEL_2D_UI)
 {
 }
 
