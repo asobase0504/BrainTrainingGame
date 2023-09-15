@@ -50,6 +50,7 @@ public:	// メンバー関数
 	CRenderer* GetRenderer() { return renderer; }
 	CTexture* GetTextureClass() { return texture; }
 	CMode* GetMode() { return mode; }
+	CMode::MODE_TYPE GetModeType() { return m_modeType; }
 	CSound* GetSound() { return sound; }
 	D3DXCOLOR GetColor(int inKey);
 	int GetColorSize();
@@ -62,6 +63,7 @@ public:	// メンバー関数
 
 private: // 動的メンバー変数
 	CMode* mode;
+	CMode::MODE_TYPE m_modeType;
 	CInput* input;
 	CRenderer* renderer;
 	CTexture* texture;
