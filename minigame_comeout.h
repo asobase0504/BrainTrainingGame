@@ -36,7 +36,14 @@ private:
 
 	//メンバ変数
 	std::vector<CTarget*> m_pTarget;
+	D3DXVECTOR3 m_pos;
+	D3DXVECTOR2 m_size;
+	D3DXVECTOR2 m_alignment;
+	D3DXVECTOR3 *m_pPos;
 	int m_nNumData; //出てくる数
+	int m_nInterval; //出てくる間隔
+	int m_nTime; //経過時間
+	bool *m_pUse; //使用フラグ
 
 };
 
