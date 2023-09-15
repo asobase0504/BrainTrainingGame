@@ -14,21 +14,17 @@
 // 前方前言　実態はNG　ポインタだけならOK
 //**************************************************
 class CObject2D;
-
-//**************************************************
-// 定数定義
-//**************************************************
 class CRememberObject;
-
-//**************************************************
-// 構造体定義
-//**************************************************
 
 //**************************************************
 // クラス
 //**************************************************
 class CRememberSystem : public CObject
 {
+public:
+	static const int X_LINE = 2;
+	static const int Y_LINE = 2;
+	static const int MAX_ANSWER = X_LINE + Y_LINE;
 public:
 	explicit CRememberSystem(int nPriority = CTaskGroup::LEVEL_2D_1);
 	~CRememberSystem();
@@ -42,6 +38,8 @@ public:
 
 private:
 	void Touch_(float nPosX, float nPosY);
+	void DisplayRemember_();
+	void Choices_();
 
 private:
 	enum TEXTURE
@@ -60,10 +58,14 @@ private:
 	};
 
 private:
-	// オブジェクト2Dの箱
-	CRememberObject *m_pRememberObject[TEXTURE_MAX];
-
+	// 覚えるもの
+	CRememberObject *m_pRememberObject;
+	// アンサー
+	CRememberObject *m_pAnswerObject[MAX_ANSWER];
+	// テクスチャ
+	std::string m_tex[TEXTURE_MAX];
+	// 答え
+	int m_nAnswer;
 };
-
 
 #endif	// _REMMBER_SYSTEM_H_
