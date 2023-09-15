@@ -43,7 +43,6 @@ HRESULT CTitle::Init()
 	object->SetSize(D3DXVECTOR2(1066.0f, 318.0f));
 	object->SetTexture("TITLE_LOGO");
 
-	CNumberSelect::Create();
 	return S_OK;
 }
 
@@ -61,6 +60,6 @@ void CTitle::Update()
 {
 	if (CInput::GetKey()->Trigger(DIK_RETURN) || CInput::GetKey()->Trigger(MOUSE_KEY::MOUSE_INPUT_LEFT))
 	{
-	//	CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_SAVE);
+		CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_SAVE);
 	}
 }

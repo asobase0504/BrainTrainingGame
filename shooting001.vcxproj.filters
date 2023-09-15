@@ -111,6 +111,9 @@
     <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty\02_NumberSelect">
       <UniqueIdentifier>{e9bba57c-12a1-4f61-bc54-11c8f181fad6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pouse">
+      <UniqueIdentifier>{287e4ae4-881a-4014-afaa-c0b5366f5587}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -157,9 +160,6 @@
     </ClCompile>
     <ClCompile Include="renderer.cpp">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
-    </ClCompile>
-    <ClCompile Include="pause.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game</Filter>
     </ClCompile>
     <ClCompile Include="menu.cpp">
       <Filter>ソース ファイル\07_UI\00_Menu</Filter>
@@ -302,6 +302,9 @@
     <ClCompile Include="sequence.cpp">
       <Filter>ソース ファイル\07_UI</Filter>
     </ClCompile>
+    <ClCompile Include="pause.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pouse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -345,9 +348,6 @@
     </ClInclude>
     <ClInclude Include="renderer.h">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
-    </ClInclude>
-    <ClInclude Include="pause.h">
-      <Filter>ソース ファイル\03_Mode\00_Game</Filter>
     </ClInclude>
     <ClInclude Include="menu.h">
       <Filter>ソース ファイル\07_UI\00_Menu</Filter>
@@ -488,6 +488,9 @@
     </ClInclude>
     <ClInclude Include="sequence.h">
       <Filter>ソース ファイル\07_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="pause.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pouse</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
