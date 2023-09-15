@@ -56,3 +56,16 @@ void CClickItem::Update()
 		}
 	}
 }
+
+CClickItem * CClickItem::Create(const D3DXVECTOR3 & inPos, const D3DXVECTOR2 & inSize)
+{
+	CClickItem* item = new CClickItem;
+
+	assert(item != nullptr);
+
+	item->Init();
+	item->SetPos(inPos);
+	item->SetSize(inSize);
+
+	return item;
+}

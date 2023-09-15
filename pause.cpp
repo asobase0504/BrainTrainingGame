@@ -1,20 +1,12 @@
 #include "pause.h"
-#include "object.h"
-#include "menu.h"
-#include "menu_item.h"
 #include "application.h"
-#include "input.h"
-#include <assert.h>
-#include "objectList.h"
+#include "click_item.h"
+#include "fade.h"
 
 //-----------------------------------------
 // コンストラクタ
 //-----------------------------------------
-CPause::CPause() :
-	m_bg(nullptr),
-	m_menu(nullptr),
-	m_status(BACK),
-	m_isDeleted(false)
+CPause::CPause()
 {
 }
 
@@ -32,65 +24,29 @@ HRESULT CPause::Init()
 {
 	CTaskGroup::GetInstance()->Pause(true);
 
-	// 背景の設定
 	{
-		m_bg = CObject2D::Create(2);
-		m_bg->SetSize(CApplication::GetInstance()->GetScreenSize());
+		CObject2D::Init();
+		SetSize(CApplication::GetInstance()->GetScreenSize());
 		D3DXVECTOR3 pos(CApplication::GetInstance()->CENTER_X, CApplication::GetInstance()->CENTER_Y, 0.0f);	// 位置の取得
-		m_bg->SetTexture("BG");
-		m_bg->SetPos(pos);
-		m_bg->SetColor(CApplication::GetInstance()->GetColor(0));
-		m_bg->SetColorAlpha(0.25f);
+		SetTexture("BG");
+		SetPos(pos);
+		SetColorAlpha(0.85f);
 	}
-
-	// メニューの設定
 	{
-		// フレームの設定
-		CMenuFream* fream = new CMenuFream;
-		{
-			fream->Init();
-			fream->SetColor(CApplication::GetInstance()->GetColor(1));
-			fream->SetColorAlpha(0.75f);
-		}
-
-		// 項目の設定
-		std::vector<std::vector<CMenuItem*>> items;
-		for (int i = 0; i < (int)CPause::Status::MAX; i++)
-		{
-			std::vector<CMenuItem*> X;
-
-			CMenuItem* item = new CPauseMenuItem;
-			item->Init();
-			item->PauseOn();
-			item->SetSize(D3DXVECTOR2(465.0f, 80.0f));			// 大きさの設定
-			item->SetColor(CApplication::GetInstance()->GetColor(0));			// 色の設定
-
-			switch ((CPause::Status)i)
-			{
-			case CPause::Status::BACK:
-				item->SetTexture("TEXT_EXIT");
-				break;
-			case CPause::Status::RESTART:
-				item->SetTexture("TEXT_RESTART");
-				break;
-			case CPause::Status::END:
-				item->SetTexture("TEXT_END");
-				break;
-			default:
-				assert(false);
-				break;
-			}
-
-			X.push_back(item);
-			items.push_back(X);
-		}
-
-		D3DXVECTOR2 pos(CApplication::GetInstance()->CENTER_X, CApplication::GetInstance()->CENTER_Y);
-		D3DXVECTOR2 area((float)CApplication::SCREEN_WIDTH, (float)CApplication::CENTER_Y * 0.8f);
-		m_menu = CMenu::Create(pos, area, fream);
-		m_menu->SetItems(items);
+		D3DXVECTOR3 pos(CApplication::CENTER_X + CApplication::CENTER_X * 0.5f, CApplication::CENTER_Y, 0.0f);
+		D3DXVECTOR2 size(D3DXVECTOR2(300.0f, 100.0f));
+		m_back = CClickItem::Create(pos, size);
+		m_back->PauseOff();
+		m_back->SetEvent([this]() {Uninit(); });
+		pos.y += 110.0f;
+		m_retry = CClickItem::Create(pos, size);
+		m_retry->PauseOff();
+		m_retry->SetEvent([this]() { CFade::GetInstance()->NextMode(CApplication::GetInstance()->GetModeType()); });
+		pos.y += 110.0f;
+		m_end = CClickItem::Create(pos, size);
+		m_end->PauseOff();
+		m_end->SetEvent([this]() { CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_MODE); });
 	}
-
 	return S_OK;
 }
 
@@ -99,58 +55,10 @@ HRESULT CPause::Init()
 //-----------------------------------------
 void CPause::Uninit()
 {
-	SetIsDeleted();
+	m_back->Uninit();
+	m_retry->Uninit();
+	m_end->Uninit();
+
 	CTaskGroup::GetInstance()->Pause(false);
-	if (m_menu != nullptr)
-	{
-		m_menu->Uninit();
-		delete m_menu;
-		m_menu = nullptr;
-	}
-	if (m_bg != nullptr)
-	{
-		m_bg = nullptr;
-	}
-}
-
-//-----------------------------------------
-// 更新
-//-----------------------------------------
-void CPause::Update()
-{
-	if (m_menu != nullptr)
-	{
-		m_menu->Update();
-
-		CInput* input = CInput::GetKey();
-		if (input->Trigger(KEY_DECISION))
-		{
-			m_status = (Status)m_menu->GetSelectIdx()[0];
-			SetIsDeleted();
-		}
-	}
-}
-
-//-----------------------------------------
-// 描画
-//-----------------------------------------
-void CPause::Draw()
-{
-
-}
-
-//-----------------------------------------
-// 死亡状態の設定
-//-----------------------------------------
-void CPause::SetIsDeleted()
-{
-	m_isDeleted = true;
-	if (m_bg != nullptr)
-	{
-		m_bg->Uninit();
-	}
-	if (m_menu != nullptr)
-	{
-		m_menu->Uninit();
-	}
+	CObject2D::Uninit();
 }

@@ -111,7 +111,7 @@
     <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty\02_NumberSelect">
       <UniqueIdentifier>{e9bba57c-12a1-4f61-bc54-11c8f181fad6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pouse">
+    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pause">
       <UniqueIdentifier>{287e4ae4-881a-4014-afaa-c0b5366f5587}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -303,7 +303,7 @@
       <Filter>ソース ファイル\07_UI</Filter>
     </ClCompile>
     <ClCompile Include="pause.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pouse</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pause</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -490,7 +490,7 @@
       <Filter>ソース ファイル\07_UI</Filter>
     </ClInclude>
     <ClInclude Include="pause.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pouse</Filter>
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pause</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

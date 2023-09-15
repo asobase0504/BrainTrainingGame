@@ -66,9 +66,9 @@ public:
 	bool NeedUpdate() { return m_isUpdate; }
 
 	/* ポーズ */
-	void SetPouseUpdate(bool isUpdate) { m_isPouseUpdate = isUpdate; }	// ポーズ時に更新を行うか決める
-	void PauseOn() { m_isUpdate = m_isPouseUpdate; }						// 更新を行うか行わないかポーズ状態で判断
-	void PauseOff() { if (!m_isPouseUpdate) { m_isUpdate = true; } }	// ポーズ状態で止まっていた更新を稼働させる
+	void SetPauseUpdate(bool isUpdate) { m_isPauseUpdate = isUpdate; }	// ポーズ時に更新を行うか決める
+	void PauseOn() { m_isUpdate = m_isPauseUpdate; }						// 更新を行うか行わないかポーズ状態で判断
+	void PauseOff() { if (!m_isPauseUpdate) { m_isUpdate = true; } }	// ポーズ状態で止まっていた更新を稼働させる
 
 private:
 	CTaskGroup::EPriority m_priority;
@@ -82,6 +82,6 @@ private:
 	ERole m_role;		// 役割
 
 	bool m_isUpdate;		// 更新を行うか
-	bool m_isPouseUpdate;	// ポーズ中に更新処理を行うか
+	bool m_isPauseUpdate;	// ポーズ中に更新処理を行うか
 };
 #endif

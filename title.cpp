@@ -16,7 +16,7 @@
 // Object系統
 #include "object2d.h"
 
-#include "number_select.h"
+#include "pause.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -43,6 +43,8 @@ HRESULT CTitle::Init()
 	object->SetSize(D3DXVECTOR2(1066.0f, 318.0f));
 	object->SetTexture("TITLE_LOGO");
 
+	CPause* pause = new CPause;
+	pause->Init();
 	return S_OK;
 }
 

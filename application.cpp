@@ -61,7 +61,8 @@ CApplication::CApplication() :
 	renderer(nullptr),
 	input(nullptr),
 	texture(nullptr),
-	color(nullptr)
+	color(nullptr),
+	m_modeType(CMode::MODE_TYPE::TITLE)
 {
 }
 

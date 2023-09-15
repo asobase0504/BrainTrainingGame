@@ -21,7 +21,7 @@ CTask::CTask(CTaskGroup::EPriority inPriority, CTaskGroup::EPushMethod inMethod,
 	m_isDeleted(false),
 	m_isProtect(false),
 	m_isUpdate(true),
-	m_isPouseUpdate(false)
+	m_isPauseUpdate(false)
 {
 	m_priority = inPriority;
 
