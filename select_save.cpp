@@ -7,19 +7,18 @@
 //-----------------------------------------------------------------------------
 // include
 //-----------------------------------------------------------------------------
-#include "title.h"
-#include "application.h"
-#include "utility.h"
-#include "input.h"
-#include "fade.h"
+#include "select_save.h"
+#include <assert.h>
 
-// Object系統
-#include "object2d.h"
+#include "application.h"
+#include "mode_guidance_item.h"
+#include "save_guidance_item.h"
+#include "utility.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CTitle::CTitle() : 
+CSelectSave::CSelectSave() :
 	m_isSelectSaveData(false)
 {
 }
@@ -27,19 +26,31 @@ CTitle::CTitle() :
 //-----------------------------------------------------------------------------
 // デストラクタ
 //-----------------------------------------------------------------------------
-CTitle::~CTitle()
+CSelectSave::~CSelectSave()
 {
 }
 
 //-----------------------------------------------------------------------------
 // 初期化
 //-----------------------------------------------------------------------------
-HRESULT CTitle::Init()
+HRESULT CSelectSave::Init()
 {
-	CObject2D* object = CObject2D::Create();
-	object->SetPos(D3DXVECTOR3(CApplication::CENTER_X,CApplication::CENTER_Y,0.0f));
-	object->SetSize(D3DXVECTOR2(1066.0f, 318.0f));
-	object->SetTexture("TITLE_LOGO");
+	CModeGuidanceItem::Create(D3DXVECTOR3(350.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_MOVEOBJECT);
+	CModeGuidanceItem::Create(D3DXVECTOR3(500.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_NUMBER25);
+	CModeGuidanceItem::Create(D3DXVECTOR3(650.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_BUS);
+	CModeGuidanceItem::Create(D3DXVECTOR3(800.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE);
+
+	m_itemSaveGuidance.resize(15);
+
+	float xPos = 100.0f;
+
+	for (int i = 0; i < 15; i++)
+	{
+		m_itemSaveGuidance[i] = CSaveGuidanceItem::Create(D3DXVECTOR3(xPos + (147.0f * 0.5f * i), CApplication::CENTER_Y, 0.0f), "aaaaa");
+
+		//Debug用
+		m_itemSaveGuidance[i]->SetColor(D3DXCOLOR(FloatRandom(1.0f, 0.0f), FloatRandom(1.0f, 0.0f), FloatRandom(1.0f, 0.0f), 1.0f));
+	}
 
 	return S_OK;
 }
@@ -47,17 +58,23 @@ HRESULT CTitle::Init()
 //-----------------------------------------------------------------------------
 // 終了
 //-----------------------------------------------------------------------------
-void CTitle::Uninit()
+void CSelectSave::Uninit()
 {
 }
 
 //-----------------------------------------------------------------------------
 // 更新
 //-----------------------------------------------------------------------------
-void CTitle::Update()
+void CSelectSave::Update()
 {
-	if (CInput::GetKey()->Trigger(DIK_RETURN))
+	if (!m_isSelectSaveData)
 	{
-		CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_SAVE);
+		for (int i = 0; i < 15; i++)
+		{
+			if (m_itemSaveGuidance[i]->IsSelect())
+			{
+				m_isSelectSaveData = true;
+			}
+		}
 	}
 }

@@ -84,8 +84,20 @@
     <Filter Include="ソース ファイル\03_Mode\00_Game\10_Remenber_before">
       <UniqueIdentifier>{3ea03509-dbff-4058-a46d-bb7c7b9555aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\01_Title\01_Object">
+    <Filter Include="ソース ファイル\03_Mode\01_Title\00_Object">
       <UniqueIdentifier>{afed4d64-bd53-4fc8-9438-016e892a428c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\03_Mode\02_SelectSave">
+      <UniqueIdentifier>{e3fc6605-8aeb-41e9-a85e-ac027e12b8c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\03_Mode\04_Login">
+      <UniqueIdentifier>{e795691d-478a-4882-acc3-0ba7e8e09d04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\03_Mode\03_SelectMode">
+      <UniqueIdentifier>{9e4f0009-3080-4cf3-afea-a3624e726584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\03_Mode\05_ExitSave">
+      <UniqueIdentifier>{5da4c4d4-04f2-4687-b065-bf55bbcd005e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -228,7 +240,7 @@
       <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject</Filter>
     </ClCompile>
     <ClCompile Include="mode_guidance_item.cpp">
-      <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\01_Title\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="task.cpp">
       <Filter>ソース ファイル\02_Object</Filter>
@@ -252,7 +264,13 @@
       <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
     </ClCompile>
     <ClCompile Include="save_guidance_item.cpp">
-      <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\01_Title\00_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="select_save.cpp">
+      <Filter>ソース ファイル\03_Mode\02_SelectSave</Filter>
+    </ClCompile>
+    <ClCompile Include="select_mode.cpp">
+      <Filter>ソース ファイル\03_Mode\03_SelectMode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -395,7 +413,7 @@
       <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="mode_guidance_item.h">
-      <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\01_Title\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="task.h">
       <Filter>ソース ファイル\02_Object</Filter>
@@ -419,7 +437,13 @@
       <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
     </ClInclude>
     <ClInclude Include="save_guidance_item.h">
-      <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
+      <Filter>ソース ファイル\03_Mode\01_Title\00_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="select_save.h">
+      <Filter>ソース ファイル\03_Mode\02_SelectSave</Filter>
+    </ClInclude>
+    <ClInclude Include="select_mode.h">
+      <Filter>ソース ファイル\03_Mode\03_SelectMode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,25 +4,24 @@
 // Author YudaKaito
 // 
 //=========================================
-#ifndef _TITLE_H_
-#define _TITLE_H_
+#ifndef _SELECT_SAVE_H_
+#define _SELECT_SAVE_H_
 
 #include "mode.h"
 
 //-----------------------------------------
 // 前方宣言
 //-----------------------------------------
-class CMenu;
 class CSaveGuidanceItem;
 
 //-----------------------------------------
 // アプリケーションクラス
 //-----------------------------------------
-class CTitle : public CMode
+class CSelectSave : public CMode
 {
 public:	// メンバー関数
-	CTitle();
-	~CTitle() override;
+	CSelectSave();
+	~CSelectSave() override;
 
 	HRESULT Init() override;
 	void Uninit() override;

@@ -1,37 +1,34 @@
 //=========================================
 // 
-// タイトル内クラス
+// 遊ぶモードを選択するシーンクラス
 // Author YudaKaito
 // 
 //=========================================
-#ifndef _TITLE_H_
-#define _TITLE_H_
+#ifndef _SELECT_MODE_H_
+#define _SELECT_MODE_H_
 
 #include "mode.h"
 
 //-----------------------------------------
 // 前方宣言
 //-----------------------------------------
-class CMenu;
-class CSaveGuidanceItem;
+class CModeGuidanceItem;
 
 //-----------------------------------------
 // アプリケーションクラス
 //-----------------------------------------
-class CTitle : public CMode
+class CSelectMode : public CMode
 {
 public:	// メンバー関数
-	CTitle();
-	~CTitle() override;
+	CSelectMode();
+	~CSelectMode() override;
 
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;
 
 private: // 動的メンバー変数
-	std::vector<CSaveGuidanceItem*> m_itemSaveGuidance;
-
-	bool m_isSelectSaveData;	// セーブデータが選択済みか否か
+	std::vector<CModeGuidanceItem*> m_itemModeGuidance;
 };
 
 #endif // !_TITLE_H_

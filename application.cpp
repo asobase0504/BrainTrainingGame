@@ -21,6 +21,8 @@
 // ÉÇÅ[Éh
 #include "title.h"
 #include "game.h"
+#include "select_mode.h"
+#include "select_save.h"
 #include "minigame_number25.h"
 #include "minigame_bus.h"
 #include "minigame_moveobject.h"
@@ -231,6 +233,18 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 	case CMode::MODE_TYPE::TITLE:
 		mode = new CTitle;
 		break;
+	case CMode::MODE_TYPE::SERECT_SAVE:
+		mode = new CSelectSave;
+		break;
+	case CMode::MODE_TYPE::SERECT_MODE:
+		mode = new CSelectMode;
+		break;
+	case CMode::MODE_TYPE::LOGIN:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::EXIT_SAVE:
+		mode = new CTitle;
+		break;
 	case CMode::MODE_TYPE::GAME:
 		mode = new CGame;
 		break;
@@ -241,40 +255,40 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 		mode = new CMiniGameNumber25;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_BOX:
-		mode = new CTitle;
+//		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_CALCULATION:
-		mode = new CTitle;
+//		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_CUPSHUFFLE:
-		mode = new CTitle;
+//		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_MOVEOBJECT:
 		mode = new CMiniGameMoveObject;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_TROLLEY:
-		mode = new CTitle;
+//		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE:
 		mode = new CMiniGameRememberBefore;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_COLORTEXT:
-		mode = new CTitle;
+//		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_COMEOUT:
-		mode = new CTitle;
+//		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_SHADOW:
-		mode = new CTitle;
+//		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_ADD:
-		mode = new CTitle;
+//		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::CUSTUM:
-		mode = new CTitle;
+//		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::RESULT:
-		mode = new CTitle;
+//		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::MAX:
 		break;

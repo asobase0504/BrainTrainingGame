@@ -3,7 +3,9 @@
 #include "application.h"
 #include "fade.h"
 
-CSaveGuidanceItem::CSaveGuidanceItem() : CObject2D(CTaskGroup::LEVEL_2D_UI)
+CSaveGuidanceItem::CSaveGuidanceItem() :
+	CObject2D(CTaskGroup::LEVEL_2D_UI),
+	m_isSelect(false)
 {
 }
 
@@ -48,6 +50,8 @@ void CSaveGuidanceItem::Select()
 		{
 			if (mousePos.y < m_pos.y + m_size.y * 0.5f && mousePos.y > m_pos.y - m_size.y * 0.5f)
 			{
+				CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_MODE);
+				m_isSelect = true;
 			}
 		}
 	}
