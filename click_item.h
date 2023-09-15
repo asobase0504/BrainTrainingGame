@@ -9,6 +9,7 @@
 // インクルード
 //**************************************************
 #include "object2D.h"
+#include <functional>
 
 //**************************************************
 // 前方前言　実態はNG　ポインタだけならOK
@@ -34,9 +35,11 @@ public:
 	HRESULT Init() override;
 	void Update() override;
 
-	virtual void ClickEvent() {}
+	virtual void ClickEvent() { m_event(); }
 
+	void SetEvent(std::function<void(void)> infunc) { m_event = infunc; }
 private:
 	bool m_isClick;
+	std::function<void(void)> m_event;
 };
 #endif	// _NUMBER_H_

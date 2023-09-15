@@ -17,7 +17,7 @@ HRESULT CSaveGuidanceItem::Init()
 	CClickItem::Init();
 	SetSize(D3DXVECTOR2(147.0f * 0.5f, 706.0f * 0.5f));
 	SetTexture("BOOK");
-	return E_NOTIMPL;
+	return S_OK;
 }
 
 void CSaveGuidanceItem::Update()

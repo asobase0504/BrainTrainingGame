@@ -221,6 +221,8 @@ int CApplication::GetColorSize()
 //-----------------------------------------------------------------------------
 void CApplication::SetMode(CMode::MODE_TYPE inType)
 {
+	m_modeType = inType;
+
 	if (mode != nullptr)
 	{
 		CTaskGroup::GetInstance()->AllRelease();
