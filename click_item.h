@@ -37,6 +37,8 @@ public:
 
 	virtual void ClickEvent() { m_event(); }
 
+	bool IsClick() { return m_isClick; }
+
 	void SetEvent(std::function<void(void)> infunc) { m_event = infunc; }
 private:
 	bool m_isClick;

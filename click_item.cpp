@@ -39,6 +39,8 @@ HRESULT CClickItem::Init()
 //--------------------------------------------------
 void CClickItem::Update()
 {
+	m_isClick = false;
+
 	CInput* input = CInput::GetKey();
 
 	if (input->Trigger(MOUSE_KEY::MOUSE_INPUT_LEFT))
@@ -49,6 +51,7 @@ void CClickItem::Update()
 			if (mousePos.y < m_pos.y + m_size.y * 0.5f && mousePos.y > m_pos.y - m_size.y * 0.5f)
 			{
 				ClickEvent();
+				m_isClick = true;
 			}
 		}
 	}
