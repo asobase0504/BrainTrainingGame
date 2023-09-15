@@ -30,7 +30,7 @@ class CRememberObject;
 class CRememberSystem : public CObject
 {
 public:
-	explicit CRememberSystem(int nPriority = CObjectList::LEVEL_2D_1);
+	explicit CRememberSystem(int nPriority = CTaskGroup::LEVEL_2D_1);
 	~CRememberSystem();
 
 	HRESULT Init() override;

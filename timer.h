@@ -23,7 +23,7 @@ class CTimer : public CObject
 public:
 	static const int NUM_TIME = 3;
 public:
-	explicit CTimer(int nPriority = CObjectList::LEVEL_2D_1);
+	explicit CTimer(int nPriority = CTaskGroup::LEVEL_2D_1);
 	~CTimer() override;
 
 	HRESULT Init() override;

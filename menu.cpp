@@ -271,10 +271,10 @@ void CMenu::SetIsDeleted()
 	{
 		for (int j = 0; j < (int)m_item[i].size(); j++)
 		{
-			m_item[i][j]->SetIsDeleted(true);
+			m_item[i][j]->Release();
 		}
 	}
-	m_fream->SetIsDeleted(true);
+	m_fream->Release();
 }
 
 //-----------------------------------------------------------------------------

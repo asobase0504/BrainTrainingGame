@@ -16,6 +16,7 @@
 #include "object2d.h"
 #include "sound.h"
 #include "objectList.h"
+#include "fade.h"
 
 // モード
 #include "title.h"
@@ -57,7 +58,6 @@ CApplication::CApplication() :
 	renderer(nullptr),
 	input(nullptr),
 	texture(nullptr),
-	object(nullptr),
 	color(nullptr)
 {
 }
@@ -71,7 +71,6 @@ CApplication::~CApplication()
 	assert(renderer == nullptr);
 	assert(input == nullptr);
 	assert(texture == nullptr);
-	assert(object == nullptr);
 	assert(color == nullptr);
 }
 
@@ -113,7 +112,7 @@ HRESULT CApplication::Init(HWND hWnd, HINSTANCE hInstance)
 	}
 
 	// ゲームモード
-	SetMode(MODE_TYPE::TITLE);
+	SetMode(CMode::MODE_TYPE::TITLE);
 
 	return S_OK;
 }
@@ -124,7 +123,7 @@ HRESULT CApplication::Init(HWND hWnd, HINSTANCE hInstance)
 void CApplication::Uninit()
 {
 	// オブジェクト全体の解放
-	CObjectList::GetInstance()->Uninit();
+	CTaskGroup::GetInstance()->Uninit();
 
 	// ゲームのクリア
 	if (mode != nullptr)
@@ -217,11 +216,11 @@ int CApplication::GetColorSize()
 //-----------------------------------------------------------------------------
 // モードの設定
 //-----------------------------------------------------------------------------
-void CApplication::SetMode(MODE_TYPE inType)
+void CApplication::SetMode(CMode::MODE_TYPE inType)
 {
 	if (mode != nullptr)
 	{
-		CObjectList::GetInstance()->AllRelease();
+		CTaskGroup::GetInstance()->AllRelease();
 		mode->Uninit();
 		delete mode;
 		mode = nullptr;
@@ -229,23 +228,55 @@ void CApplication::SetMode(MODE_TYPE inType)
 
 	switch (inType)
 	{
-	case CApplication::MODE_TYPE::TITLE:
+	case CMode::MODE_TYPE::TITLE:
 		mode = new CTitle;
 		break;
-	case CApplication::MODE_TYPE::MINIGAME_BUS:
+	case CMode::MODE_TYPE::GAME:
+		mode = new CGame;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_BUS:
 		mode = new CMiniGameBus;
 		break;
-	case CApplication::MODE_TYPE::MINIGAME_MOVEOBJECT:
-		mode = new CMiniGameMoveObject;
-		break;
-	case CApplication::MODE_TYPE::MINIGAME_NUMBER25:
+	case CMode::MODE_TYPE::MINIGAME_NUMBER25:
 		mode = new CMiniGameNumber25;
 		break;
-	case CApplication::MODE_TYPE::MINIGAME_REMEMBER_BEFORE:
+	case CMode::MODE_TYPE::MINIGAME_BOX:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_CALCULATION:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_CUPSHUFFLE:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_MOVEOBJECT:
+		mode = new CMiniGameMoveObject;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_TROLLEY:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE:
 		mode = new CMiniGameRememberBefore;
-		break;	
-	case CApplication::MODE_TYPE::GAME:
-		mode = new CGame;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_COLORTEXT:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_COMEOUT:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_SHADOW:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_ADD:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::CUSTUM:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::RESULT:
+		mode = new CTitle;
+		break;
+	case CMode::MODE_TYPE::MAX:
 		break;
 	default:
 		break;

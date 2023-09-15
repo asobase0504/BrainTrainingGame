@@ -112,10 +112,6 @@ void CObject2D::Uninit()
 //=============================================================================
 void CObject2D::Update()
 {
-	if (m_parent != nullptr)
-	{
-		SetPos(m_pos);
-	}
 }
 
 //=============================================================================
@@ -218,6 +214,7 @@ void CObject2D::SetColorAlpha(const float inAlpha)
 void CObject2D::Vtx()
 {
 	D3DXVECTOR3 pos = m_pos;
+
 	if (m_parent != nullptr)
 	{
 		pos += m_parent->GetPos();
@@ -225,7 +222,7 @@ void CObject2D::Vtx()
 
 	D3DXMATRIX mtx;	// 計算用マトリックス
 
-					// マトリックスの生成
+	// マトリックスの生成
 	D3DXMatrixIdentity(&mtx);
 
 	// マトリックスを回転

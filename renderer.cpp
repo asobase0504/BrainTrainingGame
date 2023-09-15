@@ -125,7 +125,7 @@ void CRenderer::Uninit()
 //=============================================================================
 void CRenderer::Update()
 {
-	CObjectList::GetInstance()->Update();
+	CTaskGroup::GetInstance()->Update();
 }
 
 //=============================================================================
@@ -141,7 +141,7 @@ void CRenderer::Draw()
 	{
 
 		CApplication::GetInstance()->GetMode()->Draw();
-		CObjectList::GetInstance()->Draw();
+		CTaskGroup::GetInstance()->Draw();
 
 #ifdef _DEBUG
 		// FPS•\Ž¦

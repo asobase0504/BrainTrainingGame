@@ -35,7 +35,7 @@ CCountDownUI * CCountDownUI::Create(const D3DXVECTOR2 & inPos)
 		color.a = 0.95f;
 		countDown->m_fream->SetColor(color);
 		countDown->m_fream->SetSize({ (float)CApplication::GetInstance()->SCREEN_WIDTH,100.0f });
-		countDown->m_fream->AttachActivityAtPouse();
+		countDown->m_fream->PauseOn();
 	}
 
 	// テキストの初期化
@@ -51,7 +51,7 @@ CCountDownUI * CCountDownUI::Create(const D3DXVECTOR2 & inPos)
 		countDown->m_text->SetColor(color);
 		countDown->m_text->SetSize({ 300.0f,80.0f });
 		countDown->m_text->SetTexture("TEXT_READY");
-		countDown->m_text->AttachActivityAtPouse();
+		countDown->m_text->PauseOn();
 	}
 
 	return countDown;
@@ -123,6 +123,6 @@ void CCountDownUI::Draw()
 void CCountDownUI::SetIsDeleted()
 {
 	m_isDeleted = true;
-	m_text->SetIsDeleted(true);
-	m_fream->SetIsDeleted(true);
+	m_text->Release();
+	m_fream->Release();
 }

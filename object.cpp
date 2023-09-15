@@ -16,21 +16,10 @@
 // コンストラクタ
 //----------------------------------------
 CObject::CObject(int priority) :
-	m_assignmentPriority(priority),
+	CTask((CTaskGroup::EPriority)priority),
 	m_pos(D3DXVECTOR3(0.0f,0.0f,0.0f)),
-	m_prev(nullptr),
-	m_next(nullptr),
-	m_isDeleted(false),
-	m_isActivityAtPouse(false),
-	m_shouldInvisible(false),
 	m_parent(nullptr)
 {
-	m_children.clear();
-
-
-	CObjectList* taskGroup = CObjectList::GetInstance();
-
-	taskGroup->SetPushCurrent(this, priority);
 }
 
 //----------------------------------------

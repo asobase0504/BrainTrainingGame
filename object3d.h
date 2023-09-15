@@ -40,9 +40,9 @@ protected:
 
 public:
 
-	static CObject3D *Create(int priority = CObjectList::LEVEL_DEBUG);
+	static CObject3D *Create(int priority = CTaskGroup::LEVEL_DEBUG);
 
-	CObject3D(int priority = CObjectList::LEVEL_DEBUG);
+	CObject3D(int priority = CTaskGroup::LEVEL_DEBUG);
 	~CObject3D() override;
 	HRESULT Init() override;
 	void Uninit() override;
@@ -56,7 +56,7 @@ public:
 	const D3DXVECTOR3& GetRot() const { return m_rot; }
 	void SetSize(const D3DXVECTOR2& inSize);
 	void AddSize(const D3DXVECTOR2& inSize) { SetSize((D3DXVECTOR2)m_size + inSize); }
-	const D3DXVECTOR2& GetSize() const { return (D3DXVECTOR2)m_size; }
+	const D3DXVECTOR2 GetSize() const { return (D3DXVECTOR2)m_size; }
 
 	void SetColor(const D3DXCOLOR& inColor);
 	void SetTexture(std::string inTex) { m_texture = inTex; }	// テクスチャの設定

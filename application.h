@@ -7,11 +7,12 @@
 #ifndef _APPLICATION_H_
 #define _APPLICATION_H_
 
+#include "mode.h"
+
 //-----------------------------------------
 // 前方宣言
 //-----------------------------------------
 class CRenderer;
-class CObject;
 class CDirectInput;
 class CTexture;
 class CMode;
@@ -24,21 +25,6 @@ class CSound;
 //-----------------------------------------
 class CApplication
 {
-public:
-	enum class MODE_TYPE
-	{
-		TITLE = 0,
-		GAME,
-		MINIGAME_BUS,
-		MINIGAME_NUMBER25,
-		MINIGAME_COLORTEXT,
-		MINIGAME_MOVEOBJECT,
-		MINIGAME_REMEMBER_BEFORE,
-		CUSTUM,
-		RESULT,
-		MAX
-	};
-
 public: // 定数
 	static const int SCREEN_WIDTH;		// スクリーンの幅
 	static const int SCREEN_HEIGHT;		// スクリーンの高さ
@@ -62,7 +48,6 @@ public:	// メンバー関数
 
 	// Getter
 	CRenderer* GetRenderer() { return renderer; }
-	CObject** GetMyObject() { return &object; }
 	CTexture* GetTextureClass() { return texture; }
 	CMode* GetMode() { return mode; }
 	CSound* GetSound() { return sound; }
@@ -72,7 +57,7 @@ public:	// メンバー関数
 	D3DXVECTOR2 GetScreenCenter() { return D3DXVECTOR2(CENTER_X, CENTER_Y); }
 
 	// Setter
-	void SetMode(MODE_TYPE inType);
+	void SetMode(CMode::MODE_TYPE inType);
 	void SetThemeColor(int idx);
 
 private: // 動的メンバー変数
@@ -80,7 +65,6 @@ private: // 動的メンバー変数
 	CInput* input;
 	CRenderer* renderer;
 	CTexture* texture;
-	CObject* object;
 	CThemeColor* color;
 	CSound* sound;
 };
