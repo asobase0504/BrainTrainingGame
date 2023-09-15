@@ -227,6 +227,7 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 	if (mode != nullptr)
 	{
 		CTaskGroup::GetInstance()->AllRelease();
+		CTaskGroup::GetInstance()->Pause(false);
 		mode->Uninit();
 		delete mode;
 		mode = nullptr;

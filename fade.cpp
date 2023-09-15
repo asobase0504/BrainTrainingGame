@@ -50,6 +50,7 @@ HRESULT CFade::Init()
 	m_nextMode = CMode::MODE_TYPE::TITLE;
 	SetPos(D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.5f, CApplication::SCREEN_HEIGHT * 0.5f, 0.0f));
 	SetSize(D3DXVECTOR2((float)CApplication::SCREEN_WIDTH, (float)CApplication::SCREEN_HEIGHT));
+	SetPauseUpdate(true);
 	SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
 	m_fade = FADENON;
 	return S_OK;

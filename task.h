@@ -67,7 +67,7 @@ public:
 
 	/* ポーズ */
 	void SetPauseUpdate(bool isUpdate) { m_isPauseUpdate = isUpdate; }	// ポーズ時に更新を行うか決める
-	void PauseOn() { m_isUpdate = m_isPauseUpdate; }						// 更新を行うか行わないかポーズ状態で判断
+	void PauseOn() { m_isUpdate = m_isPauseUpdate; }					// 更新を行うか行わないかポーズ状態で判断
 	void PauseOff() { if (!m_isPauseUpdate) { m_isUpdate = true; } }	// ポーズ状態で止まっていた更新を稼働させる
 
 private:
