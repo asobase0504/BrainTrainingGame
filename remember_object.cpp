@@ -11,8 +11,8 @@
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CRememberObject::CRememberObject(int nPriority) : CObject2D(nPriority),
-m_myNumber(0)
+CRememberObject::CRememberObject(int nPriority) :
+	CObject2D(nPriority), m_myNumber(0)
 {
 }
 
