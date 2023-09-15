@@ -102,6 +102,12 @@
     <Filter Include="ソース ファイル\03_Mode\03_SelectMode\00_Object">
       <UniqueIdentifier>{afed4d64-bd53-4fc8-9438-016e892a428c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty">
+      <UniqueIdentifier>{4529e3e4-30f5-4eef-a76f-f4b094eaf06e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty\01_Result">
+      <UniqueIdentifier>{71c61a9a-ab25-4792-8335-25d715f72008}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -275,6 +281,18 @@
     <ClCompile Include="save_guidance_item.cpp">
       <Filter>ソース ファイル\03_Mode\02_SelectSave\00_Object</Filter>
     </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\01_Result</Filter>
+    </ClCompile>
+    <ClCompile Include="minigame_comeout.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="click_item.cpp">
+      <Filter>ソース ファイル\07_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="target.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -447,6 +465,16 @@
     </ClInclude>
     <ClInclude Include="save_guidance_item.h">
       <Filter>ソース ファイル\03_Mode\02_SelectSave\00_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\01_Result</Filter>
+    </ClInclude>
+    <ClInclude Include="minigame_comeout.h" />
+    <ClInclude Include="click_item.h">
+      <Filter>ソース ファイル\07_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="target.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

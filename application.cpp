@@ -27,6 +27,7 @@
 #include "minigame_bus.h"
 #include "minigame_moveobject.h"
 #include "minigame_remember_before.h"
+#include "minigame_comeout.h"
 
 using namespace std;
 
@@ -220,6 +221,8 @@ int CApplication::GetColorSize()
 //-----------------------------------------------------------------------------
 void CApplication::SetMode(CMode::MODE_TYPE inType)
 {
+	m_modeType = inType;
+
 	if (mode != nullptr)
 	{
 		CTaskGroup::GetInstance()->AllRelease();
@@ -276,7 +279,7 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 //		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_COMEOUT:
-//		mode = new CTitle;
+		mode = new CMiniGameComeOut;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_SHADOW:
 //		mode = new CTitle;

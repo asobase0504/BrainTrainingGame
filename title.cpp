@@ -56,7 +56,7 @@ void CTitle::Uninit()
 //-----------------------------------------------------------------------------
 void CTitle::Update()
 {
-	if (CInput::GetKey()->Trigger(DIK_RETURN))
+	if (CInput::GetKey()->Trigger(DIK_RETURN) || CInput::GetKey()->Trigger(MOUSE_KEY::MOUSE_INPUT_LEFT))
 	{
 		CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_SAVE);
 	}

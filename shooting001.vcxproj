@@ -159,6 +159,7 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="bus.cpp" />
     <ClCompile Include="camera_game.cpp" />
+    <ClCompile Include="click_item.cpp" />
     <ClCompile Include="debug_proc.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="input.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="input\inputkeyboard.cpp" />
     <ClCompile Include="input\inputmouse.cpp" />
     <ClCompile Include="minigame_bus.cpp" />
+    <ClCompile Include="minigame_comeout.cpp" />
     <ClCompile Include="minigame_moveobject.cpp" />
     <ClCompile Include="minigame_number25.cpp" />
     <ClCompile Include="mode_guidance_item.cpp" />
@@ -176,6 +178,7 @@
     <ClCompile Include="remember_object.cpp" />
     <ClCompile Include="remember_system.cpp" />
     <ClCompile Include="minigame_remember_before.cpp" />
+    <ClCompile Include="result.cpp" />
     <ClCompile Include="save_guidance_item.cpp" />
     <ClCompile Include="select_mode.cpp" />
     <ClCompile Include="select_save.cpp" />
@@ -204,6 +207,7 @@
     </ClCompile>
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="station_goal.cpp" />
+    <ClCompile Include="target.cpp" />
     <ClCompile Include="task.cpp" />
     <ClCompile Include="task_group.cpp" />
     <ClCompile Include="theme_color.cpp" />
@@ -225,6 +229,7 @@
     <ClInclude Include="application.h" />
     <ClInclude Include="bus.h" />
     <ClInclude Include="camera_game.h" />
+    <ClInclude Include="click_item.h" />
     <ClInclude Include="debug_proc.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="input.h" />
@@ -234,6 +239,7 @@
     <ClInclude Include="input\inputkeydata.h" />
     <ClInclude Include="input\inputmouse.h" />
     <ClInclude Include="minigame_bus.h" />
+    <ClInclude Include="minigame_comeout.h" />
     <ClInclude Include="minigame_number25.h" />
     <ClInclude Include="minigame_moveobject.h" />
     <ClInclude Include="mode_guidance_item.h" />
@@ -243,6 +249,7 @@
     <ClInclude Include="remember_object.h" />
     <ClInclude Include="remember_system.h" />
     <ClInclude Include="minigame_remember_before.h" />
+    <ClInclude Include="result.h" />
     <ClInclude Include="save_guidance_item.h" />
     <ClInclude Include="select_mode.h" />
     <ClInclude Include="select_save.h" />
@@ -264,6 +271,7 @@
     <ClInclude Include="precompile.h" />
     <ClInclude Include="sound.h" />
     <ClInclude Include="station_goal.h" />
+    <ClInclude Include="target.h" />
     <ClInclude Include="task.h" />
     <ClInclude Include="task_group.h" />
     <ClInclude Include="theme_color.h" />
