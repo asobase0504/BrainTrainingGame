@@ -87,6 +87,9 @@
     <Filter Include="ソース ファイル\03_Mode\01_Title\01_Object">
       <UniqueIdentifier>{afed4d64-bd53-4fc8-9438-016e892a428c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\03_Mode\00_Game\11_PressOrder">
+      <UniqueIdentifier>{b4834b13-155d-4cd7-9397-69d8536515d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -254,6 +257,9 @@
     <ClCompile Include="save_guidance_item.cpp">
       <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
     </ClCompile>
+    <ClCompile Include="minigame_pressorder.cpp">
+      <Filter>ソース ファイル\03_Mode\00_Game\11_PressOrder</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -420,6 +426,9 @@
     </ClInclude>
     <ClInclude Include="save_guidance_item.h">
       <Filter>ソース ファイル\03_Mode\01_Title\01_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="minigame_pressorder.h">
+      <Filter>ソース ファイル\03_Mode\00_Game\11_PressOrder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
