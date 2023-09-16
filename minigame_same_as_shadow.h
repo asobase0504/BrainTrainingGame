@@ -7,19 +7,17 @@
 #ifndef _MINI_GAME_SAME_AS_SHADOW_H_
 #define _MINI_GAME_SAME_AS_SHADOW_H_
 
-#include "mode.h"
+#include "game.h"
 
 //-----------------------------------------
 // 前方宣言
 //-----------------------------------------
-class CPause;
-class CCamera;
 class CObject2D;
 
 //-----------------------------------------
 // アプリケーションクラス
 //-----------------------------------------
-class CMiniGameSameAsShadow : public CMode
+class CMiniGameSameAsShadow : public CGame
 {
 public:	// メンバー関数
 	CMiniGameSameAsShadow();

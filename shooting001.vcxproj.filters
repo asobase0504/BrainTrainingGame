@@ -114,6 +114,12 @@
     <Filter Include="ソース ファイル\01_Mode\00_Game\13_Same_as_shadow">
       <UniqueIdentifier>{084429c0-8ee1-41bc-9593-7196673f1241}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\13_Same_as_shadow\00_Object">
+      <UniqueIdentifier>{447309fb-af70-4e31-9bbc-5ac17019b64e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\13_Same_as_shadow\01_system">
+      <UniqueIdentifier>{30902ce5-f799-412a-9492-cac1f68c48bf}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\05_Correction">
       <UniqueIdentifier>{3031f105-eb75-4d25-b6f0-8b392eedd2b2}</UniqueIdentifier>
     </Filter>
@@ -289,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="minigame_same_as_shadow.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\13_Same_as_shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="same_as_shadow_system.cpp">
+      <Filter>ソース ファイル\01_Mode\00_Game\13_Same_as_shadow\01_system</Filter>
     </ClCompile>
     <ClCompile Include="count_down.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\04_Timer</Filter>
@@ -468,6 +477,9 @@
     </ClInclude>
     <ClInclude Include="game.h">
       <Filter>ソース ファイル\01_Mode\00_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="same_as_shadow_system.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\13_Same_as_shadow\01_system</Filter>
     </ClInclude>
     <ClInclude Include="count_down.h">
       <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\04_Timer</Filter>
