@@ -12,17 +12,8 @@
     <Filter Include="ソース ファイル\00_Main">
       <UniqueIdentifier>{f0159098-cbfd-4731-868c-14285ecad14f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\01_Input">
-      <UniqueIdentifier>{4942f64e-ad04-4398-ad40-a9631d9e2e18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\02_Object">
-      <UniqueIdentifier>{46662834-efab-4c03-b618-defc1f03dcd1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FIle">
       <UniqueIdentifier>{d34f2a52-70b7-4c95-bb42-419947bb7574}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\03_Mode">
-      <UniqueIdentifier>{48f00a93-53ea-4db8-9029-d9913dbc6a89}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\07_UI">
       <UniqueIdentifier>{a2ea58af-17b6-4e77-ac73-b31195417e8e}</UniqueIdentifier>
@@ -39,12 +30,6 @@
     <Filter Include="ソース ファイル\07_UI\00_Menu">
       <UniqueIdentifier>{a55cf54c-2661-4b69-873f-9824b18bc7d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\01_Title">
-      <UniqueIdentifier>{5948040f-2933-4137-9606-0409f344630f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game">
-      <UniqueIdentifier>{4c881af5-b061-444d-9fb7-b7421a8acc50}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\07_UI\00_Menu\00_TeamSelect">
       <UniqueIdentifier>{941783e8-e199-47bd-9326-a25d290d7aeb}</UniqueIdentifier>
     </Filter>
@@ -57,65 +42,80 @@
     <Filter Include="ソース ファイル\07_UI\00_Menu\03_PeopleNumberSelect">
       <UniqueIdentifier>{80881531-679e-4beb-9d25-213e325b0f82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\04_Camera">
+    <Filter Include="ソース ファイル\00_Main\02_Object">
+      <UniqueIdentifier>{46662834-efab-4c03-b618-defc1f03dcd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\00_Main\04_Camera">
       <UniqueIdentifier>{b998b0be-5f84-423e-9bfd-25ace88ab016}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\01_BusGame">
+    <Filter Include="ソース ファイル\00_Main\01_OutSide\01_Input">
+      <UniqueIdentifier>{4942f64e-ad04-4398-ad40-a9631d9e2e18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode">
+      <UniqueIdentifier>{48f00a93-53ea-4db8-9029-d9913dbc6a89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\01_Title">
+      <UniqueIdentifier>{5948040f-2933-4137-9606-0409f344630f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game">
+      <UniqueIdentifier>{4c881af5-b061-444d-9fb7-b7421a8acc50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\01_BusGame">
       <UniqueIdentifier>{cc8e58d1-b105-469f-a849-2580611cad0a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object">
+    <Filter Include="ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object">
       <UniqueIdentifier>{50bf1145-4f85-41b4-8c03-8f87c15c742d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object\01_Station">
+    <Filter Include="ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object\01_Station">
       <UniqueIdentifier>{bd314462-97fc-42e2-9fdd-5d153c9a7b30}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\03_Number25">
+    <Filter Include="ソース ファイル\01_Mode\00_Game\03_Number25">
       <UniqueIdentifier>{9ff648bb-063f-4274-ba3a-35c6dab2f3fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\03_Number25\00_Object">
+    <Filter Include="ソース ファイル\01_Mode\00_Game\03_Number25\00_Object">
       <UniqueIdentifier>{823de920-107d-4aee-9f43-a2d4ea112f76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\08_MoveObject">
+    <Filter Include="ソース ファイル\01_Mode\00_Game\08_MoveObject">
       <UniqueIdentifier>{e29217d7-dd13-472e-a153-a01b9e252215}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\08_MoveObject\00_Object">
+    <Filter Include="ソース ファイル\01_Mode\00_Game\08_MoveObject\00_Object">
       <UniqueIdentifier>{f8b4e15c-402b-4719-9531-87e70e78ebaf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\10_Remenber_before">
+    <Filter Include="ソース ファイル\01_Mode\00_Game\10_Remenber_before">
       <UniqueIdentifier>{3ea03509-dbff-4058-a46d-bb7c7b9555aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\02_SelectSave">
-      <UniqueIdentifier>{e3fc6605-8aeb-41e9-a85e-ac027e12b8c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\03_Mode\04_Login">
-      <UniqueIdentifier>{e795691d-478a-4882-acc3-0ba7e8e09d04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\03_Mode\03_SelectMode">
-      <UniqueIdentifier>{9e4f0009-3080-4cf3-afea-a3624e726584}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\03_Mode\05_ExitSave">
-      <UniqueIdentifier>{5da4c4d4-04f2-4687-b065-bf55bbcd005e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\03_Mode\02_SelectSave\00_Object">
-      <UniqueIdentifier>{e1c1c9d1-30cf-4682-ae8f-8e37326a1853}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\03_Mode\03_SelectMode\00_Object">
-      <UniqueIdentifier>{afed4d64-bd53-4fc8-9438-016e892a428c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty">
+    <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty">
       <UniqueIdentifier>{4529e3e4-30f5-4eef-a76f-f4b094eaf06e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty\01_Result">
+    <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\01_Result">
       <UniqueIdentifier>{71c61a9a-ab25-4792-8335-25d715f72008}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty\02_NumberSelect">
+    <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\02_NumberSelect">
       <UniqueIdentifier>{e9bba57c-12a1-4f61-bc54-11c8f181fad6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\11_ComeOut">
+    <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\03_Pause">
+      <UniqueIdentifier>{287e4ae4-881a-4014-afaa-c0b5366f5587}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\11_ComeOut">
       <UniqueIdentifier>{d912bb0b-ccb9-49a9-99e4-1ce5dbd0928a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pause">
-      <UniqueIdentifier>{287e4ae4-881a-4014-afaa-c0b5366f5587}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\01_Mode\02_SelectSave">
+      <UniqueIdentifier>{e3fc6605-8aeb-41e9-a85e-ac027e12b8c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\02_SelectSave\00_Object">
+      <UniqueIdentifier>{e1c1c9d1-30cf-4682-ae8f-8e37326a1853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\04_Login">
+      <UniqueIdentifier>{e795691d-478a-4882-acc3-0ba7e8e09d04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\03_SelectMode">
+      <UniqueIdentifier>{9e4f0009-3080-4cf3-afea-a3624e726584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\03_SelectMode\00_Object">
+      <UniqueIdentifier>{afed4d64-bd53-4fc8-9438-016e892a428c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\05_ExitSave">
+      <UniqueIdentifier>{5da4c4d4-04f2-4687-b065-bf55bbcd005e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -123,19 +123,19 @@
       <Filter>ソース ファイル\00_Main</Filter>
     </ClCompile>
     <ClCompile Include="title.cpp">
-      <Filter>ソース ファイル\03_Mode\01_Title</Filter>
+      <Filter>ソース ファイル\01_Mode\01_Title</Filter>
     </ClCompile>
     <ClCompile Include="object.cpp">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClCompile>
     <ClCompile Include="object2d.cpp">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClCompile>
     <ClCompile Include="mode.cpp">
-      <Filter>ソース ファイル\03_Mode</Filter>
+      <Filter>ソース ファイル\01_Mode</Filter>
     </ClCompile>
     <ClCompile Include="game.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game</Filter>
     </ClCompile>
     <ClCompile Include="ui_countdown.cpp">
       <Filter>ソース ファイル\07_UI</Filter>
@@ -192,141 +192,141 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="objectList.cpp">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClCompile>
     <ClCompile Include="bus.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="object3d.cpp">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClCompile>
     <ClCompile Include="camera.cpp">
-      <Filter>ソース ファイル\04_Camera</Filter>
+      <Filter>ソース ファイル\00_Main\04_Camera</Filter>
     </ClCompile>
     <ClCompile Include="passenger.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="camera_game.cpp">
-      <Filter>ソース ファイル\04_Camera</Filter>
+      <Filter>ソース ファイル\00_Main\04_Camera</Filter>
     </ClCompile>
     <ClCompile Include="debug_proc.cpp">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
     </ClCompile>
     <ClCompile Include="station_goal.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object\01_Station</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object\01_Station</Filter>
     </ClCompile>
     <ClCompile Include="station.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object\01_Station</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object\01_Station</Filter>
     </ClCompile>
     <ClCompile Include="minigame_bus.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame</Filter>
     </ClCompile>
     <ClCompile Include="minigame_number25.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\03_Number25</Filter>
     </ClCompile>
     <ClCompile Include="number.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\03_Number25\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="timer.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\03_Number25\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="input.cpp">
-      <Filter>ソース ファイル\01_Input</Filter>
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClCompile>
     <ClCompile Include="input\DirectInput.cpp">
-      <Filter>ソース ファイル\01_Input</Filter>
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClCompile>
     <ClCompile Include="input\inputjoypad.cpp">
-      <Filter>ソース ファイル\01_Input</Filter>
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClCompile>
     <ClCompile Include="input\inputkeyboard.cpp">
-      <Filter>ソース ファイル\01_Input</Filter>
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClCompile>
     <ClCompile Include="input\inputmouse.cpp">
-      <Filter>ソース ファイル\01_Input</Filter>
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClCompile>
     <ClCompile Include="move_object\countdown.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\08_MoveObject\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="move_object\move_object.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\08_MoveObject\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="minigame_moveobject.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\08_MoveObject</Filter>
     </ClCompile>
     <ClCompile Include="mode_guidance_item.cpp">
-      <Filter>ソース ファイル\03_Mode\03_SelectMode\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\03_SelectMode\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="task.cpp">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClCompile>
     <ClCompile Include="task_group.cpp">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClCompile>
     <ClCompile Include="fade.cpp">
-      <Filter>ソース ファイル\03_Mode</Filter>
+      <Filter>ソース ファイル\01_Mode</Filter>
     </ClCompile>
     <ClCompile Include="minigame_remember_before.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before</Filter>
     </ClCompile>
     <ClCompile Include="remember_system.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before</Filter>
     </ClCompile>
     <ClCompile Include="remember_object.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before</Filter>
     </ClCompile>
     <ClCompile Include="headcount.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame</Filter>
     </ClCompile>
     <ClCompile Include="select_save.cpp">
-      <Filter>ソース ファイル\03_Mode\02_SelectSave</Filter>
+      <Filter>ソース ファイル\01_Mode\02_SelectSave</Filter>
     </ClCompile>
     <ClCompile Include="select_mode.cpp">
-      <Filter>ソース ファイル\03_Mode\03_SelectMode</Filter>
+      <Filter>ソース ファイル\01_Mode\03_SelectMode</Filter>
     </ClCompile>
     <ClCompile Include="save_guidance_item.cpp">
-      <Filter>ソース ファイル\03_Mode\02_SelectSave\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\02_SelectSave\00_Object</Filter>
     </ClCompile>
     <ClCompile Include="result.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\01_Result</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\01_Result</Filter>
     </ClCompile>
     <ClCompile Include="click_item.cpp">
       <Filter>ソース ファイル\07_UI</Filter>
     </ClCompile>
     <ClCompile Include="number_select.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\02_NumberSelect</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\02_NumberSelect</Filter>
     </ClCompile>
     <ClCompile Include="sequence.cpp">
       <Filter>ソース ファイル\07_UI</Filter>
     </ClCompile>
     <ClCompile Include="target.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\11_ComeOut</Filter>
     </ClCompile>
     <ClCompile Include="minigame_comeout.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\11_ComeOut</Filter>
     </ClCompile>
     <ClCompile Include="pause.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pause</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\03_Pause</Filter>
     </ClCompile>
     <ClCompile Include="calendar.cpp">
-      <Filter>ソース ファイル\03_Mode\04_Login</Filter>
+      <Filter>ソース ファイル\01_Mode\04_Login</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
-      <Filter>ソース ファイル\03_Mode\01_Title</Filter>
+      <Filter>ソース ファイル\01_Mode\01_Title</Filter>
     </ClInclude>
     <ClInclude Include="object.h">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClInclude>
     <ClInclude Include="object2d.h">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClInclude>
     <ClInclude Include="mode.h">
-      <Filter>ソース ファイル\03_Mode</Filter>
+      <Filter>ソース ファイル\01_Mode</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
-      <Filter>ソース ファイル\03_Mode\00_Game</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game</Filter>
     </ClInclude>
     <ClInclude Include="ui_countdown.h">
       <Filter>ソース ファイル\07_UI</Filter>
@@ -383,127 +383,127 @@
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="objectList.h">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClInclude>
     <ClInclude Include="bus.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="object3d.h">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
-      <Filter>ソース ファイル\04_Camera</Filter>
+      <Filter>ソース ファイル\00_Main\04_Camera</Filter>
     </ClInclude>
     <ClInclude Include="passenger.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="camera_game.h">
-      <Filter>ソース ファイル\04_Camera</Filter>
+      <Filter>ソース ファイル\00_Main\04_Camera</Filter>
     </ClInclude>
     <ClInclude Include="debug_proc.h">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
     </ClInclude>
     <ClInclude Include="station.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object\01_Station</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object\01_Station</Filter>
     </ClInclude>
     <ClInclude Include="station_goal.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame\00_Object\01_Station</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object\01_Station</Filter>
     </ClInclude>
     <ClInclude Include="minigame_bus.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame</Filter>
     </ClInclude>
     <ClInclude Include="minigame_number25.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\03_Number25</Filter>
     </ClInclude>
     <ClInclude Include="number.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\03_Number25\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="timer.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\03_Number25\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\03_Number25\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="input.h">
-      <Filter>ソース ファイル\01_Input</Filter>
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClInclude>
     <ClInclude Include="input\DirectInput.h">
-      <Filter>ソース ファイル\01_Input</Filter>
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClInclude>
     <ClInclude Include="input\inputjoypad.h">
-      <Filter>ソース ファイル\01_Input</Filter>
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClInclude>
     <ClInclude Include="input\inputkeyboard.h">
-      <Filter>ソース ファイル\01_Input</Filter>
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClInclude>
     <ClInclude Include="input\inputkeydata.h">
-      <Filter>ソース ファイル\01_Input</Filter>
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClInclude>
     <ClInclude Include="input\inputmouse.h">
-      <Filter>ソース ファイル\01_Input</Filter>
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClInclude>
     <ClInclude Include="minigame_moveobject.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\08_MoveObject</Filter>
     </ClInclude>
     <ClInclude Include="move_object\countdown.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\08_MoveObject\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="move_object\move_object.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\08_MoveObject\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\08_MoveObject\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="mode_guidance_item.h">
-      <Filter>ソース ファイル\03_Mode\03_SelectMode\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\03_SelectMode\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="task.h">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClInclude>
     <ClInclude Include="task_group.h">
-      <Filter>ソース ファイル\02_Object</Filter>
+      <Filter>ソース ファイル\00_Main\02_Object</Filter>
     </ClInclude>
     <ClInclude Include="fade.h">
-      <Filter>ソース ファイル\03_Mode</Filter>
+      <Filter>ソース ファイル\01_Mode</Filter>
     </ClInclude>
     <ClInclude Include="remember_system.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before</Filter>
     </ClInclude>
     <ClInclude Include="remember_object.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before</Filter>
     </ClInclude>
     <ClInclude Include="minigame_remember_before.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before</Filter>
     </ClInclude>
     <ClInclude Include="headcount.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\01_BusGame</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame</Filter>
     </ClInclude>
     <ClInclude Include="select_save.h">
-      <Filter>ソース ファイル\03_Mode\02_SelectSave</Filter>
+      <Filter>ソース ファイル\01_Mode\02_SelectSave</Filter>
     </ClInclude>
     <ClInclude Include="select_mode.h">
-      <Filter>ソース ファイル\03_Mode\03_SelectMode</Filter>
+      <Filter>ソース ファイル\01_Mode\03_SelectMode</Filter>
     </ClInclude>
     <ClInclude Include="save_guidance_item.h">
-      <Filter>ソース ファイル\03_Mode\02_SelectSave\00_Object</Filter>
+      <Filter>ソース ファイル\01_Mode\02_SelectSave\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="result.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\01_Result</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\01_Result</Filter>
     </ClInclude>
     <ClInclude Include="click_item.h">
       <Filter>ソース ファイル\07_UI</Filter>
     </ClInclude>
     <ClInclude Include="number_select.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\02_NumberSelect</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\02_NumberSelect</Filter>
     </ClInclude>
     <ClInclude Include="sequence.h">
       <Filter>ソース ファイル\07_UI</Filter>
     </ClInclude>
     <ClInclude Include="target.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\11_ComeOut</Filter>
     </ClInclude>
     <ClInclude Include="minigame_comeout.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\11_ComeOut</Filter>
     </ClInclude>
     <ClInclude Include="pause.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\00_Utilty\03_Pause</Filter>
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\03_Pause</Filter>
     </ClInclude>
     <ClInclude Include="calendar.h">
-      <Filter>ソース ファイル\03_Mode\04_Login</Filter>
+      <Filter>ソース ファイル\01_Mode\04_Login</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
