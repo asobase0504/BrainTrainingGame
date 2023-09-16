@@ -105,9 +105,6 @@
     <Filter Include="ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object">
       <UniqueIdentifier>{50bf1145-4f85-41b4-8c03-8f87c15c742d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\03_Mode\00_Game\10_Remenber_before\00_Object">
-      <UniqueIdentifier>{e5fe44b0-608b-4518-bbc0-03d7d9e835ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\01_Mode\00_Game\01_BusGame\00_Object\01_Station">
       <UniqueIdentifier>{bd314462-97fc-42e2-9fdd-5d153c9a7b30}</UniqueIdentifier>
     </Filter>
@@ -142,9 +139,6 @@
     </ClCompile>
     <ClCompile Include="theme_color.cpp">
       <Filter>ソース ファイル\00_Main\01_OutSide</Filter>
-    </ClCompile>
-    <ClCompile Include="application.cpp">
-      <Filter>ソース ファイル\00_Main\00_InSide</Filter>
     </ClCompile>
     <ClCompile Include="collision.cpp">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
@@ -267,10 +261,6 @@
       <Filter>ソース ファイル\07_UI</Filter>
     </ClCompile>
     <ClCompile Include="target.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="remember_object.cpp">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before\00_Object</Filter>
       <Filter>ソース ファイル\01_Mode\00_Game\11_ComeOut</Filter>
     </ClCompile>
     <ClCompile Include="minigame_comeout.cpp">
@@ -287,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="count_down.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\05_CountDown</Filter>
+    </ClCompile>
+    <ClCompile Include="application.cpp">
+      <Filter>ソース ファイル\00_Main\00_InSide</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -444,10 +437,6 @@
       <Filter>ソース ファイル\07_UI</Filter>
     </ClInclude>
     <ClInclude Include="target.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\11_ComeOut</Filter>
-    <ClInclude Include="target.h" />
-    <ClInclude Include="remember_object.h">
-      <Filter>ソース ファイル\03_Mode\00_Game\10_Remenber_before\00_Object</Filter>
       <Filter>ソース ファイル\01_Mode\00_Game\11_ComeOut</Filter>
     </ClInclude>
     <ClInclude Include="minigame_comeout.h">
