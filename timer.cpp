@@ -47,7 +47,7 @@ HRESULT CTimer::Init()
 //--------------------------------------------------
 HRESULT CTimer::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	CSequence::Init(pos, size);
+	CSequence::Init(pos, size,2);
 	m_bIsStop = false;
 	return S_OK;
 }

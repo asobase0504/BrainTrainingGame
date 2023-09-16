@@ -122,7 +122,7 @@ HRESULT CNumberSelect::Init()
 		});
 	}
 
-	m_sequence = CSequence::Create(D3DXVECTOR3(CApplication::CENTER_X + CApplication::CENTER_X * 0.5f - 80.0f, 100.0f, 0.0f), D3DXVECTOR2(80.0f, 80.0f));
+	m_sequence = CSequence::Create(D3DXVECTOR3(CApplication::CENTER_X + CApplication::CENTER_X * 0.5f - 80.0f, 100.0f, 0.0f), D3DXVECTOR2(80.0f, 80.0f),3);
 	m_sequence->SetNumber(0);
 
 	return S_OK;

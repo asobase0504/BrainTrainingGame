@@ -75,7 +75,7 @@ HRESULT CCalender::Init()
 		D3DXVECTOR3 pos(CApplication::CENTER_X, CApplication::CENTER_Y,0.0f);
 		pos.x += -(size * 7.0f) + size * 2.0f * (i % 7);
 		pos.y += -(size * 7.0f) + size * 2.0f * (i / 7);
-		m_day[i] = CSequence::Create(pos,D3DXVECTOR2(size / 3.0f - 0.9f, size));
+		m_day[i] = CSequence::Create(pos,D3DXVECTOR2(size / 3.0f - 0.9f, size),2);
 		m_day[i]->SetNumber(cnt);
 	}
 

@@ -28,7 +28,7 @@ public:
 	~CSequence() override;
 
 	HRESULT Init() override;
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR2 size);
+	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR2 size, const int digit);
 	void Uninit() override;
 	void Update() override;
 	void Draw() override {}
@@ -38,13 +38,14 @@ public:
 	void SetNumber(int inNumber);
 	int GetNumber() { return m_number; }
 
-	static CSequence* Create(D3DXVECTOR3 pos, D3DXVECTOR2 size);
+	static CSequence* Create(D3DXVECTOR3 pos, D3DXVECTOR2 size,const int digit);
 
 private:
 	// NumberŒ^‚Ì”z—ñ
 	std::vector<CNumber*> m_pNumber;
 	// ŽžŠÔ
 	int m_number;
+	int m_digit;
 };
 
 #endif // _TIMER_H_
