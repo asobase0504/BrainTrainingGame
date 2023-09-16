@@ -15,6 +15,13 @@
 
 #include "remember_object.h"
 
+//**************************************************
+// 定数
+//**************************************************
+const int CRememberSystem::X_LINE = 2;
+const int CRememberSystem::Y_LINE = 1;
+const int CRememberSystem::MAX_ANSWER = X_LINE * Y_LINE;
+
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
@@ -32,10 +39,7 @@ m_tex{
 	"CLOUD",
 	"CASTLE", }
 {
-	for (int i = 0; i < MAX_ANSWER; i++)
-	{
-		m_pAnswerObject[i] = nullptr;
-	}
+	m_pAnswerObject.clear();
 
 	m_pRememberObject = nullptr;
 
@@ -59,6 +63,9 @@ HRESULT CRememberSystem::Init()
 {
 #define ARRAY_LENGTH(a) (sizeof(a)/sizeof((a)[0])) 
 	static_assert(ARRAY_LENGTH(m_tex) == TEXTURE_MAX, "baka");
+
+	// 配列サイズの設定
+	m_pAnswerObject.resize(MAX_ANSWER);
 
 	m_nAnswer = IntRandom(TEXTURE_MAX - 1, 0);
 
@@ -208,8 +215,6 @@ void CRememberSystem::DisplayRemember_()
 
 	m_pRememberObject->SetMyNumber(m_nAnswer);
 	m_pRememberObject->SetTexture(m_tex[m_nAnswer]);
-
-	m_isUsedNumber[m_nAnswer] = true;
 }
 
 //--------------------------------------------------
@@ -217,20 +222,35 @@ void CRememberSystem::DisplayRemember_()
 //--------------------------------------------------
 void CRememberSystem::Choices_()
 {
-	int number = 0;
+	// 一つをこたえにする
+	int answer = 0;
+	answer = IntRandom(MAX_ANSWER - 1, 0);
 
+	m_isUsedNumber[m_nAnswer] = true;
+
+	// 抽選
+	int number = 0;
 	number = IntRandom(TEXTURE_MAX - 1, 0);
 
 	for (int i = 0; i < MAX_ANSWER; i++)
 	{
-		while (m_isUsedNumber[number])
-		{
-			number = IntRandom(TEXTURE_MAX - 1, 0);
+		if (answer == i)
+		{// 答えと一緒にする
+			m_pAnswerObject[i]->SetMyNumber(m_nAnswer);
+			m_pAnswerObject[i]->SetTexture(m_tex[m_nAnswer]);
+		}
+		else
+		{// それ以外（ダミー）
+			while (m_isUsedNumber[number])
+			{// 画像の抽選
+				number = IntRandom(TEXTURE_MAX - 1, 0);
+			}
+
+			m_pAnswerObject[i]->SetMyNumber(number);
+			m_pAnswerObject[i]->SetTexture(m_tex[number]);
+
+			m_isUsedNumber[number] = true;
 		}
 
-		m_isUsedNumber[number] = true;
-
-		m_pAnswerObject[i]->SetMyNumber(number);
-		m_pAnswerObject[i]->SetTexture(m_tex[number]);
 	}
 }
