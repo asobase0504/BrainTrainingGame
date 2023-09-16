@@ -8,7 +8,6 @@
 // include
 //-----------------------------------------------------------------------------
 #include "minigame_bus.h"
-#include "pause.h"
 #include "input.h"
 #include <assert.h>
 #include "application.h"
@@ -22,8 +21,7 @@
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CMiniGameBus::CMiniGameBus() :
-	m_pause(nullptr)
+CMiniGameBus::CMiniGameBus()
 {
 }
 
@@ -32,7 +30,6 @@ CMiniGameBus::CMiniGameBus() :
 //-----------------------------------------------------------------------------
 CMiniGameBus::~CMiniGameBus()
 {
-	assert(m_pause == nullptr);
 }
 
 //-----------------------------------------------------------------------------
@@ -40,6 +37,8 @@ CMiniGameBus::~CMiniGameBus()
 //-----------------------------------------------------------------------------
 HRESULT CMiniGameBus::Init()
 {
+	CGame::Init();
+
 	m_count = 0;
 
 	// 背景の設定
@@ -95,13 +94,6 @@ HRESULT CMiniGameBus::Init()
 //-----------------------------------------------------------------------------
 void CMiniGameBus::Uninit()
 {
-	if (m_pause != nullptr)
-	{
-		m_pause->Uninit();
-		delete m_pause;
-		m_pause = nullptr;
-	}
-
 	if (m_camera != nullptr)
 	{
 		m_camera->Uninit();
@@ -115,6 +107,7 @@ void CMiniGameBus::Uninit()
 //-----------------------------------------------------------------------------
 void CMiniGameBus::Update()
 {
+	CGame::Update();
 	m_camera->Update();
 }
 

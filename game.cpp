@@ -9,16 +9,16 @@
 //-----------------------------------------------------------------------------
 #include "game.h"
 #include "application.h"
-#include "pause.h"
 #include "input.h"
-#include "file.h"
-#include "camera.h"
+
+#include "pause.h"
+#include "timer.h"
+#include "result.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CGame::CGame() :
-	m_pause(nullptr)
+CGame::CGame()
 {
 }
 
@@ -27,7 +27,6 @@ CGame::CGame() :
 //-----------------------------------------------------------------------------
 CGame::~CGame()
 {
-	assert(m_pause == nullptr);
 }
 
 //-----------------------------------------------------------------------------
@@ -35,9 +34,8 @@ CGame::~CGame()
 //-----------------------------------------------------------------------------
 HRESULT CGame::Init()
 {
-	m_camera = new CCamera;
-	m_camera->Init();
-
+	m_timer = CTimer::Create(D3DXVECTOR3(100.0f,100.0f,0.0f),D3DXVECTOR2(30.0f,100.0f));
+	m_timer->SetTimer(60);
 	return S_OK;
 }
 
@@ -46,19 +44,7 @@ HRESULT CGame::Init()
 //-----------------------------------------------------------------------------
 void CGame::Uninit()
 {
-	if (m_pause != nullptr)
-	{
-		m_pause->Uninit();
-		delete m_pause;
-		m_pause = nullptr;
-	}
-
-	if (m_camera != nullptr)
-	{
-		m_camera->Uninit();
-		delete m_camera;
-		m_camera = nullptr;
-	}
+	CMode::Uninit();
 }
 
 //-----------------------------------------------------------------------------
@@ -66,13 +52,16 @@ void CGame::Uninit()
 //-----------------------------------------------------------------------------
 void CGame::Update()
 {
-	m_camera->Update();
-}
+	CMode::Update();
 
-//-----------------------------------------------------------------------------
-// 描画
-//-----------------------------------------------------------------------------
-void CGame::Draw()
-{
-	m_camera->Set();
+	if (CInput::GetKey()->Trigger(DIK_P))
+	{
+		CPause::Create();
+	}
+
+	if (m_timer->GetTimer() <= 0 && !m_timer->isStop())
+	{
+		m_timer->StopTimer(true);
+		CResult::Create();
+	}
 }

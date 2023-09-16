@@ -24,7 +24,7 @@ private:
 	static const int NUM_DIGIT = 3;
 public:
 public:
-	explicit CSequence(int nPriority = CTaskGroup::LEVEL_SYSTEM);
+	explicit CSequence();
 	~CSequence() override;
 
 	HRESULT Init() override;
@@ -36,6 +36,7 @@ public:
 	void SetPos(D3DXVECTOR3 pos, D3DXVECTOR2 size);
 
 	void SetNumber(int inNumber);
+	int GetNumber() { return m_number; }
 
 	static CSequence* Create(D3DXVECTOR3 pos, D3DXVECTOR2 size);
 

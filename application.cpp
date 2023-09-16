@@ -20,7 +20,6 @@
 
 // ÉÇÅ[Éh
 #include "title.h"
-#include "game.h"
 #include "select_mode.h"
 #include "select_save.h"
 #include "minigame_number25.h"
@@ -220,9 +219,6 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 		break;
 	case CMode::MODE_TYPE::EXIT_SAVE:
 		mode = new CTitle;
-		break;
-	case CMode::MODE_TYPE::GAME:
-		mode = new CGame;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_BUS:
 		mode = new CMiniGameBus;

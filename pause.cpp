@@ -62,3 +62,14 @@ void CPause::Uninit()
 	CTaskGroup::GetInstance()->Pause(false);
 	CObject2D::Uninit();
 }
+
+CPause* CPause::Create()
+{
+	CPause* pause = new CPause;
+
+	assert(pause != nullptr);
+
+	pause->Init();
+
+	return pause;
+}

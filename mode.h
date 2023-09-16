@@ -34,7 +34,6 @@ public:
 		MINIGAME_COMEOUT,			// o‚½‡”Ô‚É‰Ÿ‚·
 		MINIGAME_SHADOW,			// ‚©‚°‚Æ“¯‚¶‚à‚Ì‚Í‚Ç‚ê
 		MINIGAME_ADD,				// ‚ ‚í‚¹‚½”
-		GAME,
 		CUSTUM,
 		RESULT,
 		MAX

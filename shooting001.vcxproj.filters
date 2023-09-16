@@ -102,6 +102,9 @@
     <Filter Include="ソース ファイル\01_Mode\05_ExitSave">
       <UniqueIdentifier>{5da4c4d4-04f2-4687-b065-bf55bbcd005e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\04_Timer">
+      <UniqueIdentifier>{bb484ef8-2467-4bee-a767-31d85fabd4d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -188,9 +191,6 @@
     <ClCompile Include="number.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\03_Number25\00_Object</Filter>
     </ClCompile>
-    <ClCompile Include="timer.cpp">
-      <Filter>ソース ファイル\01_Mode\00_Game\03_Number25\00_Object</Filter>
-    </ClCompile>
     <ClCompile Include="input.cpp">
       <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClCompile>
@@ -271,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="calendar.cpp">
       <Filter>ソース ファイル\01_Mode\04_Login</Filter>
+    </ClCompile>
+    <ClCompile Include="timer.cpp">
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\04_Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -353,9 +356,6 @@
       <Filter>ソース ファイル\01_Mode\00_Game\03_Number25</Filter>
     </ClInclude>
     <ClInclude Include="number.h">
-      <Filter>ソース ファイル\01_Mode\00_Game\03_Number25\00_Object</Filter>
-    </ClInclude>
-    <ClInclude Include="timer.h">
       <Filter>ソース ファイル\01_Mode\00_Game\03_Number25\00_Object</Filter>
     </ClInclude>
     <ClInclude Include="input.h">
@@ -441,6 +441,9 @@
     </ClInclude>
     <ClInclude Include="calendar.h">
       <Filter>ソース ファイル\01_Mode\04_Login</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\04_Timer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

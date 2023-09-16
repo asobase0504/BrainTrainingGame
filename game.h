@@ -14,8 +14,7 @@
 //-----------------------------------------
 // 前方宣言
 //-----------------------------------------
-class CPause;
-class CCamera;
+class CTimer;
 
 //-----------------------------------------
 // アプリケーションクラス
@@ -26,20 +25,17 @@ public:	// メンバー関数
 	CGame();
 	~CGame() override;
 
-	HRESULT Init() override;
-	void Uninit() override;
+	virtual HRESULT Init() override;
+	virtual void Uninit() override;
 
 	// 更新処理
-	void Update() override;
-
-	void Draw() override;
+	virtual void Update() override;
 
 private: // 動的プライベート関数
 
 private: // 動的メンバー変数
-
-	CPause* m_pause;
-	CCamera* m_camera;
+	int m_score;		// 得点
+	CTimer* m_timer;
 };
 
 #endif // !_GAME_H_

@@ -27,6 +27,8 @@ public:	// パブリック関数
 	HRESULT Init();
 	void Uninit();
 	
+	static CPause* Create();
+
 private: // プライベート関数
 private: // メンバー変数
 	CObject2D* m_bg;

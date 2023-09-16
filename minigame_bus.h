@@ -7,20 +7,17 @@
 #ifndef _MINI_GAME_H_
 #define _MINI_GAME_H_
 
-#include "mode.h"
-#include <d3dx9.h>
-#include <vector>
+#include "game.h"
 
 //-----------------------------------------
 // 前方宣言
 //-----------------------------------------
-class CPause;
 class CCamera;
 
 //-----------------------------------------
 // アプリケーションクラス
 //-----------------------------------------
-class CMiniGameBus : public CMode
+class CMiniGameBus : public CGame
 {
 public:	// メンバー関数
 	CMiniGameBus();
@@ -38,7 +35,6 @@ private: // 動的プライベート関数
 
 private: // 動的メンバー変数
 
-	CPause* m_pause;
 	CCamera* m_camera;
 
 	int m_count;

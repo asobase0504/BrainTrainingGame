@@ -18,7 +18,7 @@
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CSequence::CSequence(int nPriority) : CObject(CTaskGroup::LEVEL_3D_UI)
+CSequence::CSequence() : CObject(CTaskGroup::LEVEL_SYSTEM)
 {
 }
 
