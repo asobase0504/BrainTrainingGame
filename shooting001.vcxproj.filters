@@ -96,9 +96,6 @@
     <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\04_Timer">
       <UniqueIdentifier>{bb484ef8-2467-4bee-a767-31d85fabd4d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\05_CountDown">
-      <UniqueIdentifier>{5d0fd6c7-2a32-40d2-adf0-1cf0c220b8e4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\01_Mode\00_Game\01_BusGame">
       <UniqueIdentifier>{cc8e58d1-b105-469f-a849-2580611cad0a}</UniqueIdentifier>
     </Filter>
@@ -116,6 +113,9 @@
     </Filter>
     <Filter Include="ソース ファイル\01_Mode\00_Game\13_Same_as_shadow">
       <UniqueIdentifier>{084429c0-8ee1-41bc-9593-7196673f1241}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\05_Correction">
+      <UniqueIdentifier>{3031f105-eb75-4d25-b6f0-8b392eedd2b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -278,9 +278,6 @@
     <ClCompile Include="timer.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\04_Timer</Filter>
     </ClCompile>
-    <ClCompile Include="count_down.cpp">
-      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\05_CountDown</Filter>
-    </ClCompile>
     <ClCompile Include="application.cpp">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
     </ClCompile>
@@ -292,6 +289,12 @@
     </ClCompile>
     <ClCompile Include="minigame_same_as_shadow.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\13_Same_as_shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="count_down.cpp">
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\04_Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="correction.cpp">
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\05_Correction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -454,9 +457,6 @@
     <ClInclude Include="timer.h">
       <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\04_Timer</Filter>
     </ClInclude>
-    <ClInclude Include="count_down.h">
-      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\05_CountDown</Filter>
-    </ClInclude>
     <ClInclude Include="remember_object.h">
       <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before\00_Object</Filter>
     </ClInclude>
@@ -468,6 +468,12 @@
     </ClInclude>
     <ClInclude Include="game.h">
       <Filter>ソース ファイル\01_Mode\00_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="count_down.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\04_Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="correction.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\05_Correction</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

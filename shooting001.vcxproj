@@ -161,6 +161,7 @@
     <ClCompile Include="calendar.cpp" />
     <ClCompile Include="camera_game.cpp" />
     <ClCompile Include="click_item.cpp" />
+    <ClCompile Include="correction.cpp" />
     <ClCompile Include="count_down.cpp" />
     <ClCompile Include="debug_proc.cpp" />
     <ClCompile Include="fade.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="calendar.h" />
     <ClInclude Include="camera_game.h" />
     <ClInclude Include="click_item.h" />
+    <ClInclude Include="correction.h" />
     <ClInclude Include="count_down.h" />
     <ClInclude Include="debug_proc.h" />
     <ClInclude Include="fade.h" />
