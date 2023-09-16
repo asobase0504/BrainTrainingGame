@@ -1,5 +1,5 @@
 //==================================================
-// timer.cpp
+// score
 // Author: Buriya Kota
 //==================================================
 
@@ -7,9 +7,8 @@
 // include
 //**************************************************
 #include "application.h"
-#include "game.h"
 
-#include "timer.h"
+#include "sequence.h"
 #include "number.h"
 
 //**************************************************
@@ -19,21 +18,21 @@
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CTimer::CTimer(int nPriority) : CObject(nPriority)
+CSequence::CSequence(int nPriority) : CObject(CTaskGroup::LEVEL_3D_UI)
 {
 }
 
 //--------------------------------------------------
 // デストラクタ
 //--------------------------------------------------
-CTimer::~CTimer()
+CSequence::~CSequence()
 {
 }
 
 //--------------------------------------------------
 // 初期化
 //--------------------------------------------------
-HRESULT CTimer::Init()
+HRESULT CSequence::Init()
 {
 	return S_OK;
 }
@@ -41,18 +40,14 @@ HRESULT CTimer::Init()
 //--------------------------------------------------
 // 初期化　オーバーロード
 //--------------------------------------------------
-HRESULT CTimer::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
+HRESULT CSequence::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	m_nTime = 0;
-	m_bIsStop = false;
-	m_nFrame = 0;
-	m_nSceneFrame = 0;
-	m_nCounter = 0;
+	m_pNumber.resize(3);
 
-	for (int nCnt = 0; nCnt < NUM_TIME; nCnt++)
+	for (int nCnt = 0; nCnt < NUM_DIGIT; nCnt++)
 	{
 		m_pNumber[nCnt] = CNumber::Create(D3DXVECTOR3(size.x * nCnt + pos.x, pos.y, 0.0f), size);
-		m_pNumber[nCnt]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		m_pNumber[nCnt]->SetColor(D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f));
 		m_pNumber[nCnt]->SetTexture("TIME_NUMBER");
 	}
 
@@ -62,9 +57,9 @@ HRESULT CTimer::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 //--------------------------------------------------
 // 終了
 //--------------------------------------------------
-void CTimer::Uninit()
+void CSequence::Uninit()
 {
-	for (int nCnt = 0; nCnt < NUM_TIME; nCnt++)
+	for (int nCnt = 0; nCnt < NUM_DIGIT; nCnt++)
 	{
 		if (m_pNumber[nCnt] == nullptr)
 		{
@@ -72,6 +67,7 @@ void CTimer::Uninit()
 		}
 
 		m_pNumber[nCnt]->Release();
+		m_pNumber[nCnt] = nullptr;
 	}
 
 	CObject::Release();
@@ -80,44 +76,29 @@ void CTimer::Uninit()
 //--------------------------------------------------
 // 更新
 //--------------------------------------------------
-void CTimer::Update()
+void CSequence::Update()
 {
-	if (!m_bIsStop)
-	{
-		//フレームカウンター
-		m_nCounter++;
-
-		if (m_nCounter >= 60)
-		{
-			AddTimer(1);
-
-			m_nCounter = 0;
-		}
-	}
 }
 
 //--------------------------------------------------
 // 位置の設定と大きさの設定
 //--------------------------------------------------
-void CTimer::SetPos(D3DXVECTOR3 pos, D3DXVECTOR2 size)
+void CSequence::SetPos(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	for (int nCnt = 0; nCnt < NUM_TIME; nCnt++)
+	for (int nCnt = 0; nCnt < NUM_DIGIT; nCnt++)
 	{
 		m_pNumber[nCnt]->SetPos(D3DXVECTOR3(size.x * nCnt + pos.x, pos.y, 0.0f));
 	}
 }
 
-//--------------------------------------------------
-// タイムの設定
-//--------------------------------------------------
-void CTimer::SetTimer(int nTime)
+void CSequence::SetNumber(int inNumber)
 {
-	m_nTime = nTime;
+	m_number = inNumber;
 
 	int aPosTexU[3];		//各桁の数字を格納
 
 	{
-		int timer = m_nTime;
+		int timer = inNumber;
 		for (int i = 2; i >= 0; --i)
 		{
 			aPosTexU[i] = timer % 10;
@@ -126,7 +107,7 @@ void CTimer::SetTimer(int nTime)
 	}
 
 	// テクスチャ座標の設定
-	for (int nCnt = 0; nCnt < NUM_TIME; nCnt++)
+	for (int nCnt = 0; nCnt < NUM_DIGIT; nCnt++)
 	{
 		m_pNumber[nCnt]->AnimTexture(aPosTexU[nCnt], 10);
 	}
@@ -135,19 +116,14 @@ void CTimer::SetTimer(int nTime)
 //--------------------------------------------------
 // 生成
 //--------------------------------------------------
-CTimer *CTimer::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size)
+CSequence *CSequence::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	CTimer *pTimer;
-	pTimer = new CTimer;
+	CSequence *pTimer;
+	pTimer = new CSequence;
 
-	if (pTimer != nullptr)
-	{
-		pTimer->Init(pos, size);
-	}
-	else
-	{
-		assert(false);
-	}
+	assert(pTimer != nullptr);
+
+	pTimer->Init(pos, size);
 
 	return pTimer;
 }

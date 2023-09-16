@@ -42,7 +42,7 @@ private:
 	CObject* m_prev;	// 前のオブジェクト
 	CObject* m_next;	// 次のオブジェクト
 
-	bool m_isActivityAtPouse;	// ポーズ中も更新できるか
+	bool m_isActivityAtPause;	// ポーズ中も更新できるか
 	bool m_shouldInvisible;		// 停止中に描画も止めるべきか
 
 	bool m_isDeleted;	// 削除フラグ

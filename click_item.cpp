@@ -39,6 +39,8 @@ HRESULT CClickItem::Init()
 //--------------------------------------------------
 void CClickItem::Update()
 {
+	m_isClick = false;
+
 	CInput* input = CInput::GetKey();
 
 	if (input->Trigger(MOUSE_KEY::MOUSE_INPUT_LEFT))
@@ -49,7 +51,21 @@ void CClickItem::Update()
 			if (mousePos.y < m_pos.y + m_size.y * 0.5f && mousePos.y > m_pos.y - m_size.y * 0.5f)
 			{
 				ClickEvent();
+				m_isClick = true;
 			}
 		}
 	}
+}
+
+CClickItem * CClickItem::Create(const D3DXVECTOR3 & inPos, const D3DXVECTOR2 & inSize)
+{
+	CClickItem* item = new CClickItem;
+
+	assert(item != nullptr);
+
+	item->Init();
+	item->SetPos(inPos);
+	item->SetSize(inSize);
+
+	return item;
 }

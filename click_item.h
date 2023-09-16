@@ -37,7 +37,11 @@ public:
 
 	virtual void ClickEvent() { m_event(); }
 
+	bool IsClick() { return m_isClick; }
+
 	void SetEvent(std::function<void(void)> infunc) { m_event = infunc; }
+
+	static CClickItem* Create(const D3DXVECTOR3& inPos, const D3DXVECTOR2& inSize);
 private:
 	bool m_isClick;
 	std::function<void(void)> m_event;

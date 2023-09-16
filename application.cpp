@@ -61,7 +61,8 @@ CApplication::CApplication() :
 	renderer(nullptr),
 	input(nullptr),
 	texture(nullptr),
-	color(nullptr)
+	color(nullptr),
+	m_modeType(CMode::MODE_TYPE::TITLE)
 {
 }
 
@@ -226,6 +227,7 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 	if (mode != nullptr)
 	{
 		CTaskGroup::GetInstance()->AllRelease();
+		CTaskGroup::GetInstance()->Pause(false);
 		mode->Uninit();
 		delete mode;
 		mode = nullptr;

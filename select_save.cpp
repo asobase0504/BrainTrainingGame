@@ -11,7 +11,6 @@
 #include <assert.h>
 
 #include "application.h"
-#include "mode_guidance_item.h"
 #include "save_guidance_item.h"
 #include "utility.h"
 
@@ -35,11 +34,6 @@ CSelectSave::~CSelectSave()
 //-----------------------------------------------------------------------------
 HRESULT CSelectSave::Init()
 {
-	CModeGuidanceItem::Create(D3DXVECTOR3(350.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_MOVEOBJECT);
-	CModeGuidanceItem::Create(D3DXVECTOR3(500.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_NUMBER25);
-	CModeGuidanceItem::Create(D3DXVECTOR3(650.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_BUS);
-	CModeGuidanceItem::Create(D3DXVECTOR3(800.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE);
-
 	m_itemSaveGuidance.resize(15);
 
 	float xPos = 100.0f;

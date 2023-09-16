@@ -44,7 +44,7 @@ public:	// ƒƒ“ƒo[ŠÖ”
 	virtual ~CMode();
 
 	virtual HRESULT Init() = 0;
-	virtual void Uninit() = 0;
+	virtual void Uninit() {};
 	virtual void Update() {};
 	virtual void Draw() {};
 
