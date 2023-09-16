@@ -111,6 +111,9 @@
     <Filter Include="ソース ファイル\01_Mode\00_Game\10_Remenber_before\00_Object">
       <UniqueIdentifier>{f515c8c7-d423-400d-b19d-c3c1c88274a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\10_Remenber_before\01_system">
+      <UniqueIdentifier>{0b9808ff-1b13-4fd5-9b4a-9830f550b971}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -233,9 +236,6 @@
     <ClCompile Include="minigame_remember_before.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before</Filter>
     </ClCompile>
-    <ClCompile Include="remember_system.cpp">
-      <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before</Filter>
-    </ClCompile>
     <ClCompile Include="headcount.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\01_BusGame</Filter>
     </ClCompile>
@@ -283,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="remember_object.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before\00_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="remember_system.cpp">
+      <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before\01_system</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -406,9 +409,6 @@
     <ClInclude Include="fade.h">
       <Filter>ソース ファイル\01_Mode</Filter>
     </ClInclude>
-    <ClInclude Include="remember_system.h">
-      <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before</Filter>
-    </ClInclude>
     <ClInclude Include="minigame_remember_before.h">
       <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before</Filter>
     </ClInclude>
@@ -456,6 +456,9 @@
     </ClInclude>
     <ClInclude Include="remember_object.h">
       <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before\00_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="remember_system.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before\01_system</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
