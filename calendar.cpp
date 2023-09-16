@@ -63,7 +63,7 @@ HRESULT CCalender::Init()
 	}
 
 	int cnt = 0;
-	int size = 40.0f;
+	float size = 40.0f;
 	for (int i = week; i < 49;i++)
 	{
 		if (cnt == monthDay)
