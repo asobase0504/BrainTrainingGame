@@ -1,9 +1,9 @@
 //==================================================
-// remember_system.h
+// same_as_shadow_system.h
 // Author: Buriya Kota
 //==================================================
-#ifndef _REMMBER_SYSTEM_H_
-#define _REMMBER_SYSTEM_H_
+#ifndef _SAME_AS_SHADOW_SYSTEM_H_
+#define _SAME_AS_SHADOW_SYSTEM_H_
 
 //**************************************************
 // インクルード
@@ -19,28 +19,20 @@ class CRememberObject;
 //**************************************************
 // クラス
 //**************************************************
-class CRememberSystem : public CObject
+class CSameAsShadowSystem : public CObject
 {
 public:
-	static const int X_LINE;
-	static const int Y_LINE;
-	static const int MAX_ANSWER;
 
 public:
-	explicit CRememberSystem(int nPriority = CTaskGroup::LEVEL_2D_1);
-	~CRememberSystem();
+	explicit CSameAsShadowSystem(int nPriority = CTaskGroup::LEVEL_2D_1);
+	~CSameAsShadowSystem();
 
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
 
-	static CRememberSystem *Create();
-
-private:
-	void Touch_(float nPosX, float nPosY);
-	void DisplayRemember_();
-	void Choices_();
+	static CSameAsShadowSystem *Create();
 
 private:
 	enum TEXTURE
@@ -59,18 +51,14 @@ private:
 	};
 
 private:
-	// 覚えるもの
-	CRememberObject *m_pRememberObject;
-	// アンサー
-	std::vector<CRememberObject*> m_pAnswerObject;
+	// 影のオブジェクト
+	std::vector <CRememberObject*> m_pShadowObject;
+	// 選択肢
+	std::vector <CRememberObject*> m_pSelectObject;
+
 	// テクスチャ
 	std::string m_tex[TEXTURE_MAX];
-	// この番号を使用したかどうか
-	bool m_isUsedNumber[TEXTURE_MAX];
-	// 答え
-	int m_nAnswer;
-	// 一個前のやつ
-	int m_nBeforeNumber;
+
 };
 
-#endif	// _REMMBER_SYSTEM_H_
+#endif	// _SAME_AS_SHADOW_SYSTEM_H_
