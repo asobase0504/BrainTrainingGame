@@ -19,7 +19,7 @@
 // íËêî
 //**************************************************
 const int CRememberSystem::X_LINE = 2;
-const int CRememberSystem::Y_LINE = 1;
+const int CRememberSystem::Y_LINE = 2;
 const int CRememberSystem::MAX_ANSWER = X_LINE * Y_LINE;
 
 //--------------------------------------------------
