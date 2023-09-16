@@ -4,8 +4,8 @@
 // Author BuriyaKota
 // 
 //=========================================
-#ifndef _MINI_GAME_REMEMBER_BEFORE_H_
-#define _MINI_GAME_REMEMBER_BEFORE_H_
+#ifndef _MINI_GAME_SAME_AS_SHADOW_H_
+#define _MINI_GAME_SAME_AS_SHADOW_H_
 
 #include "mode.h"
 
@@ -19,11 +19,11 @@ class CObject2D;
 //-----------------------------------------
 // アプリケーションクラス
 //-----------------------------------------
-class CMiniGameRememberBefore : public CMode
+class CMiniGameSameAsShadow : public CMode
 {
 public:	// メンバー関数
-	CMiniGameRememberBefore();
-	~CMiniGameRememberBefore() override;
+	CMiniGameSameAsShadow();
+	~CMiniGameSameAsShadow() override;
 
 	HRESULT Init() override;
 	void Uninit() override;
@@ -34,4 +34,4 @@ private:
 
 };
 
-#endif // !_MINI_GAME_REMEMBER_BEFORE_H_
+#endif // !_MINI_GAME_SAME_AS_SHADOW_H_

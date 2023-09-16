@@ -114,6 +114,9 @@
     <Filter Include="ソース ファイル\01_Mode\00_Game\10_Remenber_before\01_system">
       <UniqueIdentifier>{0b9808ff-1b13-4fd5-9b4a-9830f550b971}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\13_Same_as_shadow">
+      <UniqueIdentifier>{084429c0-8ee1-41bc-9593-7196673f1241}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -287,6 +290,9 @@
     <ClCompile Include="remember_system.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before\01_system</Filter>
     </ClCompile>
+    <ClCompile Include="minigame_same_as_shadow.cpp">
+      <Filter>ソース ファイル\01_Mode\00_Game\13_Same_as_shadow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -459,6 +465,9 @@
     </ClInclude>
     <ClInclude Include="remember_system.h">
       <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before\01_system</Filter>
+    </ClInclude>
+    <ClInclude Include="minigame_same_as_shadow.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\13_Same_as_shadow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
