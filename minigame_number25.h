@@ -7,7 +7,7 @@
 #ifndef _MINI_GAME_NUMBER25_H_
 #define _MINI_GAME_NUMBER25_H_
 
-#include "mode.h"
+#include "game.h"
 
 //-----------------------------------------
 // 前方宣言
@@ -20,7 +20,7 @@ class CTimer;
 //-----------------------------------------
 // アプリケーションクラス
 //-----------------------------------------
-class CMiniGameNumber25 : public CMode
+class CMiniGameNumber25 : public CGame
 {
 public:
 	static const int X_LINE = 5;
@@ -33,6 +33,8 @@ public:	// メンバー関数
 
 	HRESULT Init() override;
 	void Uninit() override;
+
+	void GameStart() override;
 
 	// 更新処理
 	void Update() override;

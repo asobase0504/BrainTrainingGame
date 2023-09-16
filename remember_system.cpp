@@ -68,6 +68,8 @@ HRESULT CRememberSystem::Init()
 	m_pAnswerObject.resize(MAX_ANSWER);
 
 	m_nAnswer = IntRandom(TEXTURE_MAX - 1, 0);
+	m_changeLag = 0;
+	m_isChange = false;
 
 	// 覚えるやつ 一回だけつくる
 	m_pRememberObject = CRememberObject::Create(
@@ -75,21 +77,47 @@ HRESULT CRememberSystem::Init()
 		D3DXVECTOR2(300.0f, 200.0f), m_nAnswer);
 	m_pRememberObject->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	m_pRememberObject->SetTexture(m_tex[m_nAnswer]);
+	m_pRememberObject->SetEvent([]() {});
 
-	for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
+	CClickItem* initCluck = CClickItem::Create(D3DXVECTOR3(CApplication::CENTER_X, 400.0f, 0.0f), D3DXVECTOR2(500.0f, 250.0f));
+	initCluck->SetEvent([this, initCluck]()
 	{
-		for (int nCntX = 0; nCntX < X_LINE; nCntX++)
-		{
-			int nCntNumber = nCntY * Y_LINE + nCntX;
+		m_isChange = true;
+		initCluck->Uninit();
 
-			// 答え
-			m_pAnswerObject[nCntNumber] = CRememberObject::Create(
-				D3DXVECTOR3(400.0f + 450.0f * nCntX, 370.0f + 250.0f * nCntY, 0.0f),
-				D3DXVECTOR2(300.0f, 200.0f), nCntNumber);
-			m_pAnswerObject[nCntNumber]->SetTexture(m_tex[nCntNumber]);
-			m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+		for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
+		{
+			for (int nCntX = 0; nCntX < X_LINE; nCntX++)
+			{
+				int nCntNumber = nCntY * Y_LINE + nCntX;
+
+				// 答え
+				m_pAnswerObject[nCntNumber] = CRememberObject::Create(
+					D3DXVECTOR3(400.0f + 450.0f * nCntX, 370.0f + 250.0f * nCntY, 0.0f),
+					D3DXVECTOR2(300.0f, 200.0f), nCntNumber);
+				m_pAnswerObject[nCntNumber]->SetTexture(m_tex[nCntNumber]);
+				m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+				m_pAnswerObject[nCntNumber]->SetEvent([this, nCntNumber]()
+				{
+					if (m_isChange)
+					{
+						return;
+					}
+					m_isChange = true;
+
+					int answerMyNumber = m_pAnswerObject[nCntNumber]->GetMyNumber();
+					if (answerMyNumber == m_nBeforeNumber)
+					{
+						m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
+					}
+					else
+					{
+						m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f));
+					}
+				});
+			}
 		}
-	}
+	});
 
 	return S_OK;
 }
@@ -106,32 +134,26 @@ void CRememberSystem::Uninit()
 //--------------------------------------------------
 void CRememberSystem::Update()
 {
-	D3DXVECTOR3 mousePos = CInput::GetKey()->GetMouseCursor();
-	Touch_(mousePos.x, mousePos.y);
-
-	if (CInput::GetKey()->Trigger(DIK_RETURN))
+	if (m_isChange)
 	{
-		DisplayRemember_();
-
-		for (int i = 0; i < TEXTURE_MAX; i++)
+		m_changeLag++;
+		if (m_changeLag >= 25)
 		{
-			m_isUsedNumber[i] = false;
-		}
-	}
+			DisplayRemember_();
+			Choices_();
 
-	if (CInput::GetKey()->Trigger(MOUSE_KEY::MOUSE_INPUT_RIGHT))
-	{
-		Choices_();
+			for (int i = 0; i < TEXTURE_MAX; i++)
+			{
+				m_isUsedNumber[i] = false;
+			}
 
-		for (int i = 0; i < TEXTURE_MAX; i++)
-		{
-			m_isUsedNumber[i] = false;
-		}
-
-		for (int i = 0; i < MAX_ANSWER; i++)
-		{
-			// ポリゴンのカラー変更
-			m_pAnswerObject[i]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+			for (int i = 0; i < MAX_ANSWER; i++)
+			{
+				// ポリゴンのカラー変更
+				m_pAnswerObject[i]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+			}
+			m_isChange = false;
+			m_changeLag = 0;
 		}
 	}
 }
@@ -161,42 +183,6 @@ CRememberSystem *CRememberSystem::Create()
 	}
 
 	return pRememberSystem;
-}
-
-//--------------------------------------------------
-// タッチ
-//--------------------------------------------------
-void CRememberSystem::Touch_(float nPosX, float nPosY)
-{
-	/*int answerMyNumber = m_pAnswerObject[0]->GetMyNumber();
-	int rememberMyNumber = m_pRememberObject->GetMyNumber();
-
-	m_pAnswerObject[0]->SetEvent([this, answerMyNumber, rememberMyNumber](){
-		if (answerMyNumber == rememberMyNumber)
-		{
-			m_pAnswerObject[0]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
-		}
-	});*/
-
-	for (int nCntNumber = 0; nCntNumber < MAX_ANSWER; nCntNumber++)
-	{
-		D3DXVECTOR3 pos = m_pAnswerObject[nCntNumber]->GetPos();
-		D3DXVECTOR3 size = m_pAnswerObject[nCntNumber]->GetSize();
-
-		int answerMyNumber = m_pAnswerObject[nCntNumber]->GetMyNumber();
-
-		//	タッチ座標がポリゴンの中だったら
-		if (CInput::GetKey()->Trigger(MOUSE_INPUT_LEFT) &&
-			pos.x + size.x >= nPosX &&
-			pos.x - size.x <= nPosX &&
-			pos.y - size.y <= nPosY &&
-			pos.y + size.y >= nPosY &&
-			answerMyNumber == m_nBeforeNumber)
-		{
-			// ポリゴンのカラー変更
-			m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
-		}
-	}
 }
 
 //--------------------------------------------------

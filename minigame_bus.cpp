@@ -39,8 +39,6 @@ HRESULT CMiniGameBus::Init()
 {
 	CGame::Init();
 
-	m_count = 0;
-
 	// 背景の設定
 	{
 		CObject3D* bg = CObject3D::Create(0);
@@ -48,8 +46,31 @@ HRESULT CMiniGameBus::Init()
 		D3DXVECTOR3 pos(CApplication::GetInstance()->CENTER_X, CApplication::GetInstance()->CENTER_Y, 0.0f);	// 位置の取得
 		bg->SetTexture("BG");
 		bg->SetPos(pos);
-		bg->SetColor(D3DXCOLOR(0.25f,0.34f,0.45f,1.0f));
+		bg->SetColor(D3DXCOLOR(0.25f, 0.34f, 0.45f, 1.0f));
 	}
+
+	// 変数の初期化
+	m_count = 0;
+
+	return S_OK;
+}
+
+//-----------------------------------------------------------------------------
+// 終了
+//-----------------------------------------------------------------------------
+void CMiniGameBus::Uninit()
+{
+	if (m_camera != nullptr)
+	{
+		m_camera->Uninit();
+		delete m_camera;
+		m_camera = nullptr;
+	}
+}
+
+void CMiniGameBus::GameStart()
+{
+	CGame::GameStart();
 
 	CBus* bus = new CBus;
 	//ファイル読み込み
@@ -86,20 +107,6 @@ HRESULT CMiniGameBus::Init()
 
 	m_camera = CCameraGame::Create(bus);
 
-	return S_OK;
-}
-
-//-----------------------------------------------------------------------------
-// 終了
-//-----------------------------------------------------------------------------
-void CMiniGameBus::Uninit()
-{
-	if (m_camera != nullptr)
-	{
-		m_camera->Uninit();
-		delete m_camera;
-		m_camera = nullptr;
-	}
 }
 
 //-----------------------------------------------------------------------------
@@ -108,6 +115,12 @@ void CMiniGameBus::Uninit()
 void CMiniGameBus::Update()
 {
 	CGame::Update();
+
+	if (GetState() == COUNT_DOWN)
+	{
+		return;
+	}
+
 	m_camera->Update();
 }
 
@@ -116,5 +129,10 @@ void CMiniGameBus::Update()
 //-----------------------------------------------------------------------------
 void CMiniGameBus::Draw()
 {
+	if (GetState() == COUNT_DOWN)
+	{
+		return;
+	}
+
 	m_camera->Set();
 }

@@ -23,6 +23,7 @@ CMiniGameRememberBefore::CMiniGameRememberBefore()
 //-----------------------------------------------------------------------------
 CMiniGameRememberBefore::~CMiniGameRememberBefore()
 {
+
 }
 
 //-----------------------------------------------------------------------------
@@ -30,9 +31,19 @@ CMiniGameRememberBefore::~CMiniGameRememberBefore()
 //-----------------------------------------------------------------------------
 HRESULT CMiniGameRememberBefore::Init()
 {
-	CRememberSystem::Create();
+	CGame::Init();
 
 	return S_OK;
+}
+
+//-----------------------------------------------------------------------------
+// ÉQÅ[ÉÄäJén
+//-----------------------------------------------------------------------------
+void CMiniGameRememberBefore::GameStart()
+{
+	CGame::GameStart();
+
+	CRememberSystem::Create();
 }
 
 //-----------------------------------------------------------------------------
@@ -47,6 +58,7 @@ void CMiniGameRememberBefore::Uninit()
 //-----------------------------------------------------------------------------
 void CMiniGameRememberBefore::Update()
 {
+	CGame::Update();
 }
 
 //-----------------------------------------------------------------------------

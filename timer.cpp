@@ -59,17 +59,25 @@ void CTimer::Update()
 {
 	CSequence::Update();
 
-	if (!m_bIsStop)
+	if (m_bIsStop)
 	{
-		//フレームカウンター
-		m_nCounter++;
+		return;
+	}
 
-		if (m_nCounter >= 60)
-		{
-			AddTimer(-1);
+	//フレームカウンター
+	m_nCounter++;
 
-			m_nCounter = 0;
-		}
+	if (m_nCounter >= 60)
+	{
+		AddTimer(-1);
+
+		m_nCounter = 0;
+	}
+
+	if (GetNumber() <= 0)
+	{
+		m_bIsStop = true;
+		SetTimer(0);
 	}
 }
 

@@ -41,7 +41,6 @@ HRESULT CSelectSave::Init()
 		object->SetTexture("GREEN_BG");
 	}
 
-
 	m_itemSaveGuidance.resize(15);
 
 	float xPos = 100.0f;

@@ -38,7 +38,6 @@ public:
 	static CRememberSystem *Create();
 
 private:
-	void Touch_(float nPosX, float nPosY);
 	void DisplayRemember_();
 	void Choices_();
 
@@ -71,6 +70,9 @@ private:
 	int m_nAnswer;
 	// ˆêŒÂ‘O‚Ì‚â‚Â
 	int m_nBeforeNumber;
+
+	bool m_isChange;
+	int m_changeLag;
 };
 
 #endif	// _REMMBER_SYSTEM_H_

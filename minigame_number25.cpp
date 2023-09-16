@@ -51,6 +51,27 @@ CMiniGameNumber25::~CMiniGameNumber25()
 //-----------------------------------------------------------------------------
 HRESULT CMiniGameNumber25::Init()
 {
+	CGame::Init();
+	return S_OK;
+}
+
+//-----------------------------------------------------------------------------
+// 終了
+//-----------------------------------------------------------------------------
+void CMiniGameNumber25::Uninit()
+{
+	m_pTimer = nullptr;
+
+	for (int i = 0; i < TOTAL_NUM; i++)
+	{
+		m_pObject2D[i] = nullptr;
+	}
+}
+
+void CMiniGameNumber25::GameStart()
+{
+	CGame::GameStart();
+
 	for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
 	{
 		for (int nCntX = 0; nCntX < X_LINE; nCntX++)
@@ -68,21 +89,6 @@ HRESULT CMiniGameNumber25::Init()
 	m_pTimer->SetTimer(0);
 
 	Shuffle();
-
-	return S_OK;
-}
-
-//-----------------------------------------------------------------------------
-// 終了
-//-----------------------------------------------------------------------------
-void CMiniGameNumber25::Uninit()
-{
-	m_pTimer = nullptr;
-
-	for (int i = 0; i < TOTAL_NUM; i++)
-	{
-		m_pObject2D[i] = nullptr;
-	}
 }
 
 //-----------------------------------------------------------------------------
@@ -90,6 +96,13 @@ void CMiniGameNumber25::Uninit()
 //-----------------------------------------------------------------------------
 void CMiniGameNumber25::Update()
 {
+	CGame::Update();
+
+	if (GetState() == COUNT_DOWN)
+	{
+		return;
+	}
+
 	// インプット
 	CInput *input = CInput::GetKey();
 
