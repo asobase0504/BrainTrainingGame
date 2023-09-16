@@ -61,7 +61,6 @@ CApplication::CApplication() :
 	renderer(nullptr),
 	input(nullptr),
 	texture(nullptr),
-	color(nullptr),
 	m_modeType(CMode::MODE_TYPE::TITLE)
 {
 }
@@ -75,7 +74,6 @@ CApplication::~CApplication()
 	assert(renderer == nullptr);
 	assert(input == nullptr);
 	assert(texture == nullptr);
-	assert(color == nullptr);
 }
 
 //-----------------------------------------------------------------------------
@@ -100,13 +98,6 @@ HRESULT CApplication::Init(HWND hWnd, HINSTANCE hInstance)
 	// テクスチャ
 	texture = new CTexture;
 	texture->LoadAll();
-
-	// 色管理クラス
-	color = new CThemeColor;
-	if (FAILED(color->Init()))
-	{
-		return E_FAIL;
-	}
 
 	// サウンドクラス
 	sound = new CSound;
@@ -154,13 +145,6 @@ void CApplication::Uninit()
 		texture = nullptr;
 	}
 
-	// 色管理の解放
-	if (color != nullptr)
-	{
-		delete color;
-		color = nullptr;
-	}
-
 	// 入力処理の解放
 	if (input != nullptr)
 	{
@@ -202,19 +186,6 @@ void CApplication::Update()
 void CApplication::Draw()
 {
 	renderer->Draw();
-}
-
-//-----------------------------------------------------------------------------
-// 色の取得
-//-----------------------------------------------------------------------------
-D3DXCOLOR CApplication::GetColor(int inKey)
-{
-	return color->GetColor(inKey);
-}
-
-int CApplication::GetColorSize()
-{
-	return color->GetSize();
 }
 
 //-----------------------------------------------------------------------------
@@ -305,12 +276,4 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 	{
 		assert(false);
 	}
-}
-
-//-----------------------------------------------------------------------------
-// テーマカラーの設定
-//-----------------------------------------------------------------------------
-void CApplication::SetThemeColor(int idx)
-{
-	color->SetTheme(idx);	// テーマ色の設定
 }

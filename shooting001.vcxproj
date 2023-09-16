@@ -189,17 +189,10 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="headcount.cpp" />
-    <ClCompile Include="menu.cpp" />
-    <ClCompile Include="menu_color_select.cpp" />
-    <ClCompile Include="menu_manager.cpp" />
-    <ClCompile Include="menu_number_Select.cpp" />
-    <ClCompile Include="menu_stage_select.cpp" />
-    <ClCompile Include="menu_team_select.cpp" />
     <ClCompile Include="object3d.cpp" />
     <ClCompile Include="objectList.cpp" />
     <ClCompile Include="passenger.cpp" />
     <ClCompile Include="pause.cpp" />
-    <ClCompile Include="menu_item.cpp" />
     <ClCompile Include="precompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">precompile.h</PrecompiledHeaderFile>
@@ -225,7 +218,6 @@
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="title.cpp" />
-    <ClCompile Include="ui_countdown.cpp" />
     <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -263,17 +255,10 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="headcount.h" />
-    <ClInclude Include="menu.h" />
-    <ClInclude Include="menu_color_select.h" />
-    <ClInclude Include="menu_manager.h" />
-    <ClInclude Include="menu_number_Select.h" />
-    <ClInclude Include="menu_stage_select.h" />
-    <ClInclude Include="menu_team_select.h" />
     <ClInclude Include="object3d.h" />
     <ClInclude Include="objectList.h" />
     <ClInclude Include="passenger.h" />
     <ClInclude Include="pause.h" />
-    <ClInclude Include="menu_item.h" />
     <ClInclude Include="precompile.h" />
     <ClInclude Include="sound.h" />
     <ClInclude Include="station_goal.h" />
@@ -291,7 +276,6 @@
     <ClInclude Include="texture.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="title.h" />
-    <ClInclude Include="ui_countdown.h" />
     <ClInclude Include="utility.h" />
   </ItemGroup>
   <ItemGroup>

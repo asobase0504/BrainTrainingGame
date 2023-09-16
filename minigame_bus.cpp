@@ -49,7 +49,7 @@ HRESULT CMiniGameBus::Init()
 		D3DXVECTOR3 pos(CApplication::GetInstance()->CENTER_X, CApplication::GetInstance()->CENTER_Y, 0.0f);	// ˆÊ’u‚ÌŽæ“¾
 		bg->SetTexture("BG");
 		bg->SetPos(pos);
-		bg->SetColor(CApplication::GetInstance()->GetColor(2));
+		bg->SetColor(D3DXCOLOR(0.25f,0.34f,0.45f,1.0f));
 	}
 
 	CBus* bus = new CBus;
