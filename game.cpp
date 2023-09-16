@@ -36,7 +36,17 @@ CGame::~CGame()
 //-----------------------------------------------------------------------------
 HRESULT CGame::Init()
 {
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
+		object->SetSize(D3DXVECTOR2(CApplication::CENTER_X * 2.0f, CApplication::CENTER_Y * 2.0f));
+		object->SetTexture("GREEN_BG");
+	}
+
 	m_countDown = CCountDown::Create();
+
+	m_isResult = false;
+
 	return S_OK;
 }
 
@@ -79,8 +89,9 @@ void CGame::Update()
 		CPause::Create();
 	}
 
-	if (m_timer->GetTimer() <= 0 && !m_timer->isStop())
+	if (m_timer->GetTimer() <= 0 && !m_isResult)
 	{
+		m_isResult = true;
 		m_timer->StopTimer(true);
 		CResult::Create();
 	}

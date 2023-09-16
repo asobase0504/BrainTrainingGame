@@ -30,7 +30,7 @@ protected:
 	};
 public:	// メンバー関数
 	CGame();
-	~CGame() override;
+	virtual ~CGame() override;
 
 	virtual HRESULT Init() override;
 	virtual void GameStart();
@@ -49,6 +49,8 @@ private: // 動的メンバー変数
 	CCountDown* m_countDown;	// カウントダウン
 
 	CTimer* m_timer;
+
+	bool m_isResult;
 };
 
 #endif // !_GAME_H_

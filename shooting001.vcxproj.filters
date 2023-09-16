@@ -307,9 +307,6 @@
     <ClInclude Include="mode.h">
       <Filter>ソース ファイル\01_Mode</Filter>
     </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>ソース ファイル\01_Mode\00_Game</Filter>
-    </ClInclude>
     <ClInclude Include="texture.h">
       <Filter>ソース ファイル\00_Main\01_OutSide\00_Texture</Filter>
     </ClInclude>
@@ -468,6 +465,9 @@
     </ClInclude>
     <ClInclude Include="minigame_same_as_shadow.h">
       <Filter>ソース ファイル\01_Mode\00_Game\13_Same_as_shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>ソース ファイル\01_Mode\00_Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
