@@ -2,6 +2,7 @@
 #include "input.h"
 #include "application.h"
 #include "fade.h"
+#include <locale>
 
 CModeGuidanceItem::CModeGuidanceItem()
 {

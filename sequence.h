@@ -24,7 +24,7 @@ private:
 	static const int NUM_DIGIT = 3;
 public:
 public:
-	explicit CSequence(int nPriority = CTaskGroup::LEVEL_2D_UI);
+	explicit CSequence(int nPriority = CTaskGroup::LEVEL_SYSTEM);
 	~CSequence() override;
 
 	HRESULT Init() override;

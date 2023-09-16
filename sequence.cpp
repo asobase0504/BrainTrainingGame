@@ -66,7 +66,7 @@ void CSequence::Uninit()
 			continue;
 		}
 
-		m_pNumber[nCnt]->Uninit();
+		m_pNumber[nCnt]->Release();
 		m_pNumber[nCnt] = nullptr;
 	}
 

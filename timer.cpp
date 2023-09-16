@@ -71,7 +71,7 @@ void CTimer::Uninit()
 			continue;
 		}
 
-		m_pNumber[nCnt]->Uninit();
+		m_pNumber[nCnt]->Release();
 	}
 
 	CObject::Release();
