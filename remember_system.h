@@ -64,8 +64,12 @@ private:
 	CRememberObject *m_pAnswerObject[MAX_ANSWER];
 	// テクスチャ
 	std::string m_tex[TEXTURE_MAX];
+	// この番号を使用したかどうか
+	bool m_isUsedNumber[TEXTURE_MAX];
 	// 答え
 	int m_nAnswer;
+	// 一個前のやつ
+	int m_nBeforeNumber;
 };
 
 #endif	// _REMMBER_SYSTEM_H_
