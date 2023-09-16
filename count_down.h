@@ -22,7 +22,7 @@ public:
 	HRESULT Init() override;
 	void Update() override;
 
-	CCountDown* 
+	static CCountDown* Create();
 private:
 };
 

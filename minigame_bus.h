@@ -26,7 +26,7 @@ public:	// メンバー関数
 	HRESULT Init() override;
 	void Uninit() override;
 
-	void GameStart() {}
+	void GameStart();
 
 	// 更新処理
 	void Update() override;

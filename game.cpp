@@ -11,6 +11,8 @@
 #include "application.h"
 #include "input.h"
 
+#include "count_down.h"
+
 #include "pause.h"
 #include "timer.h"
 #include "result.h"
@@ -18,7 +20,7 @@
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CGame::CGame()
+CGame::CGame() : m_state(COUNT_DOWN)
 {
 }
 
@@ -34,9 +36,17 @@ CGame::~CGame()
 //-----------------------------------------------------------------------------
 HRESULT CGame::Init()
 {
-	m_timer = CTimer::Create(D3DXVECTOR3(100.0f,100.0f,0.0f),D3DXVECTOR2(30.0f,100.0f));
-	m_timer->SetTimer(60);
+	m_countDown = CCountDown::Create();
 	return S_OK;
+}
+
+//-----------------------------------------------------------------------------
+// ゲームの開始
+//-----------------------------------------------------------------------------
+void CGame::GameStart()
+{
+	m_timer = CTimer::Create(D3DXVECTOR3(100.0f, 100.0f, 0.0f), D3DXVECTOR2(30.0f, 100.0f));
+	m_timer->SetTimer(60);
 }
 
 //-----------------------------------------------------------------------------
@@ -52,7 +62,17 @@ void CGame::Uninit()
 //-----------------------------------------------------------------------------
 void CGame::Update()
 {
-	CMode::Update();
+	if (m_countDown != nullptr)
+	{
+		if (m_countDown->GetTimer() <= 0)
+		{
+			m_countDown->Release();
+			m_countDown = nullptr;
+			m_state = GAME_NOW;
+			GameStart();
+		}
+		return;
+	}
 
 	if (CInput::GetKey()->Trigger(DIK_P))
 	{

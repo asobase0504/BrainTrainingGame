@@ -15,6 +15,7 @@
 // 前方宣言
 //-----------------------------------------
 class CTimer;
+class CCountDown;
 
 //-----------------------------------------
 // アプリケーションクラス
@@ -32,17 +33,21 @@ public:	// メンバー関数
 	~CGame() override;
 
 	virtual HRESULT Init() override;
-	virtual void GameStart() = 0;
+	virtual void GameStart();
 	virtual void Uninit() override;
 
 	// 更新処理
 	virtual void Update() override;
 
-private: // 動的プライベート関数
+protected:
+
+	EState GetState() { return m_state; }
 
 private: // 動的メンバー変数
 	int m_score;		// 得点
 	EState m_state;		// 状態
+	CCountDown* m_countDown;	// カウントダウン
+
 	CTimer* m_timer;
 };
 
