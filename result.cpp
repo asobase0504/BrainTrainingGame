@@ -34,12 +34,14 @@ HRESULT CResult::Init()
 
 	SetSize(D3DXVECTOR2(CApplication::CENTER_X, (float)CApplication::SCREEN_HEIGHT));
 	SetPos(D3DXVECTOR3(CApplication::CENTER_X + CApplication::CENTER_X * 0.5f, CApplication::CENTER_Y, 0.0f));
+	SetTexture("PAGE_BG");
 
 	m_nextClickItem = new CClickItem;
 	m_nextClickItem->Init();
 	m_nextClickItem->SetPos(D3DXVECTOR3(CApplication::CENTER_X + CApplication::CENTER_X * 0.5f, CApplication::CENTER_Y + 200.0f, 0.0f));
 	m_nextClickItem->SetSize(D3DXVECTOR2(300.0f, 100.0f));
 	m_nextClickItem->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
+	m_nextClickItem->SetTexture("TEXT_NEXT");
 	m_nextClickItem->SetEvent([this]()
 	{
 		m_nextClickItem->Uninit();

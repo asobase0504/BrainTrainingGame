@@ -16,6 +16,8 @@
 // Object系統
 #include "object2d.h"
 
+#include "result.h"
+
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
@@ -35,10 +37,12 @@ CTitle::~CTitle()
 //-----------------------------------------------------------------------------
 HRESULT CTitle::Init()
 {
-	CObject2D* object = CObject2D::Create();
-	object->SetPos(D3DXVECTOR3(CApplication::CENTER_X,CApplication::CENTER_Y,0.0f));
-	object->SetSize(D3DXVECTOR2(1066.0f, 318.0f));
-	object->SetTexture("TITLE_LOGO");
+	{
+		CObject2D* object = CObject2D::Create();
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
+		object->SetSize(D3DXVECTOR2(1066.0f, 318.0f));
+		object->SetTexture("TITLE_LOGO");
+	}
 
 	return S_OK;
 }
