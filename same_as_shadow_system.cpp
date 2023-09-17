@@ -15,7 +15,7 @@
 //**************************************************
 // íËêî
 //**************************************************
-const int CSameAsShadowSystem::MAX_SHADOW = 1;
+const int CSameAsShadowSystem::MAX_SHADOW = 3;
 const int CSameAsShadowSystem::MAX_CHOICES = 5;
 
 //--------------------------------------------------
