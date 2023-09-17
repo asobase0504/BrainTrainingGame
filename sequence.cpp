@@ -92,6 +92,14 @@ void CSequence::SetPos(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 	}
 }
 
+void CSequence::SetColor(const D3DXCOLOR & inColor)
+{
+	for (int nCnt = 0; nCnt < m_digit; nCnt++)
+	{
+		m_pNumber[nCnt]->SetColor(inColor);
+	}
+}
+
 void CSequence::SetNumber(int inNumber)
 {
 	m_number = inNumber;

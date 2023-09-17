@@ -35,6 +35,8 @@ public:
 
 	void SetPos(D3DXVECTOR3 pos, D3DXVECTOR2 size);
 
+	void SetColor(const D3DXCOLOR& inColor);
+
 	void SetNumber(int inNumber);
 	int GetNumber() { return m_number; }
 

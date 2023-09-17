@@ -57,6 +57,7 @@
 		[ "4PL", "data\/TEXTURE\/4PL.png" ],
 		[ "PAGE_BG", "data\/TEXTURE\/p0096.jpg" ],
 		[ "GREEN_BG", "data\/TEXTURE\/BG\/bg_green.jpg" ],
+		[ "BLOCK_BG", "data\/TEXTURE\/BG\/blockBG.png" ],
 		[ "TEXT_READY", "data\/TEXTURE\/TEXT\/Ready1.png" ],
 		[ "TEXT_GO", "data\/TEXTURE\/TEXT\/Go1.png" ],
 		[ "TEXT_START", "data\/TEXTURE\/TEXT\/START.png" ],

@@ -43,6 +43,13 @@ HRESULT CGame::Init()
 		object->SetTexture("GREEN_BG");
 	}
 
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
+		object->SetSize(D3DXVECTOR2(CApplication::CENTER_Y * 1.5f, CApplication::CENTER_Y * 1.5f));
+		object->SetTexture("BLOCK_BG");
+	}
+
 	m_countDown = CCountDown::Create();
 
 	m_isResult = false;

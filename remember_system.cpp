@@ -85,39 +85,7 @@ HRESULT CRememberSystem::Init()
 	{
 		m_isChange = true;
 		initCluck->Uninit();
-
-		for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
-		{
-			for (int nCntX = 0; nCntX < X_LINE; nCntX++)
-			{
-				int nCntNumber = nCntY * Y_LINE + nCntX;
-
-				// ìöÇ¶
-				m_pAnswerObject[nCntNumber] = CRememberObject::Create(
-					D3DXVECTOR3(400.0f + 450.0f * nCntX, 370.0f + 250.0f * nCntY, 0.0f),
-					D3DXVECTOR2(300.0f, 200.0f), nCntNumber);
-				m_pAnswerObject[nCntNumber]->SetTexture(m_tex[nCntNumber]);
-				m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
-				m_pAnswerObject[nCntNumber]->SetEvent([this, nCntNumber]()
-				{
-					if (m_isChange)
-					{
-						return;
-					}
-					m_isChange = true;
-
-					int answerMyNumber = m_pAnswerObject[nCntNumber]->GetMyNumber();
-					if (answerMyNumber == m_nBeforeNumber)
-					{
-						CCorrection::Create(true);
-					}
-					else
-					{
-						CCorrection::Create(false);
-					}
-				});
-			}
-		}
+		InitCreateAnswer_();
 	});
 
 	return S_OK;
@@ -184,6 +152,53 @@ CRememberSystem *CRememberSystem::Create()
 	}
 
 	return pRememberSystem;
+}
+
+//--------------------------------------------------
+// âÒìöóìÇÃê∂ê¨
+//--------------------------------------------------
+void CRememberSystem::InitCreateAnswer_()
+{
+	for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
+	{
+		for (int nCntX = 0; nCntX < X_LINE; nCntX++)
+		{
+			int nCntNumber = nCntY * Y_LINE + nCntX;
+
+			// ìöÇ¶
+			D3DXVECTOR2 size(150.0f, 100.0f);
+
+			float xInterval = size.x + 15.0f;
+			float yInterval = size.y + 10.0f;
+
+			D3DXVECTOR3 pos;
+			pos.x = CApplication::CENTER_X - ((float)(X_LINE - 1) * 0.5f) * xInterval + nCntX * xInterval;
+			pos.y = CApplication::CENTER_Y * 1.15f - ((float)(Y_LINE - 1) * 0.5f) * yInterval + nCntY * yInterval;
+			pos.z = 0.0f;
+
+			m_pAnswerObject[nCntNumber] = CRememberObject::Create(pos, size, nCntNumber);
+			m_pAnswerObject[nCntNumber]->SetTexture(m_tex[nCntNumber]);
+			m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+			m_pAnswerObject[nCntNumber]->SetEvent([this, nCntNumber]()
+			{
+				if (m_isChange)
+				{
+					return;
+				}
+				m_isChange = true;
+
+				int answerMyNumber = m_pAnswerObject[nCntNumber]->GetMyNumber();
+				if (answerMyNumber == m_nBeforeNumber)
+				{
+					CCorrection::Create(true);
+				}
+				else
+				{
+					CCorrection::Create(false);
+				}
+			});
+		}
+	}
 }
 
 //--------------------------------------------------

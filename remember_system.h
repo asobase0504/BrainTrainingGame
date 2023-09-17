@@ -38,6 +38,7 @@ public:
 	static CRememberSystem *Create();
 
 private:
+	void InitCreateAnswer_();
 	void DisplayRemember_();
 	void Choices_();
 
