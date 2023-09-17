@@ -61,6 +61,7 @@ public:
 
 	// 位置
 	void SetPos(const D3DXVECTOR3& inPos) override;
+	void AddPos(const D3DXVECTOR3& move) { SetPos(m_pos + move); }
 
 	void SetRot(const float inRot);
 	void AddRot(const float inRot) { SetRot(inRot + m_rotY); }
@@ -68,6 +69,10 @@ public:
 	// 多きさ
 	void SetSize(const D3DXVECTOR2& inSize);
 	const D3DXVECTOR2 GetSize() { return m_size; }
+
+	// 動き
+	void SetMove(const D3DXVECTOR3& inMove);
+	const D3DXVECTOR3 GetMove() { return m_move; }
 
 	// アニメーション
 	void SetTexture(std::string inTex) { m_texture = inTex; }	// テクスチャの設定
@@ -93,7 +98,8 @@ private:
 
 protected:
 	D3DXVECTOR2 m_size;	// 大きさ
-	D3DXCOLOR m_col;		// 色
+	D3DXVECTOR3 m_move;	// 動き
+	D3DXCOLOR m_col;	// 色
 };
 
 #endif // !_OBJECT2D_H_

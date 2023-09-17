@@ -39,6 +39,8 @@ HRESULT CClickItem::Init()
 //--------------------------------------------------
 void CClickItem::Update()
 {
+	CObject2D::Update();
+
 	m_isClick = false;
 
 	CInput* input = CInput::GetKey();

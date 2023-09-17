@@ -305,6 +305,9 @@
     <ClCompile Include="application.cpp">
       <Filter>ソース ファイル\00_Main</Filter>
     </ClCompile>
+    <ClCompile Include="reflection_object.cpp">
+      <Filter>ソース ファイル\01_Mode\00_Game\13_Same_as_shadow\00_Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -486,6 +489,9 @@
     </ClInclude>
     <ClInclude Include="application.h">
       <Filter>ソース ファイル\00_Main</Filter>
+    </ClInclude>
+    <ClInclude Include="reflection_object.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\13_Same_as_shadow\00_Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
