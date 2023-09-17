@@ -12,6 +12,7 @@
 #include "input.h"
 
 #include "count_down.h"
+#include "click_item.h"
 
 #include "pause.h"
 #include "timer.h"
@@ -65,6 +66,14 @@ void CGame::GameStart()
 {
 	m_timer = CTimer::Create(D3DXVECTOR3(100.0f, 100.0f, 0.0f), D3DXVECTOR2(30.0f, 100.0f));
 	m_timer->SetTimer(10);
+
+	{
+		CClickItem* pauseItem = CClickItem::Create(D3DXVECTOR3((float)CApplication::SCREEN_WIDTH - 140.0f, 140.0f, 0.0f),D3DXVECTOR2(100.0f,100.0f));
+		pauseItem->SetEvent([]()
+		{
+			CPause::Create();
+		});
+	}
 }
 
 //-----------------------------------------------------------------------------
