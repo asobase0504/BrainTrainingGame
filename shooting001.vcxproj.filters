@@ -284,9 +284,6 @@
     <ClCompile Include="timer.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\04_Timer</Filter>
     </ClCompile>
-    <ClCompile Include="application.cpp">
-      <Filter>ソース ファイル\00_Main\00_InSide</Filter>
-    </ClCompile>
     <ClCompile Include="remember_object.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\10_Remenber_before\00_Object</Filter>
     </ClCompile>
@@ -304,6 +301,9 @@
     </ClCompile>
     <ClCompile Include="correction.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\05_Correction</Filter>
+    </ClCompile>
+    <ClCompile Include="application.cpp">
+      <Filter>ソース ファイル\00_Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -330,9 +330,6 @@
     </ClInclude>
     <ClInclude Include="sound.h">
       <Filter>ソース ファイル\00_Main\01_OutSide</Filter>
-    </ClInclude>
-    <ClInclude Include="application.h">
-      <Filter>ソース ファイル\00_Main\00_InSide</Filter>
     </ClInclude>
     <ClInclude Include="collision.h">
       <Filter>ソース ファイル\00_Main\00_InSide</Filter>
@@ -486,6 +483,9 @@
     </ClInclude>
     <ClInclude Include="correction.h">
       <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\05_Correction</Filter>
+    </ClInclude>
+    <ClInclude Include="application.h">
+      <Filter>ソース ファイル\00_Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@
 #include "pause.h"
 #include "timer.h"
 #include "result.h"
+#include "fade.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -63,7 +64,7 @@ HRESULT CGame::Init()
 void CGame::GameStart()
 {
 	m_timer = CTimer::Create(D3DXVECTOR3(100.0f, 100.0f, 0.0f), D3DXVECTOR2(30.0f, 100.0f));
-	m_timer->SetTimer(60);
+	m_timer->SetTimer(10);
 }
 
 //-----------------------------------------------------------------------------
@@ -100,6 +101,7 @@ void CGame::Update()
 	{
 		m_isResult = true;
 		m_timer->StopTimer(true);
-		CResult::Create();
+		CResult::SetPlayMode(CApplication::GetInstance()->GetModeType());
+		CFade::GetInstance()->NextMode(CMode::MODE_TYPE::RESULT);
 	}
 }
