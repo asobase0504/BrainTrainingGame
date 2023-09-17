@@ -1,7 +1,7 @@
 #include "correction.h"
 #include "application.h"
 
-CCorrection::CCorrection()
+CCorrection::CCorrection() : CObject2D(CTaskGroup::EPriority::LEVEL_2D_UI)
 {
 }
 
@@ -14,7 +14,7 @@ HRESULT CCorrection::Init()
 	CObject2D::Init();
 	SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y,0.0f));
 	SetSize(D3DXVECTOR2(300.0f,300.0f));
-	m_releaseTime = 10;
+	m_releaseTime = 20;
 	return E_NOTIMPL;
 }
 
@@ -44,10 +44,10 @@ void CCorrection::SetCorrect(bool isCorrect)
 {
 	if (isCorrect)
 	{
-		SetTexture("TEST");
+		SetTexture("TRUE");
 	}
 	else
 	{
-		SetTexture("TEST");
+		SetTexture("FALSE");
 	}
 }

@@ -27,6 +27,8 @@
 		[ "ANIMAL_25", "data\/TEXTURE\/animal\/sheep.png" ],
 		[ "ANIMAL_26", "data\/TEXTURE\/animal\/squirrel.png" ],
 		[ "ANIMAL_27", "data\/TEXTURE\/animal\/tiger.png" ],
+		[ "TRUE", "data\/TEXTURE\/true1.png" ],
+		[ "FALSE", "data\/TEXTURE\/false1.png" ],
 		[ "TITLE_LOGO", "data\/TEXTURE\/TITLE\/logo00.png" ],
 		[ "WINTER", "data\/TEXTURE\/REMEMBER_TEXTURE\/winter.jpg" ],
 		[ "SUN_FLOWER", "data\/TEXTURE\/REMEMBER_TEXTURE\/sun_flower.jpg" ],

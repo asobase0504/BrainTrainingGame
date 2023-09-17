@@ -14,6 +14,7 @@
 #include "object2d.h"
 
 #include "remember_object.h"
+#include "correction.h"
 
 //**************************************************
 // ’è”
@@ -108,11 +109,11 @@ HRESULT CRememberSystem::Init()
 					int answerMyNumber = m_pAnswerObject[nCntNumber]->GetMyNumber();
 					if (answerMyNumber == m_nBeforeNumber)
 					{
-						m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
+						CCorrection::Create(true);
 					}
 					else
 					{
-						m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f));
+						CCorrection::Create(false);
 					}
 				});
 			}
