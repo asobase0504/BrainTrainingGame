@@ -23,6 +23,8 @@ public:	// ƒƒ“ƒo[ŠÖ”
 	CMiniGameSameAsShadow();
 	~CMiniGameSameAsShadow() override;
 
+	void GameStart() override;
+
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;

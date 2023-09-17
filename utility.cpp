@@ -199,3 +199,21 @@ int Digit(int number)
 {
 	return (int)log10f((float)number) + 1;
 }
+
+//---------------------------------------------------------------------------
+// 反射ベクトル（front : 進行ベクトル  normal : 衝突点での法線ベクトル）
+//---------------------------------------------------------------------------
+D3DXVECTOR3 CalcReflectVector(const D3DXVECTOR3 &front, const D3DXVECTOR3 &normal)
+{
+	// 保存用の箱
+	D3DXVECTOR3 nor;
+	D3DXVec3Normalize(&nor, &normal);
+
+	// 反射ベクトルの計算
+	D3DXVECTOR3 reflectVector = (front - 2.0f * D3DXVec3Dot(&front, &nor) * nor);
+
+	// 反射ベクトルをノーマライズ
+	D3DXVec3Normalize(&reflectVector, &reflectVector);
+
+	return reflectVector;
+}

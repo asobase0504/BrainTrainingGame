@@ -27,6 +27,7 @@
 #include "minigame_moveobject.h"
 #include "minigame_remember_before.h"
 #include "minigame_comeout.h"
+#include "minigame_same_as_shadow.h"
 
 using namespace std;
 
@@ -251,7 +252,7 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 		mode = new CMiniGameComeOut;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_SHADOW:
-//		mode = new CTitle;
+		mode = new CMiniGameSameAsShadow;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_ADD:
 //		mode = new CTitle;

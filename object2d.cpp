@@ -20,7 +20,8 @@ CObject2D::CObject2D(int inPriority) :
 	m_rotY(0.0f),
 	m_fLength(0.0f),
 	m_fAngle(0.0f),
-	m_anchor(CENTER)
+	m_anchor(CENTER),
+	m_move(D3DXVECTOR3(0.0f, 0.0f, 0.0f))
 {
 }
 
@@ -112,6 +113,7 @@ void CObject2D::Uninit()
 //=============================================================================
 void CObject2D::Update()
 {
+	AddPos(m_move);
 }
 
 //=============================================================================
@@ -165,6 +167,14 @@ void CObject2D::SetSize(const D3DXVECTOR2 & inSize)
 	m_fAngle = atan2f(m_size.x, m_size.y);
 
 	SetPos(m_pos);
+}
+
+//=============================================================================
+// ìÆÇ´ÇÃê›íË
+//=============================================================================
+void CObject2D::SetMove(const D3DXVECTOR3 & inMove)
+{
+	m_move = inMove;
 }
 
 //=============================================================================

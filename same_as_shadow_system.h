@@ -14,7 +14,7 @@
 // 前方前言　実態はNG　ポインタだけならOK
 //**************************************************
 class CObject2D;
-class CRememberObject;
+class CReflectionObject;
 
 //**************************************************
 // クラス
@@ -22,6 +22,8 @@ class CRememberObject;
 class CSameAsShadowSystem : public CObject
 {
 public:
+	static const int MAX_SHADOW;
+	static const int MAX_CHOICES;
 
 public:
 	explicit CSameAsShadowSystem(int nPriority = CTaskGroup::LEVEL_2D_1);
@@ -37,28 +39,45 @@ public:
 private:
 	enum TEXTURE
 	{// 使用しているテクスチャ
-		TEXTURE_WINTER = 0,
-		TEXTURE_SUN_FLOWER,
-		TEXTURE_MOUNTAIN,
-		TEXTURE_GORYOKAKU,
-		TEXTURE_GAME,
-		TEXTURE_FLOWER_GARD,
-		TEXTURE_DUCK,
-		TEXTURE_DOG,
-		TEXTURE_CLOUD,
-		TEXTURE_CASTLE,
+		TEXTURE_ANIMAL1 = 0,
+		TEXTURE_ANIMAL2,
+		TEXTURE_ANIMAL3,
+		TEXTURE_ANIMAL4,
+		TEXTURE_ANIMAL5,
+		TEXTURE_ANIMAL6,
+		TEXTURE_ANIMAL7,
+		TEXTURE_ANIMAL8,
+		TEXTURE_ANIMAL9,
+		TEXTURE_ANIMAL10,
+		TEXTURE_ANIMAL11,
+		TEXTURE_ANIMAL12,
+		TEXTURE_ANIMAL13,
+		TEXTURE_ANIMAL14,
+		TEXTURE_ANIMAL15,
+		TEXTURE_ANIMAL16,
+		TEXTURE_ANIMAL17,
+		TEXTURE_ANIMAL18,
+		TEXTURE_ANIMAL19,
+		TEXTURE_ANIMAL20,
+		TEXTURE_ANIMAL21,
+		TEXTURE_ANIMAL22,
+		TEXTURE_ANIMAL23,
+		TEXTURE_ANIMAL24,
+		TEXTURE_ANIMAL25,
+		TEXTURE_ANIMAL26,
+		TEXTURE_ANIMAL27,
 		TEXTURE_MAX
 	};
 
 private:
 	// 影のオブジェクト
-	std::vector <CRememberObject*> m_pShadowObject;
+	std::vector <CReflectionObject*> m_pShadowObject;
 	// 選択肢
-	std::vector <CRememberObject*> m_pSelectObject;
-
+	std::vector <CReflectionObject*> m_pSelectObject;
 	// テクスチャ
 	std::string m_tex[TEXTURE_MAX];
-
+	// この番号を使用したかどうか
+	bool m_isUsedNumber[TEXTURE_MAX];
 };
 
 #endif	// _SAME_AS_SHADOW_SYSTEM_H_
