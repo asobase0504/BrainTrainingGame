@@ -14,7 +14,7 @@
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CResult::CResult() : CObject2D(CTaskGroup::LEVEL_2D_UI)
+CResult::CResult()
 {
 }
 
@@ -30,18 +30,18 @@ CResult::~CResult()
 //--------------------------------------------------
 HRESULT CResult::Init()
 {
-	CObject2D::Init();
-
-	SetSize(D3DXVECTOR2(CApplication::CENTER_X, (float)CApplication::SCREEN_HEIGHT));
-	SetPos(D3DXVECTOR3(CApplication::CENTER_X + CApplication::CENTER_X * 0.5f, CApplication::CENTER_Y, 0.0f));
-	SetTexture("PAGE_BG");
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
+		object->SetSize(D3DXVECTOR2(CApplication::CENTER_X * 2.0f, CApplication::CENTER_Y * 2.0f));
+		object->SetTexture("GREEN_BG");
+	}
 
 	m_nextClickItem = new CClickItem;
 	m_nextClickItem->Init();
 	m_nextClickItem->SetPos(D3DXVECTOR3(CApplication::CENTER_X + CApplication::CENTER_X * 0.5f, CApplication::CENTER_Y + 200.0f, 0.0f));
 	m_nextClickItem->SetSize(D3DXVECTOR2(300.0f, 100.0f));
-	m_nextClickItem->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
-	m_nextClickItem->SetTexture("TEXT_NEXT");
+	m_nextClickItem->SetColor(D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
 	m_nextClickItem->SetEvent([this]()
 	{
 		m_nextClickItem->Uninit();
@@ -53,7 +53,7 @@ HRESULT CResult::Init()
 		m_retryClickItem->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
 		m_retryClickItem->SetEvent([]()
 		{
-			CFade::GetInstance()->NextMode(CApplication::GetInstance()->GetModeType());
+			CFade::GetInstance()->NextMode(m_playMode);
 		});
 
 		m_backClickItem = new CClickItem;

@@ -16,6 +16,7 @@
 #include "pause.h"
 #include "timer.h"
 #include "result.h"
+#include "fade.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -43,6 +44,13 @@ HRESULT CGame::Init()
 		object->SetTexture("GREEN_BG");
 	}
 
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
+		object->SetSize(D3DXVECTOR2(CApplication::CENTER_Y * 1.5f, CApplication::CENTER_Y * 1.5f));
+		object->SetTexture("BLOCK_BG");
+	}
+
 	m_countDown = CCountDown::Create();
 
 	m_isResult = false;
@@ -56,7 +64,7 @@ HRESULT CGame::Init()
 void CGame::GameStart()
 {
 	m_timer = CTimer::Create(D3DXVECTOR3(100.0f, 100.0f, 0.0f), D3DXVECTOR2(30.0f, 100.0f));
-	m_timer->SetTimer(60);
+	m_timer->SetTimer(10);
 }
 
 //-----------------------------------------------------------------------------
@@ -93,6 +101,7 @@ void CGame::Update()
 	{
 		m_isResult = true;
 		m_timer->StopTimer(true);
-		CResult::Create();
+		CResult::SetPlayMode(CApplication::GetInstance()->GetModeType());
+		CFade::GetInstance()->NextMode(CMode::MODE_TYPE::RESULT);
 	}
 }
