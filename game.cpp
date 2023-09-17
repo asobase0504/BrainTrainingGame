@@ -65,10 +65,11 @@ HRESULT CGame::Init()
 void CGame::GameStart()
 {
 	m_timer = CTimer::Create(D3DXVECTOR3(100.0f, 100.0f, 0.0f), D3DXVECTOR2(30.0f, 100.0f));
-	m_timer->SetTimer(10);
+	m_timer->SetTimer(60);
 
 	{
-		CClickItem* pauseItem = CClickItem::Create(D3DXVECTOR3((float)CApplication::SCREEN_WIDTH - 140.0f, 140.0f, 0.0f),D3DXVECTOR2(100.0f,100.0f));
+		D3DXVECTOR3 pos((float)CApplication::SCREEN_WIDTH - 60.0f, 60.0f, 0.0f);
+		CClickItem* pauseItem = CClickItem::Create(pos,D3DXVECTOR2(75.0f,75.0));
 		pauseItem->SetEvent([]()
 		{
 			CPause::Create();
