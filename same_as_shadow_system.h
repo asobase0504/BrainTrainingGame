@@ -15,6 +15,7 @@
 //**************************************************
 class CObject2D;
 class CReflectionObject;
+class CRememberObject;
 
 //**************************************************
 // クラス
@@ -35,6 +36,9 @@ public:
 	void Draw() override;
 
 	static CSameAsShadowSystem *Create();
+
+private:
+	void Choices_();
 
 private:
 	enum TEXTURE
@@ -71,13 +75,18 @@ private:
 
 private:
 	// 影のオブジェクト
-	std::vector <CReflectionObject*> m_pShadowObject;
+	std::vector<CReflectionObject*> m_pShadowObject;
 	// 選択肢
-	std::vector <CReflectionObject*> m_pSelectObject;
+	std::vector<CRememberObject*> m_pSelectObject;
 	// テクスチャ
 	std::string m_tex[TEXTURE_MAX];
 	// この番号を使用したかどうか
 	bool m_isUsedNumber[TEXTURE_MAX];
+	// 何番目を答えにしたか
+	std::vector<bool> m_isAnswerNumber;
+	// 答え
+	std::vector<int> m_nAnswerNumber;
+
 };
 
 #endif	// _SAME_AS_SHADOW_SYSTEM_H_

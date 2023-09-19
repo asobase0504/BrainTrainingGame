@@ -15,6 +15,10 @@
 // 定数
 //**************************************************
 const float CReflectionObject::SPEED = 10.0f;
+const float CReflectionObject::X_MIN = 0.0f;
+const float CReflectionObject::X_MAX = (float)CApplication::SCREEN_WIDTH;
+const float CReflectionObject::Y_MIN = 0.0f;
+const float CReflectionObject::Y_MAX = (float)CApplication::SCREEN_HEIGHT;
 
 //--------------------------------------------------
 // コンストラクタ
@@ -56,6 +60,8 @@ void CReflectionObject::Update()
 	CClickItem::Update();
 
 	Reflection_();
+
+	Rotate_();
 }
 
 //--------------------------------------------------
@@ -102,24 +108,24 @@ void CReflectionObject::Reflection_()
 	pos = GetPos();
 	size = GetSize();
 	{// 押し戻し
-		if (pos.x < 0.0f + size.x * 0.5f)
+		if (pos.x < X_MIN + size.x * 0.5f)
 		{
-			pos.x = 0.0f + size.x * 0.5f;
+			pos.x = X_MIN + size.x * 0.5f;
 			nor.x = 1.0f;
 		}
-		if (pos.x > CApplication::SCREEN_WIDTH - size.x * 0.5f)
+		if (pos.x > X_MAX - size.x * 0.5f)
 		{
-			pos.x = CApplication::SCREEN_WIDTH - size.x * 0.5f;
+			pos.x = X_MAX - size.x * 0.5f;
 			nor.x = -1.0f;
 		}
-		if (pos.y < 0.0f + size.y * 0.5f)
+		if (pos.y < Y_MIN + size.y * 0.5f)
 		{
-			pos.y = 0.0f + size.y * 0.5f;
+			pos.y = Y_MIN + size.y * 0.5f;
 			nor.y = 1.0f;
 		}
-		if (pos.y > CApplication::SCREEN_HEIGHT - size.y * 0.5f)
+		if (pos.y > Y_MAX - size.y * 0.5f)
 		{
-			pos.y = CApplication::SCREEN_HEIGHT - size.y * 0.5f;
+			pos.y = Y_MAX - size.y * 0.5f;
 			nor.y = -1.0f;
 		}
 
@@ -128,4 +134,12 @@ void CReflectionObject::Reflection_()
 		D3DXVECTOR3 refrectVector = CalcReflectVector(move, nor);
 		SetMove(refrectVector * SPEED);
 	}
+}
+
+//--------------------------------------------------
+// 反射
+//--------------------------------------------------
+void CReflectionObject::Rotate_()
+{
+	AddRot(0.05f);
 }

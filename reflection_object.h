@@ -29,6 +29,10 @@ class CReflectionObject : public CRememberObject
 {
 public:
 	static const float SPEED;
+	static const float X_MIN;
+	static const float X_MAX;
+	static const float Y_MIN;
+	static const float Y_MAX;
 
 public:
 	explicit CReflectionObject();
@@ -43,6 +47,7 @@ public:
 
 private:
 	void Reflection_();
+	void Rotate_();
 
 private:
 };
