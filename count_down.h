@@ -24,6 +24,7 @@ public:
 
 	static CCountDown* Create();
 private:
+	int m_fream;
 };
 
 #endif // _TIMER_H_

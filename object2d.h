@@ -68,6 +68,7 @@ public:
 
 	// ‘½‚«‚³
 	void SetSize(const D3DXVECTOR2& inSize);
+	void AddSize(const D3DXVECTOR2& inSize) { SetSize(GetSize() + inSize); }
 	const D3DXVECTOR2 GetSize() { return m_size; }
 
 	// “®‚«

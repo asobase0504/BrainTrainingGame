@@ -52,6 +52,8 @@ HRESULT CSequence::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size,const int digit)
 		m_pNumber[nCnt]->SetTexture("TIME_NUMBER");
 	}
 
+	SetPos(pos);
+
 	return S_OK;
 }
 
@@ -84,11 +86,13 @@ void CSequence::Update()
 //--------------------------------------------------
 // à íuÇÃê›íËÇ∆ëÂÇ´Ç≥ÇÃê›íË
 //--------------------------------------------------
-void CSequence::SetPos(D3DXVECTOR3 pos, D3DXVECTOR2 size)
+void CSequence::SetPos(const D3DXVECTOR3& inPos)
 {
+	CObject::SetPos(inPos);
+
 	for (int nCnt = 0; nCnt < m_digit; nCnt++)
 	{
-		m_pNumber[nCnt]->SetPos(D3DXVECTOR3(size.x * nCnt + pos.x, pos.y, 0.0f));
+		m_pNumber[nCnt]->SetPos(D3DXVECTOR3(m_pNumber[nCnt]->GetSize().x * nCnt + inPos.x, inPos.y, 0.0f));
 	}
 }
 
@@ -97,6 +101,14 @@ void CSequence::SetColor(const D3DXCOLOR & inColor)
 	for (int nCnt = 0; nCnt < m_digit; nCnt++)
 	{
 		m_pNumber[nCnt]->SetColor(inColor);
+	}
+}
+
+void CSequence::AddSize(const D3DXVECTOR2 & inSize)
+{
+	for (int nCnt = 0; nCnt < m_digit; nCnt++)
+	{
+		m_pNumber[nCnt]->AddSize(inSize);
 	}
 }
 

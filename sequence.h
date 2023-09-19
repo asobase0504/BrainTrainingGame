@@ -33,9 +33,11 @@ public:
 	void Update() override;
 	void Draw() override {}
 
-	void SetPos(D3DXVECTOR3 pos, D3DXVECTOR2 size);
+	void SetPos(const D3DXVECTOR3& inPos) override;
 
 	void SetColor(const D3DXCOLOR& inColor);
+
+	void AddSize(const D3DXVECTOR2& inSize);
 
 	void SetNumber(int inNumber);
 	int GetNumber() { return m_number; }
