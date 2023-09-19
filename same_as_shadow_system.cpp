@@ -9,6 +9,7 @@
 #include "same_as_shadow_system.h"
 
 #include "application.h"
+#include "input.h"
 #include "reflection_object.h"
 #include "utility.h"
 
@@ -28,6 +29,8 @@ CSameAsShadowSystem::CSameAsShadowSystem(int nPriority) : CObject(nPriority),
 {
 	m_pShadowObject.clear();
 	m_pSelectObject.clear();
+	m_nAnswerNumber.clear();
+	m_isAnswerNumber.clear();
 
 	for (int i = 0; i < TEXTURE_MAX; i++)
 	{
@@ -52,35 +55,49 @@ HRESULT CSameAsShadowSystem::Init()
 
 	m_pShadowObject.resize(MAX_SHADOW);
 	m_pSelectObject.resize(MAX_CHOICES);
+	m_nAnswerNumber.resize(MAX_SHADOW);
+	m_isAnswerNumber.resize(MAX_CHOICES);
 
 	D3DXVECTOR3 move(10.0f, 10.0f, 0.0f);
 
-	for (int i = 0; i < MAX_SHADOW; i++)
-	{
-		m_pShadowObject[i] = CReflectionObject::Create(
-			D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.5f + 100.0f * i, CApplication::SCREEN_HEIGHT * 0.5f, 0.0f),
-			D3DXVECTOR2(100.0f, 100.0f), 0);
-		m_pShadowObject[i]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
-		m_pShadowObject[i]->SetMove(move);
-		m_pShadowObject[i]->SetEvent([]() {});
-	}
-
-	// 抽選
-	int number = 0;
-	number = IntRandom(TEXTURE_MAX - 1, 0);
-
-	for (int i = 0; i < MAX_SHADOW; i++)
-	{
-		while (m_isUsedNumber[number])
-		{// 画像の抽選
-			number = IntRandom(TEXTURE_MAX - 1, 0);
+	{// シルエット
+		for (int i = 0; i < MAX_SHADOW; i++)
+		{
+			m_pShadowObject[i] = CReflectionObject::Create(
+				D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.5f + 100.0f * i, CApplication::SCREEN_HEIGHT * 0.5f, 0.0f),
+				D3DXVECTOR2(100.0f, 100.0f), 0);
+			m_pShadowObject[i]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+			m_pShadowObject[i]->SetMove(move);
+			m_pShadowObject[i]->SetEvent([]() {});
 		}
 
-		m_pShadowObject[i]->SetMyNumber(number);
-		m_pShadowObject[i]->SetTexture(m_tex[number]);
+		// 抽選
+		int number = 0;
+		number = IntRandom(TEXTURE_MAX - 1, 0);
 
-		m_isUsedNumber[number] = true;
+		for (int i = 0; i < MAX_SHADOW; i++)
+		{
+			while (m_isUsedNumber[number])
+			{// 画像の抽選
+				number = IntRandom(TEXTURE_MAX - 1, 0);
+			}
+
+			m_pShadowObject[i]->SetMyNumber(number);
+			m_pShadowObject[i]->SetTexture(m_tex[number]);
+			m_nAnswerNumber[i] = number;
+
+			m_isUsedNumber[number] = true;
+		}
 	}
+
+	for (int i = 0; i < MAX_CHOICES; i++)
+	{// 選択肢
+		m_pSelectObject[i] = CRememberObject::Create(
+			D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.25f + 100.0f * i, CApplication::SCREEN_HEIGHT - 100.0f, 0.0f),
+			D3DXVECTOR2(100.0f, 100.0f), 0);
+		m_pSelectObject[i]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+	}
+
 
 	return S_OK;
 }
@@ -97,6 +114,19 @@ void CSameAsShadowSystem::Uninit()
 //--------------------------------------------------
 void CSameAsShadowSystem::Update()
 {
+	if (CInput::GetKey()->Trigger(DIK_RETURN))
+	{
+		for (int i = 0; i < TEXTURE_MAX; i++)
+		{
+			m_isUsedNumber[i] = false;
+		}
+
+		for (int i = 0; i < MAX_SHADOW; i++)
+		{
+			m_isAnswerNumber[i] = false;
+		}
+		Choices_();
+	}
 }
 
 //--------------------------------------------------
@@ -124,4 +154,63 @@ CSameAsShadowSystem *CSameAsShadowSystem::Create()
 	}
 
 	return pSameAsShadowSystem;
+}
+
+//--------------------------------------------------
+// 選択肢
+//--------------------------------------------------
+void CSameAsShadowSystem::Choices_()
+{
+	// 3つをこたえにする
+	int answer[MAX_SHADOW] = { 0,0,0 };
+	int answerNumber = 0;
+
+	// 一番最初をランダムにする
+	answerNumber = IntRandom(MAX_CHOICES - 1, 0);
+
+	for (int j = 0; j < MAX_SHADOW; j++)
+	{
+		while (m_isAnswerNumber[answerNumber])
+		{// 五つのうちどの三つをこたえにするか
+			answerNumber = IntRandom(MAX_CHOICES - 1, 0);
+		}
+		answer[j] = answerNumber;
+		// 選択肢に選ばれた奴を使用済みにする
+		m_isAnswerNumber[answerNumber] = true;
+	}
+
+	// 抽選
+	int number = 0;
+	number = IntRandom(TEXTURE_MAX - 1, 0);
+
+	int j = 0;
+
+	for (int i = 0; i < MAX_CHOICES; i++)
+	{
+		bool a = false;
+
+		for (j = 0; j < MAX_SHADOW; j++)
+		{
+			if (answer[j] == i)
+			{// 答えと一緒にする
+				m_pSelectObject[i]->SetMyNumber(m_nAnswerNumber[j]);
+				m_pSelectObject[i]->SetTexture(m_tex[m_nAnswerNumber[j]]);
+				m_isUsedNumber[m_nAnswerNumber[j]] = true;
+				a = true;
+			}
+		}
+
+		if(!a)
+		{// それ以外（ダミー）
+			while (m_isUsedNumber[number])
+			{// 画像の抽選
+				number = IntRandom(TEXTURE_MAX - 1, 0);
+			}
+
+			m_pSelectObject[i]->SetMyNumber(number);
+			m_pSelectObject[i]->SetTexture(m_tex[number]);
+
+			m_isUsedNumber[number] = true;
+		}
+	}
 }
