@@ -114,14 +114,21 @@ void CSameAsShadowSystem::Uninit()
 //--------------------------------------------------
 void CSameAsShadowSystem::Update()
 {
+	static bool is = false;
+
 	if (CInput::GetKey()->Trigger(DIK_RETURN))
 	{
+		if (is)
+		{
+			return;
+		}
+
 		for (int i = 0; i < TEXTURE_MAX; i++)
 		{
 			m_isUsedNumber[i] = false;
 		}
 
-		for (int i = 0; i < MAX_SHADOW; i++)
+		for (int i = 0; i < m_isAnswerNumber.size(); i++)
 		{
 			m_isAnswerNumber[i] = false;
 		}
