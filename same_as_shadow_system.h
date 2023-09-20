@@ -25,7 +25,7 @@ class CSameAsShadowSystem : public CObject
 public:
 	static const int MAX_SHADOW;
 	static const int MAX_CHOICES;
-
+	static const int MAX_ANSWER;
 public:
 	explicit CSameAsShadowSystem(int nPriority = CTaskGroup::LEVEL_2D_1);
 	~CSameAsShadowSystem();
@@ -37,7 +37,9 @@ public:
 
 	static CSameAsShadowSystem *Create();
 
-private:
+private:	
+	void InitCreateAnswer_();
+	void Shadow_();
 	void Choices_();
 
 private:
@@ -87,6 +89,9 @@ private:
 	// “š‚¦
 	std::vector<int> m_nAnswerNumber;
 
+	bool m_isChange;
+	int m_changeLag;
+	int m_nCountAnswer;
 };
 
 #endif	// _SAME_AS_SHADOW_SYSTEM_H_
