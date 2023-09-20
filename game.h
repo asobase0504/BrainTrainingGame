@@ -16,6 +16,7 @@
 //-----------------------------------------
 class CTimer;
 class CCountDown;
+class CSequence;
 
 //-----------------------------------------
 // アプリケーションクラス
@@ -39,12 +40,16 @@ public:	// メンバー関数
 	// 更新処理
 	virtual void Update() override;
 
+	void AddScore(const int inScore);
+
 protected:
 
 	EState GetState() { return m_state; }
 
 private: // 動的メンバー変数
+	CSequence* m_scoreUI;	// 得点の表示
 	int m_score;		// 得点
+
 	EState m_state;		// 状態
 	CCountDown* m_countDown;	// カウントダウン
 

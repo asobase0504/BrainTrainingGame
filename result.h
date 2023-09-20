@@ -30,6 +30,7 @@ public:
 	static CResult *Create();
 
 	static void SetPlayMode(const CMode::MODE_TYPE& inMode) { m_playMode = inMode; }
+	static void SetScore(const int inScore) { m_score = inScore; }
 
 private:
 	CClickItem* m_nextClickItem;
@@ -37,6 +38,7 @@ private:
 	CClickItem* m_backClickItem;
 
 	static CMode::MODE_TYPE m_playMode;
+	static int m_score;
 };
 
 

@@ -18,12 +18,15 @@
 #include "timer.h"
 #include "result.h"
 #include "fade.h"
+#include "sequence.h"
+#include "score_up.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
 CGame::CGame() : m_state(COUNT_DOWN)
 {
+	m_score = 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -75,6 +78,11 @@ void CGame::GameStart()
 			CPause::Create();
 		});
 	}
+
+	{
+		m_scoreUI = CSequence::Create(D3DXVECTOR3(100.0f, 400.0f, 0.0f), D3DXVECTOR2(30.0f, 100.0f),3);
+		m_scoreUI->SetNumber(m_score);
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -112,6 +120,24 @@ void CGame::Update()
 		m_isResult = true;
 		m_timer->StopTimer(true);
 		CResult::SetPlayMode(CApplication::GetInstance()->GetModeType());
+		CResult::SetScore(m_score);
 		CFade::GetInstance()->NextMode(CMode::MODE_TYPE::RESULT);
 	}
+}
+
+void CGame::AddScore(const int inScore)
+{
+	int addScore = inScore;
+	m_score += inScore;
+	m_scoreUI->AddNumber(inScore);
+
+	if (m_score <= 0)
+	{
+		m_scoreUI->SetNumber(0);
+		addScore = 0;
+	}
+
+	D3DXVECTOR3 pos(m_scoreUI->GetPos());
+	pos.y -= 60.0f;
+	CScoreUp::Create(pos, addScore);
 }

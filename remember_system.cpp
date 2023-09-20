@@ -16,6 +16,8 @@
 #include "remember_object.h"
 #include "correction.h"
 
+#include "game.h"
+
 //**************************************************
 // ’è”
 //**************************************************
@@ -191,10 +193,12 @@ void CRememberSystem::InitCreateAnswer_()
 				if (answerMyNumber == m_nBeforeNumber)
 				{
 					CCorrection::Create(true);
+					m_game->AddScore(15);
 				}
 				else
 				{
 					CCorrection::Create(false);
+					m_game->AddScore(-7);
 				}
 			});
 		}

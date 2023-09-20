@@ -63,9 +63,6 @@
     <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty">
       <UniqueIdentifier>{4529e3e4-30f5-4eef-a76f-f4b094eaf06e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\01_Result">
-      <UniqueIdentifier>{71c61a9a-ab25-4792-8335-25d715f72008}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\02_NumberSelect">
       <UniqueIdentifier>{e9bba57c-12a1-4f61-bc54-11c8f181fad6}</UniqueIdentifier>
     </Filter>
@@ -122,6 +119,12 @@
     </Filter>
     <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\05_Correction">
       <UniqueIdentifier>{3031f105-eb75-4d25-b6f0-8b392eedd2b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\06_Result">
+      <UniqueIdentifier>{6763e1a5-4e3b-4729-82ec-a15ecfd26eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\01_Score">
+      <UniqueIdentifier>{1cda3eb9-c70f-4aa8-b661-2dfa87159fae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -257,9 +260,6 @@
     <ClCompile Include="save_guidance_item.cpp">
       <Filter>ソース ファイル\01_Mode\02_SelectSave\00_Object</Filter>
     </ClCompile>
-    <ClCompile Include="result.cpp">
-      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\01_Result</Filter>
-    </ClCompile>
     <ClCompile Include="click_item.cpp">
       <Filter>ソース ファイル\07_UI</Filter>
     </ClCompile>
@@ -307,6 +307,12 @@
     </ClCompile>
     <ClCompile Include="reflection_object.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\13_Same_as_shadow\00_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>ソース ファイル\01_Mode\06_Result</Filter>
+    </ClCompile>
+    <ClCompile Include="score_up.cpp">
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\01_Score</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -439,9 +445,6 @@
     <ClInclude Include="save_guidance_item.h">
       <Filter>ソース ファイル\01_Mode\02_SelectSave\00_Object</Filter>
     </ClInclude>
-    <ClInclude Include="result.h">
-      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\01_Result</Filter>
-    </ClInclude>
     <ClInclude Include="click_item.h">
       <Filter>ソース ファイル\07_UI</Filter>
     </ClInclude>
@@ -492,6 +495,12 @@
     </ClInclude>
     <ClInclude Include="reflection_object.h">
       <Filter>ソース ファイル\01_Mode\00_Game\13_Same_as_shadow\00_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>ソース ファイル\01_Mode\06_Result</Filter>
+    </ClInclude>
+    <ClInclude Include="score_up.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\01_Score</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

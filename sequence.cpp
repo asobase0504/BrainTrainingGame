@@ -104,6 +104,14 @@ void CSequence::SetColor(const D3DXCOLOR & inColor)
 	}
 }
 
+void CSequence::AddColor(const D3DXCOLOR & inColor)
+{
+	for (int nCnt = 0; nCnt < m_digit; nCnt++)
+	{
+		m_pNumber[nCnt]->SetColor(inColor + m_pNumber[nCnt]->GetColor());
+	}
+}
+
 void CSequence::AddSize(const D3DXVECTOR2 & inSize)
 {
 	for (int nCnt = 0; nCnt < m_digit; nCnt++)

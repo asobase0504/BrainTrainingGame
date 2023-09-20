@@ -34,12 +34,15 @@ public:
 	void Draw() override {}
 
 	void SetPos(const D3DXVECTOR3& inPos) override;
+	void AddPos(const D3DXVECTOR3& inPos) { SetPos(inPos + GetPos()); }
 
 	void SetColor(const D3DXCOLOR& inColor);
+	void AddColor(const D3DXCOLOR& inColor);
 
 	void AddSize(const D3DXVECTOR2& inSize);
 
 	void SetNumber(int inNumber);
+	void AddNumber(int inNumber) { SetNumber(m_number + inNumber); }
 	int GetNumber() { return m_number; }
 
 	static CSequence* Create(D3DXVECTOR3 pos, D3DXVECTOR2 size,const int digit);

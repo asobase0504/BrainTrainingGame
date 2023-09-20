@@ -10,11 +10,13 @@
 #include "application.h"
 #include "click_item.h"
 #include "fade.h"
+#include "sequence.h"
 
 //--------------------------------------------------
 // 静的変数
 //--------------------------------------------------
 CMode::MODE_TYPE CResult::m_playMode(CMode::MODE_TYPE::TITLE);
+int CResult::m_score(0);
 
 //--------------------------------------------------
 // コンストラクタ
@@ -71,6 +73,10 @@ HRESULT CResult::Init()
 			CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_MODE);
 		});
 	});
+
+	D3DXVECTOR3 pos(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f);
+	D3DXVECTOR2 size(30.0f, 60.0f);
+	CSequence::Create(pos, size, 3)->SetNumber(m_score);
 
 	return S_OK;
 }

@@ -43,7 +43,7 @@ void CMiniGameRememberBefore::GameStart()
 {
 	CGame::GameStart();
 
-	CRememberSystem::Create();
+	CRememberSystem::Create()->SetGameMode(this);
 }
 
 //-----------------------------------------------------------------------------

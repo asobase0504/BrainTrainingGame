@@ -21,7 +21,8 @@ CObject2D::CObject2D(int inPriority) :
 	m_fLength(0.0f),
 	m_fAngle(0.0f),
 	m_anchor(CENTER),
-	m_move(D3DXVECTOR3(0.0f, 0.0f, 0.0f))
+	m_move(0.0f, 0.0f, 0.0f),
+	m_col(1.0f, 1.0f, 1.0f,1.0f)
 {
 }
 

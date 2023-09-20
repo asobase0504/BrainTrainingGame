@@ -187,6 +187,7 @@
     <ClCompile Include="result.cpp" />
     <ClCompile Include="same_as_shadow_system.cpp" />
     <ClCompile Include="save_guidance_item.cpp" />
+    <ClCompile Include="score_up.cpp" />
     <ClCompile Include="sequence.cpp" />
     <ClCompile Include="select_mode.cpp" />
     <ClCompile Include="select_save.cpp" />
@@ -258,6 +259,7 @@
     <ClInclude Include="result.h" />
     <ClInclude Include="same_as_shadow_system.h" />
     <ClInclude Include="save_guidance_item.h" />
+    <ClInclude Include="score_up.h" />
     <ClInclude Include="sequence.h" />
     <ClInclude Include="select_mode.h" />
     <ClInclude Include="select_save.h" />

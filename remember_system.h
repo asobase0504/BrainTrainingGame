@@ -15,6 +15,7 @@
 //**************************************************
 class CObject2D;
 class CRememberObject;
+class CGame;
 
 //**************************************************
 // クラス
@@ -37,6 +38,7 @@ public:
 
 	static CRememberSystem *Create();
 
+	void SetGameMode(CGame* inMode) { m_game = inMode; }
 private:
 	void InitCreateAnswer_();
 	void DisplayRemember_();
@@ -59,6 +61,8 @@ private:
 	};
 
 private:
+	CGame* m_game;
+
 	// 覚えるもの
 	CRememberObject *m_pRememberObject;
 	// アンサー
