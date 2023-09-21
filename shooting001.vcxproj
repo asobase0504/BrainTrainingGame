@@ -170,8 +170,10 @@
     <ClCompile Include="input\inputjoypad.cpp" />
     <ClCompile Include="input\inputkeyboard.cpp" />
     <ClCompile Include="input\inputmouse.cpp" />
+    <ClCompile Include="large_number_system.cpp" />
     <ClCompile Include="minigame_bus.cpp" />
     <ClCompile Include="minigame_comeout.cpp" />
+    <ClCompile Include="minigame_large_number.cpp" />
     <ClCompile Include="minigame_moveobject.cpp" />
     <ClCompile Include="minigame_number25.cpp" />
     <ClCompile Include="minigame_same_as_shadow.cpp" />
@@ -242,8 +244,10 @@
     <ClInclude Include="input\inputkeyboard.h" />
     <ClInclude Include="input\inputkeydata.h" />
     <ClInclude Include="input\inputmouse.h" />
+    <ClInclude Include="large_number_system.h" />
     <ClInclude Include="minigame_bus.h" />
     <ClInclude Include="minigame_comeout.h" />
+    <ClInclude Include="minigame_large_number.h" />
     <ClInclude Include="minigame_number25.h" />
     <ClInclude Include="minigame_moveobject.h" />
     <ClInclude Include="minigame_same_as_shadow.h" />

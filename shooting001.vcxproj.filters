@@ -126,6 +126,15 @@
     <Filter Include="ソース ファイル\01_Mode\00_Game\00_Utilty\01_Score">
       <UniqueIdentifier>{1cda3eb9-c70f-4aa8-b661-2dfa87159fae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\14_Large_numbe">
+      <UniqueIdentifier>{6d00f16d-dccf-4691-a658-c2c9d3afe3ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\14_Large_numbe\00_Object">
+      <UniqueIdentifier>{d13ef72b-549f-4d9e-ba7a-7f07d8f793b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\01_Mode\00_Game\14_Large_numbe\01_System">
+      <UniqueIdentifier>{2ea0ba64-9f2c-48ec-842d-7dd774f8510d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -314,6 +323,12 @@
     <ClCompile Include="score_up.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\01_Score</Filter>
     </ClCompile>
+    <ClCompile Include="minigame_large_number.cpp">
+      <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe</Filter>
+    </ClCompile>
+    <ClCompile Include="large_number_system.cpp">
+      <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe\01_System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -501,6 +516,12 @@
     </ClInclude>
     <ClInclude Include="score_up.h">
       <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\01_Score</Filter>
+    </ClInclude>
+    <ClInclude Include="minigame_large_number.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe</Filter>
+    </ClInclude>
+    <ClInclude Include="large_number_system.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe\01_System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
