@@ -140,9 +140,9 @@ void CGame::AddScore(const int inScore)
 
 	if (m_score <= 0)
 	{
+		addScore = (m_score - inScore) * -1.0f;
 		m_score = 0;
 		m_scoreUI->SetNumber(0);
-		addScore = 0;
 	}
 
 	D3DXVECTOR3 pos(m_scoreUI->GetPos());

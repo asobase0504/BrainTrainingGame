@@ -15,6 +15,7 @@
 
 // Object系統
 #include "object2d.h"
+#include "click_item.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -43,6 +44,17 @@ HRESULT CTitle::Init()
 	}
 
 	{
+		D3DXVECTOR3 pos(CApplication::CENTER_X, CApplication::CENTER_Y + 250.0f, 0.0f);
+		D3DXVECTOR2 size(1299.0f * 0.35f, 329.0f * 0.35f);
+		CClickItem* object = CClickItem::Create(pos,size);
+		object->SetTexture("TEXT_START");
+		object->SetEvent([]()
+		{
+			CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_SAVE);
+		});
+	}
+
+	{
 		CObject2D* object = CObject2D::Create();
 		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y - 100.0f, 0.0f));
 		object->SetSize(D3DXVECTOR2(587.0f * 1.2f, 419.0f * 1.2f));
@@ -57,7 +69,7 @@ HRESULT CTitle::Init()
 //-----------------------------------------------------------------------------
 void CTitle::Update()
 {
-	if (CInput::GetKey()->Trigger(DIK_RETURN) || CInput::GetKey()->Trigger(MOUSE_KEY::MOUSE_INPUT_LEFT))
+	if (CInput::GetKey()->Trigger(DIK_RETURN))
 	{
 		CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_SAVE);
 	}

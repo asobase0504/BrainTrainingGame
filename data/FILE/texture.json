@@ -62,7 +62,7 @@
 		[ "BLOCK_BG", "data\/TEXTURE\/BG\/blockBG.png" ],
 		[ "TEXT_READY", "data\/TEXTURE\/TEXT\/Ready1.png" ],
 		[ "TEXT_GO", "data\/TEXTURE\/TEXT\/Go1.png" ],
-		[ "TEXT_START", "data\/TEXTURE\/TEXT\/START.png" ],
+		[ "TEXT_START", "data\/TEXTURE\/START.png" ],
 		[ "TEXT_TUTORIAL", "data\/TEXTURE\/TEXT\/TUTORIAL2.png" ],
 		[ "TEXT_CUSTOM", "data\/TEXTURE\/TEXT\/CUSTOM2.png" ],
 		[ "TEXT_OPTION", "data\/TEXTURE\/TEXT\/OPTION2.png" ],

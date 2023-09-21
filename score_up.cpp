@@ -38,13 +38,15 @@ CScoreUp * CScoreUp::Create(D3DXVECTOR3 pos, int inScore)
 	assert(score != nullptr);
 
 	score->Init(pos, D3DXVECTOR2(30.0f,100.0f));
-	score->SetNumber(inScore);
+
 	if (inScore > 0)
 	{
+		score->SetNumber(inScore);
 		score->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
 	}
 	else
 	{
+		score->SetNumber(inScore * -1.0f);
 		score->SetColor(D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f));
 	}
 	return score;
