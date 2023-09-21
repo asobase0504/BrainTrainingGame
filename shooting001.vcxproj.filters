@@ -329,6 +329,9 @@
     <ClCompile Include="large_number_system.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe\01_System</Filter>
     </ClCompile>
+    <ClCompile Include="largest_number.cpp">
+      <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe\00_Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -522,6 +525,9 @@
     </ClInclude>
     <ClInclude Include="large_number_system.h">
       <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe\01_System</Filter>
+    </ClInclude>
+    <ClInclude Include="largest_number.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe\00_Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

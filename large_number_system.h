@@ -13,15 +13,17 @@
 //**************************************************
 // 前方前言　実態はNG　ポインタだけならOK
 //**************************************************
-class CObject2D;
-class CReflectionObject;
-class CRememberObject;
+class CLargestNumber;
 
 //**************************************************
 // クラス
 //**************************************************
 class CLargeNumberSystem : public CObject
 {
+public:
+	static const int DISPLAY_NUMBER;
+	static const int MAX_NUMBER;
+
 public:
 	explicit CLargeNumberSystem(int nPriority = CTaskGroup::LEVEL_2D_1);
 	~CLargeNumberSystem();
@@ -34,6 +36,8 @@ public:
 	static CLargeNumberSystem *Create();
 
 private:
+	std::vector<CLargestNumber*> m_pDisplayObject;
+	std::vector<bool> m_isUsedNumber;
 };
 
 #endif	// _LARGE_NUMBER_SYSTEM_H_

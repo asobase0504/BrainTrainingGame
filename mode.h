@@ -33,6 +33,7 @@ public:
 		MINIGAME_COLORTEXT,			// F•ª•Ê
 		MINIGAME_COMEOUT,			// o‚½‡”Ô‚É‰Ÿ‚·
 		MINIGAME_SHADOW,			// ‚©‚°‚Æ“¯‚¶‚à‚Ì‚Í‚Ç‚ê
+		MINIGAME_LARGE_NUMBER,			// ‚©‚°‚Æ“¯‚¶‚à‚Ì‚Í‚Ç‚ê
 		MINIGAME_ADD,				// ‚ ‚í‚¹‚½”
 		RESULT,
 		CUSTUM,

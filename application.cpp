@@ -29,6 +29,7 @@
 #include "minigame_comeout.h"
 #include "result.h"
 #include "minigame_same_as_shadow.h"
+#include "minigame_large_number.h"
 
 using namespace std;
 
@@ -254,6 +255,9 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 		break;
 	case CMode::MODE_TYPE::MINIGAME_SHADOW:
 		mode = new CMiniGameSameAsShadow;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_LARGE_NUMBER:
+		mode = new CMiniGameLargeNumber;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_ADD:
 //		mode = new CTitle;
