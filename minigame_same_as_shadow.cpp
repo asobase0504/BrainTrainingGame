@@ -42,7 +42,7 @@ void CMiniGameSameAsShadow::GameStart()
 {
 	CGame::GameStart();
 
-	CSameAsShadowSystem::Create();
+	CSameAsShadowSystem::Create()->SetGameMode(this);
 }
 
 //-----------------------------------------------------------------------------

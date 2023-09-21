@@ -44,8 +44,8 @@ HRESULT CTitle::Init()
 
 	{
 		CObject2D* object = CObject2D::Create();
-		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
-		object->SetSize(D3DXVECTOR2(1066.0f, 318.0f));
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y - 100.0f, 0.0f));
+		object->SetSize(D3DXVECTOR2(587.0f * 1.2f, 419.0f * 1.2f));
 		object->SetTexture("TITLE_LOGO");
 	}
 

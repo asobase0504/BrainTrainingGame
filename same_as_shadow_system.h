@@ -16,6 +16,7 @@
 class CObject2D;
 class CReflectionObject;
 class CRememberObject;
+class CGame;
 
 //**************************************************
 // クラス
@@ -36,6 +37,8 @@ public:
 	void Draw() override;
 
 	static CSameAsShadowSystem *Create();
+
+	void SetGameMode(CGame* inMode) { m_game = inMode; }
 
 private:	
 	void InitCreateAnswer_();
@@ -76,6 +79,8 @@ private:
 	};
 
 private:
+	CGame* m_game;
+
 	// 影のオブジェクト
 	std::vector<CReflectionObject*> m_pShadowObject;
 	// 選択肢

@@ -14,16 +14,16 @@
 //**************************************************
 // 定数
 //**************************************************
-const float CReflectionObject::SPEED = 10.0f;
-const float CReflectionObject::X_MIN = 0.0f;
-const float CReflectionObject::X_MAX = (float)CApplication::SCREEN_WIDTH;
-const float CReflectionObject::Y_MIN = 0.0f;
-const float CReflectionObject::Y_MAX = (float)CApplication::SCREEN_HEIGHT;
+const float CReflectionObject::SPEED = 4.0f;
+const float CReflectionObject::X_MIN = 320.0f;
+const float CReflectionObject::X_MAX = (float)CApplication::SCREEN_WIDTH - 200.0f;
+const float CReflectionObject::Y_MIN = 140.0f;
+const float CReflectionObject::Y_MAX = (float)CApplication::SCREEN_HEIGHT - 100.0f;
 
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CReflectionObject::CReflectionObject()
+CReflectionObject::CReflectionObject() : m_rotY(0.0f)
 {
 }
 
@@ -40,6 +40,8 @@ CReflectionObject::~CReflectionObject()
 HRESULT CReflectionObject::Init()
 {
 	CClickItem::Init();
+
+	Reset();
 
 	return S_OK;
 }
@@ -72,6 +74,12 @@ void CReflectionObject::Draw()
 	CClickItem::Draw();
 }
 
+void CReflectionObject::Reset()
+{
+	m_rotY = FloatRandom(0.05f, -0.05f);
+	m_spead = FloatRandom(6.0f, 2.0f);
+}
+
 //--------------------------------------------------
 // 生成
 //--------------------------------------------------
@@ -80,17 +88,12 @@ CReflectionObject *CReflectionObject::Create(const D3DXVECTOR3& inPos, const D3D
 	CReflectionObject *pReflectionObject;
 	pReflectionObject = new CReflectionObject;
 
-	if (pReflectionObject != nullptr)
-	{
-		pReflectionObject->Init();
-		pReflectionObject->SetPos(inPos);
-		pReflectionObject->SetSize(inSize);
-		pReflectionObject->SetMyNumber(inMyNumber);
-	}
-	else
-	{
-		assert(false);
-	}
+	assert(pReflectionObject != nullptr);
+
+	pReflectionObject->Init();
+	pReflectionObject->SetPos(inPos);
+	pReflectionObject->SetSize(inSize);
+	pReflectionObject->SetMyNumber(inMyNumber);
 
 	return pReflectionObject;
 }
@@ -132,7 +135,7 @@ void CReflectionObject::Reflection_()
 		move = GetMove();
 		// 反射
 		D3DXVECTOR3 refrectVector = CalcReflectVector(move, nor);
-		SetMove(refrectVector * SPEED);
+		SetMove(refrectVector * m_spead);
 	}
 }
 
@@ -141,5 +144,5 @@ void CReflectionObject::Reflection_()
 //--------------------------------------------------
 void CReflectionObject::Rotate_()
 {
-	AddRot(0.05f);
+	AddRot(m_rotY);
 }

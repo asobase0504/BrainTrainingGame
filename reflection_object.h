@@ -43,6 +43,8 @@ public:
 	void Update() override;
 	void Draw() override;
 
+	void Reset();
+
 	static CReflectionObject *Create(const D3DXVECTOR3& inPos, const D3DXVECTOR2& inSize, int inMyNumber);
 
 private:
@@ -50,6 +52,8 @@ private:
 	void Rotate_();
 
 private:
+	float m_rotY;
+	float m_spead;
 };
 
 

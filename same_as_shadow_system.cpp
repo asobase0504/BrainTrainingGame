@@ -12,6 +12,7 @@
 #include "input.h"
 #include "reflection_object.h"
 #include "utility.h"
+#include "game.h"
 
 #include "correction.h"
 
@@ -119,6 +120,11 @@ void CSameAsShadowSystem::Update()
 				m_isAnswerNumber[i] = false;
 			}
 
+			for (int i = 0; i < m_pShadowObject.size(); i++)
+			{
+				m_pShadowObject[i]->Reset();
+			}
+
 			for (int i = 0; i < MAX_CHOICES; i++)
 			{
 				// ポリゴンのカラー変更
@@ -171,13 +177,16 @@ void CSameAsShadowSystem::InitCreateAnswer_()
 		m_pSelectObject[i]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 		m_pSelectObject[i]->SetEvent([this, i]()
 		{
-			m_nCountAnswer++;
-			if (m_isChange)
+			bool isClickColor = m_pSelectObject[i]->GetColor().r < 1.0f;
+			if (isClickColor || m_isChange)
 			{
 				return;
 			}
 
+			m_nCountAnswer++;
+
 			int answerMyNumber = m_pSelectObject[i]->GetMyNumber();
+			bool isAnswer = false;
 
 			for (int j = 0; j < MAX_SHADOW; j++)
 			{// 正誤判定
@@ -185,16 +194,18 @@ void CSameAsShadowSystem::InitCreateAnswer_()
 
 				if (answerMyNumber == shadowNumber)
 				{
-					CCorrection::Create(true);
-				}
-				else
-				{
-					CCorrection::Create(false);
+					isAnswer = true;
 				}
 			}
 
-			if (m_nCountAnswer == MAX_ANSWER)
-			{// 回答数が上限に達したら
+			CCorrection::Create(isAnswer);
+
+			m_pSelectObject[i]->SetColor(D3DXCOLOR(0.45f, 0.45f, 0.45f,1.0f));
+
+			m_game->AddScore(isAnswer ? 4 : -7);
+
+			if (!isAnswer || m_nCountAnswer == MAX_ANSWER)
+			{
 				m_isChange = true;
 			}
 		});
