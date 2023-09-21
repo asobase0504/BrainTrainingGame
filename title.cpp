@@ -36,6 +36,13 @@ CTitle::~CTitle()
 HRESULT CTitle::Init()
 {
 	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
+		object->SetSize(D3DXVECTOR2(CApplication::CENTER_X * 2.0f, CApplication::CENTER_Y * 2.0f));
+		object->SetTexture("GREEN_BG");
+	}
+
+	{
 		CObject2D* object = CObject2D::Create();
 		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
 		object->SetSize(D3DXVECTOR2(1066.0f, 318.0f));
