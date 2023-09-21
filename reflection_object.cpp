@@ -39,7 +39,7 @@ CReflectionObject::~CReflectionObject()
 //--------------------------------------------------
 HRESULT CReflectionObject::Init()
 {
-	CClickItem::Init();
+	CRememberObject::Init();
 
 	Reset();
 
@@ -51,7 +51,7 @@ HRESULT CReflectionObject::Init()
 //--------------------------------------------------
 void CReflectionObject::Uninit()
 {
-	CClickItem::Uninit();
+	CRememberObject::Uninit();
 }
 
 //--------------------------------------------------
@@ -59,7 +59,7 @@ void CReflectionObject::Uninit()
 //--------------------------------------------------
 void CReflectionObject::Update()
 {
-	CClickItem::Update();
+	CRememberObject::Update();
 
 	Reflection_();
 
@@ -71,7 +71,7 @@ void CReflectionObject::Update()
 //--------------------------------------------------
 void CReflectionObject::Draw()
 {
-	CClickItem::Draw();
+	CRememberObject::Draw();
 }
 
 void CReflectionObject::Reset()
