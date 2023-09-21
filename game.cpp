@@ -67,7 +67,13 @@ HRESULT CGame::Init()
 //-----------------------------------------------------------------------------
 void CGame::GameStart()
 {
-	m_timer = CTimer::Create(D3DXVECTOR3(100.0f, 100.0f, 0.0f), D3DXVECTOR2(30.0f, 100.0f));
+	{
+		CObject2D* object = CObject2D::Create();
+		object->SetPos(D3DXVECTOR3(60.0f, 90.0f, 0.0f));
+		object->SetSize(D3DXVECTOR2(100.0f,100.0f));
+		object->SetTexture("CLOCK");
+	}
+	m_timer = CTimer::Create(D3DXVECTOR3(140.0f, 95.0f, 0.0f), D3DXVECTOR2(45.0f, 140.0f));
 	m_timer->SetTimer(60);
 
 	{
@@ -80,8 +86,9 @@ void CGame::GameStart()
 	}
 
 	{
-		m_scoreUI = CSequence::Create(D3DXVECTOR3(100.0f, 400.0f, 0.0f), D3DXVECTOR2(30.0f, 100.0f),3);
+		m_scoreUI = CSequence::Create(D3DXVECTOR3(140.0f, 210.0f, 0.0f), D3DXVECTOR2(40.0f, 120.0f),3);
 		m_scoreUI->SetNumber(m_score);
+		m_scoreUI->SetColor(D3DXCOLOR(1.0f,1.0f,1.0f,1.0f));
 	}
 }
 
@@ -133,11 +140,13 @@ void CGame::AddScore(const int inScore)
 
 	if (m_score <= 0)
 	{
+		m_score = 0;
 		m_scoreUI->SetNumber(0);
 		addScore = 0;
 	}
 
 	D3DXVECTOR3 pos(m_scoreUI->GetPos());
-	pos.y -= 60.0f;
+	pos.y -= 40.0f;
+	pos.x += 25.0f;
 	CScoreUp::Create(pos, addScore);
 }
