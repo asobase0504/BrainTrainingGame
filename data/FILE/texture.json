@@ -1,6 +1,8 @@
 {
 	"TEXTURE": [
 		[ "TITLE_LOGO", "data\/TEXTURE\/TITLE\/BreanMemo2.png" ],
+		[ "GAME_ICON_SHADOW", "data\/TEXTURE\/game_icon00.png" ],
+		[ "GAME_ICON_REMENBER", "data\/TEXTURE\/game_icon01.png" ],
 		[ "ANIMAL1", "data\/TEXTURE\/animal\/bear.png" ],
 		[ "ANIMAL2", "data\/TEXTURE\/animal\/cat.png" ],
 		[ "ANIMAL3", "data\/TEXTURE\/animal\/cow.png" ],

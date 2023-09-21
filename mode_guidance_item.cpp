@@ -15,8 +15,8 @@ CModeGuidanceItem::~CModeGuidanceItem()
 HRESULT CModeGuidanceItem::Init()
 {
 	CObject2D::Init();
-	SetSize(D3DXVECTOR2(100.0f,100.0f));
-	return E_NOTIMPL;
+	SetSize(D3DXVECTOR2(140.0f,140.0f));
+	return S_OK;
 }
 
 void CModeGuidanceItem::Update()
