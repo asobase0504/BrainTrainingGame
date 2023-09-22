@@ -48,9 +48,10 @@ HRESULT CTitle::Init()
 		D3DXVECTOR2 size(1299.0f * 0.35f, 329.0f * 0.35f);
 		CClickItem* object = CClickItem::Create(pos,size);
 		object->SetTexture("TEXT_START");
-		object->SetEvent([]()
+		object->SetEvent([object]()
 		{
 			CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_SAVE);
+			object->SetColor(D3DXCOLOR(0.45f,0.45f,0.45f,1.0f));
 		});
 	}
 

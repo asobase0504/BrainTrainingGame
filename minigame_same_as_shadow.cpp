@@ -10,6 +10,8 @@
 #include "minigame_same_as_shadow.h"
 
 #include "same_as_shadow_system.h"
+#include "object2d.h"
+#include "application.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -41,6 +43,13 @@ HRESULT CMiniGameSameAsShadow::Init()
 void CMiniGameSameAsShadow::GameStart()
 {
 	CGame::GameStart();
+
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
+		object->SetSize(D3DXVECTOR2(CApplication::CENTER_Y * 1.1f, CApplication::CENTER_Y * 1.1f));
+		object->SetTexture("BLOCK_BG");
+	}
 
 	CSameAsShadowSystem::Create()->SetGameMode(this);
 }

@@ -19,9 +19,9 @@
 //**************************************************
 // 定数
 //**************************************************
-const int CSameAsShadowSystem::MAX_SHADOW = 3;
-const int CSameAsShadowSystem::MAX_CHOICES = 5;
-const int CSameAsShadowSystem::MAX_ANSWER = 3;
+const int CSameAsShadowSystem::MAX_SHADOW = 4;
+const int CSameAsShadowSystem::MAX_CHOICES = 6;
+const int CSameAsShadowSystem::MAX_ANSWER = 4;
 
 //--------------------------------------------------
 // コンストラクタ
@@ -65,27 +65,36 @@ HRESULT CSameAsShadowSystem::Init()
 	m_nAnswerNumber.resize(MAX_SHADOW);
 	m_isAnswerNumber.resize(MAX_CHOICES);
 
-	D3DXVECTOR3 move(10.0f, 10.0f, 0.0f);
-
 	{// シルエット
 		for (int i = 0; i < MAX_SHADOW; i++)
 		{
 			m_pShadowObject[i] = CReflectionObject::Create(
-				D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.5f + 100.0f * i, CApplication::SCREEN_HEIGHT * 0.5f, 0.0f),
+				D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f),
 				D3DXVECTOR2(100.0f, 100.0f), 0);
 			m_pShadowObject[i]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
-			m_pShadowObject[i]->SetMove(move);
+			m_pShadowObject[i]->SetMove(D3DXVECTOR3(FloatRandom(15.0f, -15.0f), FloatRandom(15.0f, -15.0f), 0.0f));
 			m_pShadowObject[i]->SetEvent([]() {});
 		}
 	}
 
-	CClickItem* initCluck = CClickItem::Create(D3DXVECTOR3(CApplication::CENTER_X, 400.0f, 0.0f), D3DXVECTOR2(500.0f, 250.0f));
-	initCluck->SetEvent([this, initCluck]()
+	InitCreateAnswer_();
+	Shadow_();
+	Choices_();
+
+	for (int i = 0; i < TEXTURE_MAX; i++)
 	{
-		m_isChange = true;
-		initCluck->Uninit();
-		InitCreateAnswer_();
-	});
+		m_isUsedNumber[i] = false;
+	}
+
+	for (int i = 0; i < m_isAnswerNumber.size(); i++)
+	{
+		m_isAnswerNumber[i] = false;
+	}
+
+	for (int i = 0; i < m_pShadowObject.size(); i++)
+	{
+		m_pShadowObject[i]->Reset();
+	}
 
 	return S_OK;
 }
@@ -230,6 +239,8 @@ void CSameAsShadowSystem::Shadow_()
 
 		m_pShadowObject[i]->SetMyNumber(number);
 		m_pShadowObject[i]->SetTexture(m_tex[number]);
+		m_pShadowObject[i]->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
+		m_pShadowObject[i]->SetMove(D3DXVECTOR3(FloatRandom(15.0f,-15.0f), FloatRandom(15.0f, -15.0f),0.0f));
 		m_nAnswerNumber[i] = number;
 
 		m_isUsedNumber[number] = true;
