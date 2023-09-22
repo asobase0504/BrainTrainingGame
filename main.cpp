@@ -10,6 +10,7 @@
 //*****************************************************************************
 #include <tchar.h> // _T
 #include "application.h"
+#include "input.h"
 
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
@@ -85,6 +86,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpC
 
 	//乱数の初期化
 	srand((unsigned int)time(0));
+
+	//タッチパネルの情報の受け取りの開始
+	RegisterTouchWindow(hWnd, 0);
 
 	if (FAILED(application->Init(hWnd, hInstance)))
 	{
@@ -172,6 +176,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpC
 //=============================================================================
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	UINT cInputs = NULL;
+	CInput *pInput = nullptr;
+	PTOUCHINPUT pInputs = nullptr;
 	switch (uMsg)
 	{
 	case WM_CREATE:
@@ -180,7 +187,40 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
+	case WM_TOUCH:
+		cInputs = LOWORD(wParam);
+		pInputs = new TOUCHINPUT[cInputs];
+		if (nullptr != pInputs)
+		{
+			if (GetTouchInputInfo((HTOUCHINPUT)lParam,
+				cInputs,
+				pInputs,
+				sizeof(TOUCHINPUT)))
+			{
+				// process pInputs
+				if (!CloseTouchInputHandle((HTOUCHINPUT)lParam))
+				{
+					// error handling
+				}
 
+				//inputの情報取得
+				pInput = CInput::GetKey();
+
+				//情報の設定
+				pInput->SetTouchData(pInputs, cInputs - 1);
+
+			}
+			else
+			{
+				// GetLastError() and error handling
+			}
+			delete[] pInputs;
+		}
+		else
+		{
+			// error handling, presumably out of memory
+		}
+		break;
 	case WM_KEYDOWN:
 		switch (wParam)
 		{

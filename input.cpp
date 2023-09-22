@@ -13,6 +13,7 @@
 #include "input\inputkeyboard.h"
 #include "input\inputjoypad.h"
 #include "input\inputmouse.h"
+#include "input\input_touch_panel.h"
 #include <assert.h>
 
 //-----------------------------------------------------------------------------
@@ -28,6 +29,7 @@ CInput::CInput()
 	m_pKeyboard = nullptr;		//キーボードの情報
 	m_pJoyPad = nullptr;		//ジョイパッドの情報
 	m_pMouse = nullptr;			//マウスの情報
+	m_pTouchPanel = nullptr;	//タッチパネルの情報
 	m_nOldInputType = INPUT_TYPE_KEYBOARD;
 }
 
@@ -41,7 +43,7 @@ CInput::~CInput()
 //*************************************************************************************
 //初期化
 //*************************************************************************************
-HRESULT CInput::Init(HINSTANCE hInstance, HWND hWnd)
+HRESULT CInput::Init(HINSTANCE hInstance, HWND hWnd, D3DXVECTOR2 ScreenSize)
 {
 	//DirectInputオブジェクトの生成
 	if (FAILED(CDirectInput::Create(hInstance, hWnd)))
@@ -76,6 +78,10 @@ HRESULT CInput::Init(HINSTANCE hInstance, HWND hWnd)
 		return E_FAIL;
 	}
 
+	//タッチパネルの生成
+	m_pTouchPanel = new CInputTouchPanel;
+	m_pTouchPanel->SetScreenSize(ScreenSize);
+
 	return S_OK;
 }
 
@@ -106,6 +112,13 @@ void CInput::Uninit()
 		m_pMouse->Uninit();
 		delete m_pMouse;
 		m_pMouse = nullptr;
+	}
+
+	//タッチパネルの破棄
+	if (m_pTouchPanel != nullptr)
+	{
+		delete m_pTouchPanel;
+		m_pTouchPanel = nullptr;
 	}
 
 	//DirectInputオブジェクトの破棄
@@ -492,6 +505,38 @@ void CInput::IntermediateReception(bool bIR)
 bool CInput::GetIntermediateReception()
 {
 	return m_pJoyPad->GetIntermediateReception();
+}
+
+//*************************************************************************************
+//タッチパネルの情報取得
+//*************************************************************************************
+CInputTouchPanel * CInput::GetTouchPanel()
+{
+	return m_pTouchPanel;
+}
+
+//*************************************************************************************
+//タッチデータの保存
+//*************************************************************************************
+void CInput::SetTouchData(TOUCHINPUT * pTouchData, int nCntData)
+{
+	m_pTouchPanel->SetTouchData(pTouchData, nCntData);
+}
+
+//*************************************************************************************
+//タッチパネルのプレス
+//*************************************************************************************
+bool CInput::PressTouchPanel(int nNum)
+{
+	return m_pTouchPanel->GetPress(nNum);
+}
+
+//*************************************************************************************
+//タッチパネルのPos
+//*************************************************************************************
+D3DXVECTOR3 CInput::GetTouchPanelPos(int nNum)
+{
+	return m_pTouchPanel->GetTouchPos(nNum);
 }
 
 //*************************************************************************************

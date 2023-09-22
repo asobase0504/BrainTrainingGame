@@ -26,10 +26,12 @@ class CSound;
 class CApplication
 {
 public: // 定数
-	static const int SCREEN_WIDTH;		// スクリーンの幅
-	static const int SCREEN_HEIGHT;		// スクリーンの高さ
-	static const float CENTER_X;		// スクリーン中心座標のX座標
-	static const float CENTER_Y;		// スクリーン中心座標のY座標
+	static const int SCREEN_WIDTH;			// スクリーンの幅
+	static const int SCREEN_HEIGHT;			// スクリーンの高さ
+	static const float CENTER_X;			// スクリーン中心座標のX座標
+	static const float CENTER_Y;			// スクリーン中心座標のY座標
+	static const float FLOAT_SCREEN_WIDTH;	// スクリーンの幅(float版)
+	static const float FLOAT_SCREEN_HEIGHT;	// スクリーンの高さ(float版)
 
 public: // 静的メンバー変数
 	static CApplication* application;

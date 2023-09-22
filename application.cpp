@@ -41,6 +41,8 @@ const int CApplication::SCREEN_WIDTH(1280);
 const int CApplication::SCREEN_HEIGHT(720);
 const float CApplication::CENTER_X(SCREEN_WIDTH * 0.5f);
 const float CApplication::CENTER_Y(SCREEN_HEIGHT * 0.5f);
+const float CApplication::FLOAT_SCREEN_WIDTH((float)SCREEN_WIDTH);
+const float CApplication::FLOAT_SCREEN_HEIGHT((float)SCREEN_HEIGHT);
 
 //-----------------------------------------------------------------------------
 // シングルトンでのインスタンスの取得
@@ -85,7 +87,7 @@ HRESULT CApplication::Init(HWND hWnd, HINSTANCE hInstance)
 {
 	// 入力処理
 	input = CInput::Create();
-	if (FAILED(input->Init(hInstance, hWnd)))
+	if (FAILED(input->Init(hInstance, hWnd,D3DXVECTOR2(FLOAT_SCREEN_WIDTH, FLOAT_SCREEN_HEIGHT))))
 	{
 		return E_FAIL;
 	}
