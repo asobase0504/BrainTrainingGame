@@ -170,6 +170,7 @@
     <ClCompile Include="input\inputjoypad.cpp" />
     <ClCompile Include="input\inputkeyboard.cpp" />
     <ClCompile Include="input\inputmouse.cpp" />
+    <ClCompile Include="input\input_touch_panel.cpp" />
     <ClCompile Include="largest_number.cpp" />
     <ClCompile Include="large_number_system.cpp" />
     <ClCompile Include="minigame_bus.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="input\inputkeyboard.h" />
     <ClInclude Include="input\inputkeydata.h" />
     <ClInclude Include="input\inputmouse.h" />
+    <ClInclude Include="input\input_touch_panel.h" />
     <ClInclude Include="largest_number.h" />
     <ClInclude Include="large_number_system.h" />
     <ClInclude Include="minigame_bus.h" />
