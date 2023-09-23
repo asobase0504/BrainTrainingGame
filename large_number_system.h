@@ -36,6 +36,9 @@ public:
 	static CLargeNumberSystem *Create();
 
 private:
+	void WhichiNumberLargest_();
+
+private:
 	std::vector<CLargestNumber*> m_pDisplayObject;
 	std::vector<bool> m_isUsedNumber;
 };
