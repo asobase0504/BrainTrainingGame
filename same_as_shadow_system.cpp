@@ -180,13 +180,23 @@ void CSameAsShadowSystem::InitCreateAnswer_()
 {
 	for (int i = 0; i < MAX_CHOICES; i++)
 	{// ‘I‘ðŽˆ
-		m_pSelectObject[i] = CRememberObject::Create(
-			D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.25f + 100.0f * i, CApplication::SCREEN_HEIGHT - 100.0f, 0.0f),
-			D3DXVECTOR2(100.0f, 100.0f), 0);
+
+		D3DXVECTOR3 pos(CApplication::CENTER_X - ((float)MAX_CHOICES * 0.5f) * 100.0f + i * 100.0f + 50.0f, CApplication::SCREEN_HEIGHT - 100.0f, 0.0f);
+		D3DXVECTOR2 size(80.0f, 80.0f);
+
+		{
+			CObject2D* object = CObject2D::Create();
+			object->SetPos(pos);
+			object->SetSize(size * 1.1f);
+			object->SetTexture("BLOCK_BG");
+		}
+
+		m_pSelectObject[i] = CRememberObject::Create(pos, size, 0);
 		m_pSelectObject[i]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 		m_pSelectObject[i]->SetEvent([this, i]()
 		{
 			bool isClickColor = m_pSelectObject[i]->GetColor().r < 1.0f;
+
 			if (isClickColor || m_isChange)
 			{
 				return;

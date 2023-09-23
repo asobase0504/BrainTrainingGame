@@ -332,6 +332,9 @@
     <ClCompile Include="largest_number.cpp">
       <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe\00_Object</Filter>
     </ClCompile>
+    <ClCompile Include="input\input_touch_panel.cpp">
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -528,6 +531,9 @@
     </ClInclude>
     <ClInclude Include="largest_number.h">
       <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe\00_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="input\input_touch_panel.h">
+      <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
