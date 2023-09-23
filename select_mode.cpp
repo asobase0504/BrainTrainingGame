@@ -41,15 +41,13 @@ HRESULT CSelectMode::Init()
 	}
 
 	CModeGuidanceItem* object;
-	object = CModeGuidanceItem::Create(D3DXVECTOR3(350.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_MOVEOBJECT);
-	object = CModeGuidanceItem::Create(D3DXVECTOR3(500.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_NUMBER25);
-	object = CModeGuidanceItem::Create(D3DXVECTOR3(650.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_BUS);
-	object = CModeGuidanceItem::Create(D3DXVECTOR3(800.0f, 500.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE);
+	object = CModeGuidanceItem::Create(D3DXVECTOR3(100.0f, 100.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_NUMBER25);
+	object = CModeGuidanceItem::Create(D3DXVECTOR3(250.0f, 100.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE);
 	object->SetTexture("GAME_ICON_REMENBER");
-	object = CModeGuidanceItem::Create(D3DXVECTOR3(350.0f, 350.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_COMEOUT);
-	object = CModeGuidanceItem::Create(D3DXVECTOR3(500.0f, 350.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_SHADOW);
+	object = CModeGuidanceItem::Create(D3DXVECTOR3(400.0f, 100.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_COMEOUT);
+	object = CModeGuidanceItem::Create(D3DXVECTOR3(550.0f, 100.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_SHADOW);
 	object->SetTexture("GAME_ICON_SHADOW");
-	object = CModeGuidanceItem::Create(D3DXVECTOR3(650.0f, 350.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_LARGE_NUMBER);
+	object = CModeGuidanceItem::Create(D3DXVECTOR3(700.0f, 100.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_LARGE_NUMBER);
 
 	return S_OK;
 }

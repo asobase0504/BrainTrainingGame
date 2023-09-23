@@ -150,7 +150,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpC
 				application->Update();
 
 				// •`‰æˆ—
+#ifdef _DEBUG
 				CDebugProc::Print("FPS : %d\n",g_nCountFPS);
+#endif // _DEBUG
 				application->Draw();
 
 #ifdef _DEBUG

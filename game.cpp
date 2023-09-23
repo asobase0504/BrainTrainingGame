@@ -77,8 +77,9 @@ void CGame::GameStart()
 	m_timer->SetTimer(60);
 
 	{
-		D3DXVECTOR3 pos((float)CApplication::SCREEN_WIDTH - 60.0f, 60.0f, 0.0f);
-		CClickItem* pauseItem = CClickItem::Create(pos,D3DXVECTOR2(75.0f,75.0));
+		D3DXVECTOR3 pos((float)CApplication::SCREEN_WIDTH - 70.0f, 60.0f, 0.0f);
+		CClickItem* pauseItem = CClickItem::Create(pos,D3DXVECTOR2(100.0f,100.0f));
+		pauseItem->SetTexture("STOP_BUTTON");
 		pauseItem->SetEvent([]()
 		{
 			CPause::Create();
