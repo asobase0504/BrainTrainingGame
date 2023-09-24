@@ -10,6 +10,8 @@
 #include "minigame_remember_before.h"
 
 #include "remember_system.h"
+#include "application.h"
+#include "object2d.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -32,6 +34,14 @@ CMiniGameRememberBefore::~CMiniGameRememberBefore()
 HRESULT CMiniGameRememberBefore::Init()
 {
 	CGame::Init();
+
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y - 300.0f, 0.0f));
+		D3DXVECTOR2 size(1292.0f * 0.4f, 252.0f * 0.4f);
+		object->SetSize(size);
+		object->SetTexture("TEXT_EXPO_SHADOW");
+	}
 
 	return S_OK;
 }

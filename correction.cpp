@@ -1,7 +1,7 @@
 #include "correction.h"
 #include "application.h"
 
-CCorrection::CCorrection() : CObject2D(CTaskGroup::EPriority::LEVEL_2D_UI)
+CCorrection::CCorrection() : CObject2D(CTaskGroup::EPriority::LEVEL_2D_UI_2)
 {
 }
 

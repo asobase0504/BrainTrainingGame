@@ -44,6 +44,7 @@
 		[ "DECO_PEN_GREEN", "data\/TEXTURE\/pen_green.png" ],
 		[ "DECO_PEN_RED", "data\/TEXTURE\/pen_red.png" ],
 		[ "DECO_TAG", "data\/TEXTURE\/tag.png" ],
+		[ "DECO_PIN", "data\/TEXTURE\/pin.png" ],
 		[ "TRUE", "data\/TEXTURE\/true1.png" ],
 		[ "FALSE", "data\/TEXTURE\/false1.png" ],
 		[ "RESULT_SCORE", "data\/TEXTURE\/result_score.png" ],
