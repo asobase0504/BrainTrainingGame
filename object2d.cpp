@@ -231,19 +231,24 @@ void CObject2D::Vtx()
 		pos += m_parent->GetPos();
 	}
 
-	D3DXMATRIX mtx;	// 計算用マトリックス
+	D3DXMATRIX mtx, mtxTrans;
 
-	// マトリックスの生成
-	D3DXMatrixIdentity(&mtx);
+	// 回転の反映
+	D3DXMatrixRotationZ(&mtx, -m_rotY);
 
-	// マトリックスを回転
-	D3DXMatrixRotationZ(&mtx, m_rotY);
-	D3DXVECTOR3 addPos[4];
+	// 位置の反映
+	D3DXMatrixTranslation(&mtxTrans, pos.x, pos.y, 0.0f);
+	D3DXMatrixMultiply(&mtx, &mtx, &mtxTrans);
 
-	D3DXVec3TransformCoord(&addPos[0], &D3DXVECTOR3(-1.0f, -1.0f, 0.0f), &mtx);
-	D3DXVec3TransformCoord(&addPos[1], &D3DXVECTOR3(1.0f, -1.0f, 0.0f), &mtx);
-	D3DXVec3TransformCoord(&addPos[2], &D3DXVECTOR3(-1.0f, 1.0f, 0.0f), &mtx);
-	D3DXVec3TransformCoord(&addPos[3], &D3DXVECTOR3(1.0f, 1.0f, 0.0f), &mtx);
+	D3DXVECTOR3 pVtxpos[4];
+
+	float fHalfWidth = m_size.x * 0.5f;
+	float fHalfHeight = m_size.y * 0.5f;
+
+	pVtxpos[0] = D3DXVECTOR3(-fHalfWidth, -fHalfHeight, 0.0f);
+	pVtxpos[1] = D3DXVECTOR3(+fHalfWidth, -fHalfHeight, 0.0f);
+	pVtxpos[2] = D3DXVECTOR3(-fHalfWidth, +fHalfHeight, 0.0f);
+	pVtxpos[3] = D3DXVECTOR3(+fHalfWidth, +fHalfHeight, 0.0f);
 
 	VERTEX_2D *pVtx = NULL;		// 頂点情報へのポインタ
 
@@ -252,9 +257,7 @@ void CObject2D::Vtx()
 
 	for (int i = 0; i < 4; i++)
 	{
-		pVtx[i].pos.x = pos.x + addPos[i].x * m_size.x * 0.5f;
-		pVtx[i].pos.y = pos.y + addPos[i].y * m_size.y * 0.5f;
-		pVtx[i].pos.z = 0.0f;
+		D3DXVec3TransformCoord(&pVtx[i].pos, &pVtxpos[i], &mtx);
 	}
 
 	// 頂点バッファをアンロックする

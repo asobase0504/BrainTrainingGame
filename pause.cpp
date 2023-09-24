@@ -35,7 +35,7 @@ HRESULT CPause::Init()
 	{
 		D3DXVECTOR3 pos(CApplication::CENTER_X, CApplication::CENTER_Y - 219.0f, 0.0f);
 		D3DXVECTOR2 size(D3DXVECTOR2(652.0f, 219.0f));
-		size *= 0.9f;
+		size *= 0.75f;
 		m_back = CClickItem::Create(pos, size, CTaskGroup::EPriority::LEVEL_PAUSE);
 		m_back->PauseOff();
 		m_back->SetEvent([this]() {Uninit(); });
@@ -49,7 +49,7 @@ HRESULT CPause::Init()
 		m_end = CClickItem::Create(pos, size, CTaskGroup::EPriority::LEVEL_PAUSE);
 		m_end->PauseOff();
 		m_end->SetEvent([this]() { CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_MODE); });
-		m_end->SetTexture("TEXT_POUSE_END");
+		m_end->SetTexture("TEXT_END");
 	}
 	return S_OK;
 }
