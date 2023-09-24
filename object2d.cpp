@@ -264,6 +264,22 @@ void CObject2D::Vtx()
 	m_pVtxBuff->Unlock();
 }
 
+void CObject2D::SetUV(D3DXVECTOR2 U, D3DXVECTOR2 V)
+{
+	VERTEX_2D *pVtx;			// 頂点情報へのポインタ
+								
+// 頂点バッファをロックし、頂点情報へのポインタを取得
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	pVtx[0].tex = D3DXVECTOR2(U[0], V[0]);
+	pVtx[1].tex = D3DXVECTOR2(U[1], V[0]);
+	pVtx[2].tex = D3DXVECTOR2(U[0], V[1]);
+	pVtx[3].tex = D3DXVECTOR2(U[1], V[1]);
+
+	// 頂点バッファをアンロック
+	m_pVtxBuff->Unlock();
+}
+
 //=============================================================================
 // テクスチャのアニメーション
 //=============================================================================

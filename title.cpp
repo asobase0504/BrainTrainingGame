@@ -70,11 +70,11 @@ HRESULT CTitle::Init()
 
 	{
 		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
-		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X + 500.0f, CApplication::CENTER_Y - 300.0f, 0.0f));
-		object->SetRot(0.8f);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X + 460.0f, CApplication::CENTER_Y - 290.0f, 0.0f));
+		object->SetRot(0.9f);
 		D3DXVECTOR2 size(652.0f * 0.45f, 317.0f * 0.45f);
 		object->SetSize(size);
-		object->SetColor(D3DXCOLOR(1.0f,1.0f,0.0f,1.0f));
+		object->SetColor(D3DXCOLOR(1.0f, 0.75f, 0.75f, 1.0f));
 		object->SetTexture("DECO_TAG");
 	}
 	{
@@ -83,16 +83,9 @@ HRESULT CTitle::Init()
 		object->SetRot(0.8f);
 		D3DXVECTOR2 size(652.0f * 0.45f, 317.0f * 0.45f);
 		object->SetSize(size);
-		object->SetColor(D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
+		object->SetColor(D3DXCOLOR(1.0f,1.0f,0.0f,1.0f));
 		object->SetTexture("DECO_TAG");
 	}
-	//{
-	//	CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
-	//	object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
-	//	D3DXVECTOR2 size(354.0f * 0.15f, 2774.0f * 0.15f);
-	//	object->SetSize(size);
-	//	object->SetTexture("DECO_PEN_RED");
-	//}
 
 	{
 		D3DXVECTOR3 pos(CApplication::CENTER_X + 250.0f, CApplication::CENTER_Y, 0.0f);
@@ -101,7 +94,7 @@ HRESULT CTitle::Init()
 		object->SetTexture("TEXT_START");
 		object->SetEvent([object]()
 		{
-			CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_SAVE);
+			CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_MODE);
 			object->SetColor(D3DXCOLOR(0.45f,0.45f,0.45f,1.0f));
 		});
 	}

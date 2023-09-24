@@ -14,7 +14,7 @@ HRESULT CCountDown::Init()
 	m_fream = 0;
 	CSequence::Init(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f), D3DXVECTOR2(100.0f, 200.0f), 1);
 	SetTimer(3);
-	SetColor(D3DXCOLOR(1.0f,1.0f,0.0f,1.0f));
+	SetColor(D3DXCOLOR(0.0f,0.0f,0.0f,1.0f));
 	return E_NOTIMPL;
 }
 

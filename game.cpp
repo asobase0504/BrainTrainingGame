@@ -51,8 +51,8 @@ HRESULT CGame::Init()
 	{
 		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
 		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
-		object->SetSize(D3DXVECTOR2(CApplication::CENTER_Y * 1.85f, CApplication::CENTER_Y * 1.85f));
-		object->SetTexture("BLOCK_BG");
+		object->SetSize(D3DXVECTOR2(CApplication::CENTER_Y * 2.0f, CApplication::CENTER_Y * 2.0f));
+		object->SetTexture("GAME_BG");
 	}
 
 	m_countDown = CCountDown::Create();
