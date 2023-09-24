@@ -13,6 +13,7 @@
 //**************************************************
 // 前方前言　実態はNG　ポインタだけならOK
 //**************************************************
+class CSequence;
 
 //**************************************************
 // 定数定義
@@ -32,6 +33,7 @@ public:
 	~CLargestNumber();
 
 	HRESULT Init() override;
+	HRESULT Init(const D3DXVECTOR3& inPos);
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
@@ -41,7 +43,10 @@ public:
 	void SetIsLargest(bool inIsLargest) { m_isLargest = inIsLargest; }
 	bool GetIsLargest() { return m_isLargest; }
 
+	void SetSequence(int inSequence);
+
 private:
+	CSequence *m_pSequence;
 	bool m_isLargest;
 };
 
