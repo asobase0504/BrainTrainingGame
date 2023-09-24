@@ -76,25 +76,34 @@ HRESULT CRememberSystem::Init()
 
 	{
 		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI_2);
-		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X + 20.0f , 70.0f, 0.0f));
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X + 20.0f , 130.0f, 0.0f));
 		object->SetSize(D3DXVECTOR2(50.0f * 0.5f, 63.0f * 0.5f));
 		object->SetTexture("DECO_PIN");
 	}
 
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI);
+		object->SetPos(D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.5f, 230.0f, 0.0f));
+		object->SetSize(D3DXVECTOR2(320.0f, 220.0f));
+		object->SetColor(D3DXCOLOR(0.16f,0.24f,0.22f,1.0f));
+	}
+
 	// Šo‚¦‚é‚â‚Â ˆê‰ñ‚¾‚¯‚Â‚­‚é
 	m_pRememberObject = CRememberObject::Create(
-		D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.5f, 170.0f, 0.0f),
+		D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.5f, 230.0f, 0.0f),
 		D3DXVECTOR2(300.0f, 200.0f), m_nAnswer);
 	m_pRememberObject->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	m_pRememberObject->SetTexture(m_tex[m_nAnswer]);
 	m_pRememberObject->SetEvent([]() {});
 
-	CClickItem* initCluck = CClickItem::Create(D3DXVECTOR3(CApplication::CENTER_X, 400.0f, 0.0f), D3DXVECTOR2(500.0f, 250.0f));
-	initCluck->SetEvent([this, initCluck]()
+	CClickItem* initClick = CClickItem::Create(D3DXVECTOR3(CApplication::CENTER_X, 500.0f, 0.0f), D3DXVECTOR2(652.0f * 0.5f, 219.0f * 0.5f));
+	initClick->SetTexture("TEXT_CHACK");
+	initClick->SetEvent([this, initClick]()
 	{
 		m_isChange = true;
-		initCluck->Uninit();
+		initClick->Uninit();
 		InitCreateAnswer_();
+		Update();
 	});
 
 	return S_OK;
@@ -182,7 +191,7 @@ void CRememberSystem::InitCreateAnswer_()
 
 			D3DXVECTOR3 pos;
 			pos.x = CApplication::CENTER_X - ((float)(X_LINE - 1) * 0.5f) * xInterval + nCntX * xInterval;
-			pos.y = CApplication::CENTER_Y * 1.2f - ((float)(Y_LINE - 1) * 0.5f) * yInterval + nCntY * yInterval;
+			pos.y = CApplication::CENTER_Y + 165.0f - ((float)(Y_LINE - 1) * 0.5f) * yInterval + nCntY * yInterval;
 			pos.z = 0.0f;
 
 			{

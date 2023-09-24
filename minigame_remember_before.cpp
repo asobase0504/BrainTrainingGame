@@ -40,7 +40,7 @@ HRESULT CMiniGameRememberBefore::Init()
 		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y - 300.0f, 0.0f));
 		D3DXVECTOR2 size(1292.0f * 0.4f, 252.0f * 0.4f);
 		object->SetSize(size);
-		object->SetTexture("TEXT_EXPO_SHADOW");
+		object->SetTexture("TEXT_EXPO_REMEMBER");
 	}
 
 	return S_OK;
