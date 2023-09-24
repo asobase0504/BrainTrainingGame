@@ -123,21 +123,13 @@ CLargeNumberSystem *CLargeNumberSystem::Create()
 //--------------------------------------------------
 void CLargeNumberSystem::WhichiNumberLargest_()
 {
-	for (int i = 0; i < DISPLAY_NUMBER - 1; i++)
+	for (int i = 0; i < DISPLAY_NUMBER; i++)
 	{
-		int number1 = m_pDisplayObject[i]->GetMyNumber();
-		for (int j = i + 1; j < DISPLAY_NUMBER; j++)
+		if (m_nLargestNumber < m_pDisplayObject[i]->GetMyNumber())
 		{
-			int number2 = m_pDisplayObject[j]->GetMyNumber();
-			// “ñ‚Â‚Ìƒf[ƒ^‚ğ”äŠr‚·‚é
-			if (number1 <= number2)
-			{
-				m_nLargestNumber = number2;
-			}
+			m_nLargestNumber = m_pDisplayObject[i]->GetMyNumber();
 		}
 	}
-
-	int a = 0;
 
 	for (int i = 0; i < DISPLAY_NUMBER; i++)
 	{
