@@ -77,8 +77,9 @@ HRESULT CResult::Init()
 
 	D3DXVECTOR3 pos(CApplication::CENTER_X - 90.0f, CApplication::CENTER_Y, 0.0f);
 	D3DXVECTOR2 size(90.0f, 280.0f);
-	CSequence::Create(pos, size, 3)->SetNumber(m_score);
-
+	CSequence* sequence = CSequence::Create(pos, size, 3);
+	sequence->SetColor(D3DXCOLOR(0.0f,0.0f,0.0f,1.0f));
+	sequence->SetNumber(m_score);
 	return S_OK;
 }
 
