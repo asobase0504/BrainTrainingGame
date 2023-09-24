@@ -39,7 +39,7 @@ void CTexture::LoadAll()
 	
 	for (int i = 0; i < (int)list["TEXTURE"].size(); ++i)
 	{
-		Load(list["TEXTURE"].at(i));
+		m_texturePath[list["TEXTURE"].at(i)[0]] = list["TEXTURE"].at(i)[1];
 	}
 }
 
@@ -111,8 +111,13 @@ LPDIRECT3DTEXTURE9 CTexture::GetTexture(std::string inKey)
 	// Key‚ª‘¶Ý‚·‚é‚©”Û‚©B
 	if (!ExistsKey(inKey))
 	{
-		// Key‚ª‚È‚©‚Á‚½ê‡
-		return nullptr;
+		if (!ExistsKeyPath(inKey))
+		{
+			// Key‚ª‚È‚©‚Á‚½ê‡
+			return nullptr;
+		}
+
+		Load(inKey,m_texturePath[inKey]);
 	}
 
 	/* «Key‚ª‚ ‚Á‚½ê‡« */
