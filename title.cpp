@@ -45,7 +45,7 @@ HRESULT CTitle::Init()
 
 	{
 		D3DXVECTOR3 pos(CApplication::CENTER_X, CApplication::CENTER_Y + 250.0f, 0.0f);
-		D3DXVECTOR2 size(1299.0f * 0.35f, 329.0f * 0.35f);
+		D3DXVECTOR2 size(652.0f * 0.7f, 219.0f * 0.7f);
 		CClickItem* object = CClickItem::Create(pos,size);
 		object->SetTexture("TEXT_START");
 		object->SetEvent([object]()

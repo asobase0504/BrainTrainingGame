@@ -32,7 +32,6 @@ public:
 	explicit CClickItem(int priority = CTaskGroup::EPriority::LEVEL_2D_UI);
 	~CClickItem();
 
-	HRESULT Init() override;
 	void Update() override;
 
 	virtual void ClickEvent() { m_event(); }
