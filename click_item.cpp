@@ -15,6 +15,8 @@
 //--------------------------------------------------
 CClickItem::CClickItem(int priority) : CObject2D(priority)
 {
+	m_eventTick = [](){};
+	m_tick = 0;
 }
 
 //--------------------------------------------------
@@ -30,6 +32,9 @@ CClickItem::~CClickItem()
 void CClickItem::Update()
 {
 	CObject2D::Update();
+
+	m_tick++;
+	m_eventTick();
 
 	m_isClick = false;
 

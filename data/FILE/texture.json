@@ -3,7 +3,7 @@
 		[ "TITLE_LOGO", "data\/TEXTURE\/TITLE\/BreanMemo2.png" ],
 		[ "GAME_ICON_SHADOW", "data\/TEXTURE\/game_icon00.png" ],
 		[ "GAME_ICON_REMENBER", "data\/TEXTURE\/game_icon01.png" ],
-		[ "STOP_BUTTON", "data\/TEXTURE\/TEXT\/stop_button.png" ],
+		[ "STOP_BUTTON", "data\/TEXTURE\/stop_button.png" ],
 		[ "TEXT_POUSE_BACK", "data\/TEXTURE\/TEXT\/back.png" ],
 		[ "TEXT_POUSE_RETRY", "data\/TEXTURE\/TEXT\/retry.png" ],
 		[ "TEXT_END", "data\/TEXTURE\/TEXT\/end.png" ],

@@ -97,6 +97,11 @@ HRESULT CTitle::Init()
 			CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_MODE);
 			object->SetColor(D3DXCOLOR(0.45f,0.45f,0.45f,1.0f));
 		});
+		object->SetEventTick([object, size]()
+		{
+			float mul = 1.0f + (sinf((object->GetTick() * 0.005f) * (D3DX_PI * 2.0f)) + 1.0f) * 0.5f * 0.05f;
+			object->SetSize(size * mul);
+		});
 	}
 
 	{
