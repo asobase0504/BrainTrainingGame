@@ -64,6 +64,8 @@ HRESULT CLargeNumberSystem::Init()
 		m_pDisplayObject[i]->SetEvent([]() {});
 	}
 
+	WhichiNumberLargest_();
+
 	return S_OK;
 }
 
@@ -106,4 +108,33 @@ CLargeNumberSystem *CLargeNumberSystem::Create()
 	}
 
 	return pLargeNumberSystem;
+}
+
+//--------------------------------------------------
+// ‚Ç‚ê‚ª‘å‚«‚¢”‚©
+//--------------------------------------------------
+void CLargeNumberSystem::WhichiNumberLargest_()
+{
+	// ˆê“I‚É•Û‘¶‚·‚é•Ï”
+	int nCheck = 0;
+	for (int i = 0; i < DISPLAY_NUMBER - 1; i++)
+	{
+		int number1 = m_pDisplayObject[i]->GetMyNumber();
+		for (int j = j + 1; j < DISPLAY_NUMBER; j++)
+		{
+			int number2 = m_pDisplayObject[j]->GetMyNumber();
+			// “ñ‚Â‚Ìƒf[ƒ^‚ğ”äŠr‚·‚é
+			if (number1 <= number2)
+			{
+				//•Ï”‚ğˆêŠi”[
+				nCheck = number2;
+
+				//”äŠr‚µ‚½”’l‚ğ“ü‚ê‚é
+				number2 = number1;
+				number1 = nCheck;
+			}
+		}
+
+		int a = 0;
+	}
 }
