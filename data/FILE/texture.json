@@ -20,6 +20,7 @@
 		[ "TEXT_EXPO_COMEOUT", "data\/TEXTURE\/TEXT\/game_expo_come_out.png" ],
 		[ "TEXT_EXPO_SHADOW", "data\/TEXTURE\/TEXT\/game_expo_shadow.png" ],
 		[ "TEXT_EXPO_REMEMBER", "data\/TEXTURE\/TEXT\/game_expo_remember.png" ],
+		[ "HI_SCORE", "data\/TEXTURE\/top.png" ],
 		[ "BOOK_BG", "data\/TEXTURE\/BG\/bg_book.png" ],
 		[ "GAME_BG", "data\/TEXTURE\/BG\/game_bg.png" ],
 		[ "GREEN_BG", "data\/TEXTURE\/BG\/bg.jpg" ],

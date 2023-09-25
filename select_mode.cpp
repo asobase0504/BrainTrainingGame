@@ -70,6 +70,12 @@ HRESULT CSelectMode::Init()
 	// ‘O‰ñ
 	object = CModeGuidanceItem::Create(D3DXVECTOR3(425.0f, 320.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE);
 	object->SetModeTexture("GAME_ICON_REMENBER", "TEXT_EXPO_REMEMBER");
+	{
+		CObject2D* item = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI);
+		item->SetPos(D3DXVECTOR3(345.0f, 240.0f, 0.0f));
+		item->SetSize(D3DXVECTOR2(120.0f * 0.6f, 105.0f * 0.6f));
+		item->SetTexture("HI_SCORE");
+	}
 	m_pHiScore[0] = CSequence::Create(D3DXVECTOR3(425.0f, 240.0f, 0.0f), D3DXVECTOR2(30.0f, 80.0f), 3);
 	m_pHiScore[0]->SetNumber(CSave::GetHiScore(CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE));
 	m_pHiScore[0]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
@@ -77,6 +83,12 @@ HRESULT CSelectMode::Init()
 	// ‰e
 	object = CModeGuidanceItem::Create(D3DXVECTOR3(975.0f, 320.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_SHADOW);
 	object->SetModeTexture("GAME_ICON_SHADOW", "TEXT_EXPO_SHADOW");
+	{
+		CObject2D* item = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI);
+		item->SetPos(D3DXVECTOR3(895.0f, 240.0f, 0.0f));
+		item->SetSize(D3DXVECTOR2(120.0f * 0.6f, 105.0f * 0.6f));
+		item->SetTexture("HI_SCORE");
+	}
 	m_pHiScore[1] = CSequence::Create(D3DXVECTOR3(975.0f, 240.0f, 0.0f), D3DXVECTOR2(30.0f, 80.0f), 3);
 	m_pHiScore[1]->SetNumber(CSave::GetHiScore(CMode::MODE_TYPE::MINIGAME_SHADOW));
 	m_pHiScore[1]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
@@ -84,14 +96,26 @@ HRESULT CSelectMode::Init()
 	// o‚½‡
 	object = CModeGuidanceItem::Create(D3DXVECTOR3(425.0f, 600.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_COMEOUT);
 	object->SetModeTexture("GAME_ICON_COMEOUT", "TEXT_EXPO_COMEOUT");
-	m_pHiScore[2] = CSequence::Create(D3DXVECTOR3(425.0f, 530.0f, 0.0f), D3DXVECTOR2(30.0f, 80.0f), 3);
+	{
+		CObject2D* item = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI);
+		item->SetPos(D3DXVECTOR3(345.0f, 520.0f, 0.0f));
+		item->SetSize(D3DXVECTOR2(120.0f * 0.6f, 105.0f * 0.6f));
+		item->SetTexture("HI_SCORE");
+	}
+	m_pHiScore[2] = CSequence::Create(D3DXVECTOR3(425.0f, 520.0f, 0.0f), D3DXVECTOR2(30.0f, 80.0f), 3);
 	m_pHiScore[2]->SetNumber(CSave::GetHiScore(CMode::MODE_TYPE::MINIGAME_COMEOUT));
 	m_pHiScore[2]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 
 	// ‘å‚«‚¢”
 	object = CModeGuidanceItem::Create(D3DXVECTOR3(975.0f, 600.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_LARGE_NUMBER);
 	object->SetModeTexture("GAME_ICON_LARGE", "TEXT_EXPO_LARGE");
-	m_pHiScore[3] = CSequence::Create(D3DXVECTOR3(975.0f, 530.0f, 0.0f), D3DXVECTOR2(30.0f, 80.0f), 3);
+	{
+		CObject2D* item = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI);
+		item->SetPos(D3DXVECTOR3(895.0f, 520.0f, 0.0f));
+		item->SetSize(D3DXVECTOR2(120.0f * 0.6f, 105.0f * 0.6f));
+		item->SetTexture("HI_SCORE");
+	}
+	m_pHiScore[3] = CSequence::Create(D3DXVECTOR3(975.0f, 520.0f, 0.0f), D3DXVECTOR2(30.0f, 80.0f), 3);
 	m_pHiScore[3]->SetNumber(CSave::GetHiScore(CMode::MODE_TYPE::MINIGAME_LARGE_NUMBER));
 	m_pHiScore[3]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 	return S_OK;
