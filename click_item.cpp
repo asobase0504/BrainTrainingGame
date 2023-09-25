@@ -49,6 +49,9 @@ void CClickItem::Update()
 	}
 }
 
+//--------------------------------------------------
+// çÏê¨
+//--------------------------------------------------
 CClickItem * CClickItem::Create(const D3DXVECTOR3 & inPos, const D3DXVECTOR2 & inSize, int priority)
 {
 	CClickItem* item = new CClickItem(priority);

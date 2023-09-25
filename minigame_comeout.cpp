@@ -44,6 +44,8 @@ CMiniGameComeOut::~CMiniGameComeOut()
 //==========================================
 HRESULT CMiniGameComeOut::Init()
 {
+	CGame::Init();
+
 	//経過時間をリセット
 	m_nTime = 0;
 	m_nSpeed = 0;
@@ -51,6 +53,72 @@ HRESULT CMiniGameComeOut::Init()
 
 	//データを読み込み
 	Load();
+
+	return S_OK;
+}
+
+//==========================================
+//  終了処理
+//==========================================
+void CMiniGameComeOut::Uninit()
+{
+	CGame::Uninit();
+	delete[] m_pUse;
+	m_pUse = NULL;
+	delete[] m_pPos;
+	m_pPos = NULL;
+}
+
+//==========================================
+//  更新処理
+//==========================================
+void CMiniGameComeOut::Update()
+{
+	CGame::Update();
+
+	if (GetState() == COUNT_DOWN)
+	{
+		return;
+	}
+
+	//経過時間を更新
+	m_nTime++;
+	CTarget::SetTime(m_nTime);
+
+	//クリックが可能になる時間
+	if (!m_bClick)
+	{
+		if (m_nTime >= m_nPopTime)
+		{
+			m_bClick = true;
+		}
+	}
+
+	//クリアフラグ
+	if (CTarget::GetNext() == m_nNumData)
+	{
+		CDebugProc::Print("クリアタイム : %d\n", m_nSpeed / 60);
+	}
+	else if (m_bClick)
+	{
+		m_nSpeed++;
+	}
+
+	//デバッグ表示
+	CDebugProc::Print("出た順に押すモード\n");
+}
+
+//==========================================
+//  描画処理
+//==========================================
+void CMiniGameComeOut::Draw()
+{
+
+}
+
+void CMiniGameComeOut::GameStart()
+{
+	CGame::GameStart();
 
 	//画面の中心を取得する
 	m_pos = D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f);
@@ -123,58 +191,6 @@ HRESULT CMiniGameComeOut::Init()
 		//座標の設定
 		m_pTarget[nCnt]->SetPos(m_pPos[nCnt]);
 	}
-
-	return S_OK;
-}
-
-//==========================================
-//  終了処理
-//==========================================
-void CMiniGameComeOut::Uninit()
-{
-	delete[] m_pUse;
-	m_pUse = NULL;
-	delete[] m_pPos;
-	m_pPos = NULL;
-}
-
-//==========================================
-//  更新処理
-//==========================================
-void CMiniGameComeOut::Update()
-{
-	//経過時間を更新
-	m_nTime++;
-	CTarget::SetTime(m_nTime);
-
-	//クリックが可能になる時間
-	if (!m_bClick)
-	{
-		if (m_nTime >= m_nPopTime)
-		{
-			m_bClick = true;
-		}
-	}
-
-	//クリアフラグ
-	if (CTarget::GetNext() == m_nNumData)
-	{
-		CDebugProc::Print("クリアタイム : %d\n", m_nSpeed / 60);
-	}
-	else if (m_bClick)
-	{
-		m_nSpeed++;
-	}
-
-	//デバッグ表示
-	CDebugProc::Print("出た順に押すモード\n");
-}
-
-//==========================================
-//  描画処理
-//==========================================
-void CMiniGameComeOut::Draw()
-{
 
 }
 
