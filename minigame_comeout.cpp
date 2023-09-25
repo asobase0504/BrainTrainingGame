@@ -11,6 +11,11 @@
 #include "target.h"
 
 //==========================================
+//  静的メンバ変数宣言
+//==========================================
+bool CMiniGameComeOut::m_bClick = false;
+
+//==========================================
 //  コンストラクタ
 //==========================================
 CMiniGameComeOut::CMiniGameComeOut()
@@ -22,6 +27,7 @@ CMiniGameComeOut::CMiniGameComeOut()
 	m_nNumData = 0;
 	m_nInterval = 0;
 	m_nTime = 0;
+	m_nPopTime = 0;
 }
 
 //==========================================
@@ -39,6 +45,7 @@ HRESULT CMiniGameComeOut::Init()
 {
 	//経過時間をリセット
 	m_nTime = 0;
+	m_bClick = false;
 
 	//データを読み込み
 	Load();
@@ -63,7 +70,7 @@ HRESULT CMiniGameComeOut::Init()
 		m_pPos = new D3DXVECTOR3[m_nNumData];
 
 		//ポリゴン同士の間隔を算出
-		D3DXVECTOR2 space = D3DXVECTOR2(m_size.x + m_size.x * 0.1f, m_size.y + m_size.y * 0.1f);
+		D3DXVECTOR2 space = D3DXVECTOR2(m_size.x + m_size.x * 0.2f, m_size.y + m_size.y * 0.2f);
 
 		//座標を計算
 		for (int nCntU = 0; nCntU < m_alignment.x; nCntU++)
@@ -97,7 +104,13 @@ HRESULT CMiniGameComeOut::Init()
 			if (!m_pUse[nIndex])
 			{
 				m_pTarget[nCnt]->SetTiming(m_nInterval * (nIndex + 1));
+				m_pTarget[nCnt]->SetIndex(nIndex);
 				m_pUse[nIndex] = true;
+
+				if (m_nPopTime < m_nInterval * (nIndex + 1))
+				{
+					m_nPopTime = m_nInterval * (nIndex + 1);
+				}
 				break;
 			}
 		}
@@ -131,6 +144,21 @@ void CMiniGameComeOut::Update()
 	//経過時間を更新
 	m_nTime++;
 	CTarget::SetTime(m_nTime);
+
+	//クリックが可能になる時間
+	if (!m_bClick)
+	{
+		if (m_nTime >= m_nPopTime)
+		{
+			m_bClick = true;
+		}
+	}
+
+	//クリアフラグ
+	if (CTarget::GetNext() == m_nNumData)
+	{
+		CDebugProc::Print("クリア\n");
+	}
 
 	//デバッグ表示
 	CDebugProc::Print("出た順に押すモード\n");
@@ -168,14 +196,12 @@ void CMiniGameComeOut::Load(void)
 			//出現間隔の取得
 			if (strcmp(&aStr[0], "INTERVAL") == 0)
 			{
-				fscanf(pFile, "%s", &aStr[0]); // =
-				fscanf(pFile, "%d", &m_nInterval); //データ数
+				fscanf(pFile, "%d", &m_nInterval); //生成間隔
 			}
 
 			//ポリゴンサイズの取得
 			if (strcmp(&aStr[0], "SIZE") == 0)
 			{
-				fscanf(pFile, "%s", &aStr[0]); // =
 				fscanf(pFile, "%f", &m_size.x); //横幅
 				fscanf(pFile, "%f", &m_size.y); //縦幅
 			}
@@ -183,7 +209,6 @@ void CMiniGameComeOut::Load(void)
 			//分割数の取得
 			if (strcmp(&aStr[0], "ALIGNMENT") == 0)
 			{
-				fscanf(pFile, "%s", &aStr[0]); // =
 				fscanf(pFile, "%f", &m_alignment.x); //横分割数
 				fscanf(pFile, "%f", &m_alignment.y); //縦分割数
 			}

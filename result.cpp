@@ -44,35 +44,29 @@ HRESULT CResult::Init()
 		object->SetTexture("GREEN_BG");
 	}
 
-	m_nextClickItem = new CClickItem;
-	m_nextClickItem->Init();
-	m_nextClickItem->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y + 200.0f, 0.0f));
-	m_nextClickItem->SetSize(D3DXVECTOR2(300.0f, 100.0f));
-	m_nextClickItem->SetColor(D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
-	m_nextClickItem->SetEvent([this]()
 	{
-		m_nextClickItem->Uninit();
-
 		m_retryClickItem = new CClickItem;
 		m_retryClickItem->Init();
-		m_retryClickItem->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y + 100.0f, 0.0f));
-		m_retryClickItem->SetSize(D3DXVECTOR2(300.0f, 100.0f));
-		m_retryClickItem->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
-		m_retryClickItem->SetEvent([]()
+		m_retryClickItem->SetTexture("TEXT_GAME_TRY");
+		m_retryClickItem->SetPos(D3DXVECTOR3(CApplication::CENTER_X - 200.0f, CApplication::CENTER_Y + 250.0f, 0.0f));
+		m_retryClickItem->SetSize(D3DXVECTOR2(652.0f * 0.5f, 219.0f * 0.5f));
+		m_retryClickItem->SetEvent([this]()
 		{
+			m_retryClickItem->SetColor(D3DXCOLOR(0.45f, 0.45f, 0.45f, 1.0f));
 			CFade::GetInstance()->NextMode(m_playMode);
 		});
 
 		m_backClickItem = new CClickItem;
 		m_backClickItem->Init();
-		m_backClickItem->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y + 300.0f, 0.0f));
-		m_backClickItem->SetSize(D3DXVECTOR2(300.0f, 100.0f));
-		m_backClickItem->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
-		m_backClickItem->SetEvent([]()
+		m_backClickItem->SetTexture("TEXT_END");
+		m_backClickItem->SetPos(D3DXVECTOR3(CApplication::CENTER_X + 200.0f, CApplication::CENTER_Y + 250.0f, 0.0f));
+		m_backClickItem->SetSize(D3DXVECTOR2(652.0f * 0.5f, 219.0f * 0.5f));
+		m_backClickItem->SetEvent([this]()
 		{
+			m_backClickItem->SetColor(D3DXCOLOR(0.45f, 0.45f, 0.45f, 1.0f));
 			CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_MODE);
 		});
-	});
+	}
 
 	{
 		CObject2D* object = CObject2D::Create();
@@ -83,8 +77,9 @@ HRESULT CResult::Init()
 
 	D3DXVECTOR3 pos(CApplication::CENTER_X - 90.0f, CApplication::CENTER_Y, 0.0f);
 	D3DXVECTOR2 size(90.0f, 280.0f);
-	CSequence::Create(pos, size, 3)->SetNumber(m_score);
-
+	CSequence* sequence = CSequence::Create(pos, size, 3);
+	sequence->SetColor(D3DXCOLOR(0.0f,0.0f,0.0f,1.0f));
+	sequence->SetNumber(m_score);
 	return S_OK;
 }
 

@@ -17,8 +17,8 @@
 const float CReflectionObject::SPEED = 4.0f;
 const float CReflectionObject::X_MIN = CApplication::CENTER_X - (CApplication::CENTER_Y * 1.0f * 0.5f);
 const float CReflectionObject::X_MAX = CApplication::CENTER_X + (CApplication::CENTER_Y * 1.0f * 0.5f);
-const float CReflectionObject::Y_MIN = CApplication::CENTER_Y - (CApplication::CENTER_Y * 1.0f * 0.5f);
-const float CReflectionObject::Y_MAX = CApplication::CENTER_Y + (CApplication::CENTER_Y * 1.0f * 0.5f);
+const float CReflectionObject::Y_MIN = CApplication::CENTER_Y - 70.0f - (CApplication::CENTER_Y * 0.8f * 0.5f);
+const float CReflectionObject::Y_MAX = CApplication::CENTER_Y - 70.0f + (CApplication::CENTER_Y * 0.8f * 0.5f);
 
 //--------------------------------------------------
 // コンストラクタ

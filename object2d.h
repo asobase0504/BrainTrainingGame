@@ -77,6 +77,7 @@ public:
 
 	// アニメーション
 	void SetTexture(std::string inTex) { m_texture = inTex; }	// テクスチャの設定
+	void SetUV(D3DXVECTOR2 U, D3DXVECTOR2 V);
 	void AnimTexture(int num, int texMax);
 
 	// 色

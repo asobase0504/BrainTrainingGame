@@ -34,6 +34,14 @@ HRESULT CMiniGameSameAsShadow::Init()
 {
 	CGame::Init();
 
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y - 300.0f, 0.0f));
+		D3DXVECTOR2 size(1292.0f * 0.4f, 252.0f * 0.4f);
+		object->SetSize(size);
+		object->SetTexture("TEXT_EXPO_SHADOW");
+	}
+
 	return S_OK;
 }
 
@@ -46,8 +54,9 @@ void CMiniGameSameAsShadow::GameStart()
 
 	{
 		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
-		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
-		object->SetSize(D3DXVECTOR2(CApplication::CENTER_Y * 1.1f, CApplication::CENTER_Y * 1.1f));
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y - 70.0f, 0.0f));
+		object->SetSize(D3DXVECTOR2(CApplication::CENTER_Y * 1.1f, CApplication::CENTER_Y * 0.9f));
+		object->SetColor(D3DXCOLOR(0.0f,0.45f,0.0f,1.0f));
 		object->SetTexture("BLOCK_BG");
 	}
 

@@ -6,18 +6,20 @@
 //==========================================
 #include "target.h"
 #include "debug_proc.h"
+#include "minigame_comeout.h"
 
 //==========================================
 //  静的メンバ変数宣言
 //==========================================
 int CTarget::m_nTime = 0;
+int CTarget::m_nNext = 0;
 
 //==========================================
 //  コンストラクタ
 //==========================================
 CTarget::CTarget()
 {
-
+	m_bClick = false;
 }
 
 //==========================================
@@ -33,7 +35,8 @@ CTarget::~CTarget()
 //==========================================
 HRESULT CTarget::Init()
 {
-	return CObject2D::Init();
+	m_nNext = 0;
+	return CClickItem::Init();
 }
 
 //==========================================
@@ -41,7 +44,7 @@ HRESULT CTarget::Init()
 //==========================================
 void CTarget::Uninit()
 {
-	CObject2D::Uninit();
+	CClickItem::Uninit();
 }
 
 //==========================================
@@ -49,16 +52,32 @@ void CTarget::Uninit()
 //==========================================
 void CTarget::Update()
 {
-	if (m_nTime < m_nTiming)
+	if (!m_bClick)
 	{
-		SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
-	}
-	else
-	{
-		SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		if (m_nTime < m_nTiming)
+		{
+			SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+		}
+		else
+		{
+			SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+
+		if (CMiniGameComeOut::GetClick())
+		{
+			if (IsClick())
+			{
+				if (m_nNext == m_nIndex)
+				{
+					m_nNext++;
+					m_bClick = true;
+					SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
+				}
+			}
+		}
 	}
 
-	CObject2D::Update();
+	CClickItem::Update();
 }
 
 //==========================================
@@ -66,5 +85,5 @@ void CTarget::Update()
 //==========================================
 void CTarget::Draw()
 {
-	CObject2D::Draw();
+	CClickItem::Draw();
 }

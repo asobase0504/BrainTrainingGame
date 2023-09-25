@@ -36,8 +36,14 @@ public:
 	static CLargeNumberSystem *Create();
 
 private:
+	void WhichiNumberLargest_();
+	void NumberLottery_();
+
+private:
 	std::vector<CLargestNumber*> m_pDisplayObject;
 	std::vector<bool> m_isUsedNumber;
+	// Å‘å‚Ì”‚ğ•Û‘¶
+	int m_nLargestNumber;
 };
 
 #endif	// _LARGE_NUMBER_SYSTEM_H_

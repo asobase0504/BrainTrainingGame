@@ -29,6 +29,9 @@ public:
 	void Update() override;
 	void Draw() override;
 
+	//静的メンバ関数
+	static bool GetClick() { return m_bClick; }
+
 private:
 
 	//メンバ関数
@@ -43,7 +46,11 @@ private:
 	int m_nNumData; //出てくる数
 	int m_nInterval; //出てくる間隔
 	int m_nTime; //経過時間
+	int m_nPopTime; //生成が完了する時間
 	bool *m_pUse; //使用フラグ
+
+	//静的メンバ変数
+	static bool m_bClick; //クリック可能状態
 
 };
 

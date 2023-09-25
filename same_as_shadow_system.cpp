@@ -72,7 +72,7 @@ HRESULT CSameAsShadowSystem::Init()
 				D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f),
 				D3DXVECTOR2(100.0f, 100.0f), 0);
 			m_pShadowObject[i]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
-			m_pShadowObject[i]->SetMove(D3DXVECTOR3(FloatRandom(15.0f, -15.0f), FloatRandom(15.0f, -15.0f), 0.0f));
+			m_pShadowObject[i]->SetMove(D3DXVECTOR3(FloatRandom(12.0f, -12.0f), FloatRandom(12.0f, -12.0f), 0.0f));
 			m_pShadowObject[i]->SetEvent([]() {});
 		}
 	}
@@ -180,13 +180,26 @@ void CSameAsShadowSystem::InitCreateAnswer_()
 {
 	for (int i = 0; i < MAX_CHOICES; i++)
 	{// ‘I‘ðŽˆ
-		m_pSelectObject[i] = CRememberObject::Create(
-			D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.25f + 100.0f * i, CApplication::SCREEN_HEIGHT - 100.0f, 0.0f),
-			D3DXVECTOR2(100.0f, 100.0f), 0);
+
+		D3DXVECTOR3 pos;
+		pos.x = CApplication::CENTER_X - ((float)MAX_CHOICES * 0.5f * 0.5f) * 120.0f + (i % (int)(MAX_CHOICES * 0.5f)) * 120.0f + 50.0f;
+		pos.y = CApplication::SCREEN_HEIGHT - 200.0f + (int)(i / (MAX_CHOICES * 0.5f)) * 100.0f;
+		pos.z = 0.0f;
+		D3DXVECTOR2 size(80.0f, 80.0f);
+
+		{
+			CObject2D* object = CObject2D::Create();
+			object->SetPos(pos);
+			object->SetSize(size * 1.2f);
+			object->SetTexture("DECO_TAG");
+		}
+
+		m_pSelectObject[i] = CRememberObject::Create(pos, size, 0);
 		m_pSelectObject[i]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 		m_pSelectObject[i]->SetEvent([this, i]()
 		{
 			bool isClickColor = m_pSelectObject[i]->GetColor().r < 1.0f;
+
 			if (isClickColor || m_isChange)
 			{
 				return;

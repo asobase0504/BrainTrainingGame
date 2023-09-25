@@ -48,6 +48,13 @@ HRESULT CGame::Init()
 		object->SetTexture("GREEN_BG");
 	}
 
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y * 1.05f, 0.0f));
+		object->SetSize(D3DXVECTOR2(CApplication::CENTER_Y * 2.0f, CApplication::CENTER_Y * 1.9f));
+		object->SetTexture("GAME_BG");
+	}
+
 	m_countDown = CCountDown::Create();
 
 	m_isResult = false;
@@ -70,8 +77,9 @@ void CGame::GameStart()
 	m_timer->SetTimer(60);
 
 	{
-		D3DXVECTOR3 pos((float)CApplication::SCREEN_WIDTH - 60.0f, 60.0f, 0.0f);
-		CClickItem* pauseItem = CClickItem::Create(pos,D3DXVECTOR2(75.0f,75.0));
+		D3DXVECTOR3 pos((float)CApplication::SCREEN_WIDTH - 70.0f, 60.0f, 0.0f);
+		CClickItem* pauseItem = CClickItem::Create(pos,D3DXVECTOR2(100.0f,100.0f));
+		pauseItem->SetTexture("STOP_BUTTON");
 		pauseItem->SetEvent([]()
 		{
 			CPause::Create();
