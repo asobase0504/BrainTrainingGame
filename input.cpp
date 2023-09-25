@@ -532,11 +532,96 @@ bool CInput::PressTouchPanel(int nNum)
 }
 
 //*************************************************************************************
+//タッチパネルのトリガー
+//*************************************************************************************
+bool CInput::TriggerTouchPanel(int nNum)
+{
+	return m_pTouchPanel->GetTrigger(nNum);
+}
+
+//*************************************************************************************
 //タッチパネルのPos
 //*************************************************************************************
 D3DXVECTOR3 CInput::GetTouchPanelPos(int nNum)
 {
 	return m_pTouchPanel->GetTouchPos(nNum);
+}
+
+//*************************************************************************************
+//タッチもしくはクリックをしたかどうかのPress
+//*************************************************************************************
+bool CInput::PressTouchClick(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR3 &RectangleSize)
+{
+	//タッチパネル
+	bool bTouch = PressTouchPanel();
+	//マウス
+	bool bMouse = Press(MOUSE_INPUT_LEFT);
+	
+	if (!bTouch && !bMouse)
+	{//そもそも押されていない
+		return false;
+	}
+
+	if (bTouch)
+	{ //タッチパネルのが押されていたら
+		return RectangleHitTest(RectanglePos, RectangleSize, GetTouchPanelPos());
+	}
+
+	if (bMouse)
+	{ //マウスのが押されていたら
+		return RectangleHitTest(RectanglePos, RectangleSize, GetMouseCursor());
+	}
+
+	return false;
+}
+
+//*************************************************************************************
+//タッチもしくはクリックをしたかどうかのTrigger
+//*************************************************************************************
+bool CInput::TriggerTouchClick(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR3 &RectangleSize)
+{
+	//タッチパネル
+	bool bTouch = TriggerTouchPanel();
+	//マウス
+	bool bMouse = Trigger(MOUSE_INPUT_LEFT);
+
+	if (!bTouch && !bMouse)
+	{//そもそも押されていない
+		return false;
+	}
+
+	if (bTouch)
+	{ //タッチパネルのが押されていたら
+		return RectangleHitTest(RectanglePos, RectangleSize, GetTouchPanelPos());
+	}
+
+	if (bMouse)
+	{ //マウスのが押されていたら
+		return RectangleHitTest(RectanglePos, RectangleSize, GetMouseCursor());
+	}
+
+	return false;
+}
+
+//*************************************************************************************
+//矩形と点の当たり判定
+//*************************************************************************************
+bool CInput::RectangleHitTest(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR3 &RectangleSize, const D3DXVECTOR3 &Pos)
+{
+	//各変数
+	D3DXVECTOR3 rectanglepos = RectanglePos;
+	D3DXVECTOR3 rectanglesize = RectangleSize;
+	D3DXVECTOR3 pos = Pos;
+
+	//	タッチ座標がポリゴンの中だったら
+	if (rectanglepos.x + rectanglesize.x >= pos.x
+		&& rectanglepos.x - rectanglesize.x <= pos.x
+		&& rectanglepos.y - rectanglesize.y <= pos.y
+		&& rectanglepos.y + rectanglesize.y >= pos.y)
+	{
+		return true;
+	}
+	return false;
 }
 
 //*************************************************************************************

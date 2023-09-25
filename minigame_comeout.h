@@ -6,7 +6,7 @@
 //==========================================
 #ifndef _MINIGAME_COMEOUT_H_
 #define _MINIGAME_COMEOUT_H_
-#include "mode.h"
+#include "game.h"
 
 //==========================================
 //  前方宣言
@@ -16,7 +16,7 @@ class CTarget;
 //==========================================
 //  クラス定義
 //==========================================
-class CMiniGameComeOut : public CMode
+class CMiniGameComeOut : public CGame
 {
 public:
 
@@ -28,6 +28,8 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
+
+	void GameStart();
 
 	//静的メンバ関数
 	static bool GetClick() { return m_bClick; }
@@ -47,6 +49,7 @@ private:
 	int m_nInterval; //出てくる間隔
 	int m_nTime; //経過時間
 	int m_nPopTime; //生成が完了する時間
+	int m_nSpeed; //時間の計測
 	bool *m_pUse; //使用フラグ
 
 	//静的メンバ変数
