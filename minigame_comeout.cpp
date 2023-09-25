@@ -94,18 +94,23 @@ void CMiniGameComeOut::Update()
 		}
 	}
 
-	//クリアフラグ
 	if (CTarget::GetNext() == m_nNumData)
 	{
-		CDebugProc::Print("クリアタイム : %d\n", m_nSpeed / 60);
+		Reset();
 	}
-	else if (m_bClick)
+	
+	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
+	{
+		if (m_pTarget[nCnt]->GetMiss())
+		{
+			Reset();
+		}
+	}
+
+	if (m_bClick)
 	{
 		m_nSpeed++;
 	}
-
-	//デバッグ表示
-	CDebugProc::Print("出た順に押すモード\n");
 }
 
 //==========================================
@@ -126,72 +131,7 @@ void CMiniGameComeOut::GameStart()
 	//ポリゴン数を設定
 	m_nNumData = (int)(m_alignment.x * m_alignment.y);
 
-	//ポリゴン数分のメモリを確保
-	m_pUse = new bool[m_nNumData];
-	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
-	{
-		m_pUse[nCnt] = false;
-	}
-
-	//座標を設定
-	if (m_pPos == NULL)
-	{
-		//メモリを確保
-		m_pPos = new D3DXVECTOR3[m_nNumData];
-
-		//ポリゴン同士の間隔を算出
-		D3DXVECTOR2 space = D3DXVECTOR2(m_size.x + m_size.x * 0.2f, m_size.y + m_size.y * 0.2f);
-
-		//座標を計算
-		for (int nCntU = 0; nCntU < m_alignment.x; nCntU++)
-		{
-			for (int nCntV = 0; nCntV < m_alignment.y; nCntV++)
-			{
-				m_pPos[nCntU + (nCntV * (int)m_alignment.x)] = D3DXVECTOR3
-				(
-					m_pos.x - (space.x * m_alignment.x) * 0.5f + (space.x * 0.5f + space.x * nCntU),
-					m_pos.y - (space.x * m_alignment.x) * 0.5f + (space.y * 0.5f + space.y * nCntV),
-					0.0f
-				);
-			}
-		}
-	}
-
-	//ターゲットを生成をする
-	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
-	{
-		//生成,初期化
-		m_pTarget.push_back(new CTarget);
-		m_pTarget[nCnt]->Init();
-
-		//生成タイミングの設定
-		while (1)
-		{
-			//生成順の乱数を取得
-			int nIndex = rand() % m_nNumData;
-
-			//インデックスが使用されていない場合
-			if (!m_pUse[nIndex])
-			{
-				m_pTarget[nCnt]->SetTiming(m_nInterval * (nIndex + 1));
-				m_pTarget[nCnt]->SetIndex(nIndex);
-				m_pUse[nIndex] = true;
-
-				if (m_nPopTime < m_nInterval * (nIndex + 1))
-				{
-					m_nPopTime = m_nInterval * (nIndex + 1);
-				}
-				break;
-			}
-		}
-
-		//大きさの設定
-		m_pTarget[nCnt]->SetSize(m_size);
-
-		//座標の設定
-		m_pTarget[nCnt]->SetPos(m_pPos[nCnt]);
-	}
-
+	Set();
 }
 
 //==========================================
@@ -240,4 +180,91 @@ void CMiniGameComeOut::Load(void)
 		//ファイルを閉じる
 		fclose(pFile);
 	}
+}
+
+void CMiniGameComeOut::Set(void)
+{
+	//ポリゴン数分のメモリを確保
+	m_pUse = new bool[m_nNumData];
+	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
+	{
+		m_pUse[nCnt] = false;
+	}
+
+	//座標を設定
+	if (m_pPos == NULL)
+	{
+		//メモリを確保
+		m_pPos = new D3DXVECTOR3[m_nNumData];
+
+		//ポリゴン同士の間隔を算出
+		D3DXVECTOR2 space = D3DXVECTOR2(m_size.x + m_size.x * 0.2f, m_size.y + m_size.y * 0.2f);
+
+		//座標を計算
+		for (int nCntU = 0; nCntU < m_alignment.x; nCntU++)
+		{
+			for (int nCntV = 0; nCntV < m_alignment.y; nCntV++)
+			{
+				m_pPos[nCntU + (nCntV * (int)m_alignment.x)] = D3DXVECTOR3
+				(
+					m_pos.x - (space.x * m_alignment.x) * 0.5f + (space.x * 0.5f + space.x * nCntU),
+					m_pos.y - (space.x * m_alignment.x) * 0.5f + (space.y * 0.5f + space.y * nCntV),
+					0.0f
+				);
+			}
+		}
+	}
+
+	//ターゲットを生成をする
+	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
+	{
+		m_pTarget.push_back(new CTarget);
+		m_pTarget[nCnt]->Init();
+
+		//生成タイミングの設定
+		while (1)
+		{
+			//生成順の乱数を取得
+			int nIndex = rand() % m_nNumData;
+
+			//インデックスが使用されていない場合
+			if (!m_pUse[nIndex])
+			{
+				m_pTarget[nCnt]->SetTiming(m_nInterval * (nIndex + 1));
+				m_pTarget[nCnt]->SetIndex(nIndex);
+				m_pUse[nIndex] = true;
+
+				if (m_nPopTime < m_nInterval * (nIndex + 1))
+				{
+					m_nPopTime = m_nInterval * (nIndex + 1);
+				}
+				break;
+			}
+		}
+
+		//大きさの設定
+		m_pTarget[nCnt]->SetSize(m_size);
+
+		//座標の設定
+		m_pTarget[nCnt]->SetPos(m_pPos[nCnt]);
+	}
+}
+
+void CMiniGameComeOut::Reset(void)
+{
+	delete[] m_pUse;
+	m_pUse = NULL;
+	delete[] m_pPos;
+	m_pPos = NULL;
+	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
+	{
+		m_pTarget[nCnt]->Uninit();
+		m_pTarget[nCnt] = NULL;
+	}
+	m_pTarget.clear();
+
+	m_nTime = 0;
+	m_nSpeed = 0;
+	m_bClick = false;
+	Set();
 }

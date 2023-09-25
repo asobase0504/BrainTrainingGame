@@ -14,7 +14,7 @@
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CLargestNumber::CLargestNumber() : m_isLargest(false),m_pSequence(nullptr)
+CLargestNumber::CLargestNumber() : m_isMax(false), m_isMin(false) ,m_pSequence(nullptr), m_space(D3DXVECTOR2(0.0f,0.0f))
 {
 }
 
