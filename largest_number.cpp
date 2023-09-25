@@ -38,13 +38,13 @@ HRESULT CLargestNumber::Init()
 //--------------------------------------------------
 // ‰Šú‰»
 //--------------------------------------------------
-HRESULT CLargestNumber::Init(const D3DXVECTOR3& inPos)
+HRESULT CLargestNumber::Init(const D3DXVECTOR3& inPos, const D3DXVECTOR2& inSize)
 {
 	CRememberObject::Init();
 
 	m_pSequence = CSequence::Create(
-		D3DXVECTOR3(inPos.x - 20.0f, inPos.y, 0.0f), 
-		D3DXVECTOR2(50.0f,60.0f), 2);
+		D3DXVECTOR3(inPos.x - 20.0f, inPos.y, 0.0f),
+		D3DXVECTOR2(inSize.x * 0.35f, inSize.y * 0.45f), 2);
 
 	return S_OK;
 }
@@ -83,7 +83,7 @@ CLargestNumber *CLargestNumber::Create(const D3DXVECTOR3 & inPos, const D3DXVECT
 
 	if (pLargestNumber != nullptr)
 	{
-		pLargestNumber->Init(inPos);
+		pLargestNumber->Init(inPos, inSize);
 		pLargestNumber->SetPos(inPos);
 		pLargestNumber->SetSize(inSize);
 	}
@@ -101,4 +101,15 @@ CLargestNumber *CLargestNumber::Create(const D3DXVECTOR3 & inPos, const D3DXVECT
 void CLargestNumber::SetSequence(int inSequence)
 {
 	m_pSequence->SetNumber(inSequence);
+}
+
+//--------------------------------------------------
+// ƒŠƒZƒbƒg
+//--------------------------------------------------
+void CLargestNumber::Reset()
+{
+	float size = 0.0f;
+	size = FloatRandom(150.0f, 100.0f);
+	SetSize(D3DXVECTOR2(size, size));
+	m_pSequence->SetSize(D3DXVECTOR2(size * 0.35f, size * 0.45f));
 }

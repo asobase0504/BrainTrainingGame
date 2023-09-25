@@ -33,7 +33,7 @@ public:
 	~CLargestNumber();
 
 	HRESULT Init() override;
-	HRESULT Init(const D3DXVECTOR3& inPos);
+	HRESULT Init(const D3DXVECTOR3& inPos, const D3DXVECTOR2& inSize);
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
@@ -47,6 +47,8 @@ public:
 	bool GetIsMin() { return m_isMin; }
 
 	void SetSequence(int inSequence);
+
+	void Reset();
 
 private:
 	CSequence *m_pSequence;
