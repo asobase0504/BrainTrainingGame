@@ -61,9 +61,18 @@ HRESULT CSound::Init(HWND hWnd)
 	// COMライブラリの初期化
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
-	if (FAILED(XAudio2Create(&m_pXAudio2, 0)))
+	HRESULT hr;
+
+	hr = XAudio2Create(&m_pXAudio2, 0);
+
+	if (FAILED(hr))
 	{// XAudio2オブジェクトの作成
 		MessageBox(hWnd, "XAudio2オブジェクトの作成に失敗！", "警告！", MB_ICONWARNING);
+		
+		char buf[1024];
+		buf[1023] = '\0';
+		snprintf(buf,1023,"%#x", hr);
+		MessageBox(hWnd, buf, "警告！", MB_ICONWARNING);
 
 		// COMライブラリの終了処理
 		CoUninitialize();
