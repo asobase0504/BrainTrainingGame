@@ -276,6 +276,8 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 		break;
 	}
 
+	GetSound()->Stop();
+
 	if (FAILED(mode->Init()))
 	{
 		assert(false);

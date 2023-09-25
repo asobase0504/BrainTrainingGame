@@ -224,7 +224,7 @@ void CSameAsShadowSystem::InitCreateAnswer_()
 
 			m_pSelectObject[i]->SetColor(D3DXCOLOR(0.45f, 0.45f, 0.45f,1.0f));
 
-			m_game->AddScore(isAnswer ? 4 : -7);
+			m_game->AddScore(isAnswer ? 12 : -7);
 
 			if (!isAnswer || m_nCountAnswer == MAX_ANSWER)
 			{
