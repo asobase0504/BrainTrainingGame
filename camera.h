@@ -34,7 +34,7 @@ public:
 	const D3DXMATRIX& GetMtxView() { return m_MtxView; }
 	const D3DXVECTOR3& GetPos() { return m_posV; }
 
-	const D3DXVECTOR3& VectorCombinedRot(const D3DXVECTOR3& inVector);
+	const D3DXVECTOR3 VectorCombinedRot(const D3DXVECTOR3& inVector);
 
 	// ƒJƒƒ‰‚ğ—h‚ç‚·
 	void Shake(float ShakeFrame, float Magnitude);

@@ -9,6 +9,7 @@
 #include "click_item.h"
 #include "application.h"
 #include "input.h"
+#include "sound.h"
 
 //--------------------------------------------------
 // コンストラクタ
@@ -44,6 +45,7 @@ void CClickItem::Update()
 	{
 		ClickEvent();
 		m_isClick = true;
+		CApplication::GetInstance()->GetSound()->Play(CSound::LABEL_SE_DECISION);
 	}
 }
 
