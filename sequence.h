@@ -39,6 +39,7 @@ public:
 	void SetColor(const D3DXCOLOR& inColor);
 	void AddColor(const D3DXCOLOR& inColor);
 
+	void SetSize(const D3DXVECTOR2& inSize);
 	void AddSize(const D3DXVECTOR2& inSize);
 
 	void SetNumber(int inNumber);
