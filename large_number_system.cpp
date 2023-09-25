@@ -51,16 +51,23 @@ HRESULT CLargeNumberSystem::Init()
 	m_minOrMax = IntRandom(6, 1);
 
 	D3DXVECTOR2 size(100.0f, 100.0f);
-	D3DXVECTOR2 space(20.0f, 20.0f);
+	D3DXVECTOR2 space(100.0f, 100.0f);
 
 	for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
 	{
 		for (int nCntX = 0; nCntX < X_LINE; nCntX++)
 		{
 			int nCntNumber = nCntY * X_LINE + nCntX;
+
+			float posX = ((CApplication::SCREEN_WIDTH * 0.5f) + (size.x + space.x) * nCntX);
+			float posY = ((CApplication::SCREEN_HEIGHT * 0.5f) + (size.y + space.y) * nCntY);
+
+			float shiftX = (size.x * X_LINE * 0.5f);
+			float shiftY = (size.y * Y_LINE * 0.5f);
+
 			m_pDisplayObject[nCntNumber] = CLargestNumber::Create(D3DXVECTOR3(
-				((CApplication::SCREEN_WIDTH * 0.5f) + ((size.x + space.x) * nCntX)) - ((size.x * X_LINE * 0.5f)) + (space.x * 2),
-				((CApplication::SCREEN_HEIGHT * 0.5f) + ((size.y + space.y) * nCntY)) - ((size.y * Y_LINE * 0.5f)) + (space.y * 2), 0.0f),
+				posX - shiftX,
+				posY - shiftY, 0.0f),
 				size);
 			m_pDisplayObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 			m_pDisplayObject[nCntNumber]->SetTexture("DECO_TAG");
