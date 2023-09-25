@@ -1,5 +1,7 @@
 #include "correction.h"
 #include "application.h"
+#include "correction.h"
+#include "sound.h"
 
 CCorrection::CCorrection() : CObject2D(CTaskGroup::EPriority::LEVEL_2D_UI_2)
 {
@@ -45,9 +47,11 @@ void CCorrection::SetCorrect(bool isCorrect)
 	if (isCorrect)
 	{
 		SetTexture("TRUE");
+		CApplication::GetInstance()->GetSound()->Play(CSound::ELabel::LABEL_SE_TRUE);
 	}
 	else
 	{
 		SetTexture("FALSE");
+		CApplication::GetInstance()->GetSound()->Play(CSound::ELabel::LABEL_SE_FALSE);
 	}
 }

@@ -18,10 +18,9 @@ const CSound::SParam CSound::PARAM[] =
 {// 各音素材のパラメータ
 	{ "data/SOUND/BGM/title.wav", -1 },	// タイトル
 	{ "data/SOUND/BGM/game.wav", -1 },	// タイトル
-	{ "data/SOUND/SE/Shot01.wav", 0 },	// 決定音
-	{ "data/SOUND/SE/Dead1.wav", 0 },	// 死亡音
+	{ "data/SOUND/SE/true.wav", 0 },	// 正答音
+	{ "data/SOUND/SE/false.wav", 0 },	// 誤答音
 	{ "data/SOUND/SE/Decision.wav", 0 },	// 決定音
-	{ "data/SOUND/SE/Serect.wav", 0 },	// 選択音
 };
 
 static_assert(sizeof(CSound::PARAM) / sizeof(CSound::PARAM[0]) == CSound::LABEL_MAX, "aho");
