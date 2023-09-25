@@ -67,6 +67,7 @@
 		[ "TIME_NUMBER", "data\/TEXTURE\/number003.png" ],
 		[ "NUMBER25", "data\/TEXTURE\/number002.png" ],
 		[ "BOOK", "data\/TEXTURE\/Book.png" ],
+		[ "RING", "data\/TEXTURE\/ring.png" ],
 		[ "CLOCK", "data\/TEXTURE\/tokei2.png" ]
 	]
 }

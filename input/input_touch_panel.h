@@ -32,12 +32,15 @@ private:
 		D3DXVECTOR3 OldPos;
 		D3DXVECTOR3 Vec;
 		bool bTrigger;
+		bool bFirstTrigger;
 		bool bUse;
 	};
 
 public:
 	CInputTouchPanel();
 	~CInputTouchPanel();
+
+	void Update();
 	
 	bool GetPress(int nNum = 0);					//プレス処理
 	bool GetTrigger(int nNum = 0);					//トリガー処理
