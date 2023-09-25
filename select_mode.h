@@ -13,6 +13,7 @@
 // 前方宣言
 //-----------------------------------------
 class CModeGuidanceItem;
+class CSequence;
 
 //-----------------------------------------
 // アプリケーションクラス
@@ -29,6 +30,9 @@ public:	// メンバー関数
 
 private: // 動的メンバー変数
 	std::vector<CModeGuidanceItem*> m_itemModeGuidance;
+
+	CSequence *m_pHiScore[4]; //ハイスコアの表示
+
 };
 
 #endif // !_TITLE_H_

@@ -20,6 +20,7 @@ int CTarget::m_nNext = 0;
 CTarget::CTarget()
 {
 	m_bClick = false;
+	m_bMiss = false;
 }
 
 //==========================================
@@ -73,9 +74,16 @@ void CTarget::Update()
 					m_bClick = true;
 					SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
 				}
+				else
+				{
+					m_bMiss = true;
+				}
 			}
 		}
 	}
+
+	CDebugProc::Print("インデックス : %d\n", m_nIndex);
+	CDebugProc::Print("m_bClick : %d\n", m_bClick);
 
 	CClickItem::Update();
 }

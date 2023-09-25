@@ -40,14 +40,19 @@ public:
 
 	static CLargestNumber *Create(const D3DXVECTOR3& inPos, const D3DXVECTOR2& inSize);
 
-	void SetIsLargest(bool inIsLargest) { m_isLargest = inIsLargest; }
-	bool GetIsLargest() { return m_isLargest; }
+	void SetIsMax(bool inIsMax) { m_isMax = inIsMax; }
+	bool GetIsMax() { return m_isMax; }
+
+	void SetIsMin(bool inIsMin) { m_isMin = inIsMin; }
+	bool GetIsMin() { return m_isMin; }
 
 	void SetSequence(int inSequence);
 
 private:
 	CSequence *m_pSequence;
-	bool m_isLargest;
+	bool m_isMax;
+	bool m_isMin;
+	D3DXVECTOR2 m_space;
 };
 
 
