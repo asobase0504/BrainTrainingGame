@@ -1,12 +1,13 @@
 //=========================================
 // 
-// オブジェクトクラス
-// Author YudaKaito
+// effect_ring.h
+// Author Koduns Hirohito
 // 
 //=========================================
 #include "effect_ring.h"
 #include "texture.h"
 #include <assert.h>
+#include "effect_flash.h"
 
 //=============================================================================
 // 静的マクロ
@@ -14,6 +15,7 @@
 const float CEffectRing::INITIAL_SIZE = 20.0f;
 const float CEffectRing::SIZE_INCREASE = 2.0f;
 const float CEffectRing::TRANSPARENCY_DECREASE_QUANTITY = 0.04f;
+const int  CEffectRing::FLASH_COUNT = 2;						//フラッシュエフェクトの個数
 
 //=============================================================================
 // コンストラクタ
@@ -96,5 +98,12 @@ CEffectRing* CEffectRing::Create(D3DXVECTOR3 pos)
 		assert(false);
 	}
 
+	//追加エフェクト
+	int nCntMax = rand() % FLASH_COUNT + 3;
+	for (int i = 0; i < nCntMax; i++)
+	{
+		CEffectFlash::Create(pos);
+	}
+	
 	return objectCreate;
 }

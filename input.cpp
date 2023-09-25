@@ -83,6 +83,9 @@ HRESULT CInput::Init(HINSTANCE hInstance, HWND hWnd, D3DXVECTOR2 ScreenSize)
 	m_pTouchPanel = new CInputTouchPanel;
 	m_pTouchPanel->SetScreenSize(ScreenSize);
 
+	//エフェクト
+	m_bEffect = true;
+
 	return S_OK;
 }
 
@@ -138,6 +141,9 @@ void CInput::Uninit()
 //*************************************************************************************
 void CInput::Update()
 {
+	//エフェクト許可の復活
+	m_bEffect = true;
+
 	//キーボードの更新
 	m_pKeyboard->Update();
 	//ジョイパッドの更新
@@ -634,13 +640,20 @@ bool CInput::TriggerTouchClick(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR
 
 	if (bTouch)
 	{ //タッチパネルのが押されていたら
-		CEffectRing::Create(TouchPos);
+		if (m_bEffect)
+		{
+			m_bEffect = false;
+			CEffectRing::Create(TouchPos);
+		}
 		return RectangleHitTest(RectanglePos, RectangleSize, TouchPos);
 	}
-
-	if (bMouse)
+	else if (bMouse)
 	{ //マウスのが押されていたら
-		CEffectRing::Create(MousePos);
+		if (m_bEffect)
+		{
+			m_bEffect = false;
+			CEffectRing::Create(MousePos);
+		}
 		return RectangleHitTest(RectanglePos, RectangleSize, MousePos);
 	}
 
