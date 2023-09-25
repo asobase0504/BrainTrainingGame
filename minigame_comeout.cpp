@@ -23,6 +23,7 @@ CMiniGameComeOut::CMiniGameComeOut()
 	m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_size = D3DXVECTOR2(0.0f, 0.0f);
 	m_alignment = D3DXVECTOR2(0.0f, 0.0f);
+	m_pUse = NULL;
 	m_pPos = NULL;
 	m_nNumData = 0;
 	m_nInterval = 0;
@@ -63,10 +64,16 @@ HRESULT CMiniGameComeOut::Init()
 void CMiniGameComeOut::Uninit()
 {
 	CGame::Uninit();
-	delete[] m_pUse;
-	m_pUse = NULL;
-	delete[] m_pPos;
-	m_pPos = NULL;
+	if (m_pUse != NULL)
+	{
+		delete[] m_pUse;
+		m_pUse = NULL;
+	}
+	if (m_pPos != NULL)
+	{
+		delete[] m_pPos;
+		m_pPos = NULL;
+	}
 }
 
 //==========================================
@@ -107,10 +114,15 @@ void CMiniGameComeOut::Update()
 		}
 	}
 
-	if (m_bClick)
+	//前回のターゲットから更新されていたらスコアを加算
+	int nNext = CTarget::GetNext(); //今回のターゲット
+	if (m_nNext != nNext)
 	{
-		m_nSpeed++;
+		AddScore(3 * nNext);
 	}
+
+	//次のターゲットを保存
+	m_nNext = nNext;
 }
 
 //==========================================
