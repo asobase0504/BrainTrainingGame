@@ -12,6 +12,7 @@
 #include "utility.h"
 #include "input.h"
 #include "fade.h"
+#include "sound.h"
 
 // ObjectŒn“
 #include "object2d.h"
@@ -36,6 +37,8 @@ CTitle::~CTitle()
 //-----------------------------------------------------------------------------
 HRESULT CTitle::Init()
 {
+	CApplication::GetInstance()->GetSound()->Play(CSound::LABEL_BGM_TITLE);
+
 	{
 		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
 		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));

@@ -335,6 +335,9 @@
     <ClCompile Include="input\input_touch_panel.cpp">
       <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
     </ClCompile>
+    <ClCompile Include="save.cpp">
+      <Filter>ソース ファイル\01_Mode\05_ExitSave</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -534,6 +537,9 @@
     </ClInclude>
     <ClInclude Include="input\input_touch_panel.h">
       <Filter>ソース ファイル\00_Main\01_OutSide\01_Input</Filter>
+    </ClInclude>
+    <ClInclude Include="save.h">
+      <Filter>ソース ファイル\01_Mode\05_ExitSave</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

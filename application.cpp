@@ -17,6 +17,7 @@
 #include "sound.h"
 #include "objectList.h"
 #include "fade.h"
+#include "save.h"
 
 // ƒ‚[ƒh
 #include "title.h"
@@ -275,6 +276,11 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 	default:
 		break;
 	}
+
+	GetSound()->Stop();
+
+	//‘‚«o‚µæ‚ðÝ’è
+	CSave::SaveMode(inType);
 
 	if (FAILED(mode->Init()))
 	{
