@@ -21,6 +21,7 @@
 #include "sequence.h"
 #include "score_up.h"
 #include "sound.h"
+#include "save.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -125,13 +126,17 @@ void CGame::Update()
 	{
 		CPause::Create();
 	}
-
+	
 	if (m_timer->GetTimer() <= 0 && !m_isResult)
 	{
 		m_isResult = true;
 		m_timer->StopTimer(true);
 		CResult::SetPlayMode(CApplication::GetInstance()->GetModeType());
 		CResult::SetScore(m_score);
+
+		//スコアを書き出し
+		CSave::SaveScore(m_score);
+
 		CFade::GetInstance()->NextMode(CMode::MODE_TYPE::RESULT);
 	}
 }
