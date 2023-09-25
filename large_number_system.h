@@ -37,15 +37,27 @@ public:
 
 	static CLargeNumberSystem *Create();
 
+	bool GetMode() { return m_mode; } // true‚ÍÅ‘å false‚ÍÅ¬
+
 private:
-	void WhichiNumberLargest_();
+	void WhichiNumberMax_();
+	void WhichiNumberMin_();
 	void NumberLottery_();
+	void SetMode();
+	void InitCreateAnswer_();
+	void CorrectAnswer_(int inNumber);
 
 private:
 	std::vector<CLargestNumber*> m_pDisplayObject;
 	std::vector<bool> m_isUsedNumber;
 	// Å‘å‚Ì”‚ğ•Û‘¶
-	int m_nLargestNumber;
+	int m_nMaxNumber;
+	// Å¬‚Ì’l‚ğ•Û‘¶
+	int m_nMinNumber;
+	// Å‘å‚©Å¬‚©
+	int m_minOrMax;
+	// ƒ‚[ƒh
+	bool m_mode;
 };
 
 #endif	// _LARGE_NUMBER_SYSTEM_H_
