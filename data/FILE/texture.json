@@ -10,6 +10,7 @@
 		[ "TEXT_START", "data\/TEXTURE\/start.png" ],
 		[ "TEXT_GAME_TRY", "data\/TEXTURE\/TEXT\/game_try.png" ],
 		[ "TEXT_CHACK", "data\/TEXTURE\/TEXT\/chack.png" ],
+		[ "TEXT_EXPO", "data\/TEXTURE\/TEXT\/game_expo.png" ],
 		[ "TEXT_EXPO_SHADOW", "data\/TEXTURE\/TEXT\/game_expo_shadow.png" ],
 		[ "TEXT_EXPO_REMEMBER", "data\/TEXTURE\/TEXT\/game_expo_remember.png" ],
 		[ "BOOK_BG", "data\/TEXTURE\/BG\/bg_book.png" ],
