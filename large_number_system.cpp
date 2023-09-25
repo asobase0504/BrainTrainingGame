@@ -18,7 +18,7 @@
 //**************************************************
 // íËêîíËã`
 //**************************************************
-const int CLargeNumberSystem::X_LINE = 2;
+const int CLargeNumberSystem::X_LINE = 3;
 const int CLargeNumberSystem::Y_LINE = 3;
 const int CLargeNumberSystem::DISPLAY_NUMBER = X_LINE * Y_LINE;
 const int CLargeNumberSystem::MAX_NUMBER = 99;
@@ -50,15 +50,18 @@ HRESULT CLargeNumberSystem::Init()
 
 	m_minOrMax = IntRandom(6, 1);
 
+	D3DXVECTOR2 size(100.0f, 100.0f);
+	D3DXVECTOR2 space(20.0f, 20.0f);
+
 	for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
 	{
 		for (int nCntX = 0; nCntX < X_LINE; nCntX++)
 		{
 			int nCntNumber = nCntY * X_LINE + nCntX;
-			m_pDisplayObject[nCntNumber] = CLargestNumber::Create(
-				D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.25f + 120.0f * nCntNumber,
-					CApplication::SCREEN_HEIGHT * 0.5f, 0.0f),
-				D3DXVECTOR2(100.0f, 100.0f));
+			m_pDisplayObject[nCntNumber] = CLargestNumber::Create(D3DXVECTOR3(
+				((CApplication::SCREEN_WIDTH * 0.5f) + ((size.x + space.x) * nCntX)) - ((size.x * X_LINE * 0.5f)) + (space.x * 2),
+				((CApplication::SCREEN_HEIGHT * 0.5f) + ((size.y + space.y) * nCntY)) - ((size.y * Y_LINE * 0.5f)) + (space.y * 2), 0.0f),
+				size);
 			m_pDisplayObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 			m_pDisplayObject[nCntNumber]->SetTexture("DECO_TAG");
 			m_pDisplayObject[nCntNumber]->SetEvent([this, nCntNumber]()
@@ -133,7 +136,6 @@ void CLargeNumberSystem::WhichiNumberMax_()
 		if (m_nMaxNumber == m_pDisplayObject[i]->GetMyNumber())
 		{
 			m_pDisplayObject[i]->SetIsMax(true);
-			m_pDisplayObject[i]->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
 		}
 	}
 }
@@ -156,7 +158,6 @@ void CLargeNumberSystem::WhichiNumberMin_()
 		if (m_nMinNumber == m_pDisplayObject[i]->GetMyNumber())
 		{
 			m_pDisplayObject[i]->SetIsMin(true);
-			m_pDisplayObject[i]->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
 		}
 	}
 }

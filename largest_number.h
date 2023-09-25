@@ -52,6 +52,7 @@ private:
 	CSequence *m_pSequence;
 	bool m_isMax;
 	bool m_isMin;
+	D3DXVECTOR2 m_space;
 };
 
 
