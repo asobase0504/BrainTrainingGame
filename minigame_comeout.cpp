@@ -28,6 +28,7 @@ CMiniGameComeOut::CMiniGameComeOut()
 	m_nInterval = 0;
 	m_nTime = 0;
 	m_nPopTime = 0;
+	m_nSpeed = 0;
 }
 
 //==========================================
@@ -45,6 +46,7 @@ HRESULT CMiniGameComeOut::Init()
 {
 	//経過時間をリセット
 	m_nTime = 0;
+	m_nSpeed = 0;
 	m_bClick = false;
 
 	//データを読み込み
@@ -157,7 +159,11 @@ void CMiniGameComeOut::Update()
 	//クリアフラグ
 	if (CTarget::GetNext() == m_nNumData)
 	{
-		CDebugProc::Print("クリア\n");
+		CDebugProc::Print("クリアタイム : %d\n", m_nSpeed / 60);
+	}
+	else if (m_bClick)
+	{
+		m_nSpeed++;
 	}
 
 	//デバッグ表示

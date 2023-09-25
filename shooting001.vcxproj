@@ -190,6 +190,7 @@
     <ClCompile Include="minigame_remember_before.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="same_as_shadow_system.cpp" />
+    <ClCompile Include="save.cpp" />
     <ClCompile Include="save_guidance_item.cpp" />
     <ClCompile Include="score_up.cpp" />
     <ClCompile Include="sequence.cpp" />
@@ -266,6 +267,7 @@
     <ClInclude Include="minigame_remember_before.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="same_as_shadow_system.h" />
+    <ClInclude Include="save.h" />
     <ClInclude Include="save_guidance_item.h" />
     <ClInclude Include="score_up.h" />
     <ClInclude Include="sequence.h" />
