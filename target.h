@@ -28,6 +28,7 @@ public:
 
 	void SetTiming(const int nTiming) { m_nTiming = nTiming; } //出現する時間の設定
 	void SetIndex(const int nIndex) { m_nIndex = nIndex; } //出現する順番の設定
+	bool GetMiss(void) { return m_bMiss; } //出現する順番の設定
 
 	//静的メンバ変数宣言
 	static void SetTime(int nTime) { m_nTime = nTime; }
@@ -39,6 +40,7 @@ private:
 	int m_nTiming; //出現する時間
 	int m_nIndex; //出現する順番
 	bool m_bClick; //クリックされたフラグ
+	bool m_bMiss; //ミス
 
 	//静的メンバ変数
 	static int m_nTime; //経過時間

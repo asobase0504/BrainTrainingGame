@@ -38,6 +38,8 @@ private:
 
 	//ƒƒ“ƒoŠÖ”
 	void Load(void);
+	void Set(void);
+	void Reset(void);
 
 	//ƒƒ“ƒo•Ï”
 	std::vector<CTarget*> m_pTarget;
