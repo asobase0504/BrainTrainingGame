@@ -12,12 +12,15 @@
 #include "input.h"
 #include "utility.h"
 
+#include "correction.h"
 #include "largest_number.h"
 
 //**************************************************
 // íËêîíËã`
 //**************************************************
-const int CLargeNumberSystem::DISPLAY_NUMBER = 5;
+const int CLargeNumberSystem::X_LINE = 2;
+const int CLargeNumberSystem::Y_LINE = 3;
+const int CLargeNumberSystem::DISPLAY_NUMBER = X_LINE * Y_LINE;
 const int CLargeNumberSystem::MAX_NUMBER = 99;
 
 //--------------------------------------------------
@@ -45,13 +48,39 @@ HRESULT CLargeNumberSystem::Init()
 	m_pDisplayObject.resize(DISPLAY_NUMBER);
 	m_isUsedNumber.resize(MAX_NUMBER + 1);
 
-	for (int i = 0; i < DISPLAY_NUMBER; i++)
+	for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
 	{
-		m_pDisplayObject[i] = CLargestNumber::Create(
-			D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.25f + 120.0f * i, CApplication::SCREEN_HEIGHT * 0.5f, 0.0f),
-			D3DXVECTOR2(100.0f, 100.0f));
-		m_pDisplayObject[i]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
-		m_pDisplayObject[i]->SetEvent([]() {});
+		for (int nCntX = 0; nCntX < X_LINE; nCntX++)
+		{
+			int nCntNumber = nCntY * X_LINE + nCntX;
+			m_pDisplayObject[nCntNumber] = CLargestNumber::Create(
+				D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.25f + 120.0f * nCntNumber,
+					CApplication::SCREEN_HEIGHT * 0.5f, 0.0f),
+				D3DXVECTOR2(100.0f, 100.0f));
+			m_pDisplayObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+			m_pDisplayObject[nCntNumber]->SetTexture("DECO_TAG");
+			m_pDisplayObject[nCntNumber]->SetEvent([this, nCntNumber]()
+			{
+				CCorrection::Create(m_pDisplayObject[nCntNumber]->GetIsLargest());
+
+				for (int j = 0; j < MAX_NUMBER + 1; j++)
+				{
+					m_isUsedNumber[j] = false;
+				}
+
+				for (int j = 0; j < DISPLAY_NUMBER; j++)
+				{
+					m_pDisplayObject[j]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+					m_pDisplayObject[j]->SetIsLargest(false);
+				}
+
+				m_nLargestNumber = 0;
+
+				NumberLottery_();
+				WhichiNumberLargest_();
+			});
+
+		}
 	}
 	NumberLottery_();
 	WhichiNumberLargest_();

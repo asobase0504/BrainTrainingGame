@@ -277,6 +277,8 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 		break;
 	}
 
+	GetSound()->Stop();
+
 	//‘‚«o‚µæ‚ğİ’è
 	CSave::SaveMode(inType);
 

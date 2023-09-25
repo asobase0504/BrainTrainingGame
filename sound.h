@@ -12,6 +12,7 @@
 //==================================================
 #include <d3dx9.h>
 #include <xaudio2.h>
+#pragma comment(lib,"xaudio2.lib")
 
 //==================================================
 // 定義
@@ -24,6 +25,7 @@ public:
 	{
 		LABEL_NONE = -1,
 		LABEL_BGM_TITLE = 0,	// タイトル
+		LABEL_BGM_GAME,			// ゲーム中
 		LABEL_SE_SHOT,			// 射撃音
 		LABEL_SE_DEAD,			// 死亡音
 		LABEL_SE_DECISION,		// 決定音

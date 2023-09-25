@@ -20,6 +20,7 @@
 #include "fade.h"
 #include "sequence.h"
 #include "score_up.h"
+#include "sound.h"
 #include "save.h"
 
 //-----------------------------------------------------------------------------
@@ -42,6 +43,8 @@ CGame::~CGame()
 //-----------------------------------------------------------------------------
 HRESULT CGame::Init()
 {
+	CApplication::GetInstance()->GetSound()->Play(CSound::LABEL_BGM_GAME);
+
 	{
 		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
 		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));

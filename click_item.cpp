@@ -9,6 +9,7 @@
 #include "click_item.h"
 #include "application.h"
 #include "input.h"
+#include "sound.h"
 
 //--------------------------------------------------
 // コンストラクタ
@@ -40,17 +41,11 @@ void CClickItem::Update()
 
 	CInput* input = CInput::GetKey();
 
-	if (input->Trigger(MOUSE_KEY::MOUSE_INPUT_LEFT))
+	if (input->TriggerTouchClick(m_pos, D3DXVECTOR3(m_size.x, m_size.y, 0.0f) * 0.5f))
 	{
-		D3DXVECTOR3 mousePos = input->GetMouseCursor();
-		if (mousePos.x < m_pos.x + m_size.x * 0.5f && mousePos.x > m_pos.x - m_size.x * 0.5f)
-		{
-			if (mousePos.y < m_pos.y + m_size.y * 0.5f && mousePos.y > m_pos.y - m_size.y * 0.5f)
-			{
-				ClickEvent();
-				m_isClick = true;
-			}
-		}
+		ClickEvent();
+		m_isClick = true;
+		CApplication::GetInstance()->GetSound()->Play(CSound::LABEL_SE_DECISION);
 	}
 }
 

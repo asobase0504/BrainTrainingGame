@@ -126,7 +126,7 @@ void CCamera::Set()
 // カメラの向きに合わせたベクトルに変換する
 // Author : Yuda Kaito
 //-----------------------------------------------------------------------------
-const D3DXVECTOR3 & CCamera::VectorCombinedRot(const D3DXVECTOR3& inVector)
+const D3DXVECTOR3 CCamera::VectorCombinedRot(const D3DXVECTOR3& inVector)
 {
 	if (D3DXVec3Length(&inVector) <= 0.0f)
 	{

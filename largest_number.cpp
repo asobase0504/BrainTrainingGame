@@ -43,8 +43,8 @@ HRESULT CLargestNumber::Init(const D3DXVECTOR3& inPos)
 	CRememberObject::Init();
 
 	m_pSequence = CSequence::Create(
-		D3DXVECTOR3(inPos.x - 20.0f, inPos.y, inPos.z), 
-		D3DXVECTOR2(50.0f,50.0f), 2);
+		D3DXVECTOR3(inPos.x - 20.0f, inPos.y, 0.0f), 
+		D3DXVECTOR2(50.0f,60.0f), 2);
 
 	return S_OK;
 }

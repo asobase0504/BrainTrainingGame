@@ -96,7 +96,13 @@ public:
 	CInputTouchPanel *GetTouchPanel();	//タッチパネルの情報取得
 	void SetTouchData(TOUCHINPUT *pTouchData, int nCntData);//タッチデータの保存
 	bool PressTouchPanel(int nNum = 0);				//タッチパネルプレス
+	bool TriggerTouchPanel(int nNum = 0);				//タッチパネルトリガー
 	D3DXVECTOR3 GetTouchPanelPos(int nNum = 0);		//タッチパネルPos
+
+	bool PressTouchClick(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR3 &RectangleSize); //タッチもしくはクリックをしたかどうかのPress
+	bool TriggerTouchClick(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR3 &RectangleSize); //タッチもしくはクリックをしたかどうかのTrigger
+
+	bool RectangleHitTest(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR3 &RectangleSize, const D3DXVECTOR3 &Pos);//矩形と点の当たり判定
 
 private:
 	bool KeyChackAll(STAN_DART_INPUT_KEY key, int type);			// 全デバイスの入力を確認

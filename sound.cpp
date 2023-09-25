@@ -16,7 +16,8 @@
 //==================================================
 const CSound::SParam CSound::PARAM[] =
 {// 各音素材のパラメータ
-	{ "data/SOUND/BGM/title.wav", -1},	// タイトル
+	{ "data/SOUND/BGM/title.wav", -1 },	// タイトル
+	{ "data/SOUND/BGM/game.wav", -1 },	// タイトル
 	{ "data/SOUND/SE/Shot01.wav", 0 },	// 決定音
 	{ "data/SOUND/SE/Dead1.wav", 0 },	// 死亡音
 	{ "data/SOUND/SE/Decision.wav", 0 },	// 決定音
@@ -60,9 +61,18 @@ HRESULT CSound::Init(HWND hWnd)
 	// COMライブラリの初期化
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
-	if (FAILED(XAudio2Create(&m_pXAudio2, 0)))
+	HRESULT hr;
+
+	hr = XAudio2Create(&m_pXAudio2, 0);
+
+	if (FAILED(hr))
 	{// XAudio2オブジェクトの作成
 		MessageBox(hWnd, "XAudio2オブジェクトの作成に失敗！", "警告！", MB_ICONWARNING);
+		
+		char buf[1024];
+		buf[1023] = '\0';
+		snprintf(buf,1023,"%#x", hr);
+		MessageBox(hWnd, buf, "警告！", MB_ICONWARNING);
 
 		// COMライブラリの終了処理
 		CoUninitialize();

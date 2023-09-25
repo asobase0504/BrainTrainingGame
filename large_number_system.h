@@ -22,6 +22,8 @@ class CLargeNumberSystem : public CObject
 {
 public:
 	static const int DISPLAY_NUMBER;
+	static const int X_LINE;
+	static const int Y_LINE;
 	static const int MAX_NUMBER;
 
 public:
