@@ -338,6 +338,12 @@
     <ClCompile Include="save.cpp">
       <Filter>ソース ファイル\01_Mode\05_ExitSave</Filter>
     </ClCompile>
+    <ClCompile Include="effect_ring.cpp">
+      <Filter>ソース ファイル\07_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="effect_flash.cpp">
+      <Filter>ソース ファイル\07_UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -540,6 +546,12 @@
     </ClInclude>
     <ClInclude Include="save.h">
       <Filter>ソース ファイル\01_Mode\05_ExitSave</Filter>
+    </ClInclude>
+    <ClInclude Include="effect_ring.h">
+      <Filter>ソース ファイル\07_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="effect_flash.h">
+      <Filter>ソース ファイル\07_UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

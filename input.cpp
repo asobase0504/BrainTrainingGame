@@ -15,6 +15,7 @@
 #include "input\inputmouse.h"
 #include "input\input_touch_panel.h"
 #include <assert.h>
+#include "effect_ring.h"
 
 //-----------------------------------------------------------------------------
 //静的メンバ変数宣言
@@ -143,6 +144,8 @@ void CInput::Update()
 	m_pJoyPad->Update();
 	//マウスの更新
 	m_pMouse->Update();
+	//タッチパネルの更新
+	m_pTouchPanel->Update();
 
 	//最後に触ったデバイス
 	if (m_pJoyPad->GetPressAll())
@@ -580,11 +583,50 @@ bool CInput::PressTouchClick(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR3 
 //*************************************************************************************
 bool CInput::TriggerTouchClick(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR3 &RectangleSize)
 {
+
+	////タッチパネルとマウスの位置
+	//D3DXVECTOR3 TouchPos = GetTouchPanelPos();
+	//D3DXVECTOR3 MousePos = GetMouseCursor();
+
+	////エフェクト
+	//if (PressTouchPanel())
+	//{
+	//	CEffectRing::Create(TouchPos);
+	//}
+	//else if(Press(MOUSE_INPUT_LEFT))
+	//{
+	//	CEffectRing::Create(MousePos);
+	//}
+
+	////タッチパネル
+	//bool bTouch = RectangleHitTest(RectanglePos, RectangleSize, TouchPos);
+	////マウス
+	//bool bMouse = RectangleHitTest(RectanglePos, RectangleSize, MousePos);
+
+	//if (!bTouch && !bMouse)
+	//{//そもそも押されていない
+	//	return false;
+	//}
+
+	//if (bTouch)
+	//{ //タッチパネルのが押されていたら
+	//	return TriggerTouchPanel();
+	//}
+
+	//if (bMouse)
+	//{ //マウスのが押されていたら
+	//	return Trigger(MOUSE_INPUT_LEFT);
+	//}
+
+	//タッチパネルとマウスの位置
+	D3DXVECTOR3 TouchPos = GetTouchPanelPos();
+	D3DXVECTOR3 MousePos = GetMouseCursor();
+
 	//タッチパネル
-	bool bTouch = RectangleHitTest(RectanglePos, RectangleSize, GetTouchPanelPos());
+	bool bTouch = TriggerTouchPanel();
 	//マウス
-	bool bMouse = RectangleHitTest(RectanglePos, RectangleSize, GetMouseCursor());
-	
+	bool bMouse = Trigger(MOUSE_INPUT_LEFT);
+
 	if (!bTouch && !bMouse)
 	{//そもそも押されていない
 		return false;
@@ -592,12 +634,14 @@ bool CInput::TriggerTouchClick(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR
 
 	if (bTouch)
 	{ //タッチパネルのが押されていたら
-		return TriggerTouchPanel();
+		CEffectRing::Create(TouchPos);
+		return RectangleHitTest(RectanglePos, RectangleSize, TouchPos);
 	}
 
 	if (bMouse)
 	{ //マウスのが押されていたら
-		return Trigger(MOUSE_INPUT_LEFT);
+		CEffectRing::Create(MousePos);
+		return RectangleHitTest(RectanglePos, RectangleSize, MousePos);
 	}
 
 	return false;

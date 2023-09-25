@@ -169,6 +169,8 @@
     <ClCompile Include="correction.cpp" />
     <ClCompile Include="count_down.cpp" />
     <ClCompile Include="debug_proc.cpp" />
+    <ClCompile Include="effect_flash.cpp" />
+    <ClCompile Include="effect_ring.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="input\DirectInput.cpp" />
@@ -245,6 +247,8 @@
     <ClInclude Include="correction.h" />
     <ClInclude Include="count_down.h" />
     <ClInclude Include="debug_proc.h" />
+    <ClInclude Include="effect_flash.h" />
+    <ClInclude Include="effect_ring.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="input\DirectInput.h" />
