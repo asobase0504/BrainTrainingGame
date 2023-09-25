@@ -18,7 +18,7 @@
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CSequence::CSequence(int nPriority) : CObject(CTaskGroup::LEVEL_3D_UI)
+CSequence::CSequence() : CObject(CTaskGroup::LEVEL_SYSTEM)
 {
 }
 
@@ -40,16 +40,19 @@ HRESULT CSequence::Init()
 //--------------------------------------------------
 // 初期化　オーバーロード
 //--------------------------------------------------
-HRESULT CSequence::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
+HRESULT CSequence::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size,const int digit)
 {
-	m_pNumber.resize(3);
+	m_digit = digit;
+	m_pNumber.resize(m_digit);
 
-	for (int nCnt = 0; nCnt < NUM_DIGIT; nCnt++)
+	for (int nCnt = 0; nCnt < m_digit; nCnt++)
 	{
 		m_pNumber[nCnt] = CNumber::Create(D3DXVECTOR3(size.x * nCnt + pos.x, pos.y, 0.0f), size);
 		m_pNumber[nCnt]->SetColor(D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f));
 		m_pNumber[nCnt]->SetTexture("TIME_NUMBER");
 	}
+
+	SetPos(pos);
 
 	return S_OK;
 }
@@ -59,14 +62,14 @@ HRESULT CSequence::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 //--------------------------------------------------
 void CSequence::Uninit()
 {
-	for (int nCnt = 0; nCnt < NUM_DIGIT; nCnt++)
+	for (int nCnt = 0; nCnt < m_digit; nCnt++)
 	{
 		if (m_pNumber[nCnt] == nullptr)
 		{
 			continue;
 		}
 
-		m_pNumber[nCnt]->Uninit();
+		m_pNumber[nCnt]->Release();
 		m_pNumber[nCnt] = nullptr;
 	}
 
@@ -83,11 +86,37 @@ void CSequence::Update()
 //--------------------------------------------------
 // 位置の設定と大きさの設定
 //--------------------------------------------------
-void CSequence::SetPos(D3DXVECTOR3 pos, D3DXVECTOR2 size)
+void CSequence::SetPos(const D3DXVECTOR3& inPos)
 {
-	for (int nCnt = 0; nCnt < NUM_DIGIT; nCnt++)
+	CObject::SetPos(inPos);
+
+	for (int nCnt = 0; nCnt < m_digit; nCnt++)
 	{
-		m_pNumber[nCnt]->SetPos(D3DXVECTOR3(size.x * nCnt + pos.x, pos.y, 0.0f));
+		m_pNumber[nCnt]->SetPos(D3DXVECTOR3(m_pNumber[nCnt]->GetSize().x * nCnt + inPos.x, inPos.y, 0.0f));
+	}
+}
+
+void CSequence::SetColor(const D3DXCOLOR & inColor)
+{
+	for (int nCnt = 0; nCnt < m_digit; nCnt++)
+	{
+		m_pNumber[nCnt]->SetColor(inColor);
+	}
+}
+
+void CSequence::AddColor(const D3DXCOLOR & inColor)
+{
+	for (int nCnt = 0; nCnt < m_digit; nCnt++)
+	{
+		m_pNumber[nCnt]->SetColor(inColor + m_pNumber[nCnt]->GetColor());
+	}
+}
+
+void CSequence::AddSize(const D3DXVECTOR2 & inSize)
+{
+	for (int nCnt = 0; nCnt < m_digit; nCnt++)
+	{
+		m_pNumber[nCnt]->AddSize(inSize);
 	}
 }
 
@@ -95,11 +124,12 @@ void CSequence::SetNumber(int inNumber)
 {
 	m_number = inNumber;
 
-	int aPosTexU[3];		//各桁の数字を格納
+	std::vector<int> aPosTexU;		//各桁の数字を格納
+	aPosTexU.resize(m_digit);
 
 	{
 		int timer = inNumber;
-		for (int i = 2; i >= 0; --i)
+		for (int i = m_digit-1; i >= 0; --i)
 		{
 			aPosTexU[i] = timer % 10;
 			timer /= 10;
@@ -107,7 +137,7 @@ void CSequence::SetNumber(int inNumber)
 	}
 
 	// テクスチャ座標の設定
-	for (int nCnt = 0; nCnt < NUM_DIGIT; nCnt++)
+	for (int nCnt = 0; nCnt < m_digit; nCnt++)
 	{
 		m_pNumber[nCnt]->AnimTexture(aPosTexU[nCnt], 10);
 	}
@@ -116,14 +146,14 @@ void CSequence::SetNumber(int inNumber)
 //--------------------------------------------------
 // 生成
 //--------------------------------------------------
-CSequence *CSequence::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size)
+CSequence *CSequence::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size, int digit)
 {
 	CSequence *pTimer;
 	pTimer = new CSequence;
 
 	assert(pTimer != nullptr);
 
-	pTimer->Init(pos, size);
+	pTimer->Init(pos, size, digit);
 
 	return pTimer;
 }

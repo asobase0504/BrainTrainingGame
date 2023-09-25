@@ -8,7 +8,6 @@
 // include
 //-----------------------------------------------------------------------------
 #include "minigame_bus.h"
-#include "pause.h"
 #include "input.h"
 #include <assert.h>
 #include "application.h"
@@ -22,8 +21,7 @@
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
-CMiniGameBus::CMiniGameBus() :
-	m_pause(nullptr)
+CMiniGameBus::CMiniGameBus()
 {
 }
 
@@ -32,7 +30,6 @@ CMiniGameBus::CMiniGameBus() :
 //-----------------------------------------------------------------------------
 CMiniGameBus::~CMiniGameBus()
 {
-	assert(m_pause == nullptr);
 }
 
 //-----------------------------------------------------------------------------
@@ -40,7 +37,7 @@ CMiniGameBus::~CMiniGameBus()
 //-----------------------------------------------------------------------------
 HRESULT CMiniGameBus::Init()
 {
-	m_count = 0;
+	CGame::Init();
 
 	// 背景の設定
 	{
@@ -49,8 +46,31 @@ HRESULT CMiniGameBus::Init()
 		D3DXVECTOR3 pos(CApplication::GetInstance()->CENTER_X, CApplication::GetInstance()->CENTER_Y, 0.0f);	// 位置の取得
 		bg->SetTexture("BG");
 		bg->SetPos(pos);
-		bg->SetColor(CApplication::GetInstance()->GetColor(2));
+		bg->SetColor(D3DXCOLOR(0.25f, 0.34f, 0.45f, 1.0f));
 	}
+
+	// 変数の初期化
+	m_count = 0;
+
+	return S_OK;
+}
+
+//-----------------------------------------------------------------------------
+// 終了
+//-----------------------------------------------------------------------------
+void CMiniGameBus::Uninit()
+{
+	if (m_camera != nullptr)
+	{
+		m_camera->Uninit();
+		delete m_camera;
+		m_camera = nullptr;
+	}
+}
+
+void CMiniGameBus::GameStart()
+{
+	CGame::GameStart();
 
 	CBus* bus = new CBus;
 	//ファイル読み込み
@@ -87,27 +107,6 @@ HRESULT CMiniGameBus::Init()
 
 	m_camera = CCameraGame::Create(bus);
 
-	return S_OK;
-}
-
-//-----------------------------------------------------------------------------
-// 終了
-//-----------------------------------------------------------------------------
-void CMiniGameBus::Uninit()
-{
-	if (m_pause != nullptr)
-	{
-		m_pause->Uninit();
-		delete m_pause;
-		m_pause = nullptr;
-	}
-
-	if (m_camera != nullptr)
-	{
-		m_camera->Uninit();
-		delete m_camera;
-		m_camera = nullptr;
-	}
 }
 
 //-----------------------------------------------------------------------------
@@ -115,6 +114,13 @@ void CMiniGameBus::Uninit()
 //-----------------------------------------------------------------------------
 void CMiniGameBus::Update()
 {
+	CGame::Update();
+
+	if (GetState() == COUNT_DOWN)
+	{
+		return;
+	}
+
 	m_camera->Update();
 }
 
@@ -123,5 +129,10 @@ void CMiniGameBus::Update()
 //-----------------------------------------------------------------------------
 void CMiniGameBus::Draw()
 {
+	if (GetState() == COUNT_DOWN)
+	{
+		return;
+	}
+
 	m_camera->Set();
 }

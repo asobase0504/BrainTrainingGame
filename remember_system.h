@@ -15,6 +15,7 @@
 //**************************************************
 class CObject2D;
 class CRememberObject;
+class CGame;
 
 //**************************************************
 // クラス
@@ -22,9 +23,10 @@ class CRememberObject;
 class CRememberSystem : public CObject
 {
 public:
-	static const int X_LINE = 2;
-	static const int Y_LINE = 2;
-	static const int MAX_ANSWER = X_LINE + Y_LINE;
+	static const int X_LINE;
+	static const int Y_LINE;
+	static const int MAX_ANSWER;
+
 public:
 	explicit CRememberSystem(int nPriority = CTaskGroup::LEVEL_2D_1);
 	~CRememberSystem();
@@ -36,8 +38,9 @@ public:
 
 	static CRememberSystem *Create();
 
+	void SetGameMode(CGame* inMode) { m_game = inMode; }
 private:
-	void Touch_(float nPosX, float nPosY);
+	void InitCreateAnswer_();
 	void DisplayRemember_();
 	void Choices_();
 
@@ -58,14 +61,23 @@ private:
 	};
 
 private:
+	CGame* m_game;
+
 	// 覚えるもの
 	CRememberObject *m_pRememberObject;
 	// アンサー
-	CRememberObject *m_pAnswerObject[MAX_ANSWER];
+	std::vector<CRememberObject*> m_pAnswerObject;
 	// テクスチャ
 	std::string m_tex[TEXTURE_MAX];
+	// この番号を使用したかどうか
+	bool m_isUsedNumber[TEXTURE_MAX];
 	// 答え
 	int m_nAnswer;
+	// 一個前のやつ
+	int m_nBeforeNumber;
+
+	bool m_isChange;
+	int m_changeLag;
 };
 
 #endif	// _REMMBER_SYSTEM_H_

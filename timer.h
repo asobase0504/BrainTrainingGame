@@ -8,7 +8,7 @@
 //**************************************************
 // インクルード
 //**************************************************
-#include "object.h"
+#include "sequence.h"
 
 //**************************************************
 // 前方前言　実態はNG　ポインタだけならOK
@@ -18,42 +18,29 @@ class CNumber;
 //**************************************************
 // クラス
 //**************************************************
-class CTimer : public CObject
+class CTimer : public CSequence
 {
 public:
-	static const int NUM_TIME = 3;
-public:
-	explicit CTimer(int nPriority = CTaskGroup::LEVEL_2D_1);
+	explicit CTimer();
 	~CTimer() override;
 
 	HRESULT Init() override;
 	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR2 size);
-	void Uninit() override;
 	void Update() override;
-	void Draw() override {}
 
-	void SetPos(D3DXVECTOR3 pos, D3DXVECTOR2 size);
-
-	void SetTimer(int nTime);
-	void AddTimer(int nValue) { SetTimer(m_nTime + nValue); }
+	void SetTimer(int nValue) { SetNumber(nValue); }
+	int GetTimer() { return GetNumber(); }
+	void AddTimer(int nValue) { SetNumber(GetNumber() + nValue); }
 	void StopTimer(bool stop) { m_bIsStop = stop; }
-	int GetTimer() { return m_nTime; }
+	bool isStop() { return m_bIsStop; }
 
 	static CTimer *Create(D3DXVECTOR3 pos, D3DXVECTOR2 size);
 
 private:
-	// Number型の配列
-	CNumber *m_pNumber[NUM_TIME];
-	// 時間
-	int m_nTime;
 	// フレームカウント
 	int m_nCounter;
 	// タイマーを止める
 	bool m_bIsStop;
-	// フレーム
-	int m_nFrame;
-	// フレーム
-	int m_nSceneFrame;
 };
 
 #endif // _TIMER_H_

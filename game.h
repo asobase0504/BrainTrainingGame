@@ -14,32 +14,48 @@
 //-----------------------------------------
 // 前方宣言
 //-----------------------------------------
-class CPause;
-class CCamera;
+class CTimer;
+class CCountDown;
+class CSequence;
 
 //-----------------------------------------
 // アプリケーションクラス
 //-----------------------------------------
 class CGame : public CMode
 {
+protected:
+	enum EState
+	{
+		COUNT_DOWN,
+		GAME_NOW
+	};
 public:	// メンバー関数
 	CGame();
-	~CGame() override;
+	virtual ~CGame() override;
 
-	HRESULT Init() override;
-	void Uninit() override;
+	virtual HRESULT Init() override;
+	virtual void GameStart();
+	virtual void Uninit() override;
 
 	// 更新処理
-	void Update() override;
+	virtual void Update() override;
 
-	void Draw() override;
+	void AddScore(const int inScore);
 
-private: // 動的プライベート関数
+protected:
+
+	EState GetState() { return m_state; }
 
 private: // 動的メンバー変数
+	CSequence* m_scoreUI;	// 得点の表示
+	int m_score;		// 得点
 
-	CPause* m_pause;
-	CCamera* m_camera;
+	EState m_state;		// 状態
+	CCountDown* m_countDown;	// カウントダウン
+
+	CTimer* m_timer;
+
+	bool m_isResult;
 };
 
 #endif // !_GAME_H_

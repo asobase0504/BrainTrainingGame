@@ -7,7 +7,7 @@
 #ifndef _MINI_GAME_REMEMBER_BEFORE_H_
 #define _MINI_GAME_REMEMBER_BEFORE_H_
 
-#include "mode.h"
+#include "game.h"
 
 //-----------------------------------------
 // 前方宣言
@@ -19,16 +19,16 @@ class CObject2D;
 //-----------------------------------------
 // アプリケーションクラス
 //-----------------------------------------
-class CMiniGameRememberBefore : public CMode
+class CMiniGameRememberBefore : public CGame
 {
-public:
-	static const int MAX_TEXTURE = 10;
-
 public:	// メンバー関数
 	CMiniGameRememberBefore();
 	~CMiniGameRememberBefore() override;
 
 	HRESULT Init() override;
+
+	void GameStart() override;
+
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;

@@ -11,8 +11,7 @@
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CRememberObject::CRememberObject(int nPriority) :
-	CObject2D(nPriority), m_myNumber(0)
+CRememberObject::CRememberObject() : m_myNumber(0)
 {
 }
 
@@ -28,7 +27,7 @@ CRememberObject::~CRememberObject()
 //--------------------------------------------------
 HRESULT CRememberObject::Init()
 {
-	CObject2D::Init();
+	CClickItem::Init();
 
 	return S_OK;
 }
@@ -38,7 +37,7 @@ HRESULT CRememberObject::Init()
 //--------------------------------------------------
 void CRememberObject::Uninit()
 {
-	CObject2D::Uninit();
+	CClickItem::Uninit();
 }
 
 //--------------------------------------------------
@@ -46,7 +45,7 @@ void CRememberObject::Uninit()
 //--------------------------------------------------
 void CRememberObject::Update()
 {
-	CObject2D::Update();
+	CClickItem::Update();
 }
 
 //--------------------------------------------------
@@ -54,7 +53,7 @@ void CRememberObject::Update()
 //--------------------------------------------------
 void CRememberObject::Draw()
 {
-	CObject2D::Draw();
+	CClickItem::Draw();
 }
 
 //--------------------------------------------------

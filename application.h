@@ -26,10 +26,12 @@ class CSound;
 class CApplication
 {
 public: // 定数
-	static const int SCREEN_WIDTH;		// スクリーンの幅
-	static const int SCREEN_HEIGHT;		// スクリーンの高さ
-	static const float CENTER_X;		// スクリーン中心座標のX座標
-	static const float CENTER_Y;		// スクリーン中心座標のY座標
+	static const int SCREEN_WIDTH;			// スクリーンの幅
+	static const int SCREEN_HEIGHT;			// スクリーンの高さ
+	static const float CENTER_X;			// スクリーン中心座標のX座標
+	static const float CENTER_Y;			// スクリーン中心座標のY座標
+	static const float FLOAT_SCREEN_WIDTH;	// スクリーンの幅(float版)
+	static const float FLOAT_SCREEN_HEIGHT;	// スクリーンの高さ(float版)
 
 public: // 静的メンバー変数
 	static CApplication* application;
@@ -52,14 +54,11 @@ public:	// メンバー関数
 	CMode* GetMode() { return mode; }
 	CMode::MODE_TYPE GetModeType() { return m_modeType; }
 	CSound* GetSound() { return sound; }
-	D3DXCOLOR GetColor(int inKey);
-	int GetColorSize();
 	D3DXVECTOR2 GetScreenSize() { return D3DXVECTOR2((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT); }
 	D3DXVECTOR2 GetScreenCenter() { return D3DXVECTOR2(CENTER_X, CENTER_Y); }
 
 	// Setter
 	void SetMode(CMode::MODE_TYPE inType);
-	void SetThemeColor(int idx);
 
 private: // 動的メンバー変数
 	CMode* mode;
@@ -67,7 +66,6 @@ private: // 動的メンバー変数
 	CInput* input;
 	CRenderer* renderer;
 	CTexture* texture;
-	CThemeColor* color;
 	CSound* sound;
 };
 

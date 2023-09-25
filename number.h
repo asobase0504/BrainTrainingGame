@@ -28,7 +28,7 @@
 class CNumber : public CObject2D
 {
 public:
-	explicit CNumber(int nPriority = CTaskGroup::LEVEL_2D_1);
+	explicit CNumber();
 	~CNumber();
 
 	HRESULT Init() override;

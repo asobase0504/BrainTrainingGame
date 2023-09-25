@@ -34,6 +34,13 @@ CSelectSave::~CSelectSave()
 //-----------------------------------------------------------------------------
 HRESULT CSelectSave::Init()
 {
+	{
+		CObject2D* object = CObject2D::Create();
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
+		object->SetSize(D3DXVECTOR2(CApplication::CENTER_X * 2.0f, CApplication::CENTER_Y * 2.0f));
+		object->SetTexture("GREEN_BG");
+	}
+
 	m_itemSaveGuidance.resize(15);
 
 	float xPos = 100.0f;

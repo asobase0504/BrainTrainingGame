@@ -25,13 +25,9 @@ public:	// メンバー関数
 	~CTitle() override;
 
 	HRESULT Init() override;
-	void Uninit() override;
 	void Update() override;
 
 private: // 動的メンバー変数
-	std::vector<CSaveGuidanceItem*> m_itemSaveGuidance;
-
-	bool m_isSelectSaveData;	// セーブデータが選択済みか否か
 };
 
 #endif // !_TITLE_H_

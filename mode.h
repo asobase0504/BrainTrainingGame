@@ -33,10 +33,10 @@ public:
 		MINIGAME_COLORTEXT,			// 色分別
 		MINIGAME_COMEOUT,			// 出た順番に押す
 		MINIGAME_SHADOW,			// かげと同じものはどれ
+		MINIGAME_LARGE_NUMBER,			// かげと同じものはどれ
 		MINIGAME_ADD,				// あわせた数
-		GAME,
-		CUSTUM,
 		RESULT,
+		CUSTUM,
 		MAX
 	};
 public:	// メンバー関数
@@ -44,7 +44,7 @@ public:	// メンバー関数
 	virtual ~CMode();
 
 	virtual HRESULT Init() = 0;
-	virtual void Uninit() = 0;
+	virtual void Uninit() {};
 	virtual void Update() {};
 	virtual void Draw() {};
 

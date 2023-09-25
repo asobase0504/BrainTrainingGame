@@ -20,7 +20,6 @@
 
 // モード
 #include "title.h"
-#include "game.h"
 #include "select_mode.h"
 #include "select_save.h"
 #include "minigame_number25.h"
@@ -28,6 +27,9 @@
 #include "minigame_moveobject.h"
 #include "minigame_remember_before.h"
 #include "minigame_comeout.h"
+#include "result.h"
+#include "minigame_same_as_shadow.h"
+#include "minigame_large_number.h"
 
 using namespace std;
 
@@ -39,6 +41,8 @@ const int CApplication::SCREEN_WIDTH(1280);
 const int CApplication::SCREEN_HEIGHT(720);
 const float CApplication::CENTER_X(SCREEN_WIDTH * 0.5f);
 const float CApplication::CENTER_Y(SCREEN_HEIGHT * 0.5f);
+const float CApplication::FLOAT_SCREEN_WIDTH((float)SCREEN_WIDTH);
+const float CApplication::FLOAT_SCREEN_HEIGHT((float)SCREEN_HEIGHT);
 
 //-----------------------------------------------------------------------------
 // シングルトンでのインスタンスの取得
@@ -61,7 +65,6 @@ CApplication::CApplication() :
 	renderer(nullptr),
 	input(nullptr),
 	texture(nullptr),
-	color(nullptr),
 	m_modeType(CMode::MODE_TYPE::TITLE)
 {
 }
@@ -75,7 +78,6 @@ CApplication::~CApplication()
 	assert(renderer == nullptr);
 	assert(input == nullptr);
 	assert(texture == nullptr);
-	assert(color == nullptr);
 }
 
 //-----------------------------------------------------------------------------
@@ -85,7 +87,7 @@ HRESULT CApplication::Init(HWND hWnd, HINSTANCE hInstance)
 {
 	// 入力処理
 	input = CInput::Create();
-	if (FAILED(input->Init(hInstance, hWnd)))
+	if (FAILED(input->Init(hInstance, hWnd,D3DXVECTOR2(FLOAT_SCREEN_WIDTH, FLOAT_SCREEN_HEIGHT))))
 	{
 		return E_FAIL;
 	}
@@ -100,13 +102,6 @@ HRESULT CApplication::Init(HWND hWnd, HINSTANCE hInstance)
 	// テクスチャ
 	texture = new CTexture;
 	texture->LoadAll();
-
-	// 色管理クラス
-	color = new CThemeColor;
-	if (FAILED(color->Init()))
-	{
-		return E_FAIL;
-	}
 
 	// サウンドクラス
 	sound = new CSound;
@@ -154,13 +149,6 @@ void CApplication::Uninit()
 		texture = nullptr;
 	}
 
-	// 色管理の解放
-	if (color != nullptr)
-	{
-		delete color;
-		color = nullptr;
-	}
-
 	// 入力処理の解放
 	if (input != nullptr)
 	{
@@ -205,19 +193,6 @@ void CApplication::Draw()
 }
 
 //-----------------------------------------------------------------------------
-// 色の取得
-//-----------------------------------------------------------------------------
-D3DXCOLOR CApplication::GetColor(int inKey)
-{
-	return color->GetColor(inKey);
-}
-
-int CApplication::GetColorSize()
-{
-	return color->GetSize();
-}
-
-//-----------------------------------------------------------------------------
 // モードの設定
 //-----------------------------------------------------------------------------
 void CApplication::SetMode(CMode::MODE_TYPE inType)
@@ -227,6 +202,7 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 	if (mode != nullptr)
 	{
 		CTaskGroup::GetInstance()->AllRelease();
+		CTaskGroup::GetInstance()->Pause(false);
 		mode->Uninit();
 		delete mode;
 		mode = nullptr;
@@ -248,9 +224,6 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 		break;
 	case CMode::MODE_TYPE::EXIT_SAVE:
 		mode = new CTitle;
-		break;
-	case CMode::MODE_TYPE::GAME:
-		mode = new CGame;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_BUS:
 		mode = new CMiniGameBus;
@@ -283,7 +256,10 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 		mode = new CMiniGameComeOut;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_SHADOW:
-//		mode = new CTitle;
+		mode = new CMiniGameSameAsShadow;
+		break;
+	case CMode::MODE_TYPE::MINIGAME_LARGE_NUMBER:
+		mode = new CMiniGameLargeNumber;
 		break;
 	case CMode::MODE_TYPE::MINIGAME_ADD:
 //		mode = new CTitle;
@@ -292,7 +268,7 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 //		mode = new CTitle;
 		break;
 	case CMode::MODE_TYPE::RESULT:
-//		mode = new CTitle;
+		mode = new CResult;
 		break;
 	case CMode::MODE_TYPE::MAX:
 		break;
@@ -304,12 +280,4 @@ void CApplication::SetMode(CMode::MODE_TYPE inType)
 	{
 		assert(false);
 	}
-}
-
-//-----------------------------------------------------------------------------
-// テーマカラーの設定
-//-----------------------------------------------------------------------------
-void CApplication::SetThemeColor(int idx)
-{
-	color->SetTheme(idx);	// テーマ色の設定
 }

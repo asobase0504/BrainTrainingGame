@@ -14,30 +14,42 @@
 #include "object2d.h"
 
 #include "remember_object.h"
+#include "correction.h"
+
+#include "game.h"
+
+//**************************************************
+// 定数
+//**************************************************
+const int CRememberSystem::X_LINE = 2;
+const int CRememberSystem::Y_LINE = 2;
+const int CRememberSystem::MAX_ANSWER = X_LINE * Y_LINE;
 
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
 CRememberSystem::CRememberSystem(int nPriority) : CObject(nPriority),
-m_nAnswer(0),
+m_nAnswer(0), m_nBeforeNumber(0),
 m_tex{
 	"WINTER",
 	"SUN_FLOWER",
 	"MOUNTAIN",
 	"GORYOKAKU",
 	"GAME",
-	"FLOWER_GARD",
+	"FLOWER_GARDEN",
 	"DUCK",
 	"DOG",
 	"CLOUD",
 	"CASTLE", }
 {
-	for (int i = 0; i < MAX_ANSWER; i++)
-	{
-		m_pAnswerObject[i] = nullptr;
-	}
+	m_pAnswerObject.clear();
 
 	m_pRememberObject = nullptr;
+
+	for (int i = 0; i < TEXTURE_MAX; i++)
+	{
+		m_isUsedNumber[i] = false;
+	}
 }
 
 //--------------------------------------------------
@@ -55,23 +67,44 @@ HRESULT CRememberSystem::Init()
 #define ARRAY_LENGTH(a) (sizeof(a)/sizeof((a)[0])) 
 	static_assert(ARRAY_LENGTH(m_tex) == TEXTURE_MAX, "baka");
 
-	DisplayRemember_();
+	// 配列サイズの設定
+	m_pAnswerObject.resize(MAX_ANSWER);
 
-	// 答え
-	m_pAnswerObject[0] = CRememberObject::Create(
-		D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.25f, 600.0f, 0.0f),
-		D3DXVECTOR2(300.0f, 200.0f),
-		0);
-	m_pAnswerObject[0]->SetTexture(m_tex[0]);
-	m_pAnswerObject[0]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+	m_nAnswer = IntRandom(TEXTURE_MAX - 1, 0);
+	m_changeLag = 30;
+	m_isChange = false;
 
-	// ダミー
-	m_pAnswerObject[1] = CRememberObject::Create(
-		D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.75f, 600.0f, 0.0f),
-		D3DXVECTOR2(300.0f, 200.0f),
-		1);
-	m_pAnswerObject[1]->SetTexture(m_tex[1]);
-	m_pAnswerObject[1]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI_2);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X + 20.0f , 130.0f, 0.0f));
+		object->SetSize(D3DXVECTOR2(50.0f * 0.5f, 63.0f * 0.5f));
+		object->SetTexture("DECO_PIN");
+	}
+
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI);
+		object->SetPos(D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.5f, 230.0f, 0.0f));
+		object->SetSize(D3DXVECTOR2(320.0f, 220.0f));
+		object->SetColor(D3DXCOLOR(0.16f,0.24f,0.22f,1.0f));
+	}
+
+	// 覚えるやつ 一回だけつくる
+	m_pRememberObject = CRememberObject::Create(
+		D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.5f, 230.0f, 0.0f),
+		D3DXVECTOR2(300.0f, 200.0f), m_nAnswer);
+	m_pRememberObject->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+	m_pRememberObject->SetTexture(m_tex[m_nAnswer]);
+	m_pRememberObject->SetEvent([]() {});
+
+	CClickItem* initClick = CClickItem::Create(D3DXVECTOR3(CApplication::CENTER_X, 500.0f, 0.0f), D3DXVECTOR2(652.0f * 0.5f, 219.0f * 0.5f));
+	initClick->SetTexture("TEXT_CHACK");
+	initClick->SetEvent([this, initClick]()
+	{
+		m_isChange = true;
+		initClick->Uninit();
+		InitCreateAnswer_();
+		Update();
+	});
 
 	return S_OK;
 }
@@ -88,11 +121,28 @@ void CRememberSystem::Uninit()
 //--------------------------------------------------
 void CRememberSystem::Update()
 {
-	// インプット
-	CInput *input = CInput::GetKey();
-	D3DXVECTOR3 mousePos = input->GetMouseCursor();
+	if (m_isChange)
+	{
+		m_changeLag++;
+		if (m_changeLag >= 25)
+		{
+			DisplayRemember_();
+			Choices_();
 
-	Touch_(mousePos.x, mousePos.y);
+			for (int i = 0; i < TEXTURE_MAX; i++)
+			{
+				m_isUsedNumber[i] = false;
+			}
+
+			for (int i = 0; i < MAX_ANSWER; i++)
+			{
+				// ポリゴンのカラー変更
+				m_pAnswerObject[i]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+			}
+			m_isChange = false;
+			m_changeLag = 0;
+		}
+	}
 }
 
 //--------------------------------------------------
@@ -123,53 +173,107 @@ CRememberSystem *CRememberSystem::Create()
 }
 
 //--------------------------------------------------
-// タッチ
+// 回答欄の生成
 //--------------------------------------------------
-void CRememberSystem::Touch_(float nPosX, float nPosY)
+void CRememberSystem::InitCreateAnswer_()
 {
-	// インプット
-	CInput *input = CInput::GetKey();
-
-	for (int nCntNumber = 0; nCntNumber < 2; nCntNumber++)
+	for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
 	{
-		D3DXVECTOR3 pos = m_pAnswerObject[nCntNumber]->GetPos();
-		D3DXVECTOR3 size = m_pAnswerObject[nCntNumber]->GetSize();
-
-		int answerMyNumber = m_pAnswerObject[nCntNumber]->GetMyNumber();
-		int rememberMyNumber = m_pRememberObject->GetMyNumber();
-
-		//	タッチ座標がポリゴンの中だったら
-		if (input->Trigger(MOUSE_INPUT_LEFT) &&
-			pos.x + size.x >= nPosX &&
-			pos.x - size.x <= nPosX &&
-			pos.y - size.y <= nPosY &&
-			pos.y + size.y >= nPosY &&
-			answerMyNumber == rememberMyNumber)
+		for (int nCntX = 0; nCntX < X_LINE; nCntX++)
 		{
-			// ポリゴンのカラー変更
-			m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+			int nCntNumber = nCntY * Y_LINE + nCntX;
+
+			// 答え
+			D3DXVECTOR2 size(180.0f, 120.0f);
+
+			float xInterval = size.x + 40.0f;
+			float yInterval = size.y + 30.0f;
+
+			D3DXVECTOR3 pos;
+			pos.x = CApplication::CENTER_X - ((float)(X_LINE - 1) * 0.5f) * xInterval + nCntX * xInterval;
+			pos.y = CApplication::CENTER_Y + 165.0f - ((float)(Y_LINE - 1) * 0.5f) * yInterval + nCntY * yInterval;
+			pos.z = 0.0f;
+
+			{
+				CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI_2);
+				object->SetPos(D3DXVECTOR3(pos.x, pos.y - size.y * 0.5f, 0.0f));
+				object->SetSize(D3DXVECTOR2(50.0f * 0.5f, 63.0f * 0.5f));
+				object->SetTexture("DECO_PIN");
+			}
+
+			m_pAnswerObject[nCntNumber] = CRememberObject::Create(pos, size, nCntNumber);
+			m_pAnswerObject[nCntNumber]->SetTexture(m_tex[nCntNumber]);
+			m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+			m_pAnswerObject[nCntNumber]->SetEvent([this, nCntNumber]()
+			{
+				if (m_isChange)
+				{
+					return;
+				}
+				m_isChange = true;
+
+				int answerMyNumber = m_pAnswerObject[nCntNumber]->GetMyNumber();
+				if (answerMyNumber == m_nBeforeNumber)
+				{
+					CCorrection::Create(true);
+					m_game->AddScore(15);
+				}
+				else
+				{
+					CCorrection::Create(false);
+					m_game->AddScore(-7);
+				}
+			});
 		}
 	}
 }
 
 //--------------------------------------------------
-// 選択肢
+// 答えの表示
 //--------------------------------------------------
 void CRememberSystem::DisplayRemember_()
 {
+	m_nBeforeNumber = m_pRememberObject->GetMyNumber();
+
 	m_nAnswer = IntRandom(TEXTURE_MAX - 1, 0);
-	// 覚えるやつ
-	m_pRememberObject = CRememberObject::Create(
-		D3DXVECTOR3((float)CApplication::SCREEN_WIDTH * 0.5f, 200.0f, 0.0f),
-		D3DXVECTOR2(300.0f, 200.0f),
-		m_nAnswer);
+
+	m_pRememberObject->SetMyNumber(m_nAnswer);
 	m_pRememberObject->SetTexture(m_tex[m_nAnswer]);
-	m_pRememberObject->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 }
 
 //--------------------------------------------------
-// 答えの表示
+// 選択肢
 //--------------------------------------------------
 void CRememberSystem::Choices_()
 {
+	// 一つをこたえにする
+	int answer = 0;
+	answer = IntRandom(MAX_ANSWER - 1, 0);
+
+	m_isUsedNumber[m_nBeforeNumber] = true;
+
+	// 抽選
+	int number = 0;
+	number = IntRandom(TEXTURE_MAX - 1, 0);
+
+	for (int i = 0; i < MAX_ANSWER; i++)
+	{
+		if (answer == i)
+		{// 答えと一緒にする
+			m_pAnswerObject[i]->SetMyNumber(m_nBeforeNumber);
+			m_pAnswerObject[i]->SetTexture(m_tex[m_nBeforeNumber]);
+		}
+		else
+		{// それ以外（ダミー）
+			while (m_isUsedNumber[number])
+			{// 画像の抽選
+				number = IntRandom(TEXTURE_MAX - 1, 0);
+			}
+
+			m_pAnswerObject[i]->SetMyNumber(number);
+			m_pAnswerObject[i]->SetTexture(m_tex[number]);
+
+			m_isUsedNumber[number] = true;
+		}
+	}
 }

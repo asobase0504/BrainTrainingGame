@@ -8,7 +8,7 @@
 //**************************************************
 // インクルード
 //**************************************************
-#include "object2d.h"
+#include "click_item.h"
 
 //**************************************************
 // 前方前言　実態はNG　ポインタだけならOK
@@ -25,10 +25,10 @@
 //**************************************************
 // クラス
 //**************************************************
-class CRememberObject : public CObject2D
+class CRememberObject : public CClickItem
 {
 public:
-	explicit CRememberObject(int nPriority = CTaskGroup::LEVEL_2D_1);
+	explicit CRememberObject();
 	~CRememberObject();
 
 	HRESULT Init() override;
@@ -44,7 +44,6 @@ public:
 private:
 	// 自分の番号
 	int m_myNumber;
-
 };
 
 

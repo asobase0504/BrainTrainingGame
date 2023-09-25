@@ -128,4 +128,11 @@ void CopyBuf(IDirect3DVertexBuffer9* pBuf, void* pSrc, unsigned size);
 //--------------------------------------------------
 int Digit(int number);
 
+//---------------------------------------------------------------------------
+// 反射ベクトル
+// 引数  : D3DXVECTOR3 front / 進行ベクトル, D3DXVECTOR3 normal / 衝突点での法線ベクトル
+// 返値  : D3DXVECTOR3 / 反射ベクトル
+//---------------------------------------------------------------------------
+D3DXVECTOR3 CalcReflectVector(const D3DXVECTOR3& front, const D3DXVECTOR3& normal);
+
 #endif // !_UTILITY_H_

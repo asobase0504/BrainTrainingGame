@@ -13,8 +13,10 @@
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CClickItem::CClickItem() : CObject2D(CTaskGroup::LEVEL_2D_UI)
+CClickItem::CClickItem(int priority) : CObject2D(priority)
 {
+	m_eventTick = [](){};
+	m_tick = 0;
 }
 
 //--------------------------------------------------
@@ -25,20 +27,15 @@ CClickItem::~CClickItem()
 }
 
 //--------------------------------------------------
-// 初期化
-//--------------------------------------------------
-HRESULT CClickItem::Init()
-{
-	CObject2D::Init();
-
-	return S_OK;
-}
-
-//--------------------------------------------------
 // 更新
 //--------------------------------------------------
 void CClickItem::Update()
 {
+	CObject2D::Update();
+
+	m_tick++;
+	m_eventTick();
+
 	m_isClick = false;
 
 	CInput* input = CInput::GetKey();
@@ -57,9 +54,9 @@ void CClickItem::Update()
 	}
 }
 
-CClickItem * CClickItem::Create(const D3DXVECTOR3 & inPos, const D3DXVECTOR2 & inSize)
+CClickItem * CClickItem::Create(const D3DXVECTOR3 & inPos, const D3DXVECTOR2 & inSize, int priority)
 {
-	CClickItem* item = new CClickItem;
+	CClickItem* item = new CClickItem(priority);
 
 	assert(item != nullptr);
 

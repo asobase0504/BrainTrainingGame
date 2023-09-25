@@ -19,7 +19,9 @@
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CTimer::CTimer(int nPriority) : CObject(nPriority)
+CTimer::CTimer() : 
+	m_nCounter(0),
+	m_bIsStop(false)
 {
 }
 
@@ -35,6 +37,8 @@ CTimer::~CTimer()
 //--------------------------------------------------
 HRESULT CTimer::Init()
 {
+	CSequence::Init();
+	m_bIsStop = false;
 	return S_OK;
 }
 
@@ -43,38 +47,10 @@ HRESULT CTimer::Init()
 //--------------------------------------------------
 HRESULT CTimer::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	m_nTime = 0;
+	CSequence::Init(pos, size,2);
 	m_bIsStop = false;
-	m_nFrame = 0;
-	m_nSceneFrame = 0;
-	m_nCounter = 0;
-
-	for (int nCnt = 0; nCnt < NUM_TIME; nCnt++)
-	{
-		m_pNumber[nCnt] = CNumber::Create(D3DXVECTOR3(size.x * nCnt + pos.x, pos.y, 0.0f), size);
-		m_pNumber[nCnt]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
-		m_pNumber[nCnt]->SetTexture("TIME_NUMBER");
-	}
-
+	SetColor(D3DXCOLOR(0.0f,0.0f,0.0f,1.0f));
 	return S_OK;
-}
-
-//--------------------------------------------------
-// 終了
-//--------------------------------------------------
-void CTimer::Uninit()
-{
-	for (int nCnt = 0; nCnt < NUM_TIME; nCnt++)
-	{
-		if (m_pNumber[nCnt] == nullptr)
-		{
-			continue;
-		}
-
-		m_pNumber[nCnt]->Uninit();
-	}
-
-	CObject::Release();
 }
 
 //--------------------------------------------------
@@ -82,53 +58,27 @@ void CTimer::Uninit()
 //--------------------------------------------------
 void CTimer::Update()
 {
-	if (!m_bIsStop)
+	CSequence::Update();
+
+	if (m_bIsStop)
 	{
-		//フレームカウンター
-		m_nCounter++;
-
-		if (m_nCounter >= 60)
-		{
-			AddTimer(1);
-
-			m_nCounter = 0;
-		}
-	}
-}
-
-//--------------------------------------------------
-// 位置の設定と大きさの設定
-//--------------------------------------------------
-void CTimer::SetPos(D3DXVECTOR3 pos, D3DXVECTOR2 size)
-{
-	for (int nCnt = 0; nCnt < NUM_TIME; nCnt++)
-	{
-		m_pNumber[nCnt]->SetPos(D3DXVECTOR3(size.x * nCnt + pos.x, pos.y, 0.0f));
-	}
-}
-
-//--------------------------------------------------
-// タイムの設定
-//--------------------------------------------------
-void CTimer::SetTimer(int nTime)
-{
-	m_nTime = nTime;
-
-	int aPosTexU[3];		//各桁の数字を格納
-
-	{
-		int timer = m_nTime;
-		for (int i = 2; i >= 0; --i)
-		{
-			aPosTexU[i] = timer % 10;
-			timer /= 10;
-		}
+		return;
 	}
 
-	// テクスチャ座標の設定
-	for (int nCnt = 0; nCnt < NUM_TIME; nCnt++)
+	//フレームカウンター
+	m_nCounter++;
+
+	if (m_nCounter >= 60)
 	{
-		m_pNumber[nCnt]->AnimTexture(aPosTexU[nCnt], 10);
+		AddTimer(-1);
+
+		m_nCounter = 0;
+	}
+
+	if (GetNumber() <= 0)
+	{
+		m_bIsStop = true;
+		SetTimer(0);
 	}
 }
 
