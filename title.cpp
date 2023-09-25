@@ -124,6 +124,6 @@ void CTitle::Update()
 {
 	if (CInput::GetKey()->Trigger(DIK_RETURN))
 	{
-		CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_SAVE);
+		CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_MODE);
 	}
 }

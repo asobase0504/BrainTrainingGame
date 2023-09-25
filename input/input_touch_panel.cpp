@@ -27,6 +27,32 @@ CInputTouchPanel::~CInputTouchPanel()
 }
 
 //*************************************************************************************
+//更新
+//*************************************************************************************
+void CInputTouchPanel::Update()
+{
+	for (int i = 0; i < MAX_TOUCH_PANEL; i++)
+	{//全更新
+		if (!m_TouchPanel[i].bUse)
+		{//使用状態になったら
+			continue;
+		}
+
+
+		if (!m_TouchPanel[i].bFirstTrigger && m_TouchPanel[i].bTrigger)
+		{//二段階目トリガーの喪失
+			m_TouchPanel[i].bTrigger = false;
+		}
+
+		if (m_TouchPanel[i].bFirstTrigger && !m_TouchPanel[i].bTrigger)
+		{//一段階目トリガーの喪失
+			m_TouchPanel[i].bFirstTrigger = false;
+			m_TouchPanel[i].bTrigger = true;
+		}
+	}
+}
+
+//*************************************************************************************
 //プレス処理
 //*************************************************************************************
 bool CInputTouchPanel::GetPress(int nNum)
@@ -39,10 +65,15 @@ bool CInputTouchPanel::GetPress(int nNum)
 //*************************************************************************************
 bool CInputTouchPanel::GetTrigger(int nNum)
 {
+	//NULLチェック
+	if (!m_TouchPanel[nNum].bUse)
+	{
+		return false;
+	}
+
 	//トリガーチェック
 	if (m_TouchPanel[nNum].bTrigger)
 	{
-		m_TouchPanel[nNum].bTrigger = false;
 		return true;
 	}
 	return false;
@@ -155,7 +186,8 @@ void CInputTouchPanel::SetTouchData(TOUCHINPUT *pTouchData, int nCntData)
 		//使用状態にする
 		m_TouchPanel[i].bUse = true;
 		//トリガーの起動
-		m_TouchPanel[i].bTrigger = true;
+		m_TouchPanel[i].bTrigger = false;
+		m_TouchPanel[i].bFirstTrigger = true;
 		//データの保存
 		m_TouchPanel[i].TouchData = pTouchData[nCntMax];
 		//現在の位置を保存

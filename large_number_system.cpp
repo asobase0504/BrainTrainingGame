@@ -50,8 +50,8 @@ HRESULT CLargeNumberSystem::Init()
 
 	m_minOrMax = IntRandom(6, 1);
 
-	D3DXVECTOR2 size(100.0f, 100.0f);
-	D3DXVECTOR2 space(100.0f, 100.0f);
+	D3DXVECTOR2 size(130.0f, 130.0f);
+	D3DXVECTOR2 space(60.0f, 60.0f);
 
 	for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
 	{
@@ -59,11 +59,11 @@ HRESULT CLargeNumberSystem::Init()
 		{
 			int nCntNumber = nCntY * X_LINE + nCntX;
 
-			float posX = ((CApplication::SCREEN_WIDTH * 0.5f) + (size.x + space.x) * nCntX);
-			float posY = ((CApplication::SCREEN_HEIGHT * 0.5f) + (size.y + space.y) * nCntY);
+			float posX = ((CApplication::SCREEN_WIDTH * 0.5f) + (size.x + space.x) * nCntX + space.x * 0.5f);
+			float posY = ((CApplication::SCREEN_HEIGHT * 0.5f) + (size.y + space.y) * nCntY + space.y * 0.5f);
 
-			float shiftX = (size.x * X_LINE * 0.5f);
-			float shiftY = (size.y * Y_LINE * 0.5f);
+			float shiftX = (size.x + space.x * X_LINE * 0.5f);
+			float shiftY = (size.y + space.y * Y_LINE * 0.5f);
 
 			m_pDisplayObject[nCntNumber] = CLargestNumber::Create(D3DXVECTOR3(
 				posX - shiftX,
@@ -201,12 +201,30 @@ void CLargeNumberSystem::SetMode()
 		NumberLottery_();
 		WhichiNumberMax_();
 		m_mode = true;
+
+		for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
+		{
+			for (int nCntX = 0; nCntX < X_LINE; nCntX++)
+			{
+				int nCntNumber = nCntY * X_LINE + nCntX;
+				m_pDisplayObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 0.75f, 0.75f, 1.0f));
+			}
+		}
 	}
 	else if (m_minOrMax % 2 != 0)
 	{// ç≈è¨
 		NumberLottery_();
 		WhichiNumberMin_();
 		m_mode = false;
+
+		for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
+		{
+			for (int nCntX = 0; nCntX < X_LINE; nCntX++)
+			{
+				int nCntNumber = nCntY * X_LINE + nCntX;
+				m_pDisplayObject[nCntNumber]->SetColor(D3DXCOLOR(0.75f, 0.75f, 1.0f, 1.0f));
+			}
+		}
 	}
 }
 

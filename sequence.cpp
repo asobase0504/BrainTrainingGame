@@ -48,7 +48,7 @@ HRESULT CSequence::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size,const int digit)
 	for (int nCnt = 0; nCnt < m_digit; nCnt++)
 	{
 		m_pNumber[nCnt] = CNumber::Create(D3DXVECTOR3(size.x * nCnt + pos.x, pos.y, 0.0f), size);
-		m_pNumber[nCnt]->SetColor(D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f));
+		m_pNumber[nCnt]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 		m_pNumber[nCnt]->SetTexture("TIME_NUMBER");
 	}
 

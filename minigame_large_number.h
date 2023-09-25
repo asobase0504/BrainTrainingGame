@@ -13,6 +13,7 @@
 // 前方宣言
 //-----------------------------------------
 class CObject2D;
+class CLargeNumberSystem;
 
 //-----------------------------------------
 // アプリケーションクラス
@@ -31,7 +32,10 @@ public:	// メンバー関数
 	void Draw() override;
 
 private:
+	CLargeNumberSystem* m_system;
+	CObject2D* m_expo;
 
+	int m_time;
 };
 
 #endif // !_MINI_GAME_LARGE_NUMBER_H_

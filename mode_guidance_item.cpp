@@ -2,6 +2,7 @@
 #include "input.h"
 #include "application.h"
 #include "fade.h"
+#include "rule_item.h"
 #include <locale>
 
 CModeGuidanceItem::CModeGuidanceItem()
@@ -53,7 +54,7 @@ void CModeGuidanceItem::SetModeTexture(std::string inTexIcon, std::string inTexE
 
 void CModeGuidanceItem::ClickEvent()
 {
-	CFade::GetInstance()->NextMode(m_type);
+	CRuleItem::Create(m_type);
 }
 
 void CModeGuidanceItem::CreateIcon()
