@@ -60,3 +60,26 @@ void CSave::SaveScore(const int nScore)
 		}
 	}
 }
+
+//==========================================
+//  ハイスコアを取得
+//==========================================
+int CSave::GetHiScore(CMode::MODE_TYPE mode)
+{
+	//ローカル変数宣言
+	FILE *pFile = NULL;
+
+	//バイナリーファイルを開く
+	pFile = fopen(&msc_sRankingPass[0], "rb");
+
+	if (pFile != NULL)
+	{
+		//読み込み
+		fread(&m_aScore[0], sizeof(int), (int)CMode::MODE_TYPE::MAX, pFile);
+
+		//ファイルを閉じる
+		fclose(pFile);
+	}
+
+	return m_aScore[(int)mode];
+}

@@ -18,6 +18,7 @@ public:
 	//静的メンバ関数
 	static void SaveMode(CMode::MODE_TYPE mode); //書き出し先を設定
 	static void SaveScore(const int nScore); //スコアを書き出し
+	static int GetHiScore(CMode::MODE_TYPE mode); //ハイスコアの取得
 
 private:
 
