@@ -34,6 +34,8 @@ public:	// ƒƒ“ƒo[ŠÖ”
 private:
 	CLargeNumberSystem* m_system;
 	CObject2D* m_expo;
+
+	int m_time;
 };
 
 #endif // !_MINI_GAME_LARGE_NUMBER_H_

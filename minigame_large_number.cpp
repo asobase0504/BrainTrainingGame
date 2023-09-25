@@ -69,12 +69,26 @@ void CMiniGameLargeNumber::Update()
 
 	if (GetState() == COUNT_DOWN)
 	{
+		static bool change = true;
+
+		m_time++;
+
+		if (m_time % 30 == 0)
+		{
+			change = !change;
+			m_expo->SetTexture(change ? "TEXT_EXPO_LARGE_MAX" : "TEXT_EXPO_LARGE_MIN");
+		}
 		return;
 	}
-
-	m_expo->SetTexture("TEXT_EXPO_LARGE_MIN");
-	m_expo->SetTexture("TEXT_EXPO_LARGE_MAX");
-
+	
+	if (m_system->GetMode())
+	{
+		m_expo->SetTexture("TEXT_EXPO_LARGE_MAX");
+	}
+	else
+	{
+		m_expo->SetTexture("TEXT_EXPO_LARGE_MIN");
+	}
 }
 
 //-----------------------------------------------------------------------------
