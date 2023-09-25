@@ -52,6 +52,7 @@ private:
 	int m_nTime; //経過時間
 	int m_nPopTime; //生成が完了する時間
 	int m_nSpeed; //時間の計測
+	int m_nNext; //次のターゲット
 	bool *m_pUse; //使用フラグ
 
 	//静的メンバ変数

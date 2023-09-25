@@ -202,12 +202,30 @@ void CLargeNumberSystem::SetMode()
 		NumberLottery_();
 		WhichiNumberMax_();
 		m_mode = true;
+
+		for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
+		{
+			for (int nCntX = 0; nCntX < X_LINE; nCntX++)
+			{
+				int nCntNumber = nCntY * X_LINE + nCntX;
+				m_pDisplayObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 0.75f, 0.75f, 1.0f));
+			}
+		}
 	}
 	else if (m_minOrMax % 2 != 0)
 	{// ç≈è¨
 		NumberLottery_();
 		WhichiNumberMin_();
 		m_mode = false;
+
+		for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
+		{
+			for (int nCntX = 0; nCntX < X_LINE; nCntX++)
+			{
+				int nCntNumber = nCntY * X_LINE + nCntX;
+				m_pDisplayObject[nCntNumber]->SetColor(D3DXCOLOR(0.75f, 0.75f, 1.0f, 1.0f));
+			}
+		}
 	}
 }
 
