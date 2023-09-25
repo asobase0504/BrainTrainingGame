@@ -48,7 +48,7 @@ HRESULT CSequence::Init(D3DXVECTOR3 pos, D3DXVECTOR2 size,const int digit)
 	for (int nCnt = 0; nCnt < m_digit; nCnt++)
 	{
 		m_pNumber[nCnt] = CNumber::Create(D3DXVECTOR3(size.x * nCnt + pos.x, pos.y, 0.0f), size);
-		m_pNumber[nCnt]->SetColor(D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f));
+		m_pNumber[nCnt]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 		m_pNumber[nCnt]->SetTexture("TIME_NUMBER");
 	}
 
@@ -92,7 +92,7 @@ void CSequence::SetPos(const D3DXVECTOR3& inPos)
 
 	for (int nCnt = 0; nCnt < m_digit; nCnt++)
 	{
-		m_pNumber[nCnt]->SetPos(D3DXVECTOR3(m_pNumber[nCnt]->GetSize().x * nCnt + inPos.x, inPos.y, 0.0f));
+		m_pNumber[nCnt]->SetPos(D3DXVECTOR3(m_pNumber[nCnt]->GetSize().x * ((float)nCnt - (m_digit - 1) * 0.5f) + inPos.x, inPos.y, 0.0f));
 	}
 }
 
@@ -118,6 +118,7 @@ void CSequence::SetSize(const D3DXVECTOR2 & inSize)
 	{
 		m_pNumber[nCnt]->SetSize(inSize);
 	}
+	SetPos(m_pos);
 }
 
 void CSequence::AddSize(const D3DXVECTOR2 & inSize)

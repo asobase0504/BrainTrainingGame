@@ -196,6 +196,7 @@
     <ClCompile Include="remember_system.cpp" />
     <ClCompile Include="minigame_remember_before.cpp" />
     <ClCompile Include="result.cpp" />
+    <ClCompile Include="rule_item.cpp" />
     <ClCompile Include="same_as_shadow_system.cpp" />
     <ClCompile Include="save.cpp" />
     <ClCompile Include="save_guidance_item.cpp" />
@@ -275,6 +276,7 @@
     <ClInclude Include="remember_system.h" />
     <ClInclude Include="minigame_remember_before.h" />
     <ClInclude Include="result.h" />
+    <ClInclude Include="rule_item.h" />
     <ClInclude Include="same_as_shadow_system.h" />
     <ClInclude Include="save.h" />
     <ClInclude Include="save_guidance_item.h" />
@@ -310,9 +312,6 @@
     <ClInclude Include="utility.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\FILE\color.json" />
-    <None Include="data\FILE\STAGE\stage01.json" />
-    <None Include="data\FILE\STAGE\stage02.json" />
     <None Include="data\FILE\texture.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
