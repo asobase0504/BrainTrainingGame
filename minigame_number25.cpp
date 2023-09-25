@@ -85,9 +85,6 @@ void CMiniGameNumber25::GameStart()
 		}
 	}
 
-	m_pTimer = CTimer::Create(D3DXVECTOR3(CApplication::SCREEN_WIDTH * 0.5f, 50.0f, 0.0f), D3DXVECTOR2(25.0f, 50.0f));
-	m_pTimer->SetTimer(0);
-
 	Shuffle();
 }
 
