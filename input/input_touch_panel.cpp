@@ -39,6 +39,12 @@ bool CInputTouchPanel::GetPress(int nNum)
 //*************************************************************************************
 bool CInputTouchPanel::GetTrigger(int nNum)
 {
+	//NULLチェック
+	if (!m_TouchPanel[nNum].bUse)
+	{
+		return false;
+	}
+
 	//トリガーチェック
 	if (m_TouchPanel[nNum].bTrigger)
 	{

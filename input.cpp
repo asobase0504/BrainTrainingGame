@@ -581,10 +581,10 @@ bool CInput::PressTouchClick(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR3 
 bool CInput::TriggerTouchClick(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR3 &RectangleSize)
 {
 	//タッチパネル
-	bool bTouch = TriggerTouchPanel();
+	bool bTouch = RectangleHitTest(RectanglePos, RectangleSize, GetTouchPanelPos());
 	//マウス
-	bool bMouse = Trigger(MOUSE_INPUT_LEFT);
-
+	bool bMouse = RectangleHitTest(RectanglePos, RectangleSize, GetMouseCursor());
+	
 	if (!bTouch && !bMouse)
 	{//そもそも押されていない
 		return false;
@@ -592,12 +592,12 @@ bool CInput::TriggerTouchClick(const D3DXVECTOR3 &RectanglePos, const D3DXVECTOR
 
 	if (bTouch)
 	{ //タッチパネルのが押されていたら
-		return RectangleHitTest(RectanglePos, RectangleSize, GetTouchPanelPos());
+		return TriggerTouchPanel();
 	}
 
 	if (bMouse)
 	{ //マウスのが押されていたら
-		return RectangleHitTest(RectanglePos, RectangleSize, GetMouseCursor());
+		return Trigger(MOUSE_INPUT_LEFT);
 	}
 
 	return false;
