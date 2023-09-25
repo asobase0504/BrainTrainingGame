@@ -83,12 +83,14 @@ HRESULT CSelectMode::Init()
 
 	// o‚½‡
 	object = CModeGuidanceItem::Create(D3DXVECTOR3(425.0f, 600.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_COMEOUT);
+	object->SetModeTexture("GAME_ICON_COMEOUT", "TEXT_EXPO_COMEOUT");
 	m_pHiScore[2] = CSequence::Create(D3DXVECTOR3(425.0f, 530.0f, 0.0f), D3DXVECTOR2(30.0f, 80.0f), 3);
 	m_pHiScore[2]->SetNumber(CSave::GetHiScore(CMode::MODE_TYPE::MINIGAME_COMEOUT));
 	m_pHiScore[2]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 
 	// ‘å‚«‚¢”
 	object = CModeGuidanceItem::Create(D3DXVECTOR3(975.0f, 600.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_LARGE_NUMBER);
+	object->SetModeTexture("GAME_ICON_LARGE", "TEXT_EXPO_LARGE");
 	m_pHiScore[3] = CSequence::Create(D3DXVECTOR3(975.0f, 530.0f, 0.0f), D3DXVECTOR2(30.0f, 80.0f), 3);
 	m_pHiScore[3]->SetNumber(CSave::GetHiScore(CMode::MODE_TYPE::MINIGAME_LARGE_NUMBER));
 	m_pHiScore[3]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
