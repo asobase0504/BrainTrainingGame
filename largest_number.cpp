@@ -14,7 +14,7 @@
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
-CLargestNumber::CLargestNumber() : m_isLargest(false),m_pSequence(nullptr)
+CLargestNumber::CLargestNumber() : m_isMax(false), m_isMin(false) ,m_pSequence(nullptr)
 {
 }
 
