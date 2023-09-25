@@ -49,6 +49,14 @@ HRESULT CSelectMode::Init()
 		object->SetTexture("GREEN_BG");
 	}
 
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y + 20.0f, 0.0f));
+		object->SetSize(D3DXVECTOR2(587.0f * 1.6f, 419.0f * 1.6f));
+		object->SetColorAlpha(0.45f);
+		object->SetTexture("TITLE_LOGO");
+	}
+
 	CModeGuidanceItem* object;
 
 	//�ЂƂO

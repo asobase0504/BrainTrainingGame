@@ -56,11 +56,11 @@ void CTarget::Update()
 	{
 		if (m_nTime < m_nTiming)
 		{
-			SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+			SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
 		}
 		else
 		{
-			SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+			SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 		}
 
 		if (CMiniGameComeOut::GetClick())
