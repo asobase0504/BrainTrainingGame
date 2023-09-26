@@ -66,6 +66,7 @@ CApplication::CApplication() :
 	renderer(nullptr),
 	input(nullptr),
 	texture(nullptr),
+	m_isEnd(false),
 	m_modeType(CMode::MODE_TYPE::TITLE)
 {
 }
@@ -95,7 +96,7 @@ HRESULT CApplication::Init(HWND hWnd, HINSTANCE hInstance)
 
 	// レンダリングクラス
 	renderer = new CRenderer;
-	if (FAILED(renderer->Init(hWnd, true)))
+	if (FAILED(renderer->Init(hWnd, false)))
 	{
 		return E_FAIL;
 	}
