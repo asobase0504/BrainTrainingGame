@@ -771,7 +771,7 @@ void CInputJoyPad::KeyConfigLoading()
 	char cBffHead[LINE_MAX_READING_LENGTH];	//頭の文字を読み取るための変数
 
 	//ファイルを開く
-	pFile = fopen("input\\KeyConfigData.txt", "r");
+	pFile = fopen("data\\FILE\\KeyConfigData.txt", "r");
 
 	if (pFile == nullptr)
 	{//開けなかった時用
@@ -870,7 +870,7 @@ void CInputJoyPad::KeyConfigSave()
 	FILE *pFile = NULL;			//ファイルポインター宣言
 
 	//ファイルを開く
-	pFile = fopen("input\\KeyConfigData.txt", "w");
+	pFile = fopen("data\\FILE\\KeyConfigData.txt", "w");
 
 	if (pFile == nullptr)
 	{//開けなかった時用
