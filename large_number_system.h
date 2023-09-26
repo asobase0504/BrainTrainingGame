@@ -14,6 +14,7 @@
 // 前方前言　実態はNG　ポインタだけならOK
 //**************************************************
 class CLargestNumber;
+class CGame;
 
 //**************************************************
 // クラス
@@ -39,6 +40,8 @@ public:
 
 	bool GetMode() { return m_mode; } // trueは最大 falseは最小
 
+	void SetGame(CGame* inGame) { m_game = inGame; }
+
 private:
 	void WhichiNumberMax_();
 	void WhichiNumberMin_();
@@ -50,6 +53,9 @@ private:
 private:
 	std::vector<CLargestNumber*> m_pDisplayObject;
 	std::vector<bool> m_isUsedNumber;
+
+	CGame* m_game;
+
 	// 最大の数を保存
 	int m_nMaxNumber;
 	// 最小の値を保存

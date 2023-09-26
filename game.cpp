@@ -77,7 +77,7 @@ void CGame::GameStart()
 		object->SetSize(D3DXVECTOR2(100.0f,100.0f));
 		object->SetTexture("CLOCK");
 	}
-	m_timer = CTimer::Create(D3DXVECTOR3(140.0f, 95.0f, 0.0f), D3DXVECTOR2(45.0f, 140.0f));
+	m_timer = CTimer::Create(D3DXVECTOR3(160.0f, 95.0f, 0.0f), D3DXVECTOR2(45.0f, 140.0f));
 	m_timer->SetTimer(60);
 
 	{

@@ -535,9 +535,6 @@
     <ClInclude Include="score_up.h">
       <Filter>ソース ファイル\01_Mode\00_Game\00_Utilty\01_Score</Filter>
     </ClInclude>
-    <ClInclude Include="minigame_large_number.h">
-      <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe</Filter>
-    </ClInclude>
     <ClInclude Include="large_number_system.h">
       <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe\01_System</Filter>
     </ClInclude>
@@ -558,6 +555,9 @@
     </ClInclude>
     <ClInclude Include="rule_item.h">
       <Filter>ソース ファイル\01_Mode\03_SelectMode\00_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="minigame_large_number.h">
+      <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

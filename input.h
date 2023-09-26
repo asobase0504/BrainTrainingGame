@@ -115,6 +115,7 @@ private:
 	CInputTouchPanel *m_pTouchPanel;		//タッチパネル
 	static CInput *m_pInput;				//このクラスの情報
 	InputType m_nOldInputType;				//最後に触ったデバイス
+	bool m_bEffect;							//エフェクトを行った
 };
 
 #endif

@@ -15,6 +15,8 @@
 #include "correction.h"
 #include "largest_number.h"
 
+#include "game.h"
+
 //**************************************************
 // ’è”’è‹`
 //**************************************************
@@ -259,9 +261,12 @@ void CLargeNumberSystem::CorrectAnswer_(int inNumber)
 	if (m_mode)
 	{// Å‘å
 		CCorrection::Create(m_pDisplayObject[inNumber]->GetIsMax());
+		m_game->AddScore(m_pDisplayObject[inNumber]->GetIsMax() ? 10 : -5);
 	}
 	else
 	{// Å¬
+
 		CCorrection::Create(m_pDisplayObject[inNumber]->GetIsMin());
+		m_game->AddScore(m_pDisplayObject[inNumber]->GetIsMin() ? 10 : -5);
 	}
 }
