@@ -18,6 +18,7 @@ CClickItem::CClickItem(int priority) : CObject2D(priority)
 {
 	m_eventTick = [](){};
 	m_tick = 0;
+	m_isClickEvent = true;
 }
 
 //--------------------------------------------------
@@ -41,7 +42,7 @@ void CClickItem::Update()
 
 	CInput* input = CInput::GetKey();
 
-	if (m_tick >= 5)
+	if (m_tick >= 5 && m_isClickEvent)
 	{
 		if (input->TriggerTouchClick(m_pos, D3DXVECTOR3(m_size.x, m_size.y, 0.0f) * 0.5f))
 		{

@@ -43,11 +43,17 @@ public:
 
 	int GetTick() { return m_tick; }
 
+	void OnClickEvent() { m_isClickEvent = true; }
+	void OffClickEvent() { m_isClickEvent = false; }
+	bool IsClickEvent() { return m_isClickEvent; }
+
 	static CClickItem* Create(const D3DXVECTOR3& inPos, const D3DXVECTOR2& inSize,int priority = CTaskGroup::EPriority::LEVEL_2D_UI);
 private:
 	bool m_isClick;
 	std::function<void(void)> m_event;
 	std::function<void(void)> m_eventTick;
 	int m_tick;
+
+	bool m_isClickEvent;
 };
 #endif	// _NUMBER_H_
