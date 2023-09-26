@@ -119,7 +119,7 @@ void CMiniGameComeOut::Update()
 	int nNext = CTarget::GetNext(); //今回のターゲット
 	if (m_nNext != nNext)
 	{
-		AddScore(3 * (m_nNext + 1));
+		AddScore(3 * (m_nNext + 1) + 4);
 	}
 
 	//次のターゲットを保存

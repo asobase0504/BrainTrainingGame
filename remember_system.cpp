@@ -216,12 +216,12 @@ void CRememberSystem::InitCreateAnswer_()
 				if (answerMyNumber == m_nBeforeNumber)
 				{
 					CCorrection::Create(true);
-					m_game->AddScore(15);
+					m_game->AddScore(7);
 				}
 				else
 				{
 					CCorrection::Create(false);
-					m_game->AddScore(-7);
+					m_game->AddScore(-15);
 				}
 			});
 		}
