@@ -16,6 +16,7 @@
 #include "mode_guidance_item.h"
 #include "sequence.h"
 #include "save.h"
+#include "fade.h"
 
 //-----------------------------------------------------------------------------
 // コンストラクタ
@@ -41,6 +42,16 @@ CSelectMode::~CSelectMode()
 HRESULT CSelectMode::Init()
 {
 	CApplication::GetInstance()->GetSound()->Play(CSound::LABEL_BGM_TITLE);
+
+	{
+		D3DXVECTOR3 pos(70.0f, 60.0f, 0.0f);
+		CClickItem* item = CClickItem::Create(pos, D3DXVECTOR2(100.0f, 100.0f));
+		item->SetTexture("TITLE_BUTTON");
+		item->SetEvent([]()
+		{
+			CFade::GetInstance()->NextMode(CMode::MODE_TYPE::TITLE);
+		});
+	}
 
 	{
 		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
