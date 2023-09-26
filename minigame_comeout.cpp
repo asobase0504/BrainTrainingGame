@@ -115,17 +115,20 @@ void CMiniGameComeOut::Update()
 		Reset();
 	}
 	
+	bool bMiss = false;
 	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
 	{
-		if (m_pTarget[nCnt]->GetMiss())
+		bMiss = m_pTarget[nCnt]->GetMiss();
+		if (bMiss)
 		{
 			Reset();
+			break;
 		}
 	}
 
 	//前回のターゲットから更新されていたらスコアを加算
 	int nNext = CTarget::GetNext(); //今回のターゲット
-	if (m_nNext != nNext)
+	if (m_nNext != nNext && !bMiss)
 	{
 		AddScore(3 * (m_nNext + 1));
 	}
