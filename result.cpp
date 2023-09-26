@@ -75,7 +75,7 @@ HRESULT CResult::Init()
 		object->SetTexture("RESULT_SCORE");
 	}
 
-	D3DXVECTOR3 pos(CApplication::CENTER_X - 90.0f, CApplication::CENTER_Y, 0.0f);
+	D3DXVECTOR3 pos(CApplication::CENTER_X/* - 90.0f*/, CApplication::CENTER_Y, 0.0f);
 	D3DXVECTOR2 size(90.0f, 280.0f);
 	CSequence* sequence = CSequence::Create(pos, size, 3);
 	sequence->SetColor(D3DXCOLOR(0.0f,0.0f,0.0f,1.0f));
