@@ -1,6 +1,6 @@
 //==================================================
 // effect_ring.h
-// Author: Buriya Kota
+// Author: Koduns Hirohito
 //==================================================
 #ifndef _EFFECT_RING_H_
 #define _EFFECT_RING_H_
@@ -19,6 +19,7 @@ public:
 	static const float INITIAL_SIZE;					//初期サイズ
 	static const float SIZE_INCREASE;					//サイズの増加量
 	static const float TRANSPARENCY_DECREASE_QUANTITY;	//透明度の減少量
+	static const int  FLASH_COUNT;						//フラッシュエフェクトの個数
 	
 public:
 	explicit CEffectRing();
@@ -34,4 +35,4 @@ private:
 	
 };
 
-#endif // _TIMER_H_
+#endif // _EFFECT_RING_H_

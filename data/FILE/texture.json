@@ -73,6 +73,11 @@
 		[ "NUMBER25", "data\/TEXTURE\/number002.png" ],
 		[ "BOOK", "data\/TEXTURE\/Book.png" ],
 		[ "RING", "data\/TEXTURE\/ring.png" ],
+		[ "FLASH", "data\/TEXTURE\/effect.png" ],
+		[ "TUTORIAL_00", "data\/TEXTURE\/tutorial_00.png" ],
+		[ "TUTORIAL_01", "data\/TEXTURE\/tutorial_01.png" ],
+		[ "TUTORIAL_02", "data\/TEXTURE\/tutorial_02.png" ],
+		[ "TUTORIAL_03", "data\/TEXTURE\/tutorial_03.png" ],
 		[ "CLOCK", "data\/TEXTURE\/tokei2.png" ]
 	]
 }
