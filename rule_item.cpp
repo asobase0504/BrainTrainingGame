@@ -61,6 +61,11 @@ HRESULT CRuleItem::Init()
 		{
 			m_mode->OnClick();
 			this->Uninit();
+			if (m_BG != nullptr)
+			{
+				m_BG->Uninit();
+				m_BG = nullptr;
+			}
 		});
 		m_back->SetTexture("BACK_BUTTON");
 	}
@@ -71,20 +76,15 @@ void CRuleItem::Uninit()
 {
 	CObject2D::Uninit();
 
-	if (m_BG != nullptr)
+	if (m_back != nullptr)
 	{
-		m_BG->Uninit();
-		m_BG = nullptr;
+		m_back->Uninit();
+		m_back = nullptr;
 	}
 	if (m_start != nullptr)
 	{
 		m_start->Uninit();
 		m_start = nullptr;
-	}
-	if (m_back != nullptr)
-	{
-		m_back->Uninit();
-		m_back = nullptr;
 	}
 }
 
