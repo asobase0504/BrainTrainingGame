@@ -275,6 +275,7 @@
     <ClInclude Include="remember_object.h" />
     <ClInclude Include="remember_system.h" />
     <ClInclude Include="minigame_remember_before.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="rule_item.h" />
     <ClInclude Include="same_as_shadow_system.h" />
@@ -313,6 +314,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="data\FILE\texture.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\TEXTURE\TITLE\BreanMemo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="shooting001.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

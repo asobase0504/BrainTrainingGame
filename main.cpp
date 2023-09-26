@@ -11,6 +11,7 @@
 #include <tchar.h> // _T
 #include "application.h"
 #include "input.h"
+#include "resource.h"
 
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
@@ -23,7 +24,7 @@ namespace
 // ウインドウのクラス名
 LPCTSTR CLASS_NAME = _T("AppClass");
 // ウインドウのキャプション名
-LPCTSTR WINDOW_NAME = _T("DOMINION");
+LPCTSTR WINDOW_NAME = _T("脳メモ");
 }
 
 //*****************************************************************************
@@ -54,12 +55,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpC
 		0,
 		0,
 		hInstance,
-		NULL,
+		LoadIcon(hInstance,MAKEINTRESOURCE(IDI_ICON1)),
 		LoadCursor(NULL, IDC_ARROW),
 		(HBRUSH)(COLOR_WINDOW + 1),
 		NULL,
 		CLASS_NAME,
-		NULL
+		LoadIcon(hInstance,MAKEINTRESOURCE(IDI_ICON1))
 	};
 
 	// ウィンドウクラスの登録

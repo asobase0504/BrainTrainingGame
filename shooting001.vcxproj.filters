@@ -559,10 +559,21 @@
     <ClInclude Include="minigame_large_number.h">
       <Filter>ソース ファイル\01_Mode\00_Game\14_Large_numbe</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\FILE\texture.json">
       <Filter>FIle</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\TEXTURE\TITLE\BreanMemo.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="shooting001.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
