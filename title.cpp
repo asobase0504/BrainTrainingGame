@@ -18,6 +18,8 @@
 #include "object2d.h"
 #include "click_item.h"
 
+
+#include "calendar.h"
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
@@ -113,6 +115,8 @@ HRESULT CTitle::Init()
 		object->SetSize(D3DXVECTOR2(587.0f * 1.2f, 419.0f * 1.2f));
 		object->SetTexture("TITLE_LOGO");
 	}
+
+	CCalender::Create();
 
 	return S_OK;
 }

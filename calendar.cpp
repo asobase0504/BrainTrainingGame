@@ -63,7 +63,8 @@ HRESULT CCalender::Init()
 	}
 
 	int cnt = 0;
-	float size = 40.0f;
+	float size = 70.0f;
+	float spase = 40.0f;
 	for (int i = week; i < 49;i++)
 	{
 		if (cnt == monthDay)
@@ -72,9 +73,15 @@ HRESULT CCalender::Init()
 		}
 
 		cnt++;
-		D3DXVECTOR3 pos(CApplication::CENTER_X, CApplication::CENTER_Y,0.0f);
-		pos.x += -(size * 7.0f) + size * 2.0f * (i % 7);
-		pos.y += -(size * 7.0f) + size * 2.0f * (i / 7);
+		D3DXVECTOR3 pos(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f);
+		pos.x += -((size + spase) * 3.5f) + (size + spase) * (i % 7) + spase * 0.5f;
+		pos.y += -((size + spase) * 3.5f) + (size + spase) * (i / 7) + spase * 0.5f;
+
+		m_tag[i] = CObject2D::Create();
+		m_tag[i]->SetPos(pos);
+		m_tag[i]->SetSize(D3DXVECTOR2(size, size) * 1.2f);
+		m_tag[i]->SetTexture("DECO_TAG");
+
 		m_day[i] = CSequence::Create(pos,D3DXVECTOR2(size / 3.0f - 0.9f, size),2);
 		m_day[i]->SetNumber(cnt);
 	}
@@ -88,5 +95,10 @@ void CCalender::Update()
 
 CCalender * CCalender::Create()
 {
-	return nullptr;
+	CCalender* calender = new CCalender;
+
+	assert(calender != nullptr);
+
+	calender->Init();
+	return calender;
 }

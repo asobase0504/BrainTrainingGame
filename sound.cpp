@@ -16,8 +16,8 @@
 //==================================================
 const CSound::SParam CSound::PARAM[] =
 {// 各音素材のパラメータ
-	{ "data/SOUND/BGM/title.wav", -1 },	// タイトル
-	{ "data/SOUND/BGM/game.wav", -1 },	// タイトル
+	{ "data/SOUND/BGM/title.wav", XAUDIO2_LOOP_INFINITE },	// タイトル
+	{ "data/SOUND/BGM/game.wav", XAUDIO2_LOOP_INFINITE },	// タイトル
 	{ "data/SOUND/SE/true.wav", 0 },	// 正答音
 	{ "data/SOUND/SE/false.wav", 0 },	// 誤答音
 	{ "data/SOUND/SE/Decision.wav", 0 },	// 決定音
