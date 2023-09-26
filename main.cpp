@@ -150,6 +150,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpC
 				// XVˆ—
 				application->Update();
 
+				if (application->GetIsEnd())
+				{
+					break;
+				}
+
 				// •`‰æˆ—
 #ifdef _DEBUG
 				CDebugProc::Print("FPS : %d\n",g_nCountFPS);
