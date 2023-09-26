@@ -118,6 +118,7 @@ HRESULT CTitle::Init()
 		{
 			// ‚±‚±‚ÉI‚í‚éˆ—‘‚¢‚Ä
 			object->SetColor(D3DXCOLOR(0.45f, 0.45f, 0.45f, 1.0f));
+			CApplication::GetInstance()->SetIsEnd(true);
 		});
 		object->SetEventTick([object, size]()
 		{

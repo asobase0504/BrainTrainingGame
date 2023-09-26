@@ -96,7 +96,7 @@ HRESULT CApplication::Init(HWND hWnd, HINSTANCE hInstance)
 
 	// レンダリングクラス
 	renderer = new CRenderer;
-	if (FAILED(renderer->Init(hWnd, false)))
+	if (FAILED(renderer->Init(hWnd, true)))
 	{
 		return E_FAIL;
 	}
