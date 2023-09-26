@@ -14,5 +14,8 @@
 // プロトタイプ宣言
 //=====================================
 nlohmann::json LoadJsonStage(const wchar_t* cUrl);
+nlohmann::json LoadJson(const char* cUrl);
+nlohmann::json LoadJson(std::string cUrl);
+void SaveJson(nlohmann::json inJson, const std::string cUrl);
 
 #endif

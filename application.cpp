@@ -66,6 +66,7 @@ CApplication::CApplication() :
 	renderer(nullptr),
 	input(nullptr),
 	texture(nullptr),
+	m_isEnd(false),
 	m_modeType(CMode::MODE_TYPE::TITLE)
 {
 }

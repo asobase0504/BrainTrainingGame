@@ -7,6 +7,7 @@
 
 class CObject2D;
 class CSequence;
+class CSelectMode;
 
 //**************************************************
 // インクルード
@@ -31,10 +32,12 @@ public:
 	void SetModeTexture(std::string inTexIcon, std::string inTexExpo);
 
 	void ClickEvent();
+	void SetMode(CSelectMode* inMode) { m_mode = inMode; }
 
 private:
 	void CreateIcon();
 private:
+	CSelectMode* m_mode;
 	CObject2D* m_icon;
 	CObject2D* m_expo;
 	CSequence* m_score;

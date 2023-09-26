@@ -18,6 +18,8 @@
 #include "object2d.h"
 #include "click_item.h"
 
+
+#include "calendar.h"
 //-----------------------------------------------------------------------------
 // コンストラクタ
 //-----------------------------------------------------------------------------
@@ -91,14 +93,34 @@ HRESULT CTitle::Init()
 	}
 
 	{
-		D3DXVECTOR3 pos(CApplication::CENTER_X + 250.0f, CApplication::CENTER_Y, 0.0f);
-		D3DXVECTOR2 size(652.0f * 0.7f, 317.0f * 0.7f);
+		D3DXVECTOR3 pos(CApplication::CENTER_X + 250.0f, CApplication::CENTER_Y - 100.0f, 0.0f);
+		D3DXVECTOR2 size(652.0f * 0.5f, 317.0f * 0.5f);
 		CClickItem* object = CClickItem::Create(pos,size);
 		object->SetTexture("TEXT_START");
+		object->SetColor(D3DXCOLOR(1.0f, 1.0f, 0.7f, 1.0f));
 		object->SetEvent([object]()
 		{
 			CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_MODE);
 			object->SetColor(D3DXCOLOR(0.45f,0.45f,0.45f,1.0f));
+		});
+		object->SetEventTick([object, size]()
+		{
+			float mul = 1.0f + (sinf((object->GetTick() * 0.005f) * (D3DX_PI * 2.0f)) + 1.0f) * 0.5f * 0.05f;
+			object->SetSize(size * mul);
+		});
+	}
+
+	{
+		D3DXVECTOR3 pos(CApplication::CENTER_X + 250.0f, CApplication::CENTER_Y + 75.0f, 0.0f);
+		D3DXVECTOR2 size(652.0f * 0.4f, 317.0f * 0.4f);
+		CClickItem* object = CClickItem::Create(pos, size);
+		object->SetTexture("TEXT_END_GAME");
+		object->SetColor(D3DXCOLOR(1.0f,0.7f,0.7f,1.0f));
+		object->SetEvent([object]()
+		{
+			// ここに終わる処理書いて
+			object->SetColor(D3DXCOLOR(0.45f, 0.45f, 0.45f, 1.0f));
+			CApplication::GetInstance()->SetIsEnd(true);
 		});
 		object->SetEventTick([object, size]()
 		{

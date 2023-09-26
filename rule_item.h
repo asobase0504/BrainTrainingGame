@@ -6,6 +6,7 @@
 #define _RULE_ITEM_H_
 
 class CClickItem;
+class CSelectMode;
 
 //**************************************************
 // インクルード
@@ -27,11 +28,14 @@ public:
 	void Update();
 
 	static CRuleItem* Create(CMode::MODE_TYPE type);
+	void SetMode(CSelectMode* inMode) { m_mode = inMode; }
 private:
 	void SetRuleTexture();
 private:
+	CSelectMode* m_mode;
 	CClickItem* m_start;
 	CClickItem* m_back;
+	CObject2D* m_BG;
 	CMode::MODE_TYPE m_type;
 };
 

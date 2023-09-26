@@ -3,6 +3,7 @@
 #include "application.h"
 #include "fade.h"
 #include "rule_item.h"
+#include "select_mode.h"
 #include <locale>
 
 CModeGuidanceItem::CModeGuidanceItem()
@@ -25,7 +26,7 @@ HRESULT CModeGuidanceItem::Init()
 
 void CModeGuidanceItem::Update()
 {
-	float mul = 1.0f + (sinf((GetTick() * 0.005f) * (D3DX_PI * 2.0f)) + 1.0f) * 0.5f * 0.025f;
+	float mul = 1.0f + (sinf((GetTick() * 0.015f) * (D3DX_PI * 2.0f)) + 1.0f) * 0.5f * 0.1f;
 	D3DXVECTOR2 size(652.0f * 0.35f, 317.0f * 0.35f);
 	SetSize(size * mul);
 
@@ -54,7 +55,9 @@ void CModeGuidanceItem::SetModeTexture(std::string inTexIcon, std::string inTexE
 
 void CModeGuidanceItem::ClickEvent()
 {
-	CRuleItem::Create(m_type);
+	CRuleItem* item = CRuleItem::Create(m_type);
+	item->SetMode(m_mode);
+	m_mode->OffClick();
 }
 
 void CModeGuidanceItem::CreateIcon()

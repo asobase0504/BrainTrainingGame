@@ -60,6 +60,10 @@ public:	// メンバー関数
 	// Setter
 	void SetMode(CMode::MODE_TYPE inType);
 
+	// 終了するかどうか
+	void SetIsEnd(bool inEnd) { m_isEnd = inEnd; }
+	bool GetIsEnd() { return m_isEnd; }
+
 private: // 動的メンバー変数
 	CMode* mode;
 	CMode::MODE_TYPE m_modeType;
@@ -67,6 +71,7 @@ private: // 動的メンバー変数
 	CRenderer* renderer;
 	CTexture* texture;
 	CSound* sound;
+	bool m_isEnd;
 };
 
 #endif // !_APPLICATION_H_

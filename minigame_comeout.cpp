@@ -48,6 +48,14 @@ HRESULT CMiniGameComeOut::Init()
 {
 	CGame::Init();
 
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y - 300.0f, 0.0f));
+		D3DXVECTOR2 size(1292.0f * 0.4f, 252.0f * 0.4f);
+		object->SetSize(size);
+		object->SetTexture("TEXT_EXPO_COMEOUT");
+	}
+
 	//経過時間をリセット
 	m_nTime = 0;
 	m_nSpeed = 0;
@@ -107,17 +115,20 @@ void CMiniGameComeOut::Update()
 		Reset();
 	}
 	
+	bool bMiss = false;
 	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
 	{
-		if (m_pTarget[nCnt]->GetMiss())
+		bMiss = m_pTarget[nCnt]->GetMiss();
+		if (bMiss)
 		{
 			Reset();
+			break;
 		}
 	}
 
 	//前回のターゲットから更新されていたらスコアを加算
 	int nNext = CTarget::GetNext(); //今回のターゲット
-	if (m_nNext != nNext)
+	if (m_nNext != nNext && !bMiss)
 	{
 		AddScore(3 * (m_nNext + 1));
 	}
