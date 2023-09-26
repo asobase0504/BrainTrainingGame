@@ -30,7 +30,13 @@ public:
 	static CCalender* Create();
 
 private:
+	void LoginLoad();
+	void LoginSave();
+	void Login();
+private:
 	CSequence* m_day[49];
+	CObject2D* m_tag[49];
+	CObject2D* m_stanp[49];
 };
 
 

@@ -65,24 +65,25 @@ HRESULT CSelectMode::Init()
 		object->SetTexture("TEXT_EXPO");
 	}
 
-	CModeGuidanceItem* object;
-
 	// ‘O‰ñ
-	object = CModeGuidanceItem::Create(D3DXVECTOR3(425.0f, 320.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE);
-	object->SetModeTexture("GAME_ICON_REMENBER", "TEXT_EXPO_REMEMBER");
+	m_remenber = CModeGuidanceItem::Create(D3DXVECTOR3(425.0f, 320.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE);
+	m_remenber->SetModeTexture("GAME_ICON_REMENBER", "TEXT_EXPO_REMEMBER");
+	m_remenber->SetMode(this);
 	{
 		CObject2D* item = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI);
 		item->SetPos(D3DXVECTOR3(345.0f, 240.0f, 0.0f));
 		item->SetSize(D3DXVECTOR2(120.0f * 0.6f, 105.0f * 0.6f));
 		item->SetTexture("HI_SCORE");
 	}
+
 	m_pHiScore[0] = CSequence::Create(D3DXVECTOR3(425.0f, 240.0f, 0.0f), D3DXVECTOR2(30.0f, 80.0f), 3);
 	m_pHiScore[0]->SetNumber(CSave::GetHiScore(CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE));
 	m_pHiScore[0]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 	
 	// ‰e
-	object = CModeGuidanceItem::Create(D3DXVECTOR3(975.0f, 320.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_SHADOW);
-	object->SetModeTexture("GAME_ICON_SHADOW", "TEXT_EXPO_SHADOW");
+	m_shadow = CModeGuidanceItem::Create(D3DXVECTOR3(975.0f, 320.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_SHADOW);
+	m_shadow->SetModeTexture("GAME_ICON_SHADOW", "TEXT_EXPO_SHADOW");
+	m_shadow->SetMode(this);
 	{
 		CObject2D* item = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI);
 		item->SetPos(D3DXVECTOR3(895.0f, 240.0f, 0.0f));
@@ -94,8 +95,9 @@ HRESULT CSelectMode::Init()
 	m_pHiScore[1]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 
 	// o‚½‡
-	object = CModeGuidanceItem::Create(D3DXVECTOR3(425.0f, 600.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_COMEOUT);
-	object->SetModeTexture("GAME_ICON_COMEOUT", "TEXT_EXPO_COMEOUT");
+	m_comeout = CModeGuidanceItem::Create(D3DXVECTOR3(425.0f, 600.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_COMEOUT);
+	m_comeout->SetModeTexture("GAME_ICON_COMEOUT", "TEXT_EXPO_COMEOUT");
+	m_comeout->SetMode(this);
 	{
 		CObject2D* item = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI);
 		item->SetPos(D3DXVECTOR3(345.0f, 520.0f, 0.0f));
@@ -107,8 +109,9 @@ HRESULT CSelectMode::Init()
 	m_pHiScore[2]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 
 	// ‘å‚«‚¢”
-	object = CModeGuidanceItem::Create(D3DXVECTOR3(975.0f, 600.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_LARGE_NUMBER);
-	object->SetModeTexture("GAME_ICON_LARGE", "TEXT_EXPO_LARGE");
+	m_large = CModeGuidanceItem::Create(D3DXVECTOR3(975.0f, 600.0f, 0.0f), CMode::MODE_TYPE::MINIGAME_LARGE_NUMBER);
+	m_large->SetModeTexture("GAME_ICON_LARGE", "TEXT_EXPO_LARGE");
+	m_large->SetMode(this);
 	{
 		CObject2D* item = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI);
 		item->SetPos(D3DXVECTOR3(895.0f, 520.0f, 0.0f));
@@ -133,4 +136,20 @@ void CSelectMode::Uninit()
 //-----------------------------------------------------------------------------
 void CSelectMode::Update()
 {
+}
+
+void CSelectMode::OffClick()
+{
+	m_remenber->OffClickEvent();
+	m_shadow->OffClickEvent();
+	m_comeout->OffClickEvent();
+	m_large->OffClickEvent();
+}
+
+void CSelectMode::OnClick()
+{
+	m_remenber->OnClickEvent();
+	m_shadow->OnClickEvent();
+	m_comeout->OnClickEvent();
+	m_large->OnClickEvent();
 }

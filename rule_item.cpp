@@ -2,6 +2,7 @@
 #include "click_item.h"
 #include "application.h"
 #include "fade.h"
+#include "select_mode.h"
 
 CRuleItem::CRuleItem() : CObject2D(CTaskGroup::EPriority::LEVEL_2D_UI_2)
 {
@@ -32,7 +33,21 @@ HRESULT CRuleItem::Init()
 		{
 			CFade::GetInstance()->NextMode(m_type);
 		});
+		m_start->SetEventTick([this, size]()
+		{
+			float mul = 1.0f + (sinf((m_start->GetTick() * 0.015f) * (D3DX_PI * 2.0f)) + 1.0f) * 0.5f * 0.1f;
+			m_start->SetSize(size * mul);
+		});
 		m_start->SetTexture("TEXT_START");
+	}
+
+	{
+		m_BG = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI);
+		D3DXVECTOR3 pos(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f);
+		m_BG->SetPos(pos);
+		D3DXVECTOR2 size(D3DXVECTOR2(CApplication::CENTER_X * 2.0f, CApplication::CENTER_Y * 2.0f));
+		m_BG->SetSize(size);
+		m_BG->SetColor(D3DXCOLOR(0.0f,0.0f,0.0f,0.45f));
 	}
 
 	{
@@ -44,7 +59,13 @@ HRESULT CRuleItem::Init()
 		m_back = CClickItem::Create(pos, size, CTaskGroup::EPriority::LEVEL_PAUSE);
 		m_back->SetEvent([this]()
 		{
+			m_mode->OnClick();
 			this->Uninit();
+			if (m_BG != nullptr)
+			{
+				m_BG->Uninit();
+				m_BG = nullptr;
+			}
 		});
 		m_back->SetTexture("BACK_BUTTON");
 	}
@@ -55,8 +76,16 @@ void CRuleItem::Uninit()
 {
 	CObject2D::Uninit();
 
-	m_start->Uninit();
-	m_back->Uninit();
+	if (m_back != nullptr)
+	{
+		m_back->Uninit();
+		m_back = nullptr;
+	}
+	if (m_start != nullptr)
+	{
+		m_start->Uninit();
+		m_start = nullptr;
+	}
 }
 
 void CRuleItem::Update()

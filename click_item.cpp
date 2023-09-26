@@ -18,6 +18,7 @@ CClickItem::CClickItem(int priority) : CObject2D(priority)
 {
 	m_eventTick = [](){};
 	m_tick = 0;
+	m_isClickEvent = true;
 }
 
 //--------------------------------------------------
@@ -41,11 +42,14 @@ void CClickItem::Update()
 
 	CInput* input = CInput::GetKey();
 
-	if (input->TriggerTouchClick(m_pos, D3DXVECTOR3(m_size.x, m_size.y, 0.0f) * 0.5f))
+	if (m_tick >= 5 && m_isClickEvent)
 	{
-		ClickEvent();
-		m_isClick = true;
-		CApplication::GetInstance()->GetSound()->Play(CSound::LABEL_SE_DECISION);
+		if (input->TriggerTouchClick(m_pos, D3DXVECTOR3(m_size.x, m_size.y, 0.0f) * 0.5f))
+		{
+			ClickEvent();
+			m_isClick = true;
+			CApplication::GetInstance()->GetSound()->Play(CSound::LABEL_SE_DECISION);
+		}
 	}
 }
 

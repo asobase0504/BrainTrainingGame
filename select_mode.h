@@ -28,11 +28,18 @@ public:	// メンバー関数
 	void Uninit() override;
 	void Update() override;
 
+	void OffClick();
+	void OnClick();
+
 private: // 動的メンバー変数
 	std::vector<CModeGuidanceItem*> m_itemModeGuidance;
 
 	CSequence *m_pHiScore[4]; //ハイスコアの表示
 
+	CModeGuidanceItem* m_remenber;
+	CModeGuidanceItem* m_shadow;
+	CModeGuidanceItem* m_comeout;
+	CModeGuidanceItem* m_large;
 };
 
 #endif // !_TITLE_H_
