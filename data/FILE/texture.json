@@ -7,6 +7,7 @@
 		[ "GAME_ICON_COMEOUT", "data\/TEXTURE\/game_icon03.png" ],
 		[ "STOP_BUTTON", "data\/TEXTURE\/stop_button.png" ],
 		[ "BACK_BUTTON", "data\/TEXTURE\/back_button.png" ],
+		[ "TITLE_BUTTON", "data\/TEXTURE\/title_button.png" ],
 		[ "TEXT_POUSE_BACK", "data\/TEXTURE\/TEXT\/back.png" ],
 		[ "TEXT_POUSE_RETRY", "data\/TEXTURE\/TEXT\/retry.png" ],
 		[ "TEXT_END", "data\/TEXTURE\/TEXT\/end.png" ],

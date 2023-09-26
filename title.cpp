@@ -93,7 +93,7 @@ HRESULT CTitle::Init()
 	}
 
 	{
-		D3DXVECTOR3 pos(CApplication::CENTER_X + 250.0f, CApplication::CENTER_Y, 0.0f);
+		D3DXVECTOR3 pos(CApplication::CENTER_X + 250.0f, CApplication::CENTER_Y - 100.0f, 0.0f);
 		D3DXVECTOR2 size(652.0f * 0.7f, 317.0f * 0.7f);
 		CClickItem* object = CClickItem::Create(pos,size);
 		object->SetTexture("TEXT_START");
@@ -101,6 +101,23 @@ HRESULT CTitle::Init()
 		{
 			CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_MODE);
 			object->SetColor(D3DXCOLOR(0.45f,0.45f,0.45f,1.0f));
+		});
+		object->SetEventTick([object, size]()
+		{
+			float mul = 1.0f + (sinf((object->GetTick() * 0.005f) * (D3DX_PI * 2.0f)) + 1.0f) * 0.5f * 0.05f;
+			object->SetSize(size * mul);
+		});
+	}
+
+	{
+		D3DXVECTOR3 pos(CApplication::CENTER_X + 250.0f, CApplication::CENTER_Y + 100.0f, 0.0f);
+		D3DXVECTOR2 size(652.0f * 0.6f, 317.0f * 0.6f);
+		CClickItem* object = CClickItem::Create(pos, size);
+		object->SetTexture("TEXT_START");
+		object->SetEvent([object]()
+		{
+			// ‚±‚±‚ÉI‚í‚éˆ—‘‚¢‚Ä
+			object->SetColor(D3DXCOLOR(0.45f, 0.45f, 0.45f, 1.0f));
 		});
 		object->SetEventTick([object, size]()
 		{
