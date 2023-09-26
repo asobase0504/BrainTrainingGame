@@ -175,13 +175,13 @@ void CLargeNumberSystem::WhichiNumberMin_()
 void CLargeNumberSystem::NumberLottery_()
 {
 	int myNumber = 0;
-	myNumber = IntRandom(MAX_NUMBER, 1);
+	myNumber = IntRandom(MAX_NUMBER, 10);
 
 	for (int i = 0; i < DISPLAY_NUMBER; i++)
 	{
 		while (m_isUsedNumber[myNumber])
 		{
-			myNumber = IntRandom(MAX_NUMBER, 1);
+			myNumber = IntRandom(MAX_NUMBER, 10);
 		}
 
 		m_isUsedNumber[myNumber] = true;
