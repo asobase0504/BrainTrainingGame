@@ -24,7 +24,7 @@ void CCountDown::Update()
 	CTimer::Update();
 
 	//AddPos(D3DXVECTOR3(0.0f, cosf(m_fream / 15.0f) * 1.0f, 0.0f));
-	AddSize(D3DXVECTOR2(cosf(m_fream / 15.0f) * 1.5f, cosf(m_fream / 15.0f) * 1.5f));
+	//AddSize(D3DXVECTOR2(cosf(m_fream / 15.0f) * 1.5f, cosf(m_fream / 15.0f) * 1.5f));
 }
 
 CCountDown* CCountDown::Create()
