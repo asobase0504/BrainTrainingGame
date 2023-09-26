@@ -116,8 +116,6 @@ HRESULT CTitle::Init()
 		object->SetTexture("TITLE_LOGO");
 	}
 
-	CCalender::Create();
-
 	return S_OK;
 }
 
