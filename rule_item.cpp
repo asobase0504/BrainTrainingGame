@@ -83,20 +83,22 @@ void CRuleItem::SetRuleTexture()
 	switch (m_type)
 	{
 	case CMode::MODE_TYPE::MINIGAME_REMEMBER_BEFORE:
-		path = "TEST";
+		path = "TUTORIAL_00";
 		break;
 	case CMode::MODE_TYPE::MINIGAME_COMEOUT:
-		path = "TEST";
+		path = "TUTORIAL_02";
 		break;
 	case CMode::MODE_TYPE::MINIGAME_SHADOW:
-		path = "TEST";
+		path = "TUTORIAL_01";
 		break;
 	case CMode::MODE_TYPE::MINIGAME_LARGE_NUMBER:
-		path = "TEST";
+		path = "TUTORIAL_03";
 		break;
 	default:
+		path = "TEST";
+		assert(false);
 		break;
 	}
 
-	SetTexture("TEST");
+	SetTexture(path);
 }
