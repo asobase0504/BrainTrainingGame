@@ -12,6 +12,7 @@
 		[ "TEXT_POUSE_RETRY", "data\/TEXTURE\/TEXT\/retry.png" ],
 		[ "TEXT_END", "data\/TEXTURE\/TEXT\/end.png" ],
 		[ "TEXT_START", "data\/TEXTURE\/start.png" ],
+		[ "TEXT_END_GAME", "data\/TEXTURE\/end_game.png" ],
 		[ "TEXT_GAME_TRY", "data\/TEXTURE\/TEXT\/game_try.png" ],
 		[ "TEXT_CHACK", "data\/TEXTURE\/TEXT\/chack.png" ],
 		[ "TEXT_EXPO", "data\/TEXTURE\/TEXT\/game_expo.png" ],

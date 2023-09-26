@@ -94,9 +94,10 @@ HRESULT CTitle::Init()
 
 	{
 		D3DXVECTOR3 pos(CApplication::CENTER_X + 250.0f, CApplication::CENTER_Y - 100.0f, 0.0f);
-		D3DXVECTOR2 size(652.0f * 0.7f, 317.0f * 0.7f);
+		D3DXVECTOR2 size(652.0f * 0.5f, 317.0f * 0.5f);
 		CClickItem* object = CClickItem::Create(pos,size);
 		object->SetTexture("TEXT_START");
+		object->SetColor(D3DXCOLOR(1.0f, 1.0f, 0.7f, 1.0f));
 		object->SetEvent([object]()
 		{
 			CFade::GetInstance()->NextMode(CMode::MODE_TYPE::SERECT_MODE);
@@ -110,10 +111,11 @@ HRESULT CTitle::Init()
 	}
 
 	{
-		D3DXVECTOR3 pos(CApplication::CENTER_X + 250.0f, CApplication::CENTER_Y + 100.0f, 0.0f);
-		D3DXVECTOR2 size(652.0f * 0.6f, 317.0f * 0.6f);
+		D3DXVECTOR3 pos(CApplication::CENTER_X + 250.0f, CApplication::CENTER_Y + 75.0f, 0.0f);
+		D3DXVECTOR2 size(652.0f * 0.4f, 317.0f * 0.4f);
 		CClickItem* object = CClickItem::Create(pos, size);
-		object->SetTexture("TEXT_START");
+		object->SetTexture("TEXT_END_GAME");
+		object->SetColor(D3DXCOLOR(1.0f,0.7f,0.7f,1.0f));
 		object->SetEvent([object]()
 		{
 			// ‚±‚±‚ÉI‚í‚éˆ—‘‚¢‚Ä
