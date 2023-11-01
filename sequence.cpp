@@ -112,6 +112,14 @@ void CSequence::AddColor(const D3DXCOLOR & inColor)
 	}
 }
 
+void CSequence::SetColorAlpha(const float & inAlpha)
+{
+	for (int nCnt = 0; nCnt < m_digit; nCnt++)
+	{
+		m_pNumber[nCnt]->SetColorAlpha(inAlpha);
+	}
+}
+
 void CSequence::SetSize(const D3DXVECTOR2 & inSize)
 {
 	for (int nCnt = 0; nCnt < m_digit; nCnt++)

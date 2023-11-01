@@ -26,6 +26,8 @@ public:
 	static const int X_LINE;
 	static const int Y_LINE;
 	static const int MAX_NUMBER;
+	static const int TRUE_FLAME;
+	static const int FALSE_FLAME;
 
 public:
 	explicit CLargeNumberSystem(int nPriority = CTaskGroup::LEVEL_2D_1);
@@ -64,6 +66,12 @@ private:
 	int m_minOrMax;
 	// モード
 	bool m_mode;
+	// タイムラグ
+	int m_rug;
+	// 
+	bool m_isTrue;
+	// 
+	bool m_isAnswer;
 };
 
 #endif	// _LARGE_NUMBER_SYSTEM_H_

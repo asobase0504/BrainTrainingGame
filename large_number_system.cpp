@@ -24,12 +24,14 @@ const int CLargeNumberSystem::X_LINE = 3;
 const int CLargeNumberSystem::Y_LINE = 3;
 const int CLargeNumberSystem::DISPLAY_NUMBER = X_LINE * Y_LINE;
 const int CLargeNumberSystem::MAX_NUMBER = 99;
+const int CLargeNumberSystem::TRUE_FLAME = 30;
+const int CLargeNumberSystem::FALSE_FLAME = 60;
 
 //--------------------------------------------------
 // コンストラクタ
 //--------------------------------------------------
 CLargeNumberSystem::CLargeNumberSystem(int nPriority) : CObject(nPriority),
-m_nMaxNumber(0), m_nMinNumber(999), m_minOrMax(0), m_mode(false)
+m_nMaxNumber(0), m_nMinNumber(999), m_minOrMax(0), m_mode(false), m_rug(0), m_isTrue(false)
 {
 	m_pDisplayObject.clear();
 	m_isUsedNumber.clear();
@@ -73,11 +75,50 @@ HRESULT CLargeNumberSystem::Init()
 				D3DXVECTOR2(size, size));
 			m_pDisplayObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 			m_pDisplayObject[nCntNumber]->SetTexture("DECO_TAG");
+
 			m_pDisplayObject[nCntNumber]->SetEvent([this, nCntNumber]()
-			{
+			{// クリックしたときに反応する（一回）
+				if (m_mode)
+				{// 最大
+					m_isAnswer = m_pDisplayObject[nCntNumber]->GetIsMax();
+				}
+				else
+				{// 最小
+					m_isAnswer = m_pDisplayObject[nCntNumber]->GetIsMin();
+				}
+
 				CorrectAnswer_(nCntNumber);
-				InitCreateAnswer_();
-				SetMode();
+				m_isTrue = true;
+			});
+
+			m_pDisplayObject[nCntNumber]->SetEventTick([this, nCntNumber]()
+			{// クリックしたときに反応する（毎フレーム）
+				if (m_isTrue)
+				{
+					if (nCntNumber == 0)
+					{
+						m_rug++;
+					}
+
+					if (m_rug > TRUE_FLAME && m_isAnswer)
+					{// 正解したとき
+						InitCreateAnswer_();
+						SetMode();
+
+						m_rug = 0;
+						m_isTrue = false;
+						m_isAnswer = false;
+					}
+					else if (m_rug > FALSE_FLAME && !m_isAnswer)
+					{// 間違えた時
+						InitCreateAnswer_();
+						SetMode();
+
+						m_rug = 0;
+						m_isTrue = false;
+						m_isAnswer = false;
+					}
+				}
 			});
 		}
 	}
@@ -243,7 +284,7 @@ void CLargeNumberSystem::InitCreateAnswer_()
 
 	for (int j = 0; j < DISPLAY_NUMBER; j++)
 	{
-		m_pDisplayObject[j]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		m_pDisplayObject[j]->SetColorAlpha(1.0f);
 		m_pDisplayObject[j]->SetIsMax(false);
 		m_pDisplayObject[j]->SetIsMin(false);
 	}
@@ -260,11 +301,43 @@ void CLargeNumberSystem::CorrectAnswer_(int inNumber)
 {
 	if (m_mode)
 	{// 最大
+		if (m_pDisplayObject[inNumber]->GetIsMax())
+		{// 何もしない
+		}
+		else
+		{
+			for (int i = 0; i < DISPLAY_NUMBER; i++)
+			{
+				if (m_pDisplayObject[i]->GetIsMax())
+				{
+					continue;
+				}
+
+				m_pDisplayObject[i]->SetColorAlpha(0.3f);
+			}
+		}
+
 		CCorrection::Create(m_pDisplayObject[inNumber]->GetIsMax());
+
 		m_game->AddScore(m_pDisplayObject[inNumber]->GetIsMax() ? 10 : -5);
 	}
 	else
 	{// 最小
+		if (m_pDisplayObject[inNumber]->GetIsMin())
+		{// 何もしない
+		}
+		else
+		{
+			for (int i = 0; i < DISPLAY_NUMBER; i++)
+			{
+				if (m_pDisplayObject[i]->GetIsMin())
+				{
+					continue;
+				}
+
+				m_pDisplayObject[i]->SetColorAlpha(0.3f);
+			}
+		}
 
 		CCorrection::Create(m_pDisplayObject[inNumber]->GetIsMin());
 		m_game->AddScore(m_pDisplayObject[inNumber]->GetIsMin() ? 10 : -5);

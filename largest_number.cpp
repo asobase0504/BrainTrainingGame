@@ -103,6 +103,11 @@ void CLargestNumber::SetSequence(int inSequence)
 	m_pSequence->SetNumber(inSequence);
 }
 
+void CLargestNumber::SetColorAlpha(const float& inAlpha)
+{
+	m_pSequence->SetColorAlpha(inAlpha);
+}
+
 //--------------------------------------------------
 // ƒŠƒZƒbƒg
 //--------------------------------------------------
