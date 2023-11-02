@@ -31,7 +31,7 @@ const int CLargeNumberSystem::FALSE_FLAME = 60;
 // コンストラクタ
 //--------------------------------------------------
 CLargeNumberSystem::CLargeNumberSystem(int nPriority) : CObject(nPriority),
-m_nMaxNumber(0), m_nMinNumber(999), m_minOrMax(0), m_mode(false), m_rug(0), m_isTrue(false)
+m_nMaxNumber(0), m_nMinNumber(999), m_minOrMax(0), m_mode(false), m_rug(0), m_isTrue(false), m_frame(0)
 {
 	m_pDisplayObject.clear();
 	m_isUsedNumber.clear();
@@ -77,7 +77,7 @@ HRESULT CLargeNumberSystem::Init()
 			m_pDisplayObject[nCntNumber]->SetTexture("DECO_TAG");
 
 			m_pDisplayObject[nCntNumber]->SetEvent([this, nCntNumber]()
-			{// クリックしたときに反応する（一回）
+			{// クリックしたときに反応する（一回）	// TODO 連打したらずっとマイナスされる
 				if (m_mode)
 				{// 最大
 					m_isAnswer = m_pDisplayObject[nCntNumber]->GetIsMax();
@@ -100,17 +100,17 @@ HRESULT CLargeNumberSystem::Init()
 						m_rug++;
 					}
 
-					if (m_rug > TRUE_FLAME && m_isAnswer)
+					if (m_isAnswer)
 					{// 正解したとき
-						InitCreateAnswer_();
-						SetMode();
-
-						m_rug = 0;
-						m_isTrue = false;
-						m_isAnswer = false;
+						m_frame = TRUE_FLAME;
 					}
-					else if (m_rug > FALSE_FLAME && !m_isAnswer)
+					else if (!m_isAnswer)
 					{// 間違えた時
+						m_frame = FALSE_FLAME;
+					}
+
+					if (m_rug > m_frame)
+					{
 						InitCreateAnswer_();
 						SetMode();
 

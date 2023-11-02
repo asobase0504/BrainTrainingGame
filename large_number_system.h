@@ -68,6 +68,8 @@ private:
 	bool m_mode;
 	// タイムラグ
 	int m_rug;
+	// フレーム
+	int m_frame;
 	// 
 	bool m_isTrue;
 	// 
