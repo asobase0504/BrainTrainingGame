@@ -25,7 +25,7 @@ const int CLargeNumberSystem::Y_LINE = 3;
 const int CLargeNumberSystem::DISPLAY_NUMBER = X_LINE * Y_LINE;
 const int CLargeNumberSystem::MAX_NUMBER = 99;
 const int CLargeNumberSystem::TRUE_FLAME = 30;
-const int CLargeNumberSystem::FALSE_FLAME = 60;
+const int CLargeNumberSystem::FALSE_FLAME = 30;
 
 //--------------------------------------------------
 // コンストラクタ
@@ -77,18 +77,21 @@ HRESULT CLargeNumberSystem::Init()
 			m_pDisplayObject[nCntNumber]->SetTexture("DECO_TAG");
 
 			m_pDisplayObject[nCntNumber]->SetEvent([this, nCntNumber]()
-			{// クリックしたときに反応する（一回）	// TODO 連打したらずっとマイナスされる
-				if (m_mode)
-				{// 最大
-					m_isAnswer = m_pDisplayObject[nCntNumber]->GetIsMax();
-				}
-				else
-				{// 最小
-					m_isAnswer = m_pDisplayObject[nCntNumber]->GetIsMin();
-				}
+			{// クリックしたときに反応する（一回）
+				if (!m_isTrue)
+				{
+					if (m_mode)
+					{// 最大
+						m_isAnswer = m_pDisplayObject[nCntNumber]->GetIsMax();
+					}
+					else
+					{// 最小
+						m_isAnswer = m_pDisplayObject[nCntNumber]->GetIsMin();
+					}
 
-				CorrectAnswer_(nCntNumber);
-				m_isTrue = true;
+					CorrectAnswer_(nCntNumber);
+					m_isTrue = true;
+				}
 			});
 
 			m_pDisplayObject[nCntNumber]->SetEventTick([this, nCntNumber]()
