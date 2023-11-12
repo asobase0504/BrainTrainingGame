@@ -24,6 +24,8 @@ public:
 	void Update() override;
 	void Draw() override;
 
+	void UninitReset();
+
 	void ClickEvent() {}
 
 	void SetTiming(const int nTiming) { m_nTiming = nTiming; } //出現する時間の設定
@@ -34,6 +36,9 @@ public:
 	static void SetTime(int nTime) { m_nTime = nTime; }
 	static int GetNext(void) { return m_nNext; }
 
+	void SetPos(const D3DXVECTOR3& inPos) override;
+	void SetSize(const D3DXVECTOR2& inSize) override;
+	void SetColorAlpha(const float inAlpha) override;
 private:
 
 	enum TEXTURE
@@ -82,6 +87,7 @@ private:
 	static int m_nTime; //経過時間
 	static int m_nNext; //次に押すインデックス
 
+	CObject2D* m_BG;
 };
 
 #endif

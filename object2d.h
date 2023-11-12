@@ -67,7 +67,7 @@ public:
 	void AddRot(const float inRot) { SetRot(inRot + m_rotY); }
 
 	// ëΩÇ´Ç≥
-	void SetSize(const D3DXVECTOR2& inSize);
+	virtual void SetSize(const D3DXVECTOR2& inSize);
 	void AddSize(const D3DXVECTOR2& inSize) { SetSize(GetSize() + inSize); }
 	const D3DXVECTOR2 GetSize() { return m_size; }
 
@@ -81,7 +81,7 @@ public:
 	void AnimTexture(int num, int texMax);
 
 	// êF
-	void SetColor(const D3DXCOLOR& inColor);
+	virtual void SetColor(const D3DXCOLOR& inColor);
 	const D3DXCOLOR GetColor() { return m_col; }
 	virtual void SetColorAlpha(const float inAlpha);
 	void AddColorAlpha(const float inAlpha) { SetColorAlpha(m_col.a + inAlpha); }

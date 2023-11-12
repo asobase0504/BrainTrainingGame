@@ -107,6 +107,7 @@ void CMiniGameComeOut::Update()
 	{
 		if (m_nTime >= m_nPopTime)
 		{
+			m_BG->SetColor(D3DXCOLOR(0.4f, 0.85f, 0.4f, 1.0f));
 			m_bClick = true;
 		}
 	}
@@ -150,13 +151,10 @@ void CMiniGameComeOut::GameStart()
 {
 	CGame::GameStart();
 
-	{
-		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
-		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
-		object->SetSize(D3DXVECTOR2(CApplication::CENTER_Y * 1.1f, CApplication::CENTER_Y * 1.1f));
-		object->SetColor(D3DXCOLOR(0.0f, 0.45f, 0.0f, 1.0f));
-		object->SetTexture("BLOCK_BG");
-	}
+	m_BG = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+	m_BG->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
+	m_BG->SetSize(D3DXVECTOR2(CApplication::CENTER_Y * 1.1f, CApplication::CENTER_Y * 1.1f));
+	m_BG->SetTexture("BLOCK_BG");
 
 	//‰æ–Ê‚Ì’†S‚ğæ“¾‚·‚é
 	m_pos = D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f);
@@ -217,6 +215,8 @@ void CMiniGameComeOut::Load(void)
 
 void CMiniGameComeOut::Set(void)
 {
+	m_BG->SetColor(D3DXCOLOR(0.9f, 0.7f, 0.0f, 1.0f));
+
 	//ƒ|ƒŠƒSƒ“”•ª‚Ìƒƒ‚ƒŠ‚ğŠm•Û
 	m_pUse = new bool[m_nNumData];
 	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
@@ -231,7 +231,7 @@ void CMiniGameComeOut::Set(void)
 		m_pPos = new D3DXVECTOR3[m_nNumData];
 
 		//ƒ|ƒŠƒSƒ““¯m‚ÌŠÔŠu‚ğZo
-		D3DXVECTOR2 space = D3DXVECTOR2(m_size.x + m_size.x * 0.2f, m_size.y + m_size.y * 0.2f);
+		D3DXVECTOR2 space = D3DXVECTOR2(m_size.x + m_size.x * 0.45f, m_size.y + m_size.y * 0.45f);
 
 		//À•W‚ğŒvZ
 		for (int nCntU = 0; nCntU < m_alignment.x; nCntU++)
@@ -291,8 +291,8 @@ void CMiniGameComeOut::Reset(void)
 	m_pPos = NULL;
 	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
 	{
-		m_pTarget[nCnt]->Uninit();
-		m_pTarget[nCnt] = NULL;
+		m_pTarget[nCnt]->UninitReset();
+		m_pTarget[nCnt] = nullptr;
 	}
 	m_pTarget.clear();
 

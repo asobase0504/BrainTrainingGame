@@ -9,7 +9,7 @@
 INTERVAL 45
 
 //ポリゴンの大きさ
-SIZE 100.0 100.0
+SIZE 75.0 75.0
 
 //分割数
 ALIGNMENT 3 3

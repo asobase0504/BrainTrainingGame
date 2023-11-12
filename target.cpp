@@ -45,7 +45,15 @@ HRESULT CTarget::Init()
 	SetTexture(m_tex[rand() % TEXTURE_MAX]);
 	m_nNext = 0;
 	HRESULT hResult = CClickItem::Init();
+
+	m_BG = CObject2D::Create(CTaskGroup::LEVEL_2D_2);
+	m_BG->SetPos(m_pos);
+	m_BG->SetSize(m_size * 1.5f);
+	m_BG->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+	m_BG->SetTexture("DECO_TAG");
+	
 	SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+
 	return hResult;
 }
 
@@ -66,11 +74,11 @@ void CTarget::Update()
 	{
 		if (m_nTime < m_nTiming)
 		{
-			SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+			SetColorAlpha(0.0f);
 		}
 		else
 		{
-			SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+			SetColorAlpha(1.0f);
 		}
 
 		if (CMiniGameComeOut::GetClick())
@@ -103,4 +111,45 @@ void CTarget::Update()
 void CTarget::Draw()
 {
 	CClickItem::Draw();
+}
+
+//==========================================
+//  リセット時の終了
+//==========================================
+void CTarget::UninitReset()
+{
+	Uninit();
+
+	if (m_BG != nullptr)
+	{
+		m_BG->Uninit();
+		m_BG = nullptr;
+	}
+}
+
+//==========================================
+//  位置設定
+//==========================================
+void CTarget::SetPos(const D3DXVECTOR3 & inPos)
+{
+	CClickItem::SetPos(inPos);
+	m_BG->SetPos(inPos);
+}
+
+//==========================================
+//  大きさ設定
+//==========================================
+void CTarget::SetSize(const D3DXVECTOR2 & inSize)
+{
+	CClickItem::SetSize(inSize);
+	m_BG->SetSize(inSize * 1.5f);
+}
+
+//==========================================
+//  α値設定
+//==========================================
+void CTarget::SetColorAlpha(const float inAlpha)
+{
+	CClickItem::SetColorAlpha(inAlpha);
+	m_BG->SetColorAlpha(inAlpha);
 }
