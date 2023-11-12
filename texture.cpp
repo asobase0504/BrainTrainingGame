@@ -16,6 +16,9 @@
 
 #include <assert.h>
 
+#include <locale>
+#include <codecvt>
+
 //--------------------------------------------------
 // デフォルトコンストラクタ
 //--------------------------------------------------
@@ -72,10 +75,26 @@ void CTexture::Load(std::vector<std::string> inTexture)
 {
 	LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstance()->GetRenderer()->GetDevice();
 	LPDIRECT3DTEXTURE9 texture = nullptr;
-	std::string fileName = inTexture[1];
 
-	// テクスチャの読み込み
-	D3DXCreateTextureFromFile(pDevice, &fileName.front(), &texture);
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	std::wstring fileName = converter.from_bytes(inTexture[1]);
+
+	D3DXIMAGE_INFO imgInfo;
+	D3DXGetImageInfoFromFileW(&fileName.front(), &imgInfo);
+	D3DXCreateTextureFromFileExW(pDevice,
+		&fileName.front(),
+		imgInfo.Width,
+		imgInfo.Height,
+		1,
+		0,
+		imgInfo.Format,
+		D3DPOOL_MANAGED,
+		D3DX_FILTER_LINEAR,
+		D3DX_FILTER_LINEAR,
+		0xff,
+		nullptr,
+		nullptr,
+		&texture);	// テクスチャの読み込み
 
 	if (!ExistsKey(inTexture[0]))
 	{

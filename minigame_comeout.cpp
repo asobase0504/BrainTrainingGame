@@ -56,6 +56,7 @@ HRESULT CMiniGameComeOut::Init()
 		object->SetTexture("TEXT_EXPO_COMEOUT");
 	}
 
+
 	//経過時間をリセット
 	m_nTime = 0;
 	m_nSpeed = 0;
@@ -148,6 +149,14 @@ void CMiniGameComeOut::Draw()
 void CMiniGameComeOut::GameStart()
 {
 	CGame::GameStart();
+
+	{
+		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_BG);
+		object->SetPos(D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f));
+		object->SetSize(D3DXVECTOR2(CApplication::CENTER_Y * 1.1f, CApplication::CENTER_Y * 1.1f));
+		object->SetColor(D3DXCOLOR(0.0f, 0.45f, 0.0f, 1.0f));
+		object->SetTexture("BLOCK_BG");
+	}
 
 	//画面の中心を取得する
 	m_pos = D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f);
