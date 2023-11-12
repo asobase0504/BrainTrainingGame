@@ -24,9 +24,8 @@ class CGame;
 class CSameAsShadowSystem : public CObject
 {
 public:
-	static const int MAX_SHADOW;
-	static const int MAX_CHOICES;
-	static const int MAX_ANSWER;
+	static int MAX_SHADOW;
+	static int MAX_CHOICES;
 public:
 	explicit CSameAsShadowSystem(int nPriority = CTaskGroup::LEVEL_2D_1);
 	~CSameAsShadowSystem();
@@ -36,14 +35,15 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	static CSameAsShadowSystem *Create();
+	static CSameAsShadowSystem *Create(CGame* inMode);
 
-	void SetGameMode(CGame* inMode) { m_game = inMode; }
+	void SetGameMode() {  }
 
 private:	
 	void InitCreateAnswer_();
 	void Shadow_();
 	void Choices_();
+	void AdjustLevel_();
 
 private:
 	enum TEXTURE
@@ -97,6 +97,11 @@ private:
 	bool m_isChange;
 	int m_changeLag;
 	int m_nCountAnswer;
+
+	int m_oldLevel;
+
+	int m_correct;
+	int m_nextNeedCorrect;
 };
 
 #endif	// _SAME_AS_SHADOW_SYSTEM_H_

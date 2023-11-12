@@ -13,6 +13,7 @@
 //**************************************************
 // 前方前言　実態はNG　ポインタだけならOK
 //**************************************************
+class CObject2D;
 
 //**************************************************
 // 定数定義
@@ -32,6 +33,7 @@ public:
 	~CRememberObject();
 
 	HRESULT Init() override;
+	void UninitReset();
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
@@ -41,9 +43,16 @@ public:
 	void SetMyNumber(int inMyNumber) { m_myNumber = inMyNumber; }
 	int GetMyNumber() { return m_myNumber; }
 
+	void SetPos(const D3DXVECTOR3&) override;
+	void SetSize(const D3DXVECTOR2&) override;
+
+	void CreateBG();
+
 private:
 	// 自分の番号
 	int m_myNumber;
+
+	CObject2D* m_BG;
 };
 
 

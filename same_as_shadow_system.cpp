@@ -19,9 +19,8 @@
 //**************************************************
 // 定数
 //**************************************************
-const int CSameAsShadowSystem::MAX_SHADOW = 4;
-const int CSameAsShadowSystem::MAX_CHOICES = 6;
-const int CSameAsShadowSystem::MAX_ANSWER = 4;
+int CSameAsShadowSystem::MAX_SHADOW = 1;
+int CSameAsShadowSystem::MAX_CHOICES = 2;
 
 //--------------------------------------------------
 // コンストラクタ
@@ -60,40 +59,15 @@ HRESULT CSameAsShadowSystem::Init()
 #define ARRAY_LENGTH(a) (sizeof(a)/sizeof((a)[0])) 
 	static_assert(ARRAY_LENGTH(m_tex) == TEXTURE_MAX, "baka");
 
-	m_pShadowObject.resize(MAX_SHADOW);
-	m_pSelectObject.resize(MAX_CHOICES);
-	m_nAnswerNumber.resize(MAX_SHADOW);
-	m_isAnswerNumber.resize(MAX_CHOICES);
-
-	{// シルエット
-		for (int i = 0; i < MAX_SHADOW; i++)
-		{
-			m_pShadowObject[i] = CReflectionObject::Create(
-				D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f),
-				D3DXVECTOR2(100.0f, 100.0f), 0);
-			m_pShadowObject[i]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
-			m_pShadowObject[i]->SetMove(D3DXVECTOR3(FloatRandom(12.0f, -12.0f), FloatRandom(12.0f, -12.0f), 0.0f));
-			m_pShadowObject[i]->SetEvent([]() {});
-		}
-	}
-
-	InitCreateAnswer_();
+	m_oldLevel = 0;
+	m_correct = 0;
+	AdjustLevel_();
 	Shadow_();
 	Choices_();
 
 	for (int i = 0; i < TEXTURE_MAX; i++)
 	{
 		m_isUsedNumber[i] = false;
-	}
-
-	for (int i = 0; i < m_isAnswerNumber.size(); i++)
-	{
-		m_isAnswerNumber[i] = false;
-	}
-
-	for (int i = 0; i < m_pShadowObject.size(); i++)
-	{
-		m_pShadowObject[i]->Reset();
 	}
 
 	return S_OK;
@@ -116,6 +90,7 @@ void CSameAsShadowSystem::Update()
 		m_changeLag++;
 		if (m_changeLag >= 25)
 		{
+			AdjustLevel_();
 			Shadow_();
 			Choices_();
 
@@ -156,13 +131,14 @@ void CSameAsShadowSystem::Draw()
 //--------------------------------------------------
 // 生成
 //--------------------------------------------------
-CSameAsShadowSystem *CSameAsShadowSystem::Create()
+CSameAsShadowSystem *CSameAsShadowSystem::Create(CGame* inMode)
 {
 	CSameAsShadowSystem *pSameAsShadowSystem;
 	pSameAsShadowSystem = new CSameAsShadowSystem;
 
 	if (pSameAsShadowSystem != nullptr)
 	{
+		pSameAsShadowSystem->m_game = inMode;
 		pSameAsShadowSystem->Init();
 	}
 	else
@@ -182,19 +158,28 @@ void CSameAsShadowSystem::InitCreateAnswer_()
 	{// 選択肢
 
 		D3DXVECTOR3 pos;
-		pos.x = CApplication::CENTER_X - ((float)MAX_CHOICES * 0.5f * 0.5f) * 120.0f + (i % (int)(MAX_CHOICES * 0.5f)) * 120.0f + 50.0f;
-		pos.y = CApplication::SCREEN_HEIGHT - 200.0f + (int)(i / (MAX_CHOICES * 0.5f)) * 100.0f;
+		pos.x = CApplication::CENTER_X - ((float)MAX_CHOICES * 0.5f * 0.5f) * 120.0f + i * 80.0f;
+		pos.y = CApplication::SCREEN_HEIGHT - 150.0f;
 		pos.z = 0.0f;
 		D3DXVECTOR2 size(80.0f, 80.0f);
 
+		if (MAX_CHOICES < 6)
 		{
-			CObject2D* object = CObject2D::Create();
-			object->SetPos(pos);
-			object->SetSize(size * 1.2f);
-			object->SetTexture("DECO_TAG");
+			size = D3DXVECTOR2(120.0f, 120.0f);
+			pos.x = CApplication::CENTER_X - ((float)(MAX_CHOICES - 1) * 0.5f) * 120.0f + i * 120.0f;
+			pos.y = CApplication::SCREEN_HEIGHT - 150.0f;
+		}
+		else
+		{
+			size = D3DXVECTOR2(100.0f, 100.0f);
+			pos.x = CApplication::CENTER_X - ((float)((MAX_CHOICES * 0.5f) - 1) * 0.5f) * 100.0f + (i % (int)(MAX_CHOICES * 0.5f)) * 100.0f;
+			pos.y = CApplication::SCREEN_HEIGHT - 200.0f + (int)(i / (MAX_CHOICES * 0.5f)) * 100.0f;
 		}
 
 		m_pSelectObject[i] = CRememberObject::Create(pos, size, 0);
+		m_pSelectObject[i]->CreateBG();
+		m_pSelectObject[i]->SetPos(pos);
+		m_pSelectObject[i]->SetSize(size);
 		m_pSelectObject[i]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 		m_pSelectObject[i]->SetEvent([this, i]()
 		{
@@ -226,8 +211,24 @@ void CSameAsShadowSystem::InitCreateAnswer_()
 
 			m_game->AddScore(isAnswer ? 12 : -7);
 
-			if (!isAnswer || m_nCountAnswer == MAX_ANSWER)
+			if (!isAnswer)
 			{
+				m_correct--;
+
+				if (m_correct < 0)
+				{
+					m_game->LevelDown();
+				}
+				m_isChange = true;
+			}
+			if (m_nCountAnswer == MAX_SHADOW)
+			{
+				m_correct++;
+				if (m_correct >= m_nextNeedCorrect && m_game->GetLevel() <= 5)
+				{
+					m_correct = 0;
+					m_game->LevelUp();
+				}
 				m_isChange = true;
 			}
 		});
@@ -266,7 +267,8 @@ void CSameAsShadowSystem::Shadow_()
 void CSameAsShadowSystem::Choices_()
 {
 	// 3つをこたえにする
-	int answer[MAX_SHADOW] = { 0,0,0 };
+	std::vector<int> answer;
+	answer.resize(MAX_SHADOW);
 	int answerNumber = 0;
 
 	// 一番最初をランダムにする
@@ -316,5 +318,83 @@ void CSameAsShadowSystem::Choices_()
 
 			m_isUsedNumber[number] = true;
 		}
+	}
+}
+
+void CSameAsShadowSystem::AdjustLevel_()
+{
+	int nowLevel = m_game->GetLevel();
+
+	if (m_oldLevel == nowLevel)
+	{
+		return;
+	}
+
+	m_oldLevel = nowLevel;
+
+	for (CObject2D* object : m_pShadowObject)
+	{
+		object->Uninit();
+	}
+	for (CRememberObject* object : m_pSelectObject)
+	{
+		object->UninitReset();
+	}
+
+	m_pShadowObject.clear();
+	m_pSelectObject.clear();
+
+	switch (nowLevel)
+	{
+	case 1:
+		MAX_SHADOW = 1;
+		MAX_CHOICES = 2;
+		m_nextNeedCorrect = 1;
+		break;
+	case 2:
+		MAX_SHADOW = 2;
+		MAX_CHOICES = 4;
+		m_nextNeedCorrect = 2;
+		break;
+	case 3:
+		MAX_SHADOW = 3;
+		MAX_CHOICES = 5;
+		m_nextNeedCorrect = 3;
+		break;
+	case 4:
+		MAX_SHADOW = 4;
+		MAX_CHOICES = 6;
+		m_nextNeedCorrect = 3;
+		break;
+	case 5:
+		MAX_SHADOW = 4;
+		MAX_CHOICES = 8;
+		break;
+	default:
+		break;
+	}
+
+	m_nAnswerNumber.clear();
+	m_pShadowObject.resize(MAX_SHADOW);
+	m_pSelectObject.resize(MAX_CHOICES);
+	m_nAnswerNumber.resize(MAX_SHADOW);
+	m_isAnswerNumber.resize(MAX_CHOICES);
+
+	for (int i = 0; i < MAX_SHADOW; i++)
+	{
+		m_pShadowObject[i] = CReflectionObject::Create(
+			D3DXVECTOR3(CApplication::CENTER_X, CApplication::CENTER_Y, 0.0f),
+			D3DXVECTOR2(100.0f, 100.0f), 0);
+		m_pShadowObject[i]->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+		m_pShadowObject[i]->SetMove(D3DXVECTOR3(FloatRandom(12.0f, -12.0f), FloatRandom(12.0f, -12.0f), 0.0f));
+		m_pShadowObject[i]->SetEvent([]() {});
+		m_pShadowObject[i]->Reset();
+	}
+
+	InitCreateAnswer_();
+
+	for (int i = 0; i < m_isAnswerNumber.size(); i++)
+	{
+		m_isAnswerNumber[i] = false;
 	}
 }

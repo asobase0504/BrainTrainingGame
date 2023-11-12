@@ -118,7 +118,7 @@ void CMiniGameComeOut::Update()
 	if (CTarget::GetNext() == m_nNumData)
 	{
 		m_correct++;
-		if (m_correct >= m_nextNeedCorrect)
+		if (m_correct >= m_nextNeedCorrect && GetLevel() <= 5)
 		{
 			m_correct = 0;
 			LevelUp();

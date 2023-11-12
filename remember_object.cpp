@@ -28,8 +28,19 @@ CRememberObject::~CRememberObject()
 HRESULT CRememberObject::Init()
 {
 	CClickItem::Init();
-
+	m_BG = nullptr;
 	return S_OK;
+}
+
+void CRememberObject::UninitReset()
+{
+	Uninit();
+
+	if (m_BG != nullptr)
+	{
+		m_BG->Uninit();
+		m_BG = nullptr;
+	}
 }
 
 //--------------------------------------------------
@@ -77,4 +88,28 @@ CRememberObject *CRememberObject::Create(const D3DXVECTOR3& inPos, const D3DXVEC
 	}
 
 	return pRememberObject;
+}
+
+void CRememberObject::SetPos(const D3DXVECTOR3 & inPos)
+{
+	CClickItem::SetPos(inPos);
+	if (m_BG != nullptr)
+	{
+		m_BG->SetPos(inPos);
+	}
+}
+
+void CRememberObject::SetSize(const D3DXVECTOR2 & inSize)
+{
+	CClickItem::SetSize(inSize);
+	if (m_BG != nullptr)
+	{
+		m_BG->SetSize(inSize);
+	}
+}
+
+void CRememberObject::CreateBG()
+{
+	m_BG = CObject2D::Create();
+	m_BG->SetTexture("DECO_TAG");
 }

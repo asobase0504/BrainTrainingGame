@@ -44,7 +44,7 @@ public:	// ƒƒ“ƒo[ŠÖ”
 
 	int GetLevel() { return m_level; }
 	int LevelUp() { return m_level++; }
-	int LevelDown() { return m_level--; }
+	int LevelDown();
 
 protected:
 

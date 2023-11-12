@@ -60,7 +60,7 @@ void CMiniGameSameAsShadow::GameStart()
 		object->SetTexture("BLOCK_BG");
 	}
 
-	CSameAsShadowSystem::Create()->SetGameMode(this);
+	CSameAsShadowSystem::Create(this);
 }
 
 //-----------------------------------------------------------------------------

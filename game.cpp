@@ -163,3 +163,13 @@ void CGame::AddScore(const int inScore)
 	pos.x += 25.0f;
 	CScoreUp::Create(pos, addScore);
 }
+
+int CGame::LevelDown()
+{
+	m_level++;
+	if (m_level <= 1)
+	{
+		m_level = 1;
+	}
+	return m_level;
+}
