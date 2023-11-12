@@ -59,6 +59,9 @@ private:
 	//静的メンバ変数
 	static bool m_bClick; //クリック可能状態
 
+	int m_correct;
+	int m_nextNeedCorrect;
+
 	CObject2D* m_BG;
 };
 

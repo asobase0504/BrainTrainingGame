@@ -31,6 +31,8 @@ CMiniGameComeOut::CMiniGameComeOut()
 	m_nPopTime = 0;
 	m_nSpeed = 0;
 	m_nNext = 0;
+
+	m_correct = 0;
 }
 
 //==========================================
@@ -112,17 +114,31 @@ void CMiniGameComeOut::Update()
 		}
 	}
 
+	// 成功
 	if (CTarget::GetNext() == m_nNumData)
 	{
+		m_correct++;
+		if (m_correct >= m_nextNeedCorrect)
+		{
+			m_correct = 0;
+			LevelUp();
+		}
 		Reset();
 	}
 	
+	// 失敗
 	bool bMiss = false;
 	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
 	{
 		bMiss = m_pTarget[nCnt]->GetMiss();
 		if (bMiss)
 		{
+			m_correct--;
+			if (m_correct < 0)
+			{
+				LevelDown();
+			}
+
 			Reset();
 			break;
 		}
@@ -213,9 +229,54 @@ void CMiniGameComeOut::Load(void)
 	}
 }
 
+//==========================================
+//  設定
+//==========================================
 void CMiniGameComeOut::Set(void)
 {
 	m_BG->SetColor(D3DXCOLOR(0.9f, 0.7f, 0.0f, 1.0f));
+
+	int nowLevel = GetLevel();
+
+	switch (nowLevel)
+	{
+	case 1:
+		m_nNumData = 2;
+		m_alignment.x = 2;
+		m_alignment.y = 1;
+		m_size = D3DXVECTOR2(120.0f, 120.0f);
+		m_nextNeedCorrect = 1;
+		break;
+	case 2:
+		m_nNumData = 4;
+		m_alignment.x = 2;
+		m_alignment.y = 2;
+		m_size = D3DXVECTOR2(120.0f, 120.0f);
+		m_nextNeedCorrect = 2;
+		break;
+	case 3:
+		m_nNumData = 6;
+		m_alignment.x = 3;
+		m_alignment.y = 2;
+		m_size = D3DXVECTOR2(80.0f, 80.0f);
+		m_nextNeedCorrect = 4;
+		break;
+	case 4:
+		m_nNumData = 9;
+		m_alignment.x = 3;
+		m_alignment.y = 3;
+		m_size = D3DXVECTOR2(80.0f, 80.0f);
+		m_nextNeedCorrect = 6;
+		break;
+	case 5:
+		m_nNumData = 12;
+		m_alignment.x = 4;
+		m_alignment.y = 3;
+		m_size = D3DXVECTOR2(20.0f, 20.0f);
+		break;
+	default:
+		break;
+	}
 
 	//ポリゴン数分のメモリを確保
 	m_pUse = new bool[m_nNumData];
@@ -241,17 +302,18 @@ void CMiniGameComeOut::Set(void)
 				m_pPos[nCntU + (nCntV * (int)m_alignment.x)] = D3DXVECTOR3
 				(
 					m_pos.x - (space.x * m_alignment.x) * 0.5f + (space.x * 0.5f + space.x * nCntU),
-					m_pos.y - (space.x * m_alignment.x) * 0.5f + (space.y * 0.5f + space.y * nCntV),
+					m_pos.y - (space.y * m_alignment.y) * 0.5f + (space.y * 0.5f + space.y * nCntV),
 					0.0f
 				);
 			}
 		}
 	}
 
+	m_pTarget.resize(m_nNumData);
 	//ターゲットを生成をする
 	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
 	{
-		m_pTarget.push_back(new CTarget);
+		m_pTarget[nCnt] = new CTarget;
 		m_pTarget[nCnt]->Init();
 
 		//生成タイミングの設定
@@ -267,10 +329,6 @@ void CMiniGameComeOut::Set(void)
 				m_pTarget[nCnt]->SetIndex(nIndex);
 				m_pUse[nIndex] = true;
 
-				if (m_nPopTime < m_nInterval * (nIndex + 1))
-				{
-					m_nPopTime = m_nInterval * (nIndex + 1);
-				}
 				break;
 			}
 		}
@@ -281,14 +339,25 @@ void CMiniGameComeOut::Set(void)
 		//座標の設定
 		m_pTarget[nCnt]->SetPos(m_pPos[nCnt]);
 	}
+
+	m_nPopTime = m_nInterval * m_nNumData + 5;
 }
 
+//==========================================
+//  再設定
+//==========================================
 void CMiniGameComeOut::Reset(void)
 {
-	delete[] m_pUse;
-	m_pUse = NULL;
-	delete[] m_pPos;
-	m_pPos = NULL;
+	if (m_pUse != nullptr)
+	{
+		delete[] m_pUse;
+		m_pUse = nullptr;
+	}
+	if (m_pPos != nullptr)
+	{
+		delete[] m_pPos;
+		m_pPos = nullptr;
+	}
 	for (int nCnt = 0; nCnt < m_nNumData; nCnt++)
 	{
 		m_pTarget[nCnt]->UninitReset();
@@ -297,6 +366,7 @@ void CMiniGameComeOut::Reset(void)
 	m_pTarget.clear();
 
 	m_nTime = 0;
+	CTarget::SetTime(m_nTime);
 	m_nSpeed = 0;
 	m_bClick = false;
 	Set();

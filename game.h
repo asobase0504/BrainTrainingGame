@@ -42,6 +42,10 @@ public:	// メンバー関数
 
 	void AddScore(const int inScore);
 
+	int GetLevel() { return m_level; }
+	int LevelUp() { return m_level++; }
+	int LevelDown() { return m_level--; }
+
 protected:
 
 	EState GetState() { return m_state; }
@@ -56,6 +60,8 @@ private: // 動的メンバー変数
 	CTimer* m_timer;
 
 	bool m_isResult;
+
+	int m_level;
 };
 
 #endif // !_GAME_H_
