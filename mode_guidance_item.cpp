@@ -26,9 +26,12 @@ HRESULT CModeGuidanceItem::Init()
 
 void CModeGuidanceItem::Update()
 {
-	float mul = 1.0f + (sinf((GetTick() * 0.015f) * (D3DX_PI * 2.0f)) + 1.0f) * 0.5f * 0.1f;
-	D3DXVECTOR2 size(652.0f * 0.35f, 317.0f * 0.35f);
-	SetSize(size * mul);
+	if (IsClickEvent())
+	{
+		float mul = 1.0f + (sinf((GetTick() * 0.015f) * (D3DX_PI * 2.0f)) + 1.0f) * 0.5f * 0.1f;
+		D3DXVECTOR2 size(652.0f * 0.35f, 317.0f * 0.35f);
+		SetSize(size * mul);
+	}
 
 	CClickItem::Update();
 }

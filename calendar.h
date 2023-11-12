@@ -9,6 +9,7 @@
 // インクルード
 //**************************************************
 #include "object2D.h"
+#include <array>
 
 //**************************************************
 // 前方前言　実態はNG　ポインタだけならOK
@@ -29,14 +30,14 @@ public:
 
 	static CCalender* Create();
 
-private:
-	void LoginLoad();
-	void LoginSave();
-	void Login();
+	// その日程のオブジェクトの取得
+	CObject2D* GetDayObject(int inDay) { return m_tag[m_dayTag[inDay]]; }
+
 private:
 	CSequence* m_day[49];
 	CObject2D* m_tag[49];
 	CObject2D* m_stanp[49];
+	std::array<int, 31> m_dayTag;
 };
 
 

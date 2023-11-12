@@ -68,6 +68,7 @@ nlohmann::json LoadJson(std::string cUrl)
 
 	return nullptr;
 }
+
 //=============================================================================
 // Jsonファイルでの書込み
 // Author : Hamada Ryuuga

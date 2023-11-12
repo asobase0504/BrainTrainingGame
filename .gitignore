@@ -240,5 +240,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-/data/SOUND/ぐだぐだコミカル.mp3
-/data/SOUND/Fairy Ring.mp3
+
+.exe

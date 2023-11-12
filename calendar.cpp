@@ -81,6 +81,7 @@ HRESULT CCalender::Init()
 		m_tag[i]->SetPos(pos);
 		m_tag[i]->SetSize(D3DXVECTOR2(size, size) * 1.2f);
 		m_tag[i]->SetTexture("DECO_TAG");
+		m_dayTag[cnt] = i;
 
 		m_day[i] = CSequence::Create(pos,D3DXVECTOR2(size / 3.0f - 0.9f, size),2);
 		m_day[i]->SetNumber(cnt);
