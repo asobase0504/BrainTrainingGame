@@ -48,6 +48,8 @@ public:
 
 	void SetSequence(int inSequence);
 
+	void SetColorAlpha(const float& inAlpha);
+
 	void Reset();
 
 private:
