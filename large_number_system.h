@@ -22,9 +22,9 @@ class CGame;
 class CLargeNumberSystem : public CObject
 {
 public:
-	static const int DISPLAY_NUMBER;
-	static const int X_LINE;
-	static const int Y_LINE;
+	static int DISPLAY_NUMBER;
+	static int X_LINE;
+	static int Y_LINE;
 	static const int MAX_NUMBER;
 	static const int TRUE_FLAME;
 	static const int FALSE_FLAME;
@@ -38,11 +38,9 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	static CLargeNumberSystem *Create();
+	static CLargeNumberSystem *Create(CGame* inGame);
 
 	bool GetMode() { return m_mode; } // trueは最大 falseは最小
-
-	void SetGame(CGame* inGame) { m_game = inGame; }
 
 private:
 	void WhichiNumberMax_();
@@ -51,6 +49,7 @@ private:
 	void SetMode();
 	void InitCreateAnswer_();
 	void CorrectAnswer_(int inNumber);
+	void Reset_();
 
 private:
 	std::vector<CLargestNumber*> m_pDisplayObject;
@@ -74,6 +73,13 @@ private:
 	bool m_isTrue;
 	// 
 	bool m_isAnswer;
+
+	// 前回のレベル
+	int m_oldLevel;
+
+	// 正解
+	int m_correct;			// 今回のレベルの正解数
+	int m_nextNeedCorrect;	// 次のレベルにいくための正解数
 };
 
 #endif	// _LARGE_NUMBER_SYSTEM_H_

@@ -50,8 +50,7 @@ void CMiniGameLargeNumber::GameStart()
 {
 	CGame::GameStart();
 
-	m_system = CLargeNumberSystem::Create();
-	m_system->SetGame(this);
+	m_system = CLargeNumberSystem::Create(this);
 }
 
 //-----------------------------------------------------------------------------

@@ -166,7 +166,7 @@ void CGame::AddScore(const int inScore)
 
 int CGame::LevelDown()
 {
-	m_level++;
+	m_level--;
 	if (m_level <= 1)
 	{
 		m_level = 1;

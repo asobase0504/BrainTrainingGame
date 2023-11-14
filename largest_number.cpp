@@ -58,6 +58,20 @@ void CLargestNumber::Uninit()
 }
 
 //--------------------------------------------------
+// リセット時の終了
+//--------------------------------------------------
+void CLargestNumber::UninitReset()
+{
+	Uninit();
+
+	if (m_pSequence != nullptr)
+	{
+		m_pSequence->Uninit();
+		m_pSequence = nullptr;
+	}
+}
+
+//--------------------------------------------------
 // 更新
 //--------------------------------------------------
 void CLargestNumber::Update()
