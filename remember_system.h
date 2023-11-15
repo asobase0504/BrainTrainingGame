@@ -44,6 +44,7 @@ private:
 	void DisplayRemember_();
 	void Choices_();
 
+	void FirstCreate_();
 private:
 	enum TEXTURE
 	{// 使用しているテクスチャ

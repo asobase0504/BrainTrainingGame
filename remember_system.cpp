@@ -71,7 +71,7 @@ HRESULT CRememberSystem::Init()
 	m_pAnswerObject.resize(MAX_ANSWER);
 
 	m_nAnswer = IntRandom(TEXTURE_MAX - 1, 0);
-	m_changeLag = 30;
+	m_changeLag = 0;
 	m_isChange = false;
 
 	{
@@ -100,10 +100,8 @@ HRESULT CRememberSystem::Init()
 	initClick->SetTexture("TEXT_CHACK");
 	initClick->SetEvent([this, initClick]()
 	{
-		m_isChange = true;
 		initClick->Uninit();
-		InitCreateAnswer_();
-		Update();
+		FirstCreate_();
 	});
 
 	return S_OK;
@@ -121,27 +119,29 @@ void CRememberSystem::Uninit()
 //--------------------------------------------------
 void CRememberSystem::Update()
 {
-	if (m_isChange)
+	if (!m_isChange)
 	{
-		m_changeLag++;
-		if (m_changeLag >= 25)
+		return;
+	}
+
+	m_changeLag++;
+	if (m_changeLag >= 25)
+	{
+		DisplayRemember_();
+		Choices_();
+
+		for (int i = 0; i < TEXTURE_MAX; i++)
 		{
-			DisplayRemember_();
-			Choices_();
-
-			for (int i = 0; i < TEXTURE_MAX; i++)
-			{
-				m_isUsedNumber[i] = false;
-			}
-
-			for (int i = 0; i < MAX_ANSWER; i++)
-			{
-				// ポリゴンのカラー変更
-				m_pAnswerObject[i]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
-			}
-			m_isChange = false;
-			m_changeLag = 0;
+			m_isUsedNumber[i] = false;
 		}
+
+		for (int i = 0; i < MAX_ANSWER; i++)
+		{
+			// ポリゴンのカラー変更
+			m_pAnswerObject[i]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+		m_isChange = false;
+		m_changeLag = 0;
 	}
 }
 
@@ -274,6 +274,94 @@ void CRememberSystem::Choices_()
 			m_pAnswerObject[i]->SetTexture(m_tex[number]);
 
 			m_isUsedNumber[number] = true;
+		}
+	}
+}
+
+//--------------------------------------------------
+// 初回作成
+//--------------------------------------------------
+void CRememberSystem::FirstCreate_()
+{
+	DisplayRemember_();
+
+	// 一つをこたえにする
+	int answer = 0;
+	answer = IntRandom(1, 0);
+
+	m_isUsedNumber[m_nBeforeNumber] = true;
+
+	// 抽選
+	int number = 0;
+	number = IntRandom(TEXTURE_MAX - 1, 0);
+
+	for (int nCntY = 0; nCntY < 1; nCntY++)
+	{
+		for (int nCntX = 0; nCntX < 2; nCntX++)
+		{
+			int nCntNumber = nCntY * Y_LINE + nCntX;
+
+			// 答え
+			D3DXVECTOR2 size(180.0f, 120.0f);
+
+			float xInterval = size.x + 40.0f;
+			float yInterval = size.y + 30.0f;
+
+			D3DXVECTOR3 pos;
+			pos.x = CApplication::CENTER_X - ((float)(X_LINE - 1) * 0.5f) * xInterval + nCntX * xInterval;
+			pos.y = CApplication::CENTER_Y + 165.0f + (size.y + 30.0f) * 0.5f - ((float)(Y_LINE - 1) * 0.5f) * yInterval + nCntY * yInterval;
+			pos.z = 0.0f;
+
+			CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI_2);
+			object->SetPos(D3DXVECTOR3(pos.x, pos.y - size.y * 0.5f, 0.0f));
+			object->SetSize(D3DXVECTOR2(50.0f * 0.5f, 63.0f * 0.5f));
+			object->SetTexture("DECO_PIN");
+
+			CRememberObject* pAnswerObject = CRememberObject::Create(pos, size, nCntNumber);
+			pAnswerObject->SetTexture(m_tex[nCntNumber]);
+			pAnswerObject->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+			pAnswerObject->SetEvent([this, nCntNumber, object, pAnswerObject]()
+			{
+				if (m_isChange)
+				{
+					return;
+				}
+				m_isChange = true;
+
+				int answerMyNumber = pAnswerObject->GetMyNumber();
+				if (answerMyNumber == m_nBeforeNumber)
+				{
+					CCorrection::Create(true);
+					m_game->AddScore(7);
+				}
+				else
+				{
+					CCorrection::Create(false);
+				}
+
+				object->Uninit();
+				pAnswerObject->Uninit();
+				InitCreateAnswer_();
+			});
+
+			if (answer == nCntNumber)
+			{// 答えと一緒にする
+				pAnswerObject->SetMyNumber(m_nBeforeNumber);
+				pAnswerObject->SetTexture(m_tex[m_nBeforeNumber]);
+			}
+			else
+			{// それ以外（ダミー）
+				while (m_isUsedNumber[number])
+				{// 画像の抽選
+					number = IntRandom(TEXTURE_MAX - 1, 0);
+				}
+
+				pAnswerObject->SetMyNumber(number);
+				pAnswerObject->SetTexture(m_tex[number]);
+
+				m_isUsedNumber[number] = true;
+			}
+
 		}
 	}
 }
