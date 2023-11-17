@@ -41,6 +41,7 @@ public:
 	void SetGameMode(CGame* inMode) { m_game = inMode; }
 private:
 	void InitCreateAnswer_();
+	void UninitInitAnswer();
 	void DisplayRemember_();
 	void Choices_();
 
@@ -79,6 +80,11 @@ private:
 
 	bool m_isChange;
 	int m_changeLag;
+
+	std::vector<CRememberObject*> pAnswerObject;
+	std::vector<CObject2D*> object;
+
+	bool m_isInit;
 };
 
 #endif	// _REMMBER_SYSTEM_H_

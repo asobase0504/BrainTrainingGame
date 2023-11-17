@@ -73,6 +73,7 @@ HRESULT CRememberSystem::Init()
 	m_nAnswer = IntRandom(TEXTURE_MAX - 1, 0);
 	m_changeLag = 0;
 	m_isChange = false;
+	m_isInit = false;
 
 	{
 		CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI_2);
@@ -127,6 +128,34 @@ void CRememberSystem::Update()
 	m_changeLag++;
 	if (m_changeLag >= 25)
 	{
+		if (!m_isInit)
+		{
+			m_isInit = true;
+			for (int nCntY = 0; nCntY < Y_LINE; nCntY++)
+			{
+				for (int nCntX = 0; nCntX < X_LINE; nCntX++)
+				{
+					int nCntNumber = nCntY * Y_LINE + nCntX;
+
+					// 答え
+					D3DXVECTOR2 size(180.0f, 120.0f);
+
+					float xInterval = size.x + 40.0f;
+					float yInterval = size.y + 30.0f;
+
+					D3DXVECTOR3 pos;
+					pos.x = CApplication::CENTER_X - ((float)(X_LINE - 1) * 0.5f) * xInterval + nCntX * xInterval;
+					pos.y = CApplication::CENTER_Y + 165.0f - ((float)(Y_LINE - 1) * 0.5f) * yInterval + nCntY * yInterval;
+					pos.z = 0.0f;
+
+					CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI_2);
+					object->SetPos(D3DXVECTOR3(pos.x, pos.y - size.y * 0.5f, 0.0f));
+					object->SetSize(D3DXVECTOR2(50.0f * 0.5f, 63.0f * 0.5f));
+					object->SetTexture("DECO_PIN");
+				}
+			}
+		}
+
 		DisplayRemember_();
 		Choices_();
 
@@ -194,16 +223,9 @@ void CRememberSystem::InitCreateAnswer_()
 			pos.y = CApplication::CENTER_Y + 165.0f - ((float)(Y_LINE - 1) * 0.5f) * yInterval + nCntY * yInterval;
 			pos.z = 0.0f;
 
-			{
-				CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI_2);
-				object->SetPos(D3DXVECTOR3(pos.x, pos.y - size.y * 0.5f, 0.0f));
-				object->SetSize(D3DXVECTOR2(50.0f * 0.5f, 63.0f * 0.5f));
-				object->SetTexture("DECO_PIN");
-			}
-
 			m_pAnswerObject[nCntNumber] = CRememberObject::Create(pos, size, nCntNumber);
 			m_pAnswerObject[nCntNumber]->SetTexture(m_tex[nCntNumber]);
-			m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+			m_pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
 			m_pAnswerObject[nCntNumber]->SetEvent([this, nCntNumber]()
 			{
 				if (m_isChange)
@@ -226,6 +248,16 @@ void CRememberSystem::InitCreateAnswer_()
 			});
 		}
 	}
+}
+
+void CRememberSystem::UninitInitAnswer()
+{
+	object[0]->Uninit();
+	object[1]->Uninit();
+	pAnswerObject[0]->Uninit();
+	pAnswerObject[1]->Uninit();
+	pAnswerObject.clear();
+	object.clear();
 }
 
 //--------------------------------------------------
@@ -295,6 +327,8 @@ void CRememberSystem::FirstCreate_()
 	int number = 0;
 	number = IntRandom(TEXTURE_MAX - 1, 0);
 
+	pAnswerObject.resize(2);
+	object.resize(2);
 	for (int nCntY = 0; nCntY < 1; nCntY++)
 	{
 		for (int nCntX = 0; nCntX < 2; nCntX++)
@@ -312,15 +346,15 @@ void CRememberSystem::FirstCreate_()
 			pos.y = CApplication::CENTER_Y + 165.0f + (size.y + 30.0f) * 0.5f - ((float)(Y_LINE - 1) * 0.5f) * yInterval + nCntY * yInterval;
 			pos.z = 0.0f;
 
-			CObject2D* object = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI_2);
-			object->SetPos(D3DXVECTOR3(pos.x, pos.y - size.y * 0.5f, 0.0f));
-			object->SetSize(D3DXVECTOR2(50.0f * 0.5f, 63.0f * 0.5f));
-			object->SetTexture("DECO_PIN");
+			object[nCntNumber] = CObject2D::Create(CTaskGroup::EPriority::LEVEL_2D_UI_2);
+			object[nCntNumber]->SetPos(D3DXVECTOR3(pos.x, pos.y - size.y * 0.5f, 0.0f));
+			object[nCntNumber]->SetSize(D3DXVECTOR2(50.0f * 0.5f, 63.0f * 0.5f));
+			object[nCntNumber]->SetTexture("DECO_PIN");
 
-			CRememberObject* pAnswerObject = CRememberObject::Create(pos, size, nCntNumber);
-			pAnswerObject->SetTexture(m_tex[nCntNumber]);
-			pAnswerObject->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
-			pAnswerObject->SetEvent([this, nCntNumber, object, pAnswerObject]()
+			pAnswerObject[nCntNumber] = CRememberObject::Create(pos, size, nCntNumber);
+			pAnswerObject[nCntNumber]->SetTexture(m_tex[nCntNumber]);
+			pAnswerObject[nCntNumber]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+			pAnswerObject[nCntNumber]->SetEvent([this, nCntNumber]()
 			{
 				if (m_isChange)
 				{
@@ -328,7 +362,7 @@ void CRememberSystem::FirstCreate_()
 				}
 				m_isChange = true;
 
-				int answerMyNumber = pAnswerObject->GetMyNumber();
+				int answerMyNumber = pAnswerObject[nCntNumber]->GetMyNumber();
 				if (answerMyNumber == m_nBeforeNumber)
 				{
 					CCorrection::Create(true);
@@ -339,15 +373,14 @@ void CRememberSystem::FirstCreate_()
 					CCorrection::Create(false);
 				}
 
-				object->Uninit();
-				pAnswerObject->Uninit();
+				UninitInitAnswer();
 				InitCreateAnswer_();
 			});
 
 			if (answer == nCntNumber)
 			{// 答えと一緒にする
-				pAnswerObject->SetMyNumber(m_nBeforeNumber);
-				pAnswerObject->SetTexture(m_tex[m_nBeforeNumber]);
+				pAnswerObject[nCntNumber]->SetMyNumber(m_nBeforeNumber);
+				pAnswerObject[nCntNumber]->SetTexture(m_tex[m_nBeforeNumber]);
 			}
 			else
 			{// それ以外（ダミー）
@@ -356,8 +389,8 @@ void CRememberSystem::FirstCreate_()
 					number = IntRandom(TEXTURE_MAX - 1, 0);
 				}
 
-				pAnswerObject->SetMyNumber(number);
-				pAnswerObject->SetTexture(m_tex[number]);
+				pAnswerObject[nCntNumber]->SetMyNumber(number);
+				pAnswerObject[nCntNumber]->SetTexture(m_tex[number]);
 
 				m_isUsedNumber[number] = true;
 			}
