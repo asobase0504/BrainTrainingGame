@@ -346,12 +346,6 @@ void CLargeNumberSystem::Reset_()
 	case 4:
 		X_LINE = 3;
 		Y_LINE = 3;
-		m_nextNeedCorrect = 4;
-		break;
-	case 5:
-		X_LINE = 4;
-		Y_LINE = 4;
-		m_nextNeedCorrect = 1;
 		break;
 	default:
 		break;
